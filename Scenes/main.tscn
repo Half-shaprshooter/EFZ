@@ -1,0 +1,321 @@
+[gd_scene load_steps=30 format=3 uid="uid://r41m36oj85w4"]
+
+[ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
+[ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
+[ext_resource type="PackedScene" uid="uid://dakog3812u1f7" path="res://Scenes/houses/house3.tscn" id="2_i31j7"]
+[ext_resource type="PackedScene" uid="uid://djh6mt40wbkm8" path="res://Scenes/SceneWithCharacter.tscn" id="2_pu6ya"]
+[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Neutral.tscn" id="3_pte4x"]
+[ext_resource type="PackedScene" uid="uid://t5d4txhp4d85" path="res://Scenes/houses/house2.tscn" id="3_qosyy"]
+[ext_resource type="PackedScene" uid="uid://bn3mt4b7k843s" path="res://Scenes/houses/SellerHouse.tscn" id="4_03vsq"]
+[ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
+[ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
+[ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
+[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/wolf.tscn" id="7_d18ir"]
+[ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
+[ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
+[ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Seller.tscn" id="8_mo2kn"]
+[ext_resource type="Script" path="res://scripts/NpcS/Dialogue/DialogueManager.cs" id="9_71m5p"]
+[ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
+[ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
+[ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
+[ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
+[ext_resource type="PackedScene" uid="uid://blk8m6a44fb0f" path="res://Scenes/worldObjects/box.tscn" id="18_gnmfo"]
+[ext_resource type="Script" path="res://scripts/minimap.gd" id="19_0jp71"]
+[ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="20_7pm57"]
+[ext_resource type="Texture2D" uid="uid://bnln2nrju80yt" path="res://sprites/maptest.png" id="20_fifao"]
+[ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
+[ext_resource type="Texture2D" uid="uid://sgff8x8ohb6w" path="res://sprites/bigfire.png" id="23_4qyrl"]
+[ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hamf6"]
+radius = 181.408
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vu78m"]
+
+[node name="main" type="Node2D"]
+position = Vector2(1596, -3195)
+script = ExtResource("1_lgs1w")
+
+[node name="NodeGrassDELETE" type="Node2D" parent="."]
+
+[node name="Grass" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(-193, -255)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass2" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(2300, -4282)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass3" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(-181, -4282)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass4" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(-193, -2976)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass5" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(2248, -2971)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass6" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(2226, -1588)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass7" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(2226, -242)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass8" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(2226, 1127)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass9" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(-206, 1116)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="Grass10" type="Sprite2D" parent="NodeGrassDELETE"]
+position = Vector2(-229, -1599)
+scale = Vector2(3.81719, 3.84167)
+texture = ExtResource("2_101oy")
+
+[node name="House3" parent="." instance=ExtResource("2_i31j7")]
+position = Vector2(-568, -3968)
+
+[node name="House2" parent="." instance=ExtResource("3_qosyy")]
+position = Vector2(-600, -2712)
+
+[node name="House" parent="." instance=ExtResource("4_upcwe")]
+position = Vector2(1848, 480)
+rotation = 3.14159
+
+[node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
+position = Vector2(1952, -944)
+
+[node name="House4" parent="." instance=ExtResource("7_obbss")]
+position = Vector2(1976, -2654)
+
+[node name="House5" parent="." instance=ExtResource("4_7w24t")]
+position = Vector2(-835, -445)
+rotation = -1.5708
+
+[node name="Player" parent="." instance=ExtResource("2_pu6ya")]
+position = Vector2(-411, 1491)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.281187, 0.281187, 0.281187, 1)
+
+[node name="grass2" parent="." instance=ExtResource("5_j3ayf")]
+position = Vector2(397, 65)
+
+[node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
+position = Vector2(-2190, 208)
+
+[node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
+position = Vector2(-2168, -360)
+
+[node name="Neutral" parent="." groups=["Alive"] instance=ExtResource("3_pte4x")]
+position = Vector2(-811, 869)
+collision_layer = 32
+
+[node name="Seller" parent="." groups=["Alive"] instance=ExtResource("8_mo2kn")]
+position = Vector2(1786, -1237)
+rotation = 3.13733
+collision_layer = 36
+
+[node name="InterfaceManager" type="CanvasLayer" parent="."]
+script = ExtResource("8_lg11x")
+
+[node name="DialogueManager" type="Control" parent="InterfaceManager"]
+layout_mode = 3
+anchor_top = 0.77
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 2.04001
+offset_right = -3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+script = ExtResource("9_71m5p")
+InterfaceSelectableObject = ExtResource("10_nvyj3")
+metadata/_edit_use_anchors_ = true
+
+[node name="Fon" type="TextureRect" parent="InterfaceManager/DialogueManager"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.658
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0420074
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("17_tu52g")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="InterfaceManager/DialogueManager"]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.248
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.048
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="InterfaceManager/DialogueManager/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_right = 0.966
+anchor_bottom = 0.112
+offset_left = -0.0150003
+offset_top = -5.0
+offset_right = 15.27
+offset_bottom = -0.0960007
+grow_horizontal = 2
+scale = Vector2(0.974811, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "TEST"
+label_settings = SubResource("LabelSettings_2l8bt")
+
+[node name="TextureRect" type="TextureRect" parent="InterfaceManager/DialogueManager/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.172
+anchor_right = 1.0
+anchor_bottom = 0.79
+offset_top = -13.076
+offset_bottom = -52.07
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_7tgbb")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InterfaceManager/DialogueManager/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013
+anchor_top = 0.142
+anchor_right = 0.988
+anchor_bottom = 0.548
+offset_left = -0.0150003
+offset_top = -0.0860023
+offset_right = -16.14
+offset_bottom = -14.684
+scale = Vector2(1.0149, 1.18371)
+theme_override_colors/default_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTBOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXT"
+scroll_following = true
+tab_size = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InterfaceManager/DialogueManager/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.100006
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 2)
+alignment = 1
+
+[node name="Force" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Force"]
+polygon = PackedVector2Array(-3263, 2984, 4860, 2978, 4860, 3181, -3252, 3204)
+
+[node name="Transition" type="Area2D" parent="."]
+position = Vector2(311, 2820)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("17_c7v7w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transition"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_hamf6")
+
+[node name="Guide" type="Label" parent="Transition"]
+offset_left = 117.0
+offset_top = 2.0
+offset_right = 252.0
+offset_bottom = 25.0
+scale = Vector2(4, 4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "[F] Для перехода"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" parent="." instance=ExtResource("18_gnmfo")]
+position = Vector2(158, -281)
+
+[node name="Grass2" type="Sprite2D" parent="."]
+position = Vector2(-932, 3681)
+scale = Vector2(2.89918, 3.63196)
+texture = ExtResource("2_101oy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_left = -962.0
+offset_top = 19.0
+offset_right = -662.0
+offset_bottom = 319.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(300, 300)
+render_target_update_mode = 4
+script = ExtResource("19_0jp71")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("20_fifao")
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.26, 0.26)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/SubViewportContainer"]
+position = Vector2(154, 157)
+scale = Vector2(0.324219, 0.339844)
+texture = ExtResource("20_7pm57")
+
+[node name="Sprite2D2" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
+position = Vector2(1001, 26)
+
+[node name="Quest" type="StaticBody2D" parent="."]
+position = Vector2(-1077, -1894)
+script = ExtResource("23_wuq3j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Quest"]
+position = Vector2(-108, -55)
+texture = ExtResource("23_4qyrl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Quest"]
+scale = Vector2(29.2739, 26.0629)
+shape = SubResource("CircleShape2D_vu78m")
+
+[connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
+[connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
+[connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]
+[connection signal="body_exited" from="Transition" to="Transition" method="OnTransitionBodyExited"]

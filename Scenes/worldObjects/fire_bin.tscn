@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs2var44rvxnf"]
+
+[ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="1_7ycdy"]
+[ext_resource type="Texture2D" uid="uid://7dgl0b3xqhmp" path="res://sprites/fireBin.png" id="2_h1mmk"]
+
+[node name="FireBin" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4.00001, 3.99998)
+scale = Vector2(2.7625, 2.26015)
+shadow_enabled = true
+shadow_color = Color(0.513551, 0.342092, 0.0664336, 0)
+shadow_filter = 2
+shadow_filter_smooth = 64.0
+texture = ExtResource("1_7ycdy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, 2)
+scale = Vector2(0.771698, 0.737069)
+texture = ExtResource("2_h1mmk")

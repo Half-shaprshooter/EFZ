@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://blk8m6a44fb0f"]
+
+[ext_resource type="Material" uid="uid://b6vxxds2c0g3y" path="res://material/light.tres" id="1_8ljk3"]
+[ext_resource type="Texture2D" uid="uid://2kuhnxjl74e7" path="res://sprites/box.png" id="1_upcb4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ux6eq"]
+size = Vector2(49, 50)
+
+[node name="Sprite2D" type="Sprite2D"]
+material = ExtResource("1_8ljk3")
+texture = ExtResource("1_upcb4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ux6eq")

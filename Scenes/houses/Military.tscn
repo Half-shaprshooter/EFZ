@@ -1,0 +1,183 @@
+[gd_scene load_steps=20 format=3 uid="uid://d128oaqovn1ph"]
+
+[ext_resource type="Texture2D" uid="uid://c68i5nq0sup27" path="res://sprites/buildings/MilitaryUpdate.png" id="1_5x6dm"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="3_38vf6"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="4_cht01"]
+[ext_resource type="Texture2D" uid="uid://dpm5e7ldsjcng" path="res://sprites/buildings/MilitaryRufUpdate.png" id="5_dumqx"]
+[ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="5_ljtti"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ou7l3"]
+polygon = PackedVector2Array(525, 35, 657, 36, 659, 451, 286, 459, 290, 413, 519, 407)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ur6ya"]
+polygon = PackedVector2Array(41, 414, 41, 454, -263, 458, -257, 409)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yhrb6"]
+polygon = PackedVector2Array(-493, 414, -495, 458, -856, 457, -864, 135, -866, -243, -860, -548, -499, -540, -499, -494, -807, -489, -818, -92, -814, 120, -821, 138, -818, 169, -818, 198, -819, 227, -815, 290, -824, 295, -815, 308, -820, 326, -821, 352, -815, 373, -815, 397, -816, 412, -715, 413, -703, 407, -683, 407, -676, 408, -664, 412, -642, 409, -622, 412, -606, 408, -571, 411, -548, 411, -539, 411)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_id7dl"]
+polygon = PackedVector2Array(-267, -541, -267, -496, -33, -498, -35, -544)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e17hv"]
+polygon = PackedVector2Array(218, -542, 218, -497, 523, -496, 544, -503, 548, -122, 658, -121, 661, -545)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
+size = Vector2(201, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
+size = Vector2(23, 152.652)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
+polygon = PackedVector2Array(-11, 0, -8, 141, 15, 128, 11, -3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
+size = Vector2(1458, 893)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qhuk5"]
+blend_mode = 2
+light_mode = 2
+
+[sub_resource type="Animation" id="Animation_h1bp3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RoofSpriteGroup/RoofSprite2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_36lw7"]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RoofSpriteGroup/RoofSprite2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jt72c"]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RoofSpriteGroup/RoofSprite2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36qeb"]
+_data = {
+"RESET": SubResource("Animation_h1bp3"),
+"hide": SubResource("Animation_36lw7"),
+"show": SubResource("Animation_jt72c")
+}
+
+[node name="House" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HouseSprite" type="Sprite2D" parent="."]
+position = Vector2(-101, -45)
+texture = ExtResource("1_5x6dm")
+
+[node name="Beds" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(273, -429, 378, -428, 378, -367, 397, -322, 397, 237, 357, 252, 382, 312, 285, 342, 252, 253, 222, 274, 221, 330, 117, 329, 114, 273, 94, 258, 95, 23, 11, 10, 5, 262, -10, 270, -11, 332, -109, 328, -115, 270, -133, 245, -159, 241, -173, 272, -173, 328, -274, 325, -274, 269, -290, 248, -293, -1, -381, 5, -406, 6, -397, 237, -535, 250, -553, 270, -563, 333, -663, 300, -655, 256, -681, 244, -689, 21, -815, 21, -812, -110, -687, -109, -689, -326, -661, -361, -663, -421, -559, -420, -563, -357, -547, -321, -532, -324, -513, -371, -520, -425, -414, -425, -413, -368, -390, -324, -386, -105, -294, -108, -296, -329, -274, -368, -272, -425, -173, -428, -170, -365, -154, -326, -123, -321, -105, -377, -107, -429, -10, -425, -10, -368, 7, -329, 13, -108, 91, -109, 91, -326, 117, -371, 110, -429, 212, -428, 213, -367, 222, -318, 257, -321, 276, -368)
+
+[node name="WallCol" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(662, 35, 663, 455, -859, 460, -870, 241, -866, -544, 659, -544, 656, -121, 520, -121, 519, -497, -813, -490, -809, 337, -702, 334, -700, 400, 520, 407, 524, 32)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ou7l3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="LightOccluder2D"]
+occluder = SubResource("OccluderPolygon2D_ur6ya")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LightOccluder2D"]
+occluder = SubResource("OccluderPolygon2D_yhrb6")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="LightOccluder2D"]
+occluder = SubResource("OccluderPolygon2D_id7dl")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="LightOccluder2D"]
+occluder = SubResource("OccluderPolygon2D_e17hv")
+
+[node name="DoorHandler" type="StaticBody2D" parent="."]
+position = Vector2(609, -124)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_38vf6")
+
+[node name="DoorEvent" type="Area2D" parent="DoorHandler"]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
+position = Vector2(1.5, 65)
+shape = SubResource("RectangleShape2D_wmwc0")
+
+[node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
+position = Vector2(3.5, 74.6741)
+shape = SubResource("RectangleShape2D_fmisg")
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorHandler"]
+position = Vector2(2.26191, 67.6487)
+rotation = -1.41023
+scale = Vector2(0.830545, 0.614121)
+texture = ExtResource("4_cht01")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
+occluder = SubResource("OccluderPolygon2D_t20li")
+
+[node name="Roof" type="Area2D" parent="."]
+position = Vector2(-27, -1664)
+collision_mask = 2
+script = ExtResource("5_ljtti")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+position = Vector2(-54, 1621.5)
+shape = SubResource("RectangleShape2D_jl5kd")
+
+[node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+modulate = Color(1, 1, 1, 0.960784)
+position = Vector2(27, 1664)
+
+[node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("5_dumqx")
+
+[node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+material = SubResource("CanvasItemMaterial_qhuk5")
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("5_dumqx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Roof"]
+libraries = {
+"": SubResource("AnimationLibrary_36qeb")
+}
+
+[connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]
+[connection signal="body_exited" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyExited"]
+[connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]

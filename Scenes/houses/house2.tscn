@@ -1,0 +1,135 @@
+[gd_scene load_steps=17 format=3 uid="uid://t5d4txhp4d85"]
+
+[ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="1_i4q1h"]
+[ext_resource type="Texture2D" uid="uid://ds6jlbjusgl0y" path="res://sprites/buildings/Home1Inside.png" id="2_gyshx"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="3_gtfdr"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="4_xbie6"]
+[ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="5_wavye"]
+[ext_resource type="Texture2D" uid="uid://puj8tvpltoqu" path="res://sprites/buildings/Home1Outside.png" id="6_ueok8"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ksaog"]
+polygon = PackedVector2Array(-326, -288, -371, -293, -367, -433, 323, -441, 336, -345, 296, -344, 287, -399, -14, -398, -7, -203, -44, -201, -51, -394, -323, -392)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5eaxv"]
+polygon = PackedVector2Array(-124, 135, -123, 169, -48, 171, -48, 254, -15, 257, -17, -86, -53, -87, -48, 131, -57, 133)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2ucca"]
+polygon = PackedVector2Array(-372, 73, -329, 71, -325, 130, -245, 134, -242, 168, -320, 169, -325, 393, 291, 394, 290, 263, 321, 264, 330, 433, -374, 438)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rd4nd"]
+polygon = PackedVector2Array(-380, -154, -373, -81, -326, -79, -327, -160)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0wt40"]
+polygon = PackedVector2Array(327, 114, 292, 112, 290, -70, 100, -73, 98, -98, 290, -105, 290, -184, 329, -179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
+size = Vector2(201, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
+size = Vector2(23, 129.652)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
+polygon = PackedVector2Array(-11, 0, -8, 127, 17, 123, 11, -3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
+size = Vector2(799, 956)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wx8i0"]
+blend_mode = 2
+light_mode = 2
+
+[node name="House" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HouseOccluder" type="LightOccluder2D" parent="."]
+position = Vector2(0, 1.52588e-05)
+occluder = SubResource("OccluderPolygon2D_ksaog")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="HouseOccluder"]
+occluder = SubResource("OccluderPolygon2D_5eaxv")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="HouseOccluder"]
+occluder = SubResource("OccluderPolygon2D_2ucca")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="HouseOccluder"]
+occluder = SubResource("OccluderPolygon2D_rd4nd")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="HouseOccluder"]
+occluder = SubResource("OccluderPolygon2D_0wt40")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(159.5, 164.5)
+scale = Vector2(3.195, 2.44162)
+color = Color(1, 1, 0.333333, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.7
+texture = ExtResource("1_i4q1h")
+
+[node name="HouseSprite" type="Sprite2D" parent="."]
+position = Vector2(-25, 0)
+texture = ExtResource("2_gyshx")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-51, -82, -21, -84, -14, 257, -50, 255, -51, 170, -122, 169, -124, 134, -45, 130)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-379, -153, -373, 434, 329, 440, 329, -70, 330, -176, 333, -348, 322, -441, -367, -432, -370, -294, -356, -288, -327, -288, -321, -303, -320, -328, -328, -350, -322, -371, -328, -388, -291, -393, -54, -392, -42, -208, -29, -199, -11, -204, -6, -219, -12, -397, 21, -377, -6, -235, 20, -202, 20, -92, 42, -91, 104, -99, 107, -75, 293, -69, 293, 116, 293, 396, -327, 395, -319, 173, -248, 169, -244, 133, -326, 132, -327, -160)
+
+[node name="DoorHandler" type="StaticBody2D" parent="."]
+position = Vector2(-349, -289)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_gtfdr")
+
+[node name="DoorEvent" type="Area2D" parent="DoorHandler"]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
+position = Vector2(1.5, 65)
+shape = SubResource("RectangleShape2D_wmwc0")
+
+[node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
+position = Vector2(3.5, 63.1743)
+shape = SubResource("RectangleShape2D_fmisg")
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorHandler"]
+position = Vector2(1.37003, 62)
+rotation = -1.41023
+scale = Vector2(0.768448, 0.665817)
+texture = ExtResource("4_xbie6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
+occluder = SubResource("OccluderPolygon2D_t20li")
+
+[node name="Roof" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("5_wavye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+position = Vector2(-19, 15)
+shape = SubResource("RectangleShape2D_jl5kd")
+
+[node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+modulate = Color(1, 1, 1, 0.960784)
+position = Vector2(60, 38)
+
+[node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("6_ueok8")
+
+[node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+material = SubResource("CanvasItemMaterial_wx8i0")
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("6_ueok8")
+
+[connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]
+[connection signal="body_exited" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyExited"]
+[connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]

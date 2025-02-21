@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdima8u8such0"]
+
+[ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceSelection.cs" id="1_fb551"]
+[ext_resource type="Texture2D" uid="uid://x5c0ebm6axkm" path="res://sprites/iFace/Rectangle 8.png" id="2_hnoag"]
+[ext_resource type="Texture2D" uid="uid://cper50sbwocac" path="res://sprites/iFace/Select.png" id="3_oei4n"]
+
+[node name="InterfaceSelection" type="Control"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 3
+anchor_left = -0.065
+anchor_right = 0.07
+anchor_bottom = 0.039
+offset_left = -0.119995
+offset_right = 3.36
+offset_bottom = -0.272001
+pivot_offset = Vector2(75, 0)
+script = ExtResource("1_fb551")
+
+[node name="NotSelected" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.975
+offset_right = -0.0250092
+offset_bottom = 24.0
+texture = ExtResource("2_hnoag")
+expand_mode = 2
+
+[node name="Selected" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.981
+offset_right = 0.0209961
+offset_bottom = 24.0
+texture = ExtResource("3_oei4n")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031
+anchor_right = 0.981
+offset_left = 0.0709996
+offset_right = 0.0209961
+offset_bottom = 23.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "BOTTOM CONTROL"

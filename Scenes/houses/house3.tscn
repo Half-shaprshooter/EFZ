@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://dakog3812u1f7"]
+
+[ext_resource type="Texture2D" uid="uid://81tucckqb0r" path="res://sprites/buildings/Home3Inside.png" id="1_g0qip"]
+[ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="2_ednqr"]
+[ext_resource type="Texture2D" uid="uid://d2wlw4c251mi8" path="res://sprites/buildings/Home3Outside.png" id="3_i4emh"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ucnes"]
+polygon = PackedVector2Array(-162, 327, -157, 369, -402, 369, -400, 327)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_paiwe"]
+polygon = PackedVector2Array(271, -219, 271, -173, 358, -171, 352, -15, 355, 95, 75, 116, 68, 324, 9, 328, 9, 358, 63, 371, 81, 360, 109, 352, 116, 347, 113, 310, 120, 292, 112, 254, 122, 238, 113, 209, 117, 185, 113, 149, 393, 131, 400, 123, 402, 98, 405, 78, 404, 65, 405, 36, 406, 6, 396, 2, 405, -30, 396, -54, 407, -91, 396, -122, 405, -167, 396, -177, 404, -185, 393, -218)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2glva"]
+polygon = PackedVector2Array(13, -367, 15, -337, 53, -334, 55, -315, 85, -317, 84, -364)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
+size = Vector2(504, 674)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2krgd"]
+blend_mode = 2
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ibg0f"]
+polygon = PackedVector2Array(-420, 133, -453, 132, -441, -361, -147, -369, -150, -331, -410, -328)
+
+[node name="House3" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HouseSprite" type="Sprite2D" parent="."]
+position = Vector2(-25, 0)
+texture = ExtResource("1_g0qip")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(82, -319, 55, -319, 53, -336, 14, -336, -410, -327, -419, 136, -454, 133, -440, -361, -149, -369, 80, -363)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(278, -221, 394, -221, 400, 130, 111, 149, 111, 354, 18, 365, -403, 372, -402, 331, 65, 324, 73, 113, 277, 95, 335, -13, 354, -19, 355, -172, 276, -175)
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ucnes")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="LightOccluder2D2"]
+occluder = SubResource("OccluderPolygon2D_paiwe")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="LightOccluder2D2"]
+occluder = SubResource("OccluderPolygon2D_2glva")
+
+[node name="Roof" type="Area2D" parent="."]
+position = Vector2(-1160, -72)
+collision_mask = 2
+script = ExtResource("2_ednqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+position = Vector2(988, 92)
+shape = SubResource("RectangleShape2D_jl5kd")
+
+[node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+modulate = Color(1, 1, 1, 0.960784)
+position = Vector2(1219, 110)
+
+[node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("3_i4emh")
+
+[node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+material = SubResource("CanvasItemMaterial_2krgd")
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("3_i4emh")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ibg0f")
+
+[connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]

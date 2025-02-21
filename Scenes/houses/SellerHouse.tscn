@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn3mt4b7k843s"]
+
+[ext_resource type="Texture2D" uid="uid://btypuf23c84xv" path="res://sprites/buildings/SellerHouseIndide.png" id="1_02cfn"]
+[ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="1_blvlw"]
+[ext_resource type="Texture2D" uid="uid://b0u0akcwu14og" path="res://sprites/buildings/SellerHouseOutside.png" id="4_jma6r"]
+[ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="5_hopyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
+size = Vector2(597.5, 954)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_53y0j"]
+blend_mode = 2
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7bx3w"]
+polygon = PackedVector2Array(-352, 399, -350, 436, -470, 436, -467, -51, -466, -434, 418, -433, 433, 44, 40, 45, 40, 443, -208, 437, -208, 395, -5, 392, -3, 107, -13, 114, -19, 128, -114, 26, -106, -2, 377, -6, 372, -397, -435, -398, -421, -8, -251, -8, -245, 15, -423, 18, -432, 394)
+
+[node name="House" type="StaticBody2D"]
+rotation = 1.57775
+collision_layer = 4
+collision_mask = 2
+
+[node name="HouseSprite" type="Sprite2D" parent="."]
+position = Vector2(-25, 0)
+texture = ExtResource("1_02cfn")
+
+[node name="Roof" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 4
+z_index = 1
+position = Vector2(-947, -30)
+collision_mask = 2
+script = ExtResource("5_hopyp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+position = Vector2(715.25, 38)
+shape = SubResource("RectangleShape2D_jl5kd")
+
+[node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+position = Vector2(1017.28, 69.5123)
+
+[node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("4_jma6r")
+
+[node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+material = SubResource("CanvasItemMaterial_53y0j")
+position = Vector2(-100, -31)
+scale = Vector2(1.05746, 1.04454)
+texture = ExtResource("4_jma6r")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-285.875, 219.5)
+scale = Vector2(2.81875, 2.27919)
+color = Color(0.817521, 0.817521, 0.817521, 1)
+texture = ExtResource("1_blvlw")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-30, -203)
+scale = Vector2(3.995, 1.96701)
+color = Color(0.439049, 0.439049, 0.439049, 1)
+texture = ExtResource("1_blvlw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7bx3w")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-212, 402, -206, 431, 34, 439, 51, 42, 429, 38, 428, -437, -474, -434, -473, 439, -351, 444, -352, 401, -431, 395, -428, 289, 1, 291, -2, 397)
+
+[connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]
