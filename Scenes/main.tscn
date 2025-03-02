@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=31 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
 [ext_resource type="Texture2D" uid="uid://sgff8x8ohb6w" path="res://sprites/bigfire.png" id="23_4qyrl"]
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
+[ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -302,6 +303,18 @@ texture = ExtResource("20_7pm57")
 
 [node name="Sprite2D2" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
 position = Vector2(1001, 26)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -111.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("25_k4ij3")
 
 [node name="Quest" type="StaticBody2D" parent="."]
 position = Vector2(-1077, -1894)
