@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://djh6mt40wbkm8"]
+[gd_scene load_steps=31 format=3 uid="uid://djh6mt40wbkm8"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScripts/PlayerControl.cs" id="1_x0jpe"]
 [ext_resource type="Texture2D" uid="uid://bvqqmsci2soq0" path="res://sprites/playerSprites/WalkAnim/Run/Component 1 (56).png" id="2_ac2gw"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerScripts/Gun.cs" id="20_nok8j"]
 [ext_resource type="PackedScene" uid="uid://bood2jdsxja37" path="res://Scenes/guns/bullet.tscn" id="21_krd0o"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="22_4n81h"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/LabelHolder.cs" id="23_tbstj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4140m"]
 animations = [{
@@ -189,6 +190,10 @@ _data = {
 radius = 48.0
 height = 122.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_ct8xr"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -254,5 +259,24 @@ rotation = 1.58384
 texture = ExtResource("22_4n81h")
 
 [node name="Timer" type="Timer" parent="muzzle"]
+
+[node name="LabelHolder" type="Node2D" parent="."]
+script = ExtResource("23_tbstj")
+
+[node name="ColorRect" type="ColorRect" parent="LabelHolder"]
+visible = false
+offset_left = -83.0
+offset_top = -170.0
+offset_right = 86.0
+offset_bottom = -77.0
+
+[node name="Label" type="Label" parent="LabelHolder"]
+visible = false
+offset_left = -84.0
+offset_top = -169.0
+offset_right = 85.0
+offset_bottom = -78.0
+text = "Sdfsdf"
+label_settings = SubResource("LabelSettings_ct8xr")
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
