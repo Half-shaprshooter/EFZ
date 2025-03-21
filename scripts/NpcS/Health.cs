@@ -14,9 +14,10 @@ public partial class Health : Node2D
 	public void Damage(float damage)
 	{
 		health -= damage;
-		GD.Print("dmg");
+		GD.Print("Dmg in Health class is: " + damage);
 		if (health < 0)
 		{
+			GD.Print(123);
 			GetParent().QueueFree();
 		}
 	}

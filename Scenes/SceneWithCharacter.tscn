@@ -263,7 +263,7 @@ texture = ExtResource("22_4n81h")
 [node name="LabelHolder" type="Node2D" parent="."]
 script = ExtResource("23_tbstj")
 
-[node name="ColorRect" type="ColorRect" parent="LabelHolder"]
+[node name="BackGround" type="ColorRect" parent="LabelHolder"]
 visible = false
 offset_left = -83.0
 offset_top = -170.0

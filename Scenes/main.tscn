@@ -121,17 +121,17 @@ color = Color(0.281187, 0.281187, 0.281187, 1)
 position = Vector2(397, 65)
 
 [node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
-position = Vector2(-2190, 208)
+position = Vector2(-893, 1992)
 
 [node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
 position = Vector2(-2168, -360)
 
 [node name="Neutral" parent="." groups=["Alive"] instance=ExtResource("3_pte4x")]
-position = Vector2(-811, 869)
+position = Vector2(-27, 1983)
 collision_layer = 32
 
 [node name="Seller" parent="." groups=["Alive"] instance=ExtResource("8_mo2kn")]
-position = Vector2(1786, -1237)
+position = Vector2(-488, 1941)
 rotation = 3.13733
 collision_layer = 36
 
