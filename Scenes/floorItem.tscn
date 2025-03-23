@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0pkx260wbdnu"]
+
+[ext_resource type="Script" path="res://scripts/floorItem.gd" id="1_fxwvn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31w6y"]
+radius = 25.0
+
+[node name="FloorItem" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_fxwvn")
+item_name = ""
+item_texture = null
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_31w6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.267656, 0.267656)
+
+[node name="interactItem" type="ColorRect" parent="."]
+visible = false
+offset_left = -31.0
+offset_top = -40.0
+offset_right = 31.0
+offset_bottom = -19.0
+color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[node name="Label" type="Label" parent="interactItem"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 59.0
+offset_bottom = 21.0
+text = "press E"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
