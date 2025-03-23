@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://4cxx487cjv2e"]
 
-[ext_resource type="Script" path="res://scripts/Items/Item.cs" id="1_wlqon"]
+[ext_resource type="Script" path="res://scripts/Items/item.gd" id="1_jufdx"]
 
 [node name="Item" type="Node2D"]
-script = ExtResource("1_wlqon")
+script = ExtResource("1_jufdx")
 
 [node name="Icon" type="TextureRect" parent="."]
 anchors_preset = 8

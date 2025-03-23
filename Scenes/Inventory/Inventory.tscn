@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdhtppipmq6hf"]
 
-[ext_resource type="Script" path="res://scripts/Inventory/Inventory.cs" id="1_65nq8"]
+[ext_resource type="Script" path="res://scripts/Inventory/Inventory.gd" id="1_gl1co"]
 [ext_resource type="PackedScene" uid="uid://347ib55d2aya" path="res://Scenes/Inventory/pickingSlot.tscn" id="2_0dkhn"]
 
 [node name="Inventory" type="Control"]
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_65nq8")
+script = ExtResource("1_gl1co")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
