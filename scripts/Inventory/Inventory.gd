@@ -2,18 +2,18 @@ extends Control
 
 @onready var main_node = $"../../.."
 @onready var player = $"../.."
-@onready var slot_scene = preload("res://Scenes/slot.tscn")
+@onready var slot_scene = preload("res://Scenes/Inventory/slot.tscn")
 @onready var grid_container = $ColorRect/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
-@onready var item_scene = preload("res://Scenes/item.tscn")
+@onready var item_scene = preload("res://Scenes/Items/item.tscn")
 @onready var scroll_container = $ColorRect/MarginContainer/VBoxContainer/ScrollContainer
 @onready var col_count = grid_container.columns 
 @onready var UIinventory = $"."
 @onready var colorRect1 = $ColorRect
 @onready var colorRect2 = $ColorRect2
-@onready var picking_slot_scene = preload("res://Scenes/pickingSlot.tscn")
+@onready var picking_slot_scene = preload("res://Scenes/Inventory/pickingSlot.tscn")
 @onready var picking_slot_weapon_first = $ColorRect2/WeaponFirst
 @onready var ui = $".."
-var floor_item_scene = preload("res://Scenes/floorItem.tscn") 
+var floor_item_scene = preload("res://Scenes/Items/floorItem.tscn") 
 var grid_array := []
 var item_held = null 
 var current_slot = null

@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bimb2mgrtabbo"]
 
-[ext_resource type="Texture2D" uid="uid://20mys5jngwa2" path="res://sprites/inventory_texture.png" id="1_5lhwp"]
-[ext_resource type="Script" path="res://scripts/slot.gd" id="2_lkp0c"]
+[ext_resource type="Texture2D" uid="uid://20mys5jngwa2" path="res://sprites/inventory_texture.png" id="1_cqv45"]
+[ext_resource type="Script" path="res://scripts/Inventory/Slot.cs" id="2_74bdr"]
 
 [node name="Slot" type="TextureRect"]
 custom_minimum_size = Vector2(50, 50)
-texture = ExtResource("1_5lhwp")
+texture = ExtResource("1_cqv45")
 expand_mode = 1
-script = ExtResource("2_lkp0c")
+script = ExtResource("2_74bdr")
 
 [node name="StatusFilter" type="ColorRect" parent="."]
 layout_mode = 1

@@ -1,6 +1,6 @@
 extends Panel
 
-const ItemDB = preload("res://Scenes/ItemDB.tscn")
+const ItemDB = preload("res://Scenes/Items/ItemDB.tscn")
 @onready var slots = get_children()
 var items = {}
 

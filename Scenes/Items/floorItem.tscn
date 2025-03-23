@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0pkx260wbdnu"]
 
-[ext_resource type="Script" path="res://scripts/floorItem.gd" id="1_fxwvn"]
+[ext_resource type="Script" path="res://scripts/Items/floorItem.gd" id="1_pca6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_31w6y"]
 radius = 25.0
 
 [node name="FloorItem" type="Node2D"]
 scale = Vector2(2, 2)
-script = ExtResource("1_fxwvn")
+script = ExtResource("1_pca6g")
 item_name = ""
 item_texture = null
 

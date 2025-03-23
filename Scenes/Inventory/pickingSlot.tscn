@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://347ib55d2aya"]
 
-[ext_resource type="Script" path="res://scripts/fastSlot.gd" id="1_4yh7k"]
+[ext_resource type="Script" path="res://scripts/Inventory/fastSlot.gd" id="1_qrivd"]
 
 [node name="WeaponFirst" type="Panel"]
 offset_left = 48.0
@@ -8,7 +8,7 @@ offset_top = 110.0
 offset_right = 148.0
 offset_bottom = 168.0
 scale = Vector2(1.74544, 1.74544)
-script = ExtResource("1_4yh7k")
+script = ExtResource("1_qrivd")
 
 [node name="StatusFilter" type="ColorRect" parent="."]
 layout_mode = 1
