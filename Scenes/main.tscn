@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=32 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
 [ext_resource type="Texture2D" uid="uid://sgff8x8ohb6w" path="res://sprites/bigfire.png" id="23_4qyrl"]
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/HpBar.cs" id="25_qla2s"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/StamBar.cs" id="26_74f07"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -302,6 +304,25 @@ texture = ExtResource("20_7pm57")
 
 [node name="Sprite2D2" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
 position = Vector2(1001, 26)
+
+[node name="Node" type="Node" parent="CanvasLayer"]
+
+[node name="HP bar" type="ProgressBar" parent="CanvasLayer/Node"]
+offset_left = 983.0
+offset_top = 14.0
+offset_right = 1144.0
+offset_bottom = 41.0
+step = 1.0
+script = ExtResource("25_qla2s")
+
+[node name="Stam bar" type="ProgressBar" parent="CanvasLayer/Node"]
+offset_left = 1024.0
+offset_top = 51.0
+offset_right = 1144.0
+offset_bottom = 72.0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+script = ExtResource("26_74f07")
 
 [node name="Quest" type="StaticBody2D" parent="."]
 position = Vector2(-1077, -1894)
