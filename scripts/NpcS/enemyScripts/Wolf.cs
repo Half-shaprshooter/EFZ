@@ -2,7 +2,6 @@ public partial class Wolf: EnemyNpc
 {
 	public override void _Ready()
 	{
-		Health = 20;
 		Speed = 60;
 		DamageFromAttack = 10;
 	}

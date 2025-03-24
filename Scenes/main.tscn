@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=38 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Seller.tscn" id="8_mo2kn"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/DialogueManager.cs" id="9_71m5p"]
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
+[ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
+[ext_resource type="Script" path="res://scripts/Inventory/UI.gd" id="10_u4lks"]
+[ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="11_kc82q"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
 [ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
@@ -26,8 +29,11 @@
 [ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
 [ext_resource type="Texture2D" uid="uid://sgff8x8ohb6w" path="res://sprites/bigfire.png" id="23_4qyrl"]
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
-[ext_resource type="Script" path="res://scripts/PlayerScripts/HpBar.cs" id="25_qla2s"]
-[ext_resource type="Script" path="res://scripts/PlayerScripts/StamBar.cs" id="26_74f07"]
+[ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
+[ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
+[ext_resource type="Texture2D" uid="uid://tbrqk2pn4j0h" path="res://sprites/AK47.png" id="32_5gtp4"]
+[ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
+[ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -115,6 +121,17 @@ rotation = -1.5708
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
 position = Vector2(-411, 1491)
 
+[node name="UI" type="CanvasLayer" parent="Player"]
+script = ExtResource("10_u4lks")
+
+[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
+
+[node name="FastSlots" parent="Player/UI" instance=ExtResource("11_kc82q")]
+offset_left = 1600.0
+offset_top = -2898.0
+offset_right = 584.0
+offset_bottom = -3498.0
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
 
@@ -122,17 +139,17 @@ color = Color(0.281187, 0.281187, 0.281187, 1)
 position = Vector2(397, 65)
 
 [node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
-position = Vector2(-2190, 208)
+position = Vector2(-893, 1992)
 
 [node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
 position = Vector2(-2168, -360)
 
 [node name="Neutral" parent="." groups=["Alive"] instance=ExtResource("3_pte4x")]
-position = Vector2(-811, 869)
+position = Vector2(-27, 1983)
 collision_layer = 32
 
 [node name="Seller" parent="." groups=["Alive"] instance=ExtResource("8_mo2kn")]
-position = Vector2(1786, -1237)
+position = Vector2(-488, 1941)
 rotation = 3.13733
 collision_layer = 36
 
@@ -305,24 +322,17 @@ texture = ExtResource("20_7pm57")
 [node name="Sprite2D2" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
 position = Vector2(1001, 26)
 
-[node name="Node" type="Node" parent="CanvasLayer"]
-
-[node name="HP bar" type="ProgressBar" parent="CanvasLayer/Node"]
-offset_left = 983.0
-offset_top = 14.0
-offset_right = 1144.0
-offset_bottom = 41.0
-step = 1.0
-script = ExtResource("25_qla2s")
-
-[node name="Stam bar" type="ProgressBar" parent="CanvasLayer/Node"]
-offset_left = 1024.0
-offset_top = 51.0
-offset_right = 1144.0
-offset_bottom = 72.0
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 12
-script = ExtResource("26_74f07")
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -111.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("25_k4ij3")
 
 [node name="Quest" type="StaticBody2D" parent="."]
 position = Vector2(-1077, -1894)
@@ -335,6 +345,21 @@ texture = ExtResource("23_4qyrl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Quest"]
 scale = Vector2(29.2739, 26.0629)
 shape = SubResource("CircleShape2D_vu78m")
+
+[node name="FloorItem" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-585, 1399)
+item_id = 5
+item_texture = ExtResource("32_5gtp4")
+
+[node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-451, 1352)
+item_id = 6
+item_texture = ExtResource("33_g7gok")
+
+[node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-303, 1372)
+item_id = 7
+item_texture = ExtResource("34_nih2l")
 
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]

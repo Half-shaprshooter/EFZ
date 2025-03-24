@@ -14,8 +14,6 @@ public partial class SomeNeutralNpc : TalkableNpc
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 2", 1),
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 3", 2)
 		};
-		Health = 100;
-		Hostility = Hostility.Neutral;
 		_label = GetNode<Label>("ButtonText");
 	}
 

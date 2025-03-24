@@ -18,8 +18,7 @@ public partial class Seller : TalkableNpc
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 2", 1),
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 3", 2)
 		};
-		Health = 100;
-		Hostility = Hostility.Friendly;
+		
 		_label = GetNode<Label>("ButtonText");
 	}
 
@@ -34,7 +33,7 @@ public partial class Seller : TalkableNpc
 			_label.Visible = false;
 		}
 	}
-
+	
 	public void SetDialog()
 	{
 		InterfaceManager.dialogueManager.NpcDialogues = _npcDialogues;

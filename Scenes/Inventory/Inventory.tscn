@@ -1,0 +1,111 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdhtppipmq6hf"]
+
+[ext_resource type="Script" path="res://scripts/Inventory/Inventory.gd" id="1_gl1co"]
+[ext_resource type="PackedScene" uid="uid://347ib55d2aya" path="res://Scenes/Inventory/pickingSlot.tscn" id="2_0dkhn"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gl1co")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 623.0
+offset_top = 60.0
+offset_right = 1043.0
+offset_bottom = 580.0
+color = Color(0.314316, 0.314316, 0.314316, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Button_Spawn" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "Test ITEM"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 8
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 60.0
+offset_right = 623.0
+offset_bottom = 580.0
+color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[node name="WeaponFirst" parent="ColorRect2" instance=ExtResource("2_0dkhn")]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 109.0
+offset_right = 149.0
+offset_bottom = 167.0
+
+[node name="WeaponSecond" type="Panel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 243.0
+offset_right = 147.0
+offset_bottom = 301.0
+scale = Vector2(1.74544, 1.74544)
+
+[node name="FastItem" type="Panel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 380.0
+offset_right = 162.0
+offset_bottom = 455.0
+scale = Vector2(1.15686, 1.15686)
+
+[node name="Head" type="Panel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 96.0
+offset_right = 337.0
+offset_bottom = 146.0
+scale = Vector2(1.74544, 1.74544)
+
+[node name="Body" type="Panel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 216.0
+offset_right = 337.0
+offset_bottom = 281.0
+scale = Vector2(1.74544, 1.74544)
+
+[node name="Legs" type="Panel" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 356.0
+offset_right = 336.0
+offset_bottom = 420.0
+scale = Vector2(1.74544, 1.74544)
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]

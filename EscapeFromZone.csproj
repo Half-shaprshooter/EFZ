@@ -7,6 +7,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="scripts\enemyScripts.cs" />
+    <Compile Remove="scripts\NpcS\enemyScripts\Qwe.cs" />
+    <Compile Remove="scripts\NpcS\enemyScripts\TakinDmgNpc.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scenes\SceneWithCharacter.tscn" />

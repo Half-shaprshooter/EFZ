@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://djh6mt40wbkm8"]
+[gd_scene load_steps=31 format=3 uid="uid://djh6mt40wbkm8"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScripts/PlayerControl.cs" id="1_x0jpe"]
 [ext_resource type="Texture2D" uid="uid://bvqqmsci2soq0" path="res://sprites/playerSprites/WalkAnim/Run/Component 1 (56).png" id="2_ac2gw"]
@@ -22,8 +22,7 @@
 [ext_resource type="Script" path="res://scripts/PlayerScripts/Gun.cs" id="20_nok8j"]
 [ext_resource type="PackedScene" uid="uid://bood2jdsxja37" path="res://Scenes/guns/bullet.tscn" id="21_krd0o"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="22_4n81h"]
-[ext_resource type="Script" path="res://scripts/PlayerScripts/HpBar.cs" id="23_lnuex"]
-[ext_resource type="Script" path="res://scripts/PlayerScripts/StamBar.cs" id="24_813py"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/LabelHolder.cs" id="23_tbstj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4140m"]
 animations = [{
@@ -167,7 +166,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rd3mm"]
 resource_name = "wound"
-length = 0.14
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -175,38 +174,25 @@ tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"times": PackedFloat32Array(0, 1.53333, 2.96667),
 "transitions": PackedFloat32Array(0.90125, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_glbog"]
-resource_name = "woundx3"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.000108551, 0.0400713, 0.0803947, 0.119632, 0.160381, 0.200212, 0.24012),
-"transitions": PackedFloat32Array(0.90125, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gjvt8"]
 _data = {
 "RESET": SubResource("Animation_stjjl"),
-"wound": SubResource("Animation_rd3mm"),
-"woundx3": SubResource("Animation_glbog")
+"wound": SubResource("Animation_rd3mm")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_klx1p"]
 radius = 48.0
 height = 122.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ct8xr"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -274,23 +260,23 @@ texture = ExtResource("22_4n81h")
 
 [node name="Timer" type="Timer" parent="muzzle"]
 
-[node name="Node" type="Node" parent="."]
+[node name="LabelHolder" type="Node2D" parent="."]
+script = ExtResource("23_tbstj")
 
-[node name="HP bar" type="ProgressBar" parent="Node"]
-offset_left = 983.0
-offset_top = 14.0
-offset_right = 1144.0
-offset_bottom = 41.0
-step = 1.0
-script = ExtResource("23_lnuex")
+[node name="BackGround" type="ColorRect" parent="LabelHolder"]
+visible = false
+offset_left = -83.0
+offset_top = -170.0
+offset_right = 86.0
+offset_bottom = -77.0
 
-[node name="Stam bar" type="ProgressBar" parent="Node"]
-offset_left = 1024.0
-offset_top = 51.0
-offset_right = 1144.0
-offset_bottom = 72.0
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 12
-script = ExtResource("24_813py")
+[node name="Label" type="Label" parent="LabelHolder"]
+visible = false
+offset_left = -84.0
+offset_top = -169.0
+offset_right = 85.0
+offset_bottom = -78.0
+text = "Sdfsdf"
+label_settings = SubResource("LabelSettings_ct8xr")
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]

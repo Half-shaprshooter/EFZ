@@ -1,4 +1,4 @@
-public partial class HumanEnemyNpc : NpcObject
+public partial class HumanEnemyNpc : EnemyNpc
 {
 	public override void _Ready()
 	{
