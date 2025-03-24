@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://djh6mt40wbkm8"]
+[gd_scene load_steps=34 format=3 uid="uid://djh6mt40wbkm8"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScripts/PlayerControl.cs" id="1_x0jpe"]
 [ext_resource type="Texture2D" uid="uid://bvqqmsci2soq0" path="res://sprites/playerSprites/WalkAnim/Run/Component 1 (56).png" id="2_ac2gw"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://bood2jdsxja37" path="res://Scenes/guns/bullet.tscn" id="21_krd0o"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="22_4n81h"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/LabelHolder.cs" id="23_tbstj"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/HpBar.cs" id="24_l44xa"]
+[ext_resource type="Script" path="res://scripts/PlayerScripts/StamBar.cs" id="25_7wngu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4140m"]
 animations = [{
@@ -166,7 +168,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rd3mm"]
 resource_name = "wound"
-length = 3.0
+length = 0.09
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -174,16 +176,33 @@ tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.53333, 2.96667),
+"times": PackedFloat32Array(0, 0.0426464, 0.0824418),
 "transitions": PackedFloat32Array(0.90125, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_1dw2f"]
+resource_name = "woundx3"
+length = 0.09
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0150676, 0.0296173, 0.0445335, 0.0597816, 0.0757085, 0.0900253),
+"transitions": PackedFloat32Array(0.90125, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gjvt8"]
 _data = {
 "RESET": SubResource("Animation_stjjl"),
-"wound": SubResource("Animation_rd3mm")
+"wound": SubResource("Animation_rd3mm"),
+"woundx3": SubResource("Animation_1dw2f")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_klx1p"]
@@ -278,5 +297,21 @@ offset_right = 85.0
 offset_bottom = -78.0
 text = "Sdfsdf"
 label_settings = SubResource("LabelSettings_ct8xr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HpBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 1005.0
+offset_top = 4.0
+offset_right = 1147.0
+offset_bottom = 31.0
+script = ExtResource("24_l44xa")
+
+[node name="StamBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 1060.0
+offset_top = 37.0
+offset_right = 1142.0
+offset_bottom = 64.0
+script = ExtResource("25_7wngu")
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
