@@ -192,7 +192,7 @@ tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0150676, 0.0296173, 0.0445335, 0.0597816, 0.0757085, 0.0900253),
+"times": PackedFloat32Array(0, 0.0150676, 0.0296173, 0.0445335, 0.0597816, 0.0757085, 0.0889713),
 "transitions": PackedFloat32Array(0.90125, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1), Color(0.586158, 0.176941, 0, 1), Color(1, 1, 1, 1)]
