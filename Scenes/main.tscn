@@ -118,8 +118,14 @@ position = Vector2(1976, -2654)
 position = Vector2(-835, -445)
 rotation = -1.5708
 
+[node name="FloorItem" parent="." instance=ExtResource("31_ug1do")]
+light_mask = 0
+position = Vector2(-564, 1400)
+item_id = 5
+item_texture = ExtResource("32_5gtp4")
+
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-411, 1491)
+position = Vector2(-590, 1393)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("10_u4lks")
@@ -345,11 +351,6 @@ texture = ExtResource("23_4qyrl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Quest"]
 scale = Vector2(29.2739, 26.0629)
 shape = SubResource("CircleShape2D_vu78m")
-
-[node name="FloorItem" parent="." instance=ExtResource("31_ug1do")]
-position = Vector2(-585, 1399)
-item_id = 5
-item_texture = ExtResource("32_5gtp4")
 
 [node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-451, 1352)

@@ -11,6 +11,10 @@ public partial class PlayerControl : CharacterBody2D
 	private int _damageToPlayer;
 	private float _rotationSpeed = 6f;
 	private int _health;
+	private int _maxHealth;
+
+	private int _stamina;
+	private int _maxStamina;
 
 	private bool _isWalking;
 	private bool _isRunning;
@@ -33,6 +37,9 @@ public partial class PlayerControl : CharacterBody2D
 		_legs = GetNode<AnimatedSprite2D>("LegsAnimation");
 		_wound = GetNode<AnimationPlayer>("PointLight2D/AnimationPlayer");
 		_health = PlayerData.PlayerHealth;
+		_maxHealth = PlayerData.PlayerMaxHealth;
+		_stamina = PlayerData.PlayerStamina;
+		_maxStamina = PlayerData.PlayerMaxStamina;
 		globalPos = this.GlobalPosition;
 	}
 	
@@ -93,12 +100,6 @@ public partial class PlayerControl : CharacterBody2D
 			{
 				Speed = 600;
 			}
-
-			//TODO: Анимация урона, кнопка приделана только для теста
-			if (Input.IsKeyPressed(Key.Enter))
-			{
-				_wound.Play("wound");
-			}
 			
 			if (!Input.IsKeyPressed(Key.Shift))
 			{
@@ -141,6 +142,11 @@ public partial class PlayerControl : CharacterBody2D
 			
 			Velocity = moveInput * totalSpeed;
 			MoveAndSlide();
+
+			if (Input.IsActionJustPressed("Damage"))
+			{
+				TakeDmg(15);
+			}
 		}
 	}
 
@@ -149,6 +155,20 @@ public partial class PlayerControl : CharacterBody2D
 		if (_health > 0)
 		{
 			_health -= dmg;
+
+			if (_health < 0)
+			{
+				_health = 0;
+			}
+
+			if (_health > (double)_maxHealth * 0.3)
+			{
+				_wound.Play("wound");
+			}
+			else
+			{
+				_wound.Play("woundx3");
+			}
 		}
 		else
 		{
