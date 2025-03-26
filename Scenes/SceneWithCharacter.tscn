@@ -221,7 +221,8 @@ speed_scale = 3.0
 offset = Vector2(-0.0196381, -0.28363)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(1.33333, 1.34921)
+position = Vector2(1, -2)
+scale = Vector2(2.89673, 3.93651)
 shadow_enabled = true
 shadow_filter = 2
 shadow_filter_smooth = 1.9
