@@ -16,6 +16,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scripts\NpcS\FriendlyNpcS\" />
-    <Folder Include="scripts\PlayerScripts\" />
   </ItemGroup>
 </Project>

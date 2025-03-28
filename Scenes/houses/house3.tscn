@@ -51,6 +51,10 @@ position = Vector2(-1160, -72)
 collision_mask = 2
 script = ExtResource("2_ednqr")
 
+[node name="LightsGroup" type="CanvasGroup" parent="Roof"]
+visible = false
+position = Vector2(1160, 72)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
 position = Vector2(988, 92)
 shape = SubResource("RectangleShape2D_jl5kd")

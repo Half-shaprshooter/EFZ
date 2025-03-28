@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5d31782lmllg"]
+[gd_scene load_steps=15 format=3 uid="uid://c5d31782lmllg"]
 
 [ext_resource type="Texture2D" uid="uid://deei6qm656a0u" path="res://sprites/buildings/Home4Inside.png" id="1_d8wx0"]
 [ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="3_47rxh"]
 [ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="4_nj2t2"]
 [ext_resource type="Texture2D" uid="uid://dcbhhwihv6nvy" path="res://sprites/buildings/HouseRoof4.png" id="5_6s52y"]
 [ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="5_ern6p"]
+[ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_q22mg"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mbv0c"]
 polygon = PackedVector2Array(535, 294, 537, 475, -239, 472, -237, 40, -270, 39, -273, 10, -236, 6, -237, -270, -197, -265, -191, 434, 499, 435, 498, 293)
@@ -91,6 +92,16 @@ script = ExtResource("5_ern6p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Roof"]
 polygon = PackedVector2Array(-747, -38, -742, -510, 371, -524, 361, 427, -337, 421, -343, -49)
+
+[node name="LightsGroup" type="CanvasGroup" parent="Roof"]
+visible = false
+position = Vector2(-176, -29)
+
+[node name="PointLight2D2" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(-321, -321)
+scale = Vector2(2.81875, 2.27919)
+color = Color(0.817521, 0.817521, 0.817521, 1)
+texture = ExtResource("5_q22mg")
 
 [node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
 modulate = Color(1, 1, 1, 0.960784)
