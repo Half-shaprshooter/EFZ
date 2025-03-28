@@ -25,7 +25,6 @@ public partial class Wolf: EnemyNpc
 		if (PlayerNear && AbleToCast)
 		{
 			JumpAttack();
-			AbleToCast = false;
 			IsAttacking = false;
 			CastTimer = CastTimerReset;
 			CastDuration = CastDurationReset;
@@ -35,9 +34,12 @@ public partial class Wolf: EnemyNpc
 			Speed = 60;
 		}
 		
+		//TODO: Тут баг неприятный, если игрок будет выходить заходить часто в ренж атаки волка, то волк шотнет игрока, пока хз че не так
 		TimerManager();
 		if (InMeleeRange && AbleToCast)
 		{
+			GD.Print(AbleToCast);
+			AbleToCast = false;
 			Player.TakeDmg(DamageFromAttack);
 		}
 	}

@@ -1,8 +1,11 @@
 using Godot;
 using System;
+using EscapeFromZone.scripts.PlayerScripts;
 
 public partial class Gun : Node2D
-{
+{	
+	public FireTypeImpl fireType;
+	public FireTypeImpl PlayerFireType;
 	[Export] public int spread = 10; // Разброс
 	[Export] public bool isAuto = true; // Автоматический режим
 	[Export] public float bulletsPerSecond = 5f; // Скорострельность
@@ -18,10 +21,27 @@ public partial class Gun : Node2D
 	private Timer muzzleTimer;
 	private Sprite2D muzzle;
 
+	public Gun()
+	{
+		fireType = this.GetNodeOrNull<FireTypeImpl>("FireTypeImpl");
+		
+		if (fireType == null)
+		{
+			GD.Print("Добавил");
+			fireType = new FireTypeImpl();
+			this.AddChild(fireType);
+			fireType.Name = "FireTypeImpl";
+			GD.Print("Добавил: " + fireType);
+		}
+
+		fireType.fireType = FireType.FireArm;
+	}
+
 	public override void _Ready()
 	{
 		fireRate = 1 / bulletsPerSecond;
-
+		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl"); 
+		
 		muzzleTimer = new Timer();
 		muzzle = GetTree().Root.GetNode<Sprite2D>("main/Player/muzzle"); 
 		AddChild(muzzleTimer);
@@ -74,10 +94,11 @@ public partial class Gun : Node2D
 		}
 
 		// Реализация стрельбы
-		if ((isAuto ? automatic : notAutomatic) && timeUntilFire > fireRate)
+		if ((isAuto ? automatic : notAutomatic) && timeUntilFire > fireRate && PlayerFireType.fireType == FireType.FireArm)
 		{
 			for (int i = 0; i < bulletsPerShoot; i++)
 			{
+				GD.Print("Спавню пулю");
 				SpawnBullet(totalSpread);
 				muzzle.Visible = true;
 				muzzleTimer.Start();

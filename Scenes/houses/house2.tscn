@@ -58,16 +58,6 @@ occluder = SubResource("OccluderPolygon2D_rd4nd")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="HouseOccluder"]
 occluder = SubResource("OccluderPolygon2D_0wt40")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(159.5, 164.5)
-scale = Vector2(3.195, 2.44162)
-color = Color(1, 1, 0.333333, 1)
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 5.7
-texture = ExtResource("1_i4q1h")
-
 [node name="HouseSprite" type="Sprite2D" parent="."]
 position = Vector2(-25, 0)
 texture = ExtResource("2_gyshx")
@@ -109,6 +99,18 @@ occluder = SubResource("OccluderPolygon2D_t20li")
 [node name="Roof" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource("5_wavye")
+
+[node name="LightsGroup" type="CanvasGroup" parent="Roof"]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(159.5, 164.5)
+scale = Vector2(3.195, 2.44162)
+color = Color(1, 1, 0.333333, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.7
+texture = ExtResource("1_i4q1h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
 position = Vector2(-19, 15)
