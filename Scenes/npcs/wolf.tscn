@@ -8,7 +8,7 @@
 size = Vector2(63, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3sui"]
-size = Vector2(216, 162)
+size = Vector2(122, 81)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0uqjj"]
 radius = 192.751
@@ -38,7 +38,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
-position = Vector2(47, -6)
+position = Vector2(18, -3.5)
 shape = SubResource("RectangleShape2D_s3sui")
 
 [node name="DetectionArea" type="Area2D" parent="."]
@@ -46,7 +46,6 @@ collision_layer = 4
 collision_mask = 7
 
 [node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_0uqjj")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
