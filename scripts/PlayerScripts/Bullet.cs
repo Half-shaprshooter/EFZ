@@ -35,4 +35,6 @@ public partial class Bullet : RigidBody2D
 			GlobalPosition = newPosition;
 		}
 	}
+
+	
 }

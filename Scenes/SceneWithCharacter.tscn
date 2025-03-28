@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://bood2jdsxja37" path="res://Scenes/guns/bullet.tscn" id="21_krd0o"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="22_4n81h"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/MeleeGun.cs" id="22_7r28r"]
-[ext_resource type="PackedScene" uid="uid://b6qs3rv77p7u2" path="res://Scenes/guns/melee.tscn" id="23_0jqcx"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/LabelHolder.cs" id="23_tbstj"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/HpBar.cs" id="24_l44xa"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/StamBar.cs" id="25_7wngu"]
@@ -214,6 +213,9 @@ height = 122.0
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p20nb"]
+size = Vector2(146, 87)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 5
@@ -225,7 +227,7 @@ visibility_layer = 3
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_4140m")
-animation = &"Run"
+animation = &"Stand"
 speed_scale = 2.5
 
 [node name="LegsAnimation" type="AnimatedSprite2D" parent="."]
@@ -273,8 +275,7 @@ script = ExtResource("20_nok8j")
 bulletScene = ExtResource("21_krd0o")
 
 [node name="MeleeGun" type="Node2D" parent="."]
-script = ExtResource("22_7r28r")
-meleeScene = ExtResource("23_0jqcx")
+visible = false
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false
@@ -328,5 +329,17 @@ offset_top = 0.0639992
 offset_right = 0.36792
 offset_bottom = -0.152008
 script = ExtResource("25_7wngu")
+
+[node name="Knife" type="Sprite2D" parent="."]
+rotation = -0.97913
+
+[node name="MeleeAttackArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("22_7r28r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea"]
+position = Vector2(104, -0.5)
+shape = SubResource("RectangleShape2D_p20nb")
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]

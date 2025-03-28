@@ -2,25 +2,18 @@ using Godot;
 using System;
 using EscapeFromZone.scripts.PlayerScripts;
 
-public partial class MeleeGun : Node2D
+public partial class MeleeGun : Area2D
 {
-	public FireTypeImpl fireType;
+	public FireTypeImpl FireType;
 	public FireTypeImpl PlayerFireType;
-	float timeUntilFire = 0f;
-	private float attackDuration = 0.5f;  // Длительность атаки в секундах
-	private float attackRadius = 100f;  // Радиус полукруга
-	private float currentTime = 0f;
-	private Vector2 startPosition;
-	private Sprite2D muzzle;
-	
-	public int countAttacks = 1;
-	
-	[Export] PackedScene meleeScene;
-	
+	public float AttacksPerSeconds = 1f;
+	private float fireRate;
+	private float timeUntilFire;
+
 	public MeleeGun()
 	{
 		var fireType = this.GetNodeOrNull<FireTypeImpl>("FireTypeImpl");
-		
+
 		if (fireType == null)
 		{
 			GD.Print("Добавил");
@@ -29,23 +22,34 @@ public partial class MeleeGun : Node2D
 			fireType.Name = "FireTypeImpl";
 		}
 
-		fireType.fireType = FireType.Melee;
-	}
-	public override void _Ready()
-	{
-		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl");
-		muzzle = GetTree().Root.GetNode<Sprite2D>("main/Player/muzzle"); 
+		fireType.fireType = EscapeFromZone.scripts.PlayerScripts.FireType.Melee;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Ready()
+	{
+		fireRate = 1 / AttacksPerSeconds;
+		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl");
+	}
+	
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("shoot") && PlayerFireType.fireType == FireType.Melee)
+		if (timeUntilFire > fireRate && Input.IsActionJustPressed("shoot") && PlayerFireType.fireType == EscapeFromZone.scripts.PlayerScripts.FireType.Melee)
 		{
-			for (int i = 0; i < countAttacks; i++)
+			//Если объект не является живым, то будет просто проигрываться звук анимка удара, без урона
+			var list = GetOverlappingAreas();
+			foreach (var area in list)
 			{
-				GD.Print("Спавню милишку");
-				SpawnMeleeFrame();
+				GD.Print("Бью рукой");
+				var parent = area.GetParent();
+				if (parent.IsInGroup("Alive"))
+				{
+					var health = parent.GetNodeOrNull<Health>("Health");
+					var host = parent.GetNodeOrNull<HostImpl>("HostImpl");
+					GD.Print(parent.GetName() + " is before " + host._host);
+					host._host = Host.Enemy;
+					GD.Print(parent.GetName() + " is after " + host._host);
+					health?.Damage(15);
+				}
 			}
 			timeUntilFire = 0f;
 		}
@@ -53,27 +57,5 @@ public partial class MeleeGun : Node2D
 		{
 			timeUntilFire += (float)delta;
 		}
-	}
-	
-	public void SpawnMeleeFrame()
-	{
-		//await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
-		
-		currentTime += 0.01f;
-
-		RigidBody2D melee = meleeScene.Instantiate<RigidBody2D>();
-		melee.GlobalPosition = muzzle.GlobalPosition;
-		
-		 // Направление пули с учетом разброса
-		// float spreadAngle = (float)rnd.RandfRange(-spread, spread) / 100;
-		//  Vector2 direction = new Vector2((float)Math.Cos(GlobalRotation), (float)Math.Sin(GlobalRotation));
-		//  //direction = direction.Rotated(spreadAngle);
-		//
-		//  // Устанавливаем позицию, поворот и свойства пули
-		//  melee.Rotation = GlobalRotation + spreadAngle;
-		//  melee.Set("speed", bulletSpeed);
-		//  melee.Set("damage", bulletDamage);
-		
-		 GetTree().Root.AddChild(melee);
 	}
 }

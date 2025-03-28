@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vdn8xw3p6pow"
-path="res://.godot/imported/blood_splatter.png-720ccd74364d90a214a986b8be8ad7d8.ctex"
+uid="uid://comkxms1q1jo3"
+path="res://.godot/imported/simpleStandUpdate.png-fe5d85e894cfd80c8b742886d53e2495.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/GunSprites/blood_splatter.png"
-dest_files=["res://.godot/imported/blood_splatter.png-720ccd74364d90a214a986b8be8ad7d8.ctex"]
+source_file="res://sprites/playerSprites/simpleStandUpdate.png"
+dest_files=["res://.godot/imported/simpleStandUpdate.png-fe5d85e894cfd80c8b742886d53e2495.ctex"]
 
 [params]
 

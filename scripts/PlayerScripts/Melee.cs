@@ -1,9 +1,18 @@
+using Godot.Collections;
+
 namespace EscapeFromZone.scripts.PlayerScripts;
 
-public partial class Melee : RigidBody2D
+public partial class Melee : StaticBody2D
 {
 	[Export] public float damage = 1000f;
 	[Export] public float speed = 1000f;
+
+	public Timer timer;
+
+	public override void _Ready()
+	{
+		 
+	}
 
 	//Не доделано
 	public override void _PhysicsProcess(double delta)
@@ -34,5 +43,10 @@ public partial class Melee : RigidBody2D
 		{
 			GlobalPosition = newPosition;
 		}
+	}
+	public void _on_timer_timeout()
+	{
+		GD.Print("Заканчиваю");
+		QueueFree();
 	}
 }

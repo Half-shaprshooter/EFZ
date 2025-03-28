@@ -4,6 +4,7 @@ public partial class Wolf: EnemyNpc
 	{
 		Speed = 60;
 		DamageFromAttack = 10;
+		fireRate = 1 / 1;
 	}
 	
 	public override void _Process(double delta)
@@ -33,14 +34,17 @@ public partial class Wolf: EnemyNpc
 		{
 			Speed = 60;
 		}
-		
-		//TODO: Тут баг неприятный, если игрок будет выходить заходить часто в ренж атаки волка, то волк шотнет игрока, пока хз че не так
+
 		TimerManager();
-		if (InMeleeRange && AbleToCast)
+		if (InMeleeRange && timeUntilFire > fireRate)
 		{
-			GD.Print(AbleToCast);
 			AbleToCast = false;
 			Player.TakeDmg(DamageFromAttack);
+			timeUntilFire = 0f;
+		}
+		else
+		{
+			timeUntilFire += (float)delta;
 		}
 	}
 
