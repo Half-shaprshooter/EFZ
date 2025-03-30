@@ -36,6 +36,22 @@ script = ExtResource("5_hopyp")
 position = Vector2(715.25, 38)
 shape = SubResource("RectangleShape2D_jl5kd")
 
+[node name="LightsGroup" type="CanvasGroup" parent="Roof"]
+visible = false
+position = Vector2(947, 30)
+
+[node name="PointLight2D2" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(-285.875, 219.5)
+scale = Vector2(2.81875, 2.27919)
+color = Color(0.817521, 0.817521, 0.817521, 1)
+texture = ExtResource("1_blvlw")
+
+[node name="PointLight2D" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(-30, -203)
+scale = Vector2(3.995, 1.96701)
+color = Color(0.439049, 0.439049, 0.439049, 1)
+texture = ExtResource("1_blvlw")
+
 [node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
 position = Vector2(1017.28, 69.5123)
 
@@ -49,20 +65,6 @@ material = SubResource("CanvasItemMaterial_53y0j")
 position = Vector2(-100, -31)
 scale = Vector2(1.05746, 1.04454)
 texture = ExtResource("4_jma6r")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(-285.875, 219.5)
-scale = Vector2(2.81875, 2.27919)
-color = Color(0.817521, 0.817521, 0.817521, 1)
-texture = ExtResource("1_blvlw")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(-30, -203)
-scale = Vector2(3.995, 1.96701)
-color = Color(0.439049, 0.439049, 0.439049, 1)
-texture = ExtResource("1_blvlw")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_7bx3w")

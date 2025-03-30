@@ -10,6 +10,9 @@ public partial class EnemyNpc : NpcObject
 	protected float CastDurationReset = 0.3f;
 	
 	protected int DamageFromAttack;
+	
+	public float fireRate;
+	public float timeUntilFire;
 
 	public EnemyNpc()
 	{

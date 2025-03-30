@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q4cgumy72n0j"
-path="res://.godot/imported/Sprite.png-d6692e0a5e90a8d3352a67a5ab76a3ce.ctex"
+uid="uid://comkxms1q1jo3"
+path="res://.godot/imported/simpleStandUpdate.png-fe5d85e894cfd80c8b742886d53e2495.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Sprite.png"
-dest_files=["res://.godot/imported/Sprite.png-d6692e0a5e90a8d3352a67a5ab76a3ce.ctex"]
+source_file="res://sprites/playerSprites/simpleStandUpdate.png"
+dest_files=["res://.godot/imported/simpleStandUpdate.png-fe5d85e894cfd80c8b742886d53e2495.ctex"]
 
 [params]
 

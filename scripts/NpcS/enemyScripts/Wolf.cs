@@ -4,6 +4,7 @@ public partial class Wolf: EnemyNpc
 	{
 		Speed = 60;
 		DamageFromAttack = 10;
+		fireRate = 1 / 1;
 	}
 	
 	public override void _Process(double delta)
@@ -25,7 +26,6 @@ public partial class Wolf: EnemyNpc
 		if (PlayerNear && AbleToCast)
 		{
 			JumpAttack();
-			AbleToCast = false;
 			IsAttacking = false;
 			CastTimer = CastTimerReset;
 			CastDuration = CastDurationReset;
@@ -34,11 +34,17 @@ public partial class Wolf: EnemyNpc
 		{
 			Speed = 60;
 		}
-		
+
 		TimerManager();
-		if (InMeleeRange && AbleToCast)
+		if (InMeleeRange && timeUntilFire > fireRate)
 		{
+			AbleToCast = false;
 			Player.TakeDmg(DamageFromAttack);
+			timeUntilFire = 0f;
+		}
+		else
+		{
+			timeUntilFire += (float)delta;
 		}
 	}
 

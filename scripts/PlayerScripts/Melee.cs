@@ -1,16 +1,25 @@
-using Godot;
-using System;
+using Godot.Collections;
 
-public partial class Bullet : RigidBody2D
+namespace EscapeFromZone.scripts.PlayerScripts;
+
+public partial class Melee : StaticBody2D
 {
 	[Export] public float damage = 1000f;
-	[Export] public float speed = 1000f; 
+	[Export] public float speed = 1000f;
 
+	public Timer timer;
+
+	public override void _Ready()
+	{
+		 
+	}
+
+	//Не доделано
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Transform.X * speed * (float)delta;
 		Vector2 newPosition = GlobalPosition + velocity;
-		
+
 		var spaceState = GetWorld2D().DirectSpaceState;
 		var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, newPosition);
 		var result = spaceState.IntersectRay(query);
@@ -35,6 +44,9 @@ public partial class Bullet : RigidBody2D
 			GlobalPosition = newPosition;
 		}
 	}
-
-	
+	public void _on_timer_timeout()
+	{
+		GD.Print("Заканчиваю");
+		QueueFree();
+	}
 }
