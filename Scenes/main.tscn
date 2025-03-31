@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=39 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://tbrqk2pn4j0h" path="res://sprites/AK47.png" id="32_5gtp4"]
 [ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
+[ext_resource type="PackedScene" uid="uid://cw0fisn4val1x" path="res://Scenes/DoorWithCodeTest.tscn" id="35_ioahn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -362,6 +363,8 @@ item_texture = ExtResource("33_g7gok")
 position = Vector2(-303, 1372)
 item_id = 7
 item_texture = ExtResource("34_nih2l")
+
+[node name="DoorHandler" parent="." instance=ExtResource("35_ioahn")]
 
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
