@@ -125,7 +125,7 @@ item_id = 5
 item_texture = ExtResource("32_5gtp4")
 
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-936, 1283)
+position = Vector2(-290, 336)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("10_u4lks")
@@ -133,10 +133,17 @@ script = ExtResource("10_u4lks")
 [node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
 
 [node name="FastSlots" parent="Player/UI" instance=ExtResource("11_kc82q")]
-offset_left = 1600.0
-offset_top = -2898.0
-offset_right = 584.0
-offset_bottom = -3498.0
+offset_left = -712.0
+offset_top = -1492.0
+offset_right = -1728.0
+offset_bottom = -2092.0
+
+[node name="TextEdit" type="TextEdit" parent="Player/UI"]
+offset_left = -892.0
+offset_top = -1491.0
+offset_right = -756.0
+offset_bottom = -1454.0
+text = "ЧТО ЭТО??? ->"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -145,7 +152,7 @@ color = Color(0.281187, 0.281187, 0.281187, 1)
 position = Vector2(397, 65)
 
 [node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
-position = Vector2(-893, 1992)
+position = Vector2(-903, 2025)
 
 [node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
 position = Vector2(-2168, -360)
