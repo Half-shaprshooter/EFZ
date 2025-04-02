@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=37 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/DialogueManager.cs" id="9_71m5p"]
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
-[ext_resource type="Script" path="res://scripts/Inventory/UI.gd" id="10_u4lks"]
+[ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
 [ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="11_kc82q"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
@@ -31,7 +31,6 @@
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
-[ext_resource type="Texture2D" uid="uid://tbrqk2pn4j0h" path="res://sprites/AK47.png" id="32_5gtp4"]
 [ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 
@@ -121,14 +120,14 @@ rotation = -1.5708
 [node name="FloorItem" parent="." instance=ExtResource("31_ug1do")]
 light_mask = 0
 position = Vector2(-564, 1400)
-item_id = 5
-item_texture = ExtResource("32_5gtp4")
+ItemId = 5
+ItemName = "AK47"
 
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
 position = Vector2(-290, 336)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
-script = ExtResource("10_u4lks")
+script = ExtResource("11_1p33v")
 
 [node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
 
@@ -362,13 +361,15 @@ shape = SubResource("CircleShape2D_vu78m")
 
 [node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-451, 1352)
-item_id = 6
-item_texture = ExtResource("33_g7gok")
+ItemId = 6
+ItemName = "Glock"
+ItemTexture = ExtResource("33_g7gok")
 
 [node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-303, 1372)
-item_id = 7
-item_texture = ExtResource("34_nih2l")
+ItemId = 7
+ItemName = "Knife"
+ItemTexture = ExtResource("34_nih2l")
 
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
