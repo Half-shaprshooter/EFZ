@@ -150,6 +150,7 @@ texture = ExtResource("4_cht01")
 occluder = SubResource("OccluderPolygon2D_t20li")
 
 [node name="Roof" type="Area2D" parent="."]
+visible = false
 position = Vector2(-27, -1664)
 collision_mask = 2
 script = ExtResource("5_ljtti")

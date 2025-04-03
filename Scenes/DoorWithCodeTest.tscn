@@ -1,0 +1,252 @@
+[gd_scene load_steps=14 format=3 uid="uid://cw0fisn4val1x"]
+
+[ext_resource type="Script" path="res://scripts/DoorWithCodeTest.cs" id="1_jpt2t"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="2_rcpip"]
+[ext_resource type="Texture2D" uid="uid://dwq3bcx21bfpw" path="res://sprites/CodeLock/1.png" id="3_ly22n"]
+[ext_resource type="Script" path="res://scripts/CodeLock.cs" id="3_w304y"]
+[ext_resource type="Texture2D" uid="uid://b7lc7oy7swkai" path="res://sprites/CodeLock/2.png" id="4_6221m"]
+[ext_resource type="Texture2D" uid="uid://ewja21464ay1" path="res://sprites/CodeLock/3.png" id="5_prbac"]
+[ext_resource type="Texture2D" uid="uid://b7h7jnxee4d11" path="res://sprites/CodeLock/4.png" id="6_jdip3"]
+[ext_resource type="Texture2D" uid="uid://5xy60lqobb1o" path="res://sprites/CodeLock/5.png" id="7_ocvcm"]
+[ext_resource type="Texture2D" uid="uid://c2snmw4hr4jdl" path="res://sprites/CodeLock/Error.png" id="8_1lj8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eeu2"]
+size = Vector2(201, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw0sg"]
+size = Vector2(23, 152.652)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r2tpp"]
+polygon = PackedVector2Array(-11, 0, -8, 141, 15, 128, 11, -3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gimi"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="DoorHandler" type="StaticBody2D" node_paths=PackedStringArray("_codeLock")]
+position = Vector2(973, 2051)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_jpt2t")
+_codeLock = NodePath("CodeLock")
+
+[node name="DoorEvent" type="Area2D" parent="."]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="EventArea" type="CollisionShape2D" parent="DoorEvent"]
+position = Vector2(1.5, 65)
+shape = SubResource("RectangleShape2D_1eeu2")
+
+[node name="doorCol" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 74.6741)
+shape = SubResource("RectangleShape2D_dw0sg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.26191, 67.6487)
+rotation = -1.41023
+scale = Vector2(0.830545, 0.614121)
+texture = ExtResource("2_rcpip")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_r2tpp")
+
+[node name="CodeLock" type="Node" parent="."]
+script = ExtResource("3_w304y")
+isLocked = true
+PinCode = "1578"
+
+[node name="CodeUI" type="CanvasLayer" parent="CodeLock"]
+visible = false
+
+[node name="CodePictures" type="Control" parent="CodeLock/CodeUI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZeroButtons" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+texture = ExtResource("3_ly22n")
+
+[node name="OneButton" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+visible = false
+texture = ExtResource("4_6221m")
+
+[node name="TwoButtons" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+visible = false
+texture = ExtResource("5_prbac")
+
+[node name="ThreeButtons" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+visible = false
+texture = ExtResource("6_jdip3")
+
+[node name="FourButtons" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+visible = false
+texture = ExtResource("7_ocvcm")
+
+[node name="Error" type="Sprite2D" parent="CodeLock/CodeUI/CodePictures"]
+visible = false
+texture = ExtResource("8_1lj8b")
+
+[node name="Buttons" type="Control" parent="CodeLock/CodeUI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="One" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.2
+anchor_top = -0.925
+anchor_right = -0.325
+anchor_bottom = -0.125
+flat = true
+
+[node name="Two" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = -0.925
+anchor_right = 0.925
+anchor_bottom = -0.125
+flat = true
+
+[node name="Three" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.275
+anchor_top = -0.925
+anchor_right = 2.15
+anchor_bottom = -0.125
+flat = true
+
+[node name="Four" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.225
+anchor_top = 0.275
+anchor_right = -0.35
+anchor_bottom = 1.075
+flat = true
+
+[node name="Five" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.275
+anchor_right = 0.9
+anchor_bottom = 1.075
+flat = true
+
+[node name="Six" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.275
+anchor_top = 0.275
+anchor_right = 2.15
+anchor_bottom = 1.075
+flat = true
+
+[node name="Seven" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.225
+anchor_top = 1.5
+anchor_right = -0.35
+anchor_bottom = 2.3
+flat = true
+
+[node name="Eight" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 1.5
+anchor_right = 0.925
+anchor_bottom = 2.3
+flat = true
+
+[node name="Nine" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.275
+anchor_top = 1.5
+anchor_right = 2.15
+anchor_bottom = 2.3
+flat = true
+
+[node name="Zero" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 2.675
+anchor_right = 0.925
+anchor_bottom = 3.475
+flat = true
+
+[node name="Cancel" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.225
+anchor_top = 2.65
+anchor_right = -0.35
+anchor_bottom = 3.45
+flat = true
+
+[node name="Enter" type="Button" parent="CodeLock/CodeUI/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.3
+anchor_top = 2.65
+anchor_right = 2.175
+anchor_bottom = 3.45
+flat = true
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="Canvas"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.725
+anchor_right = 0.5
+anchor_bottom = 0.725
+offset_top = 0.199982
+offset_bottom = 0.199982
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Canvas/Control"]
+layout_mode = 0
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 34.0
+text = "[E] для ввода кода"
+label_settings = SubResource("LabelSettings_6gimi")
+
+[connection signal="body_entered" from="DoorEvent" to="." method="OnDoorEventBodyEntered"]
+[connection signal="body_exited" from="DoorEvent" to="." method="OnDoorEventBodyExited"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/One" to="CodeLock" method="_on_one_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Two" to="CodeLock" method="_on_two_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Three" to="CodeLock" method="_on_three_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Four" to="CodeLock" method="_on_four_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Five" to="CodeLock" method="_on_five_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Six" to="CodeLock" method="_on_six_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Seven" to="CodeLock" method="_on_seven_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Eight" to="CodeLock" method="_on_eight_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Nine" to="CodeLock" method="_on_nine_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Zero" to="CodeLock" method="_on_zero_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Cancel" to="CodeLock" method="_on_cancel_pressed"]
+[connection signal="pressed" from="CodeLock/CodeUI/Buttons/Enter" to="CodeLock" method="_on_enter_pressed"]
