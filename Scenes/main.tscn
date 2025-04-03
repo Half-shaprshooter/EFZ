@@ -133,10 +133,10 @@ script = ExtResource("10_u4lks")
 [node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
 
 [node name="FastSlots" parent="Player/UI" instance=ExtResource("11_kc82q")]
-offset_left = -712.0
-offset_top = -1492.0
-offset_right = -1728.0
-offset_bottom = -2092.0
+offset_left = -739.0
+offset_top = -1497.0
+offset_right = -1755.0
+offset_bottom = -2097.0
 
 [node name="TextEdit" type="TextEdit" parent="Player/UI"]
 offset_left = -892.0
