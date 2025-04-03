@@ -2,6 +2,8 @@ using System.Linq;
 
 public  partial class DialogueManager : Control
 {
+	
+	//Мяу мяу
 	public List<NpcDialogue> NpcDialogues;
 	public List<InterfaceSelection> Selections = new List<InterfaceSelection>();
 	
