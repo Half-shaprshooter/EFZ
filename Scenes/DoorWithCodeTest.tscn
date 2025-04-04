@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw0fisn4val1x"]
+[gd_scene load_steps=14 format=3 uid="uid://wacv3xxahf74"]
 
 [ext_resource type="Script" path="res://scripts/DoorWithCodeTest.cs" id="1_jpt2t"]
 [ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="2_rcpip"]

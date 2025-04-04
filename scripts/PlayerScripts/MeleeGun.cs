@@ -45,9 +45,17 @@ public partial class MeleeGun : Area2D
 				{
 					var health = parent.GetNodeOrNull<Health>("Health");
 					var host = parent.GetNodeOrNull<HostImpl>("HostImpl");
+					GD.Print(parent);
 					GD.Print(parent.GetName() + " is before " + host._host);
 					host._host = Host.Enemy;
 					GD.Print(parent.GetName() + " is after " + host._host);
+					//TODO: Если милишки будут разные, сюда нужно будет передавать динамично урон
+					health?.Damage(15);
+				} 
+				if (parent.IsInGroup("Distructable")) {
+					var health = parent.GetNodeOrNull<Health>("Health");
+					GD.Print(parent);
+					GD.Print("Damage");
 					health?.Damage(15);
 				}
 			}

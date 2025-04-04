@@ -20,6 +20,7 @@ public partial class Seller : TalkableNpc
 		};
 		
 		_label = GetNode<Label>("ButtonText");
+		
 	}
 
 	public override void _Process(double delta)
@@ -38,6 +39,7 @@ public partial class Seller : TalkableNpc
 	{
 		InterfaceManager.dialogueManager.NpcDialogues = _npcDialogues;
 		InterfaceManager.dialogueManager.DialogHeader = NpcName;
+		GetTree().Paused = true;
 	}
 	private void OnDetectionAreaBodyEntered(Node2D body)
 	{

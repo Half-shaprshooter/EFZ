@@ -19,7 +19,6 @@ public partial class NpcObject : CharacterBody2D
 		
 		if (health == null)
 		{
-			GD.Print("Добавил");
 			host = new HostImpl();
 			health = new Health(); // Создаем новый узел Health
 			this.AddChild(host);

@@ -14,10 +14,11 @@ public partial class Bullet : RigidBody2D
 		var spaceState = GetWorld2D().DirectSpaceState;
 		var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, newPosition);
 		var result = spaceState.IntersectRay(query);
-
+		
 		if (result != null && result.ContainsKey("collider"))
 		{
 			var collider = (Node)result["collider"];
+			GD.Print(collider.GetGroups());
 			if (collider != null && collider.IsInGroup("Alive"))
 			{
 				var health = collider.GetNodeOrNull<Health>("Health");
@@ -25,6 +26,15 @@ public partial class Bullet : RigidBody2D
 				GD.Print(collider + " is before " + host._host);
 				host._host = Host.Enemy;
 				GD.Print(collider + " is after " + host._host);
+				health?.Damage(damage);
+			}
+			GD.Print(collider);
+			if (collider.IsInGroup("Distructable"))
+			{
+				GD.Print("Damage From Bullet");
+				var health = collider.GetNodeOrNull<Health>("Health");
+				GD.Print(collider);
+				GD.Print(health);
 				health?.Damage(damage);
 			}
 			GlobalPosition = (Vector2)result["position"];
