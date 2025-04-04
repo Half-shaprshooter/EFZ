@@ -2,8 +2,6 @@ using System.Linq;
 
 public  partial class DialogueManager : Control
 {
-	
-	//Мяу мяу
 	public List<NpcDialogue> NpcDialogues;
 	public List<InterfaceSelection> Selections = new List<InterfaceSelection>();
 	
@@ -23,8 +21,9 @@ public  partial class DialogueManager : Control
 
 	public override void _Process(double delta)
 	{
-		if (MainSceneManager.GlobalMainSceneManager.GamePaused && _isDialogueUp)
+		if ( _isDialogueUp)
 		{
+			//GetTree().Paused = true;
 			if (Input.IsActionJustPressed("ui_left"))
 			{
 				foreach (var item in Selections)
@@ -87,14 +86,13 @@ public  partial class DialogueManager : Control
 		Selections[0].SetSelected(true);
 		_currentIndex = 0;
 		_isDialogueUp = true;
-		MainSceneManager.GlobalMainSceneManager.GamePaused = true;
 	}
 
 	private void ShutDownDialogue()
 	{
 		GetNode<Panel>("Panel").Hide();
 		GetNode<TextureRect>("Fon").Hide();
-		MainSceneManager.GlobalMainSceneManager.GamePaused = false;
+		GetTree().Paused = false;
 		_isDialogueUp = false;
 	}
 	

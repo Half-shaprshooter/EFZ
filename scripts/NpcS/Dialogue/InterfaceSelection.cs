@@ -6,6 +6,7 @@ public partial class InterfaceSelection : Control
 	{
 		this.GetNode<Label>("Label").Text = interfaceSelectionObject.SelectionText;
 		GetNode<TextureRect>("Selected").Visible = false;
+		ProcessMode = ProcessModeEnum.Always;
 	}
 
 	public void SetSelected(bool selected)

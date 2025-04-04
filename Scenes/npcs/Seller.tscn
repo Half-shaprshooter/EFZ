@@ -13,6 +13,7 @@ size = Vector2(145, 79)
 radius = 193.01
 
 [node name="NeutralNpc" type="CharacterBody2D"]
+process_mode = 3
 collision_layer = 4
 collision_mask = 244
 script = ExtResource("1_x4me2")

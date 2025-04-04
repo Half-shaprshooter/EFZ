@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cper50sbwocac" path="res://sprites/iFace/Select.png" id="3_oei4n"]
 
 [node name="InterfaceSelection" type="Control"]
+process_mode = 3
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 3
 anchor_left = -0.065

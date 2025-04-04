@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb1x25ak01gsa"]
+
+[ext_resource type="Script" path="res://scripts/Ui/PauseMenu.cs" id="1_bbcrv"]
+[ext_resource type="FontFile" uid="uid://cab28dc7h5bep" path="res://sprites/iFace/SofiaSansSemiCondensed-Italic-VariableFont_wght.ttf" id="2_t3231"]
+
+[sub_resource type="Theme" id="Theme_w3ok1"]
+default_font_size = 30
+Button/colors/font_color = Color(0.960351, 0.960351, 0.960351, 1)
+Button/colors/font_hover_color = Color(0.825886, 0.666007, 0.220501, 1)
+Button/fonts/font = ExtResource("2_t3231")
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bbcrv")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.003
+anchor_right = 0.423
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 0.056
+offset_right = -0.296021
+theme = SubResource("Theme_w3ok1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Продолжить"
+alignment = 0
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Перезагрузить уровень"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Выйти"
+alignment = 0
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="OnResumePressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="OnQuitPressed"]
