@@ -5,9 +5,11 @@ public partial class Item : Node2D
 	public TextureRect IconRectPath { get; set; }
 
 	public int ItemID;
+	private List<Vector2I> OriginItemGrids = new();
 	public List<Vector2I> ItemGrids = new();
 	public bool Selected = false;
 	public object GridAnchor = null;
+	public string Category { get; private set; }
 
 	public override void _Ready()
 	{
@@ -31,12 +33,16 @@ public partial class Item : Node2D
 		ItemID = aItemID;
 		var iconPath = $"res://sprites/{DataHandler.itemData[aItemID.ToString()]["Name"]}.png";
 		IconRectPath.Texture = GD.Load<Texture2D>(iconPath);
+
+		Category = DataHandler.itemData[aItemID.ToString()]["Category"].ToString();
 		
 		foreach (var grid in DataHandler.itemGridData[aItemID.ToString()])
 		{
 			Vector2I convertedGrid = new(int.Parse(grid[0]), int.Parse(grid[1]));
 			ItemGrids.Add(convertedGrid);
 		}
+
+		OriginItemGrids = ItemGrids;
 	}
 
 	public string GetItemName(int aItemID)
@@ -60,6 +66,12 @@ public partial class Item : Node2D
 		{
 			RotationDegrees = 0;
 		}
+	}
+
+	public void ResetAngle()
+	{
+		RotationDegrees = 0;
+		ItemGrids = OriginItemGrids;
 	}
 
 	/// <summary>
