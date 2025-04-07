@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://347ib55d2aya"]
+
+[ext_resource type="Script" path="res://scripts/Inventory/EquipmentSlot.cs" id="1_5vj33"]
+
+[node name="EquipmentSlot" type="Panel"]
+offset_left = 48.0
+offset_top = 110.0
+offset_right = 198.0
+offset_bottom = 210.0
+script = ExtResource("1_5vj33")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 149.0
+offset_bottom = 98.0
+expand_mode = 2
+stretch_mode = 3
+
+[node name="StatusFilter" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.158472, 0.158472, 0.158472, 0.0431373)
