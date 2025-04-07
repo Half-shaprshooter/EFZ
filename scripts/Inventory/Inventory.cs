@@ -22,7 +22,7 @@ public partial class Inventory : Control
 
 	// Состояние инвентаря
 	private List<Slot> _gridArray = new List<Slot>();
-	private Item _itemHeld = null;
+	private EscapeFromZone.scripts.Items.Item _itemHeld = null;
 	private Slot _currentSlot = null;
 	private bool _canPlace = false;
 	private Vector2 _iconAnchor;
@@ -148,7 +148,7 @@ public partial class Inventory : Control
 	/// <summary>
 	/// Размещает предмет в ячейках инвентаря
 	/// </summary>
-	private bool PlaceItemInCells(Item item, int[] itemSize, int startSlotId)
+	private bool PlaceItemInCells(EscapeFromZone.scripts.Items.Item item, int[] itemSize, int startSlotId)
 	{
 		// Очищаем предыдущие позиции если предмет уже в инвентаре
 		if (item.GetParent() == _gridContainer)
@@ -225,7 +225,7 @@ public partial class Inventory : Control
 	{
 		itemId = (int)itemId;
 		_fastPlace = true;
-		Item item = (Item)_itemScene.Instantiate();
+		EscapeFromZone.scripts.Items.Item item = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
 		GD.Print("Picked up ", item.GetItemName(itemId));
 		
 		_uiInventory.Visible = true;
@@ -234,7 +234,7 @@ public partial class Inventory : Control
 	
 	private void OnButtonSpawnPressed()
 	{
-		Item item = (Item)_itemScene.Instantiate();
+		EscapeFromZone.scripts.Items.Item item = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
 		AddChild(item);
 		item.LoadItem(8);
 	
@@ -259,7 +259,7 @@ public partial class Inventory : Control
 	/// </summary>
 	private void ManualItemPlace(int itemId)
 	{
-		Item newItem = (Item)_itemScene.Instantiate();
+		EscapeFromZone.scripts.Items.Item newItem = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
 		AddChild(newItem);
 		newItem.LoadItem(itemId);
 		newItem.Selected = true;
@@ -389,7 +389,7 @@ public partial class Inventory : Control
 	{
 		if (_currentSlot == null || _currentSlot.ItemStored == null) return;
 		
-		_itemHeld = (Item)_currentSlot.ItemStored;
+		_itemHeld = (EscapeFromZone.scripts.Items.Item)_currentSlot.ItemStored;
 		_itemHeld.Selected = true;
 		
 		_itemHeld.GetParent().RemoveChild(_itemHeld);

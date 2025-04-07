@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bamin58ys1teb"]
+
+[ext_resource type="Script" path="res://scripts/Items/DistructableStatic.cs" id="1_3j30f"]
+[ext_resource type="Material" uid="uid://b6vxxds2c0g3y" path="res://material/light.tres" id="2_g8yai"]
+[ext_resource type="Texture2D" uid="uid://2kuhnxjl74e7" path="res://sprites/box.png" id="3_7icjj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0bs70"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjhpo"]
+size = Vector2(81, 79)
+
+[node name="DistructableBox" type="StaticBody2D" groups=["Distructable"]]
+collision_mask = 244
+script = ExtResource("1_3j30f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0bs70")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_g8yai")
+scale = Vector2(1.64286, 1.55882)
+texture = ExtResource("3_7icjj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wjhpo")

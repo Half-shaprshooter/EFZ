@@ -1,6 +1,4 @@
-using Godot;
-using System;
-using System.Collections.Generic;
+namespace EscapeFromZone.scripts.Items;
 
 public partial class Item : Node2D
 {

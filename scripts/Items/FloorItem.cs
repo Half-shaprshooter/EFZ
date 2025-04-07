@@ -1,5 +1,4 @@
-using Godot;
-using System;
+namespace EscapeFromZone.scripts.Items;
 
 [Tool] // Позволяет работать скрипту в редакторе Godot
 public partial class FloorItem : Node2D
@@ -21,9 +20,11 @@ public partial class FloorItem : Node2D
 	private Sprite2D _iconSprite;
 	private Control _interactUI;
 
+	private StaticBody2D partOfProxy;
+
 	public override void _Ready()
 	{
-		_inventoryUI = GetNode<Control>("../Player/UI/Inventory");
+		_inventoryUI = GetNode<Control>("/root/main/Player/UI/Inventory");
 		_iconSprite = GetNode<Sprite2D>("Sprite2D");
 		_interactUI = GetNode<Control>("interactItem");
 

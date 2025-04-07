@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class NpcDialogue
 {
 	public int Index;

@@ -3,10 +3,15 @@ using System;
 
 public partial class Health : Node2D
 {
-	[Export] public float maxHealth = 100f;
-	float health;
+	public float maxHealth = 100f;
+	public float health;
 
-	public override void _Ready()
+	public Health(long count)
+	{
+		health = count;
+	}
+
+	public Health()
 	{
 		health = maxHealth;
 	}
@@ -17,7 +22,7 @@ public partial class Health : Node2D
 		GD.Print("Dmg in Health class is: " + damage);
 		if (health < 0)
 		{
-			GD.Print(123);
+			GD.Print("Dead");
 			GetParent().QueueFree();
 		}
 	}
