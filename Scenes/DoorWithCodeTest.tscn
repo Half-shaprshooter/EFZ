@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://cw0fisn4val1x"]
 
-[ext_resource type="Script" path="res://scripts/DoorWithCodeTest.cs" id="1_jpt2t"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorWithCodeTest.cs" id="1_jpt2t"]
 [ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="2_rcpip"]
 [ext_resource type="Texture2D" uid="uid://dwq3bcx21bfpw" path="res://sprites/CodeLock/1.png" id="3_ly22n"]
-[ext_resource type="Script" path="res://scripts/CodeLock.cs" id="3_w304y"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/CodeLock.cs" id="3_w304y"]
 [ext_resource type="Texture2D" uid="uid://b7lc7oy7swkai" path="res://sprites/CodeLock/2.png" id="4_6221m"]
 [ext_resource type="Texture2D" uid="uid://ewja21464ay1" path="res://sprites/CodeLock/3.png" id="5_prbac"]
 [ext_resource type="Texture2D" uid="uid://b7h7jnxee4d11" path="res://sprites/CodeLock/4.png" id="6_jdip3"]

@@ -89,7 +89,7 @@ scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
 [node name="Grass9" type="Sprite2D" parent="NodeGrassDELETE"]
-position = Vector2(-206, 1116)
+position = Vector2(-464, 1082)
 scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
@@ -302,7 +302,7 @@ position = Vector2(189.25, -253.25)
 scale = Vector2(2.27551, 2.08824)
 
 [node name="Grass2" type="Sprite2D" parent="."]
-position = Vector2(-932, 3681)
+position = Vector2(-934, 3681)
 scale = Vector2(2.89918, 3.63196)
 texture = ExtResource("2_101oy")
 

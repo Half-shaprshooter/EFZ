@@ -4,6 +4,7 @@ public partial class PlayerControl : CharacterBody2D
 {
 	//TODO: БАГ С ПАУЗОЙ НА ВРАГА 
 	//TODO: УКПАСТЬ КОД У ГУФА ГИТ
+	
 	public FireTypeImpl fireTypeInHands;
 	private AnimatedSprite2D _walk;
 	private AnimatedSprite2D _legs;
@@ -15,7 +16,8 @@ public partial class PlayerControl : CharacterBody2D
 	private int _health;
 	private int _maxHealth;
 
-	private int _stamina;
+	private int _staminaCons;
+	private double _stamina;
 	private int _maxStamina;
 
 	private bool _isWalking;
@@ -56,6 +58,7 @@ public partial class PlayerControl : CharacterBody2D
 		_wound = GetNode<AnimationPlayer>("PointLight2D/AnimationPlayer");
 		_health = PlayerData.PlayerHealth;
 		_maxHealth = PlayerData.PlayerMaxHealth;
+		_staminaCons = PlayerData.staminaConsumption;
 		_stamina = PlayerData.PlayerStamina;
 		_maxStamina = PlayerData.PlayerMaxStamina;
 		globalPos = this.GlobalPosition;
@@ -81,8 +84,8 @@ public partial class PlayerControl : CharacterBody2D
 		globalPos = this.GlobalPosition;
 		localPos = this.Position;
 
-
 		PlayerData.PlayerHealth = _health;
+		PlayerData.PlayerStamina = _stamina;
 		var mousePosition = GetGlobalMousePosition();
 
 		// Вычисление угла между игроком и мышью
@@ -129,9 +132,11 @@ public partial class PlayerControl : CharacterBody2D
 				Rotation = (float)Mathf.LerpAngle(Rotation, targetRotation, _rotationSpeed * delta);
 			}
 
-			if (Input.IsActionPressed("run"))
+			if (Input.IsActionPressed("run") && _stamina > 0)
 			{
 				_walk.Play("Run");
+				_stamina -= _staminaCons * delta;
+				_stamina = Math.Clamp(_stamina, 0f, _maxStamina);
 				Input.SetCustomMouseCursor(_runCursor, Input.CursorShape.Arrow, _hotspot8);
 				totalSpeed = (float)(Speed * 2);
 				Rotation = (float)Mathf.LerpAngle(Rotation, moveInput.Angle(), _rotationSpeed * delta);
@@ -183,6 +188,8 @@ public partial class PlayerControl : CharacterBody2D
 			{
 				_wound.Play("wound");
 			}
+
+			StaminaRecovery(delta);
 		}
 	}
 
@@ -202,6 +209,16 @@ public partial class PlayerControl : CharacterBody2D
 		else
 		{
 			GD.Print("Увы");
+		}
+	}
+
+	//метод восстановления выносливости
+	private void StaminaRecovery(double deltaTime)
+	{
+		if (!Input.IsActionPressed("run") && _stamina < 100)
+		{
+			_stamina += 7 * deltaTime;
+			_stamina = Math.Clamp(_stamina, 0f, _maxStamina);
 		}
 	}
 }
