@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using EscapeFromZone.scripts.Items;
 
 public partial class Inventory : Control
 {
@@ -15,14 +16,17 @@ public partial class Inventory : Control
 	private Control _uiInventory;
 	private ColorRect _colorRect1;
 	private ColorRect _colorRect2;
-	private PackedScene _pickingSlotScene;
-	private Control _pickingSlotWeaponFirst;
+	
+	private EquipmentSlot _currentEquipmentSlot = null;
+	private List<EquipmentSlot> _equipmentSlots = new List<EquipmentSlot>();
+	private PackedScene _equipmentSlotScene;
+	
 	private CanvasLayer _ui;
 	private PackedScene _floorItemScene;
 
 	// Состояние инвентаря
 	private List<Slot> _gridArray = new List<Slot>();
-	private EscapeFromZone.scripts.Items.Item _itemHeld = null;
+	private Item _itemHeld = null;
 	private Slot _currentSlot = null;
 	private bool _canPlace = false;
 	private Vector2 _iconAnchor;
@@ -41,17 +45,31 @@ public partial class Inventory : Control
 		_uiInventory = this;
 		_colorRect1 = GetNode<ColorRect>("ColorRect");
 		_colorRect2 = GetNode<ColorRect>("ColorRect2");
-		_pickingSlotScene = GD.Load<PackedScene>("res://Scenes/Inventory/pickingSlot.tscn");
-		_pickingSlotWeaponFirst = GetNode<Control>("ColorRect2/WeaponFirst");
 		_ui = GetNode<CanvasLayer>("..");
 		_floorItemScene = GD.Load<PackedScene>("res://Scenes/Items/floorItem.tscn");
 
 		_uiInventory.Visible = false;
+
+		InitializeEquipmentSlots();
 		
 		// Создаем начальные слоты
 		for (int i = 0; i < 64; i++)
 		{
 			CreateSlot();
+		}
+	}
+	
+	private void InitializeEquipmentSlots()
+	{
+		// Находим все EquipmentSlot в ColorRect2
+		foreach (var child in _colorRect2.GetChildren())
+		{
+			if (child is EquipmentSlot equipmentSlot)
+			{
+				_equipmentSlots.Add(equipmentSlot);
+				equipmentSlot.SlotEntered += OnEquipmentSlotMouseEntered;
+				equipmentSlot.SlotExited += OnEquipmentSlotMouseExited;
+			}
 		}
 	}
 
@@ -80,10 +98,15 @@ public partial class Inventory : Control
 				{
 					DeleteHeldItem();
 				}
-				else if (_pickingSlotWeaponFirst.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+				else
 				{
-					
+					foreach (var equipmentSlot in _equipmentSlots)
+					{
+						if (equipmentSlot.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+							PlaceItem();
+					}
 				}
+				
 			}
 
 			if (Input.IsActionJustPressed("InventoryRightClick"))
@@ -105,6 +128,14 @@ public partial class Inventory : Control
 				{
 					PickItem();
 				}
+				else
+				{
+					foreach (var equipmentSlot in _equipmentSlots)
+					{
+						if (equipmentSlot.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+							PickItem();
+					}
+				}
 			}
 		}
 	}
@@ -120,6 +151,30 @@ public partial class Inventory : Control
 		_gridContainer.AddChild(newSlot);
 		newSlot.SlotEntered += OnSlotMouseEntered;
 		newSlot.SlotExited += OnSlotMouseExited;
+	}
+	
+	// Обработчик входа курсора в слот экипировки
+	private void OnEquipmentSlotMouseEntered(EquipmentSlot slot)
+	{
+		_currentEquipmentSlot = slot;
+		if (_itemHeld != null && slot.CanAcceptItem(_itemHeld))
+		{
+			slot.SetColor(EquipmentSlot.States.Free);
+			_canPlace = true;
+		}
+		else
+		{
+			slot.SetColor(EquipmentSlot.States.Taken);
+			_canPlace = false;
+		}
+	}
+
+	// Обработчик выхода курсора из слота экипировки
+	private void OnEquipmentSlotMouseExited(EquipmentSlot slot)
+	{
+		_currentEquipmentSlot = null;
+		slot.SetColor(EquipmentSlot.States.Default);
+		_canPlace = false;
 	}
 
 	/// <summary>
@@ -148,7 +203,7 @@ public partial class Inventory : Control
 	/// <summary>
 	/// Размещает предмет в ячейках инвентаря
 	/// </summary>
-	private bool PlaceItemInCells(EscapeFromZone.scripts.Items.Item item, int[] itemSize, int startSlotId)
+	private bool PlaceItemInCells(Item item, int[] itemSize, int startSlotId)
 	{
 		// Очищаем предыдущие позиции если предмет уже в инвентаре
 		if (item.GetParent() == _gridContainer)
@@ -225,7 +280,7 @@ public partial class Inventory : Control
 	{
 		itemId = (int)itemId;
 		_fastPlace = true;
-		EscapeFromZone.scripts.Items.Item item = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
+		Item item = (Item)_itemScene.Instantiate();
 		GD.Print("Picked up ", item.GetItemName(itemId));
 		
 		_uiInventory.Visible = true;
@@ -234,7 +289,7 @@ public partial class Inventory : Control
 	
 	private void OnButtonSpawnPressed()
 	{
-		EscapeFromZone.scripts.Items.Item item = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
+		Item item = (Item)_itemScene.Instantiate();
 		AddChild(item);
 		item.LoadItem(8);
 	
@@ -259,7 +314,7 @@ public partial class Inventory : Control
 	/// </summary>
 	private void ManualItemPlace(int itemId)
 	{
-		EscapeFromZone.scripts.Items.Item newItem = (EscapeFromZone.scripts.Items.Item)_itemScene.Instantiate();
+		Item newItem = (Item)_itemScene.Instantiate();
 		AddChild(newItem);
 		newItem.LoadItem(itemId);
 		newItem.Selected = true;
@@ -353,32 +408,49 @@ public partial class Inventory : Control
 	/// </summary>
 	private async void PlaceItem()
 	{
-		if (!_canPlace || _currentSlot == null) return;
-		
-		_itemHeld.GetParent().RemoveChild(_itemHeld);
-		_gridContainer.AddChild(_itemHeld);
-		_itemHeld.GlobalPosition = GetGlobalMousePosition();
+		if (!_canPlace) return;
 
-		int calculatedGridId = _currentSlot.SlotID + (int)_iconAnchor.X * _colCount + (int)_iconAnchor.Y;
-		_itemHeld.SnapTo(_gridArray[calculatedGridId].GlobalPosition);
-		GD.Print(calculatedGridId);
-		
-		_itemHeld.GridAnchor = _currentSlot;
-		foreach (Vector2I grid in _itemHeld.ItemGrids)
+		if (_currentEquipmentSlot != null && _itemHeld != null && _currentEquipmentSlot.CanAcceptItem(_itemHeld))
 		{
-			int gridToCheck = _currentSlot.SlotID + grid.X + grid.Y * _colCount;
-			_gridArray[gridToCheck].State = Slot.States.Taken;
-			_gridArray[gridToCheck].ItemStored = _itemHeld;
+			// Размещение в слоте экипировки
+			_itemHeld.GetParent().RemoveChild(_itemHeld);
+			_currentEquipmentSlot.AddChild(_itemHeld);
+			_itemHeld.ResetAngle();
+			_itemHeld.SnapTo(_currentEquipmentSlot.GlobalPosition);
+			_currentEquipmentSlot.State = EquipmentSlot.States.Taken;
+			_currentEquipmentSlot.ItemStored = _itemHeld;
+			_itemHeld.GridAnchor = _currentEquipmentSlot;
+			_itemHeld = null;
+			_currentEquipmentSlot.SetColor(EquipmentSlot.States.Default);
 		}
-		
-		_itemHeld = null;
-		ClearGrid();
-		
-		if (_fastPlace)
+		else if (_currentSlot != null)
 		{
-			await ToSignal(GetTree().CreateTimer(0.2), "timeout");
-			_uiInventory.Visible = false;
-			_fastPlace = false;
+			// Существующая логика для размещения в обычный слот
+			_itemHeld.GetParent().RemoveChild(_itemHeld);
+			_gridContainer.AddChild(_itemHeld);
+			_itemHeld.GlobalPosition = GetGlobalMousePosition();
+
+			int calculatedGridId = _currentSlot.SlotID + (int)_iconAnchor.X * _colCount + (int)_iconAnchor.Y;
+			_itemHeld.SnapTo(_gridArray[calculatedGridId].GlobalPosition);
+			GD.Print(calculatedGridId);
+
+			_itemHeld.GridAnchor = _currentSlot;
+			foreach (Vector2I grid in _itemHeld.ItemGrids)
+			{
+				int gridToCheck = _currentSlot.SlotID + grid.X + grid.Y * _colCount;
+				_gridArray[gridToCheck].State = Slot.States.Taken;
+				_gridArray[gridToCheck].ItemStored = _itemHeld;
+			}
+
+			_itemHeld = null;
+			ClearGrid();
+
+			if (_fastPlace)
+			{
+				await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+				_uiInventory.Visible = false;
+				_fastPlace = false;
+			}
 		}
 	}
 
@@ -387,24 +459,40 @@ public partial class Inventory : Control
 	/// </summary>
 	private void PickItem()
 	{
-		if (_currentSlot == null || _currentSlot.ItemStored == null) return;
-		
-		_itemHeld = (EscapeFromZone.scripts.Items.Item)_currentSlot.ItemStored;
-		_itemHeld.Selected = true;
-		
-		_itemHeld.GetParent().RemoveChild(_itemHeld);
-		AddChild(_itemHeld);
-		_itemHeld.GlobalPosition = GetGlobalMousePosition();
-		
-		foreach (Vector2I grid in _itemHeld.ItemGrids)
+		if (_currentSlot != null && _currentSlot.ItemStored != null)
 		{
-			int gridToCheck = ((Slot)_itemHeld.GridAnchor).SlotID + grid.X + grid.Y * _colCount;
-			_gridArray[gridToCheck].State = Slot.States.Free;
-			_gridArray[gridToCheck].ItemStored = null;
+			// Существующая логика для обычного слота
+			_itemHeld = (Item)_currentSlot.ItemStored;
+			_itemHeld.Selected = true;
+
+			_itemHeld.GetParent().RemoveChild(_itemHeld);
+			AddChild(_itemHeld);
+			_itemHeld.GlobalPosition = GetGlobalMousePosition();
+
+			foreach (Vector2I grid in _itemHeld.ItemGrids)
+			{
+				int gridToCheck = ((Slot)_itemHeld.GridAnchor).SlotID + grid.X + grid.Y * _colCount;
+				_gridArray[gridToCheck].State = Slot.States.Free;
+				_gridArray[gridToCheck].ItemStored = null;
+			}
+
+			CheckSlotAvailability(_currentSlot);
+			CallDeferred(nameof(SetGrids), _currentSlot);
 		}
-		
-		CheckSlotAvailability(_currentSlot);
-		CallDeferred(nameof(SetGrids), _currentSlot);
+		else if (_currentEquipmentSlot != null && _currentEquipmentSlot.ItemStored != null)
+		{
+			// Подбор из слота экипировки
+			_itemHeld = _currentEquipmentSlot.ItemStored;
+			_itemHeld.Selected = true;
+
+			_currentEquipmentSlot.RemoveChild(_itemHeld);
+			AddChild(_itemHeld);
+			_itemHeld.GlobalPosition = GetGlobalMousePosition();
+
+			_currentEquipmentSlot.State = EquipmentSlot.States.Free;
+			_currentEquipmentSlot.ItemStored = null;
+			_currentEquipmentSlot.SetColor(EquipmentSlot.States.Default);
+		}
 	}
 
 	/// <summary>
