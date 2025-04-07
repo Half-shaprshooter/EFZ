@@ -3,7 +3,7 @@ using System;
 
 public partial class StamBar : ProgressBar
 {
-    int _stamina;
+    double _stamina;
 
     public override void _Ready()
 	{
