@@ -1,0 +1,201 @@
+[gd_scene load_steps=16 format=3 uid="uid://brk0q1mwlagv0"]
+
+[ext_resource type="Texture2D" uid="uid://cosmulgermxnr" path="res://sprites/buildings/ChurchInside.png" id="1_05433"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="2_c4ty4"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="3_p2hy2"]
+[ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="4_67iv4"]
+[ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_o0gt4"]
+[ext_resource type="Texture2D" uid="uid://b5eje2guf0w5j" path="res://sprites/buildings/ChurchOutside.png" id="6_ak83y"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1slxu"]
+polygon = PackedVector2Array(-37, 502, -34, 539, 204, 534, 214, 358, 159, 355, 154, 497)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s6t3g"]
+polygon = PackedVector2Array(-35, 330, -41, 373, 275, 370, 278, -696, 245, -696, 244, -633, 146, -642, 136, -740, 87, -739, 89, -602, 246, -596, 253, 331)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5yvd2"]
+polygon = PackedVector2Array(-12, 478, -8, 522, -249, 522, -256, 361, -215, 359, -207, 480)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pl1qu"]
+polygon = PackedVector2Array(-6, 362, -334, 363, -345, -880, 513, -883, 509, -841, -289, -832, -302, 333, -10, 324)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
+size = Vector2(201, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
+size = Vector2(23, 129.652)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
+polygon = PackedVector2Array(-11, 0, -8, 127, 17, 123, 11, -3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
+size = Vector2(890, 1601)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wx8i0"]
+blend_mode = 2
+light_mode = 2
+
+[node name="House" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HouseSprite" type="Sprite2D" parent="."]
+position = Vector2(-25, 0)
+scale = Vector2(1.37382, 1.2297)
+texture = ExtResource("1_05433")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+position = Vector2(77, 81)
+occluder = SubResource("OccluderPolygon2D_1slxu")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(113, 75)
+occluder = SubResource("OccluderPolygon2D_s6t3g")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+position = Vector2(-83, 95)
+occluder = SubResource("OccluderPolygon2D_5yvd2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-112, 83)
+occluder = SubResource("OccluderPolygon2D_pl1qu")
+
+[node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1.21667, 3.90002)
+scale = Vector2(1.4296, 1.23605)
+polygon = PackedVector2Array(27.4244, 466.945, 29.4397, 495.75, 197.715, 492.77, 206.783, 354.703, 161.44, 355.697, 161.44, 462.972)
+
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="."]
+position = Vector2(19.916, 3.9001)
+scale = Vector2(1.42121, 1.24414)
+polygon = PackedVector2Array(-79.3847, 490.784, -249.675, 493.764, -255.721, 361.656, -255.721, 355.697, -217.431, 355.697, -220.453, 459.992, -77.3695, 460.985)
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="."]
+position = Vector2(-36, -128)
+scale = Vector2(0.992424, 1.00676)
+polygon = PackedVector2Array(-121, -552, -117.893, -455.919, 63.4809, -460.886, 58.4427, -555.248)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+position = Vector2(-98, 58)
+polygon = PackedVector2Array(-287, 230, -283, 306, -9, 310, -2, 229)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="."]
+position = Vector2(430.125, -200.852)
+scale = Vector2(1.27439, 1.30859)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="."]
+position = Vector2(9.25002, -161.76)
+scale = Vector2(1.32927, 1.19336)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="."]
+position = Vector2(9.21875, -381.853)
+scale = Vector2(1.35213, 1.24219)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="."]
+position = Vector2(442.188, -395.793)
+scale = Vector2(1.32622, 1.29883)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="."]
+position = Vector2(-3.06249, -582.734)
+scale = Vector2(1.31402, 1.28906)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="."]
+position = Vector2(445.375, -556.936)
+scale = Vector2(1.33537, 1.22266)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+position = Vector2(428.563, 15.1813)
+scale = Vector2(1.24695, 1.20313)
+polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(-116, 84)
+polygon = PackedVector2Array(-3, 325, -2, 363, -332, 362, -341, -876, 519, -881, 517, -843, -287, -830, -302, 333)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(114, 76)
+polygon = PackedVector2Array(-38, 332, -44, 370, 282, 363, 279, -701, 242, -697, 241, -632, 140, -643, 137, -740, 85, -741, 86, -602, 245, -600, 246, 329)
+
+[node name="DoorHandler" type="StaticBody2D" parent="."]
+position = Vector2(-108, 427)
+rotation = -1.45788
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_c4ty4")
+
+[node name="DoorEvent" type="Area2D" parent="DoorHandler"]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
+position = Vector2(1.5, 65)
+shape = SubResource("RectangleShape2D_wmwc0")
+
+[node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
+position = Vector2(3.5, 63.1743)
+shape = SubResource("RectangleShape2D_fmisg")
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorHandler"]
+position = Vector2(1.37003, 62)
+rotation = -1.41023
+scale = Vector2(0.768448, 0.665817)
+texture = ExtResource("3_p2hy2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
+occluder = SubResource("OccluderPolygon2D_t20li")
+
+[node name="Roof" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("4_67iv4")
+
+[node name="LightsGroup" type="CanvasGroup" parent="Roof"]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(-40, 113)
+scale = Vector2(3.195, 2.44162)
+color = Color(1, 1, 0.333333, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.7
+texture = ExtResource("5_o0gt4")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Roof/LightsGroup"]
+position = Vector2(-22, -315)
+scale = Vector2(3.195, 2.44162)
+color = Color(1, 1, 0.333333, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.7
+texture = ExtResource("5_o0gt4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+position = Vector2(-19, -12.5)
+shape = SubResource("RectangleShape2D_jl5kd")
+
+[node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+modulate = Color(1, 1, 1, 0.960784)
+position = Vector2(74, 9)
+
+[node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+position = Vector2(-108, -19)
+scale = Vector2(1.37253, 1.25518)
+texture = ExtResource("6_ak83y")
+
+[node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
+material = SubResource("CanvasItemMaterial_wx8i0")
+position = Vector2(-100, -31)
+scale = Vector2(1.33526, 1.26049)
+texture = ExtResource("6_ak83y")
+
+[connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]
+[connection signal="body_exited" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyExited"]
+[connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]
