@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvqqmsci2soq0"
-path="res://.godot/imported/Component 1 (56).png-c3b7247ac99432954f01899b2097031f.ctex"
+uid="uid://bof8v0acsme18"
+path="res://.godot/imported/runs (1).png-b24a7f922eb3f1cc03d4bfc757fb2497.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/playerSprites/WalkAnim/Run/Component 1 (56).png"
-dest_files=["res://.godot/imported/Component 1 (56).png-c3b7247ac99432954f01899b2097031f.ctex"]
+source_file="res://sprites/playerSprites/WalkAnim/Atlas/runs (1).png"
+dest_files=["res://.godot/imported/runs (1).png-b24a7f922eb3f1cc03d4bfc757fb2497.ctex"]
 
 [params]
 

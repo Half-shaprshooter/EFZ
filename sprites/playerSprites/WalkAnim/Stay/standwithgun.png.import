@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://choxeqxcqecph"
-path="res://.godot/imported/Component 3 (13).png-b1202a752fd5bc3718f5dfc6702afef1.ctex"
+uid="uid://3ccw3whb7v6v"
+path="res://.godot/imported/standwithgun.png-5c611d45229d6e80caf99c2d393d0e6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/playerSprites/WalkAnim/Run/Component 3 (13).png"
-dest_files=["res://.godot/imported/Component 3 (13).png-b1202a752fd5bc3718f5dfc6702afef1.ctex"]
+source_file="res://sprites/playerSprites/WalkAnim/Stay/standwithgun.png"
+dest_files=["res://.godot/imported/standwithgun.png-5c611d45229d6e80caf99c2d393d0e6e.ctex"]
 
 [params]
 

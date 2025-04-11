@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du3682e5x622w"
-path="res://.godot/imported/Component 4 (11).png-872705d534773091db2a8c1f2374df5f.ctex"
+uid="uid://bdfxahuk2xiaw"
+path="res://.godot/imported/StandPlayer (1).png-52afa0fb9e4360eb580c5e94c871a7d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/playerSprites/WalkAnim/Run/Component 4 (11).png"
-dest_files=["res://.godot/imported/Component 4 (11).png-872705d534773091db2a8c1f2374df5f.ctex"]
+source_file="res://sprites/playerSprites/WalkAnim/Atlas/StandPlayer (1).png"
+dest_files=["res://.godot/imported/StandPlayer (1).png-52afa0fb9e4360eb580c5e94c871a7d2.ctex"]
 
 [params]
 

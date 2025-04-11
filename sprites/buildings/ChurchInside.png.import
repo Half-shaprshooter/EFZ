@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lbtlyqf4vyyf"
-path="res://.godot/imported/Component 45.png-60e8ad79660f3481b5a82f337690a776.ctex"
+uid="uid://cosmulgermxnr"
+path="res://.godot/imported/ChurchInside.png-bac9b99e42da0a63a015257b1548c0be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/playerSprites/WalkAnim/walkLegs/Component 45.png"
-dest_files=["res://.godot/imported/Component 45.png-60e8ad79660f3481b5a82f337690a776.ctex"]
+source_file="res://sprites/buildings/ChurchInside.png"
+dest_files=["res://.godot/imported/ChurchInside.png-bac9b99e42da0a63a015257b1548c0be.ctex"]
 
 [params]
 
