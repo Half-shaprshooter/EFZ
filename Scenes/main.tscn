@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=39 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -32,8 +32,9 @@
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
 [ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
-[ext_resource type="PackedScene" uid="uid://bb1x25ak01gsa" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
+[ext_resource type="PackedScene" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
+[ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -89,7 +90,7 @@ scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
 [node name="Grass9" type="Sprite2D" parent="NodeGrassDELETE"]
-position = Vector2(-464, 1082)
+position = Vector2(-216, 1118)
 scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
@@ -108,6 +109,9 @@ position = Vector2(-600, -2712)
 position = Vector2(1848, 480)
 rotation = 3.14159
 
+[node name="House6" parent="." instance=ExtResource("35_6cqhb")]
+position = Vector2(-3061, 704)
+
 [node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
 position = Vector2(1952, -944)
 
@@ -124,7 +128,7 @@ position = Vector2(-564, 1400)
 ItemId = 5
 
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-77, 293)
+position = Vector2(-2395, 1091)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("11_1p33v")
@@ -383,8 +387,10 @@ script = ExtResource("11_1p33v")
 anchors_preset = -1
 anchor_left = 1.0
 anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
+offset_left = -283.0
+offset_top = 40.0
+offset_right = 870.0
+offset_bottom = 40.184
 
 [node name="FloorItem4" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(111, 84)

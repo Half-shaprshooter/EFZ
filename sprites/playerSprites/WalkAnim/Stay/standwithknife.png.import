@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl1qq5lbkthr2"
-path="res://.godot/imported/Component 2 (22).png-9efa62c8e0876384b852b4d567ba6c0b.ctex"
+uid="uid://4hmiujgm80gi"
+path="res://.godot/imported/standwithknife.png-593023eda5ee799470b6710956337b7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/playerSprites/WalkAnim/Run/Component 2 (22).png"
-dest_files=["res://.godot/imported/Component 2 (22).png-9efa62c8e0876384b852b4d567ba6c0b.ctex"]
+source_file="res://sprites/playerSprites/WalkAnim/Stay/standwithknife.png"
+dest_files=["res://.godot/imported/standwithknife.png-593023eda5ee799470b6710956337b7e.ctex"]
 
 [params]
 
