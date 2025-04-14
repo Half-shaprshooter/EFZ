@@ -12,6 +12,8 @@ public partial class NpcObject : CharacterBody2D
 
 	protected bool PlayerNear;
 
+	[Export] protected string relationToPlayer = "neutral";
+	
 	public NpcObject()
 	{
 		var health = this.GetNodeOrNull<Health>("Health");
