@@ -132,10 +132,11 @@ public partial class PlayerControl : CharacterBody2D
 		var targetRotation = (mousePosition - GlobalPosition).Angle();
 		var moveInput = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		
-		if (!Input.IsActionPressed("run") || (Input.IsActionPressed("run") && Input.IsActionPressed("aim")))
+		if (!Input.IsActionPressed("run") || Input.IsActionPressed("aim") || _stamina <= 0)
 		{
 			Rotation = (float)Mathf.LerpAngle(Rotation, targetRotation, _rotationSpeed * delta);
 		}
+		
 		if (Input.IsActionPressed("aim"))
 		{
 			_walk.Play("ScopePistol");
@@ -144,7 +145,8 @@ public partial class PlayerControl : CharacterBody2D
 			_legs.Play("WalkLegs");
 	
 			if (!Input.IsActionPressed("move_down") && !Input.IsActionPressed("move_left") &&
-				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up")){
+				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up"))	
+			{
 				_legs.Stop();
 			}
 		}
@@ -180,13 +182,15 @@ public partial class PlayerControl : CharacterBody2D
 		{
 			totalSpeed = Speed;
 			Input.SetCustomMouseCursor(_notAimCursor, Input.CursorShape.Arrow, _hotspot32);
+
 			if (Input.IsActionPressed("move_down") || Input.IsActionPressed("move_left") ||
 				Input.IsActionPressed("move_right") ||
-				Input.IsActionPressed("move_up") && !Input.IsKeyPressed(Key.Shift))
+				Input.IsActionPressed("move_up") && !Input.IsActionPressed("run"))
 			{
 				_walk.Play("Walk");
 				_legs.Play("WalkLegs");
 			}
+			
 			if (!Input.IsActionPressed("move_down") && !Input.IsActionPressed("move_left") &&
 				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up"))
 			{

@@ -43,6 +43,5 @@ public partial class LabelHolder : Node2D
 		backGround.Visible = false;
 		label.Text = "";
 		isTyping = false;
-
 	}
 }

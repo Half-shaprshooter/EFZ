@@ -5,6 +5,7 @@ public partial class Seller : TalkableNpc
 {
 	private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
+
 	public override void _Ready()
 	{
 		NpcName = "SellerName";
@@ -20,19 +21,11 @@ public partial class Seller : TalkableNpc
 		};
 		
 		_label = GetNode<Label>("ButtonText");
-		
 	}
 
 	public override void _Process(double delta)
 	{
-		if (PlayerNear)
-		{
-			_label.Visible = true;
-		}
-		else
-		{
-			_label.Visible = false;
-		}
+		
 	}
 	
 	public void SetDialog()
@@ -41,10 +34,13 @@ public partial class Seller : TalkableNpc
 		InterfaceManager.dialogueManager.DialogHeader = NpcName;
 		GetTree().Paused = true;
 	}
+
+	//добавлен async, чтобы работал показ текста
 	private void OnDetectionAreaBodyEntered(Node2D body)
 	{
 		if (body is PlayerControl)
 		{
+			_label.Visible = true;
 			PlayerNear = true;
 		}
 	}
@@ -53,6 +49,7 @@ public partial class Seller : TalkableNpc
 	{
 		if (body is PlayerControl)
 		{
+			_label.Visible = false;
 			PlayerNear = false;
 		}
 	}

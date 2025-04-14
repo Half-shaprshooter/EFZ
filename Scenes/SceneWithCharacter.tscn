@@ -721,23 +721,22 @@ texture = ExtResource("22_4n81h")
 [node name="Timer" type="Timer" parent="muzzle"]
 
 [node name="LabelHolder" type="Node2D" parent="."]
+visible = false
 position = Vector2(19, 43)
 script = ExtResource("23_tbstj")
 
 [node name="BackGround" type="ColorRect" parent="LabelHolder"]
-visible = false
-offset_left = -83.0
-offset_top = -170.0
-offset_right = 86.0
-offset_bottom = -77.0
+offset_left = -103.0
+offset_top = -217.0
+offset_right = 66.0
+offset_bottom = -126.0
+color = Color(1, 1, 1, 0)
 
 [node name="Label" type="Label" parent="LabelHolder"]
-visible = false
-offset_left = -84.0
-offset_top = -169.0
-offset_right = 85.0
-offset_bottom = -78.0
-text = "Sdfsdf"
+offset_left = -103.0
+offset_top = -217.0
+offset_right = 66.0
+offset_bottom = -126.0
 label_settings = SubResource("LabelSettings_ct8xr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
