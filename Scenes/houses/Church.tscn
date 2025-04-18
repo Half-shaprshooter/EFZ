@@ -1,35 +1,133 @@
-[gd_scene load_steps=16 format=3 uid="uid://brk0q1mwlagv0"]
+[gd_scene load_steps=32 format=3 uid="uid://brk0q1mwlagv0"]
 
-[ext_resource type="Texture2D" uid="uid://cosmulgermxnr" path="res://sprites/buildings/ChurchInside.png" id="1_05433"]
+[ext_resource type="Texture2D" uid="uid://dsfifjojas41d" path="res://sprites/buildings/Church/NewChurchInside.png" id="1_1c3uu"]
 [ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="2_c4ty4"]
+[ext_resource type="Texture2D" uid="uid://bwd0xrfbxy8n6" path="res://sprites/buildings/Church/ManHole.png" id="2_no4fb"]
+[ext_resource type="Script" path="res://scripts/Items/ManHole.cs" id="3_6cdje"]
 [ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="3_p2hy2"]
+[ext_resource type="Texture2D" uid="uid://bhpir3ksf6h7q" path="res://sprites/buildings/Church/Kafedra.png" id="3_tuiit"]
 [ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="4_67iv4"]
+[ext_resource type="Script" path="res://scripts/Items/Kafedra.cs" id="4_fpa5r"]
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_o0gt4"]
-[ext_resource type="Texture2D" uid="uid://b5eje2guf0w5j" path="res://sprites/buildings/ChurchOutside.png" id="6_ak83y"]
+[ext_resource type="Texture2D" uid="uid://dnlf8gh4fiiqk" path="res://sprites/buildings/Church/NewChurchOutside.png" id="6_lfvo4"]
+[ext_resource type="PackedScene" uid="uid://c3kfg3v0i4dkt" path="res://Scenes/Items/Distructable_Door.tscn" id="7_w4uyy"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1slxu"]
 polygon = PackedVector2Array(-37, 502, -34, 539, 204, 534, 214, 358, 159, 355, 154, 497)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s6t3g"]
-polygon = PackedVector2Array(-35, 330, -41, 373, 275, 370, 278, -696, 245, -696, 244, -633, 146, -642, 136, -740, 87, -739, 89, -602, 246, -596, 253, 331)
+polygon = PackedVector2Array(-35, 330, -41, 373, 275, 370, 278, -682, 246, -681, 244, -633, 146, -642, 139, -703, 85, -706, 89, -602, 246, -596, 253, 331)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5yvd2"]
 polygon = PackedVector2Array(-12, 478, -8, 522, -249, 522, -256, 361, -215, 359, -207, 480)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pl1qu"]
-polygon = PackedVector2Array(-6, 362, -334, 363, -345, -880, 513, -883, 509, -841, -289, -832, -302, 333, -10, 324)
+polygon = PackedVector2Array(-6, 362, -334, 363, -341, -863, 1072, -854, 1071, -827, 1070, -112, 494, -113, 497, -691, 528, -689, 534, -137, 1041, -140, 1042, -827, -292, -826, -302, 333, -10, 324)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djxyf"]
+size = Vector2(204.711, 207.539)
+
+[sub_resource type="Animation" id="Animation_4qg63"]
+resource_name = "Black"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ofmqj"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pamgv"]
+_data = {
+"Black": SubResource("Animation_4qg63"),
+"RESET": SubResource("Animation_ofmqj")
+}
+
+[sub_resource type="Animation" id="Animation_tpaao"]
+resource_name = "White"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kboxk"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tor77"]
+_data = {
+"RESET": SubResource("Animation_kboxk"),
+"White": SubResource("Animation_tpaao")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbd8a"]
+size = Vector2(131.022, 77.2546)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrgim"]
+size = Vector2(127.382, 120.355)
+
+[sub_resource type="Animation" id="Animation_uk1in"]
+resource_name = "Slide"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-405, -619), Vector2(-637, -619)]
+}
+
+[sub_resource type="Animation" id="Animation_vmwfj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-405, -619)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ng2w"]
+_data = {
+"RESET": SubResource("Animation_vmwfj"),
+"Slide": SubResource("Animation_uk1in")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
-size = Vector2(201, 152)
+size = Vector2(201, 187.682)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
-size = Vector2(23, 129.652)
+size = Vector2(29.593, 174.318)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
-polygon = PackedVector2Array(-11, 0, -8, 127, 17, 123, 11, -3)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
-size = Vector2(890, 1601)
+polygon = PackedVector2Array(-11, 0, -6.56677, 172.841, 21.0092, 158.643, 15.5601, -4.78375)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wx8i0"]
 blend_mode = 2
@@ -42,88 +140,144 @@ collision_mask = 2
 [node name="HouseSprite" type="Sprite2D" parent="."]
 position = Vector2(-25, 0)
 scale = Vector2(1.37382, 1.2297)
-texture = ExtResource("1_05433")
+texture = ExtResource("1_1c3uu")
 
 [node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
-position = Vector2(77, 81)
+position = Vector2(-281, 81)
 occluder = SubResource("OccluderPolygon2D_1slxu")
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
-position = Vector2(113, 75)
+position = Vector2(-242, 67)
 occluder = SubResource("OccluderPolygon2D_s6t3g")
 
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
-position = Vector2(-83, 95)
+position = Vector2(-431, 80)
 occluder = SubResource("OccluderPolygon2D_5yvd2")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(-112, 83)
+position = Vector2(-460, 80)
 occluder = SubResource("OccluderPolygon2D_pl1qu")
 
 [node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="."]
-position = Vector2(-1.21667, 3.90002)
+position = Vector2(-359, 2)
 scale = Vector2(1.4296, 1.23605)
-polygon = PackedVector2Array(27.4244, 466.945, 29.4397, 495.75, 197.715, 492.77, 206.783, 354.703, 161.44, 355.697, 161.44, 462.972)
+polygon = PackedVector2Array(40.5708, 463.573, 44.0682, 495.126, 197.715, 492.77, 206.783, 354.703, 161.44, 355.697, 161.44, 462.972)
 
 [node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="."]
-position = Vector2(19.916, 3.9001)
+position = Vector2(-327, -5)
 scale = Vector2(1.42121, 1.24414)
 polygon = PackedVector2Array(-79.3847, 490.784, -249.675, 493.764, -255.721, 361.656, -255.721, 355.697, -217.431, 355.697, -220.453, 459.992, -77.3695, 460.985)
 
-[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="."]
-position = Vector2(-36, -128)
-scale = Vector2(0.992424, 1.00676)
-polygon = PackedVector2Array(-121, -552, -117.893, -455.919, 63.4809, -460.886, 58.4427, -555.248)
-
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
-position = Vector2(-98, 58)
+position = Vector2(-445, 53)
 polygon = PackedVector2Array(-287, 230, -283, 306, -9, 310, -2, 229)
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="."]
-position = Vector2(430.125, -200.852)
+position = Vector2(-349, -196)
 scale = Vector2(1.27439, 1.30859)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="."]
-position = Vector2(9.25002, -161.76)
+position = Vector2(89, -176)
 scale = Vector2(1.32927, 1.19336)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="."]
-position = Vector2(9.21875, -381.853)
+position = Vector2(105, -378)
 scale = Vector2(1.35213, 1.24219)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="."]
-position = Vector2(442.188, -395.793)
+position = Vector2(-344, -394)
 scale = Vector2(1.32622, 1.29883)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="."]
-position = Vector2(-3.06249, -582.734)
+position = Vector2(93, -570)
 scale = Vector2(1.31402, 1.28906)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="."]
-position = Vector2(445.375, -556.936)
+position = Vector2(-353, -559)
 scale = Vector2(1.33537, 1.22266)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
-position = Vector2(428.563, 15.1813)
+position = Vector2(76, 4)
 scale = Vector2(1.24695, 1.20313)
 polygon = PackedVector2Array(-287, 230, -287, 292, -82, 294, -85, 232)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-position = Vector2(-116, 84)
-polygon = PackedVector2Array(-3, 325, -2, 363, -332, 362, -341, -876, 519, -881, 517, -843, -287, -830, -302, 333)
+position = Vector2(-462, 83)
+polygon = PackedVector2Array(-23, 321, -24, 361, -332, 362, -341, -876, 1073, -857, 1072, -829, 1072, -118, 537, -116, 537, -141, 1043, -142, 1043.55, -829.021, -287, -830, -302, 333)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(114, 76)
-polygon = PackedVector2Array(-38, 332, -44, 370, 282, 363, 279, -701, 242, -697, 241, -632, 140, -643, 137, -740, 85, -741, 86, -602, 245, -600, 246, 329)
+position = Vector2(-237, 73)
+polygon = PackedVector2Array(-26, 331, -25, 365, 282, 363, 282, -108, 313, -107, 306, -678, 278, -679, 279, -701, 242, -697, 241, -632, 140, -643, 133, -705, 87, -708, 84, -595, 236, -593, 246, 329)
+
+[node name="ManHole" type="Sprite2D" parent="."]
+position = Vector2(-413, -623)
+scale = Vector2(0.478723, 0.457747)
+texture = ExtResource("2_no4fb")
+script = ExtResource("3_6cdje")
+
+[node name="Area2D" type="Area2D" parent="ManHole"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ManHole/Area2D"]
+position = Vector2(8.35553, -1.09216)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_djxyf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ManHole"]
+
+[node name="ColorRect" type="ColorRect" parent="ManHole/CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.0
+offset_right = -2.45605
+color = Color(0, 0, 0, 0)
+
+[node name="Black" type="AnimationPlayer" parent="ManHole"]
+libraries = {
+"": SubResource("AnimationLibrary_pamgv")
+}
+
+[node name="White" type="AnimationPlayer" parent="ManHole"]
+libraries = {
+"": SubResource("AnimationLibrary_tor77")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Kafedra" type="Sprite2D" parent="Node2D"]
+position = Vector2(-405, -619)
+scale = Vector2(1.37382, 1.2297)
+texture = ExtResource("3_tuiit")
+script = ExtResource("4_fpa5r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Kafedra"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Kafedra/StaticBody2D"]
+position = Vector2(-0.727905, -2.03302)
+shape = SubResource("RectangleShape2D_gbd8a")
+
+[node name="Area2D" type="Area2D" parent="Node2D/Kafedra"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Kafedra/Area2D"]
+position = Vector2(-0.363953, 23.583)
+shape = SubResource("RectangleShape2D_jrgim")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Kafedra"]
+libraries = {
+"": SubResource("AnimationLibrary_7ng2w")
+}
 
 [node name="DoorHandler" type="StaticBody2D" parent="."]
-position = Vector2(-108, 427)
+position = Vector2(-477, 428)
 rotation = -1.45788
 collision_layer = 4
 collision_mask = 2
@@ -135,25 +289,36 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
-position = Vector2(1.5, 65)
+position = Vector2(1.5, 82.841)
 shape = SubResource("RectangleShape2D_wmwc0")
 
 [node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
-position = Vector2(3.5, 63.1743)
+position = Vector2(6.79648, 85.5075)
 shape = SubResource("RectangleShape2D_fmisg")
 
 [node name="Sprite2D" type="Sprite2D" parent="DoorHandler"]
-position = Vector2(1.37003, 62)
+position = Vector2(3.96647, 84.8966)
 rotation = -1.41023
-scale = Vector2(0.768448, 0.665817)
+scale = Vector2(1.02201, 0.846214)
 texture = ExtResource("3_p2hy2")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
 occluder = SubResource("OccluderPolygon2D_t20li")
 
+[node name="DistructableBox" parent="." instance=ExtResource("7_w4uyy")]
+position = Vector2(27, -711)
+rotation = -1.50002
+scale = Vector2(0.592484, 0.687199)
+
 [node name="Roof" type="Area2D" parent="."]
+visible = false
+position = Vector2(83, -0.999998)
+scale = Vector2(0.922822, 0.956375)
 collision_mask = 2
 script = ExtResource("4_67iv4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Roof"]
+polygon = PackedVector2Array(516, -16, 13, -13, 29, 820, -851, 817, -846, -811, 523, -806)
 
 [node name="LightsGroup" type="CanvasGroup" parent="Roof"]
 visible = false
@@ -176,25 +341,27 @@ shadow_filter = 1
 shadow_filter_smooth = 5.7
 texture = ExtResource("5_o0gt4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
-position = Vector2(-19, -12.5)
-shape = SubResource("RectangleShape2D_jl5kd")
-
 [node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
 modulate = Color(1, 1, 1, 0.960784)
 position = Vector2(74, 9)
+scale = Vector2(1.17239, 1.04063)
 
 [node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
 position = Vector2(-108, -19)
 scale = Vector2(1.37253, 1.25518)
-texture = ExtResource("6_ak83y")
+texture = ExtResource("6_lfvo4")
 
 [node name="RoofSprite" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
 material = SubResource("CanvasItemMaterial_wx8i0")
 position = Vector2(-100, -31)
 scale = Vector2(1.33526, 1.26049)
-texture = ExtResource("6_ak83y")
+texture = ExtResource("6_lfvo4")
 
+[connection signal="body_entered" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyEntered"]
+[connection signal="body_exited" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyExited"]
+[connection signal="animation_finished" from="ManHole/Black" to="ManHole" method="OnPnimationPlayerAnimationFinished"]
+[connection signal="body_entered" from="Node2D/Kafedra/Area2D" to="Node2D/Kafedra" method="OnAreaBodyEntered"]
+[connection signal="body_exited" from="Node2D/Kafedra/Area2D" to="Node2D/Kafedra" method="OnAreaBodyExited"]
 [connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]
 [connection signal="body_exited" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyExited"]
 [connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
