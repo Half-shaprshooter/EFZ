@@ -36,7 +36,7 @@ public partial class PlayerControl : CharacterBody2D
 
 	public static Vector2 globalPos;
 	public static Vector2 localPos;
-	
+
 	private double _idleTimer = 0f;
 	private bool _hasPlayedIdleAnim = false;
 	private const double IDLE_TRIGGER_TIME = 5;
@@ -91,9 +91,9 @@ public partial class PlayerControl : CharacterBody2D
 
 		PlayerData.PlayerHealth = _health;
 		PlayerData.PlayerStamina = _stamina;
-		
+
 		_isStading = true;
-		
+
 		Dialogue();
 		GrassLogic();
 		MovementAndAnimLogic(delta);
@@ -107,7 +107,7 @@ public partial class PlayerControl : CharacterBody2D
 
 		StaminaRecovery(delta);
 	}
-	
+
 	private void GunSlotsLogic()
 	{
 		if (Input.IsActionJustPressed("firstSlot"))
@@ -125,27 +125,33 @@ public partial class PlayerControl : CharacterBody2D
 		}
 	}
 
+	public void Transport()
+	{
+		GD.Print("Але нахуй");
+		Position = new Vector2(-13143, 2406);
+	}
+
 	private void MovementAndAnimLogic(double delta)
 	{
 		float totalSpeed;
 		var mousePosition = GetGlobalMousePosition();
 		var targetRotation = (mousePosition - GlobalPosition).Angle();
 		var moveInput = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		
+
 		if (!Input.IsActionPressed("run") || Input.IsActionPressed("aim") || _stamina <= 0)
 		{
 			Rotation = (float)Mathf.LerpAngle(Rotation, targetRotation, _rotationSpeed * delta);
 		}
-		
+
 		if (Input.IsActionPressed("aim"))
 		{
 			_walk.Play("ScopePistol");
 			Input.SetCustomMouseCursor(_aimCursor, Input.CursorShape.Arrow, _hotspot16);
 			totalSpeed = (float)(Speed * 0.50);
 			_legs.Play("WalkLegs");
-	
+
 			if (!Input.IsActionPressed("move_down") && !Input.IsActionPressed("move_left") &&
-				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up"))	
+				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up"))
 			{
 				_legs.Stop();
 			}
@@ -171,7 +177,7 @@ public partial class PlayerControl : CharacterBody2D
 					_legs.Stop();
 					break;
 			}
-			
+
 			_stamina -= _staminaCons * delta;
 			_stamina = Math.Clamp(_stamina, 0f, _maxStamina);
 			Input.SetCustomMouseCursor(_runCursor, Input.CursorShape.Arrow, _hotspot8);
@@ -190,7 +196,7 @@ public partial class PlayerControl : CharacterBody2D
 				_walk.Play("Walk");
 				_legs.Play("WalkLegs");
 			}
-			
+
 			if (!Input.IsActionPressed("move_down") && !Input.IsActionPressed("move_left") &&
 				!Input.IsActionPressed("move_right") && !Input.IsActionPressed("move_up"))
 			{
@@ -201,7 +207,7 @@ public partial class PlayerControl : CharacterBody2D
 					_walk.Play("newStand");
 					_hasPlayedIdleAnim = true;
 				}
-				else if(_idleTimer <= IDLE_TRIGGER_TIME)
+				else if (_idleTimer <= IDLE_TRIGGER_TIME)
 				{
 					switch (_slots)
 					{
@@ -218,6 +224,7 @@ public partial class PlayerControl : CharacterBody2D
 							_walk.Play("StandWithPistol");
 							break;
 					}
+
 					_legs.Stop();
 				}
 			}
@@ -226,8 +233,8 @@ public partial class PlayerControl : CharacterBody2D
 				_hasPlayedIdleAnim = false;
 				_idleTimer = 0;
 			}
-			
 		}
+
 		Velocity = moveInput * totalSpeed;
 		MoveAndSlide();
 	}
@@ -242,7 +249,7 @@ public partial class PlayerControl : CharacterBody2D
 
 		return false;
 	}
-	
+
 	private void GrassLogic()
 	{
 		if (_isInGrass)
@@ -290,7 +297,7 @@ public partial class PlayerControl : CharacterBody2D
 
 			_wound.Play("woundx3");
 		}
-		
+
 		else
 		{
 			GD.Print("Увы");

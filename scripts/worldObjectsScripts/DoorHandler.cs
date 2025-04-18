@@ -1,6 +1,6 @@
 public partial class DoorHandler : StaticBody2D
 {
-	[Export] private bool _isInArea;
+	private bool _isInArea;
 
 	private bool _isOpen; 
 	

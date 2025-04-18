@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://unsca7f6u0rs" path="res://sprites/GunSprites/bullet.png" id="2_pc2lu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghakk"]
-radius = 2.0
-height = 14.0
+radius = 4.0
+height = 22.0
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 4
@@ -21,8 +21,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ghakk")
 
 [node name="GFX" type="Sprite2D" parent="."]
+position = Vector2(0.629959, -0.0787511)
 rotation = 3.14159
-scale = Vector2(0.01, 0.01)
+scale = Vector2(0.0181206, 0.0172593)
 texture = ExtResource("2_pc2lu")
 
 [node name="Timer" type="Timer" parent="."]
