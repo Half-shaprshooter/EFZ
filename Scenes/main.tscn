@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=40 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1x25ak01gsa" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
+[ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="36_t50qu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -368,6 +369,12 @@ ItemId = 6
 ItemName = "Glock"
 ItemTexture = ExtResource("33_g7gok")
 
+[node name="FloorItem5" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-119, 1010)
+ItemId = 9
+ItemName = "Bandage"
+ItemTexture = ExtResource("36_t50qu")
+
 [node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-303, 1372)
 ItemId = 7
@@ -379,18 +386,6 @@ position = Vector2(507, 312)
 Scenes = [ExtResource("31_ug1do")]
 ItemId = 5
 ItemName = "AK47"
-
-[node name="UI" type="CanvasLayer" parent="DistructableBox"]
-script = ExtResource("11_1p33v")
-
-[node name="Inventory" parent="DistructableBox/UI" instance=ExtResource("10_ritai")]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -283.0
-offset_top = 40.0
-offset_right = 870.0
-offset_bottom = 40.184
 
 [node name="FloorItem4" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(111, 84)

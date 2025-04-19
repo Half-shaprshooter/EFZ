@@ -31,6 +31,8 @@ public partial class Inventory : Control
 	private bool _canPlace = false;
 	private Vector2 _iconAnchor;
 	private bool _fastPlace = false;
+	
+	private ItemUseHandler _itemUseHandler;
 
 	public override void _Ready()
 	{
@@ -47,6 +49,7 @@ public partial class Inventory : Control
 		_colorRect2 = GetNode<ColorRect>("ColorRect2");
 		_ui = GetNode<CanvasLayer>("..");
 		_floorItemScene = GD.Load<PackedScene>("res://Scenes/Items/floorItem.tscn");
+		_itemUseHandler = new ItemUseHandler();
 
 		_uiInventory.Visible = false;
 
@@ -108,13 +111,6 @@ public partial class Inventory : Control
 				}
 				
 			}
-
-			if (Input.IsActionJustPressed("InventoryRightClick"))
-			{
-				DeleteHeldItem();
-				_uiInventory.Visible = false;
-			}
-
 			if (Input.IsActionJustPressed("InventoryDelete"))
 			{
 				DeleteHeldItem();
@@ -137,6 +133,33 @@ public partial class Inventory : Control
 					}
 				}
 			}
+			if (Input.IsActionJustPressed("InventoryRightClick"))
+			{
+				if (_scrollContainer.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+				{
+					UseItem();
+				}
+			}
+		}
+	}
+
+	private void UseItem()
+	{
+		if (_currentSlot != null && _currentSlot.ItemStored != null)
+		{
+			var item = (Item)_currentSlot.ItemStored;
+			_itemUseHandler.UseItem(item);
+			foreach (Vector2I grid in item.ItemGrids)
+			{
+				var gridToCheck = _currentSlot.SlotID + grid.X + grid.Y * _colCount;
+				if (gridToCheck >= 0 && gridToCheck < _gridArray.Count)
+				{
+					_gridArray[gridToCheck].State = Slot.States.Free;
+					_gridArray[gridToCheck].ItemStored = null;
+				}
+			}
+			item.QueueFree();
+			ClearGrid();
 		}
 	}
 
