@@ -5,6 +5,8 @@ public partial class Seller : TalkableNpc
 {
 	private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
+	private Inventory _sellerInventory;
+	private TradeManager _tradeManager;
 
 	public override void _Ready()
 	{
@@ -21,11 +23,18 @@ public partial class Seller : TalkableNpc
 		};
 		
 		_label = GetNode<Label>("ButtonText");
+		_sellerInventory = GetNode<Inventory>("UI2/SellerInventory");
+		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
+		
 	}
-
+	
 	public override void _Process(double delta)
 	{
-		
+		if (DialogueManager.IsTradeIndex)
+		{
+			DialogueManager.IsTradeIndex = false;
+			_tradeManager.StartTraiding(_sellerInventory);
+		}
 	}
 	
 	public void SetDialog()

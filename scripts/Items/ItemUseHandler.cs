@@ -5,20 +5,27 @@ using EscapeFromZone.scripts.Items;
 public partial class ItemUseHandler : Control
 {
 
-    public void UseItem(Item item)
+    public bool UseItem(Item item)
     {
         switch (item.ItemID)
         {
             case 9: // Бинт
-                UseBandage(item);
-                break;
+                return UseBandage(item);
             default:
-                break;
+                return false;
         }
     }
 
-    private void UseBandage(Item item)
+    private bool UseBandage(Item item)
     {
+        var hpIncreaseAmount = PlayerData.PlayerMaxHealth - PlayerData.PlayerHealth >= 20
+            ? 20
+            : PlayerData.PlayerMaxHealth - PlayerData.PlayerHealth;
+        if (hpIncreaseAmount == 0)
+            return false;
+        PlayerData.PlayerHealth += hpIncreaseAmount;
+        
         GD.Print($"Предмет использован");
+        return true;
     }
 }

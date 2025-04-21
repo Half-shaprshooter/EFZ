@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerData="*res://scripts/PlayerScripts/PlayerData.cs"
 HousesObjectsData="*res://scripts/Data/HousesObjectsData.cs"
 DataHandler="*res://data/DataHandler.cs"
+TradeManager="*res://scripts/TradeSystem/TradeManager.cs"
 
 [dotnet]
 

@@ -30,9 +30,14 @@ public partial class Inventory : Control
 	private Slot _currentSlot = null;
 	private bool _canPlace = false;
 	private Vector2 _iconAnchor;
-	private bool _fastPlace = false;
+	
 	
 	private ItemUseHandler _itemUseHandler;
+
+	[Export] public bool IsPlayerInventory;
+
+	private TradeManager _tradeManager;
+	public bool IsTradeMode { get; set; }
 
 	public override void _Ready()
 	{
@@ -50,8 +55,15 @@ public partial class Inventory : Control
 		_ui = GetNode<CanvasLayer>("..");
 		_floorItemScene = GD.Load<PackedScene>("res://Scenes/Items/floorItem.tscn");
 		_itemUseHandler = new ItemUseHandler();
+		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
+
+		if (IsPlayerInventory)
+		{
+			_tradeManager.GetPlayerInventory(this);
+		}
 
 		_uiInventory.Visible = false;
+		
 
 		InitializeEquipmentSlots();
 		
@@ -78,7 +90,7 @@ public partial class Inventory : Control
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("Inventory"))
+		if (Input.IsActionJustPressed("Inventory") && !IsTradeMode && IsPlayerInventory)
 		{
 			_uiInventory.Visible = !_uiInventory.Visible;
 		}
@@ -96,11 +108,11 @@ public partial class Inventory : Control
 				{
 					PlaceItem();
 				}
-				else if (!_colorRect1.GetGlobalRect().HasPoint(GetGlobalMousePosition()) && 
-						 !_colorRect2.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
-				{
-					DeleteHeldItem();
-				}
+				//else if (!_colorRect1.GetGlobalRect().HasPoint(GetGlobalMousePosition()) && 
+				//		 !_colorRect2.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+				//{
+				//	DeleteHeldItem();
+				//}
 				else
 				{
 					foreach (var equipmentSlot in _equipmentSlots)
@@ -148,18 +160,20 @@ public partial class Inventory : Control
 		if (_currentSlot != null && _currentSlot.ItemStored != null)
 		{
 			var item = (Item)_currentSlot.ItemStored;
-			_itemUseHandler.UseItem(item);
-			foreach (Vector2I grid in item.ItemGrids)
+			if (_itemUseHandler.UseItem(item))
 			{
-				var gridToCheck = _currentSlot.SlotID + grid.X + grid.Y * _colCount;
-				if (gridToCheck >= 0 && gridToCheck < _gridArray.Count)
+				foreach (Vector2I grid in item.ItemGrids)
 				{
-					_gridArray[gridToCheck].State = Slot.States.Free;
-					_gridArray[gridToCheck].ItemStored = null;
+					var gridToCheck = _currentSlot.SlotID + grid.X + grid.Y * _colCount;
+					if (gridToCheck >= 0 && gridToCheck < _gridArray.Count)
+					{
+						_gridArray[gridToCheck].State = Slot.States.Free;
+						_gridArray[gridToCheck].ItemStored = null;
+					}
 				}
+				item.QueueFree();
+				ClearGrid();
 			}
-			item.QueueFree();
-			ClearGrid();
 		}
 	}
 
@@ -302,7 +316,7 @@ public partial class Inventory : Control
 	public void AddItem(int itemId)
 	{
 		itemId = (int)itemId;
-		_fastPlace = true;
+		
 		Item item = (Item)_itemScene.Instantiate();
 		GD.Print("Picked up ", item.GetItemName(itemId));
 		
@@ -381,23 +395,26 @@ public partial class Inventory : Control
 	/// </summary>
 	private void SetGrids(Slot slot)
 	{
-		foreach (Vector2I grid in _itemHeld.ItemGrids)
+		if (_itemHeld != null)
 		{
-			int gridToCheck = slot.SlotID + grid.X + grid.Y * _colCount;
-			if (gridToCheck < 0 || gridToCheck >= _gridArray.Count) continue;
+			foreach (Vector2I grid in _itemHeld.ItemGrids)
+			{
+				int gridToCheck = slot.SlotID + grid.X + grid.Y * _colCount;
+				if (gridToCheck < 0 || gridToCheck >= _gridArray.Count) continue;
 
-			int lineSwitchCheck = slot.SlotID % _colCount + grid.X;
-			if (lineSwitchCheck < 0 || lineSwitchCheck >= _colCount) continue;
+				int lineSwitchCheck = slot.SlotID % _colCount + grid.X;
+				if (lineSwitchCheck < 0 || lineSwitchCheck >= _colCount) continue;
 			
-			if (_canPlace)
-			{
-				_gridArray[gridToCheck].SetColor(Slot.States.Free);
-				if (grid.Y < _iconAnchor.X) _iconAnchor.X = grid.Y;
-				if (grid.X < _iconAnchor.Y) _iconAnchor.Y = grid.X;
-			}
-			else
-			{
-				_gridArray[gridToCheck].SetColor(Slot.States.Taken);
+				if (_canPlace)
+				{
+					_gridArray[gridToCheck].SetColor(Slot.States.Free);
+					if (grid.Y < _iconAnchor.X) _iconAnchor.X = grid.Y;
+					if (grid.X < _iconAnchor.Y) _iconAnchor.Y = grid.X;
+				}
+				else
+				{
+					_gridArray[gridToCheck].SetColor(Slot.States.Taken);
+				}
 			}
 		}
 	}
@@ -467,13 +484,23 @@ public partial class Inventory : Control
 
 			_itemHeld = null;
 			ClearGrid();
+			
+		}
+	}
 
-			if (_fastPlace)
-			{
-				await ToSignal(GetTree().CreateTimer(0.2), "timeout");
-				_uiInventory.Visible = false;
-				_fastPlace = false;
-			}
+	private void DoTransfer()
+	{
+		if (IsPlayerInventory)
+		{
+			var item = _itemHeld;
+			DeleteHeldItem();
+			_tradeManager.TryMakeItemFromPlayerTransfer(item);
+		}
+		else
+		{
+			var item = _itemHeld;
+			DeleteHeldItem();
+			_tradeManager.TryMakeItemFromSellerTransfer(item);
 		}
 	}
 
@@ -501,6 +528,12 @@ public partial class Inventory : Control
 
 			CheckSlotAvailability(_currentSlot);
 			CallDeferred(nameof(SetGrids), _currentSlot);
+
+			if (IsTradeMode)
+			{
+				DoTransfer();
+			}
+			
 		}
 		else if (_currentEquipmentSlot != null && _currentEquipmentSlot.ItemStored != null)
 		{

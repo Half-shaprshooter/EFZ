@@ -140,6 +140,7 @@ anchor_left = 1.0
 anchor_bottom = 0.992
 offset_left = -1153.0
 offset_bottom = 0.18396
+IsPlayerInventory = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -162,6 +163,18 @@ process_mode = 0
 position = Vector2(-546, 2041)
 rotation = -3.14159
 collision_layer = 36
+
+[node name="UI2" type="CanvasLayer" parent="Seller"]
+script = ExtResource("11_1p33v")
+
+[node name="SellerInventory" parent="Seller/UI2" instance=ExtResource("10_ritai")]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_bottom = 0.992
+offset_left = -2007.0
+offset_top = -2.0
+offset_right = -854.0
+offset_bottom = -1.81604
 
 [node name="InterfaceManager" type="CanvasLayer" parent="."]
 script = ExtResource("8_lg11x")
