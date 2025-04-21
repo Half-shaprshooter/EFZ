@@ -32,10 +32,10 @@
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
 [ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
-[ext_resource type="PackedScene" uid="uid://bb1x25ak01gsa" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
+[ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
-[ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="36_t50qu"]
+[ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -111,12 +111,15 @@ position = Vector2(1848, 480)
 rotation = 3.14159
 
 [node name="House6" parent="." instance=ExtResource("35_6cqhb")]
-position = Vector2(-3061, 704)
+position = Vector2(-2532, 825)
 
 [node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
 position = Vector2(1952, -944)
 
 [node name="House4" parent="." instance=ExtResource("7_obbss")]
+position = Vector2(1976, -2654)
+
+[node name="House7" parent="." instance=ExtResource("7_obbss")]
 position = Vector2(1976, -2654)
 
 [node name="House5" parent="." instance=ExtResource("4_7w24t")]
@@ -128,8 +131,11 @@ light_mask = 0
 position = Vector2(-564, 1400)
 ItemId = 5
 
+[node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
+position = Vector2(-12902, 2667)
+
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-524, 991)
+position = Vector2(-2983, 408)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("11_1p33v")
@@ -140,7 +146,6 @@ anchor_left = 1.0
 anchor_bottom = 0.992
 offset_left = -1153.0
 offset_bottom = 0.18396
-IsPlayerInventory = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -149,7 +154,7 @@ color = Color(0.281187, 0.281187, 0.281187, 1)
 position = Vector2(397, 65)
 
 [node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
-position = Vector2(-1166, 2065)
+position = Vector2(-2082, 1917)
 
 [node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
 position = Vector2(-2168, -360)
@@ -163,18 +168,6 @@ process_mode = 0
 position = Vector2(-546, 2041)
 rotation = -3.14159
 collision_layer = 36
-
-[node name="UI2" type="CanvasLayer" parent="Seller"]
-script = ExtResource("11_1p33v")
-
-[node name="SellerInventory" parent="Seller/UI2" instance=ExtResource("10_ritai")]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -2007.0
-offset_top = -2.0
-offset_right = -854.0
-offset_bottom = -1.81604
 
 [node name="InterfaceManager" type="CanvasLayer" parent="."]
 script = ExtResource("8_lg11x")
@@ -381,12 +374,6 @@ position = Vector2(-451, 1352)
 ItemId = 6
 ItemName = "Glock"
 ItemTexture = ExtResource("33_g7gok")
-
-[node name="FloorItem5" parent="." instance=ExtResource("31_ug1do")]
-position = Vector2(-119, 1010)
-ItemId = 9
-ItemName = "Bandage"
-ItemTexture = ExtResource("36_t50qu")
 
 [node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-303, 1372)

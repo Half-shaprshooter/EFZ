@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3kfg3v0i4dkt"]
+
+[ext_resource type="Script" path="res://scripts/Items/DistructableStatic.cs" id="1_stgv3"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="3_33r4r"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3b8j4"]
+polygon = PackedVector2Array(-139, -10, -131, 36, 53, 12, 45, -33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjvc0"]
+size = Vector2(188, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjhpo"]
+size = Vector2(188, 72)
+
+[node name="DistructableBox" type="StaticBody2D" groups=["Distructable"]]
+collision_mask = 244
+script = ExtResource("1_stgv3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_3b8j4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-43, 0.5)
+shape = SubResource("RectangleShape2D_fjvc0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-42.7504, -0.0849838)
+rotation = 0.191283
+scale = Vector2(1.15685, 1.55882)
+texture = ExtResource("3_33r4r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-43, -1)
+shape = SubResource("RectangleShape2D_wjhpo")

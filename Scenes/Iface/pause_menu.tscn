@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb1x25ak01gsa"]
+[gd_scene load_steps=4 format=3 uid="uid://dp1q31rje6gio"]
 
 [ext_resource type="Script" path="res://scripts/Ui/PauseMenu.cs" id="1_bbcrv"]
 [ext_resource type="FontFile" uid="uid://cab28dc7h5bep" path="res://sprites/iFace/SofiaSansSemiCondensed-Italic-VariableFont_wght.ttf" id="2_t3231"]
@@ -22,12 +22,11 @@ script = ExtResource("1_bbcrv")
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.003
-anchor_right = 0.423
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 0.056
-offset_right = -0.296021
+anchor_right = 0.438
+anchor_bottom = 1.002
+offset_right = 0.423981
+offset_bottom = -0.296082
+grow_vertical = 2
 theme = SubResource("Theme_w3ok1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
@@ -43,6 +42,12 @@ layout_mode = 2
 text = "Продолжить"
 alignment = 0
 
+[node name="Reference" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Справка
+"
+alignment = 0
+
 [node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Перезагрузить уровень"
@@ -52,6 +57,55 @@ layout_mode = 2
 text = "Выйти"
 alignment = 0
 
+[node name="References" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.549
+anchor_right = 0.998
+anchor_bottom = 1.005
+offset_left = 0.552002
+offset_top = -1.0
+offset_right = 0.303955
+offset_bottom = -0.23999
+grow_vertical = 2
+theme = SubResource("Theme_w3ok1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="References"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="Label" type="Label" parent="References/VBoxContainer"]
+layout_mode = 2
+text = "E - Взаимодействия"
+
+[node name="Label2" type="Label" parent="References/VBoxContainer"]
+layout_mode = 2
+text = "I - инвентарь"
+
+[node name="Label3" type="Label" parent="References/VBoxContainer"]
+layout_mode = 2
+text = "ПКМ - Прицеливание"
+
+[node name="Label4" type="Label" parent="References/VBoxContainer"]
+layout_mode = 2
+text = "ЛКМ - Атака"
+
+[node name="Label5" type="Label" parent="References/VBoxContainer"]
+layout_mode = 2
+text = "L. Shift - Бег"
+
+[node name="CloseButton" type="Button" parent="References"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Close"
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="OnResumePressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Reference" to="." method="OnReferencePressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="OnRestartPressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="OnQuitPressed"]
+[connection signal="pressed" from="References/CloseButton" to="." method="OnCloseButtonPressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cosmulgermxnr"
-path="res://.godot/imported/ChurchInside.png-bac9b99e42da0a63a015257b1548c0be.ctex"
+uid="uid://bhpir3ksf6h7q"
+path="res://.godot/imported/Kafedra.png-899912326a04416c1f586b1db6181948.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/buildings/ChurchInside.png"
-dest_files=["res://.godot/imported/ChurchInside.png-bac9b99e42da0a63a015257b1548c0be.ctex"]
+source_file="res://sprites/buildings/Church/Kafedra.png"
+dest_files=["res://.godot/imported/Kafedra.png-899912326a04416c1f586b1db6181948.ctex"]
 
 [params]
 

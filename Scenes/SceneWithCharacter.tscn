@@ -644,8 +644,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_klx1p"]
-radius = 48.0
-height = 122.0
+radius = 44.0
+height = 88.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ct8xr"]
 font_size = 20
@@ -694,7 +694,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+position = Vector2(6, -1)
 shape = SubResource("CapsuleShape2D_klx1p")
 
 [node name="MainCamera" type="Camera2D" parent="."]
