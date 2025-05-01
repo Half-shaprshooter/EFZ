@@ -25,7 +25,7 @@ public partial class Seller : TalkableNpc
 
 	public override void _Process(double delta)
 	{
-		
+		GD.Print();
 	}
 	
 	public void SetDialog()
