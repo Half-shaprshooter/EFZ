@@ -7,18 +7,30 @@ public partial class Remarks : Node2D
 	//ссылка на персонажа, к которому будет привязана нода Remarks
 	[Export] CharacterBody2D body;
 
-	private bool isPlayerNear = false; //если игрок входит в зону, то true
+	private bool isPlayerInVisible = false; //true - если игрок в зоне видимости.
+	private bool isPlayerNear = false;
 
 	private Area2D proximityArea; //зона в которой бот обнаруживает игрока
+	private Area2D playerNearArea; //зона, которая определяет, находится ли игрок рядом
 	private RayCast2D lookRay; //луч ,куда смотрит бот
 
 	//ноды текста и заднего фона текста
     private Label label;
 	private ColorRect backGround;
 
-	private bool isTyping = false; 
+	private bool isTyping = false; //если печатается текст - true
 	private bool isHeSay = false; //если сказал, то true, чтобы без остановки не печатались фразы
-	private bool isHeSee = false;
+	private bool isHeSee = false; //если бот видит игрока - true
+	
+	private Timer cooldownTimer; // Таймер для задержки между фразами
+	private bool isOnCooldown = false; // Флаг, что идёт задержка
+
+	private bool IsPriorityPhrase => isPlayerInVisible && isHeSee;
+	private bool isSayingPriorityPhrase = false;
+	private bool isHeSayPriorityPhrase = false;
+
+	private float minPriorityDelay = 2f; // Минимум 2 сек между важными фразами
+	private float timeSinceLastPriority = 0f;
 
 	private Random random = new Random();
 
@@ -87,6 +99,17 @@ public partial class Remarks : Node2D
 		}
 	};
 
+	private List<string> idleThoughts = new List<string>
+	{
+		"Интересно, откуда этот скрипучий звук?..",
+		"Постой-ка... это ветер или шаги?",
+		"Мне кажется, кто-то рядом.",
+		"Что за тишина?.. напрягает.",
+		"Какое странное ощущение... будто кто-то наблюдает.",
+		"Иногда молчание громче слов.",
+		"Если бы я мог читать мысли... хотя лучше не надо.",
+	};
+
 	public override void _Ready()
 	{
 		lookRay = GetNode<RayCast2D>("LookRay");
@@ -98,18 +121,35 @@ public partial class Remarks : Node2D
 
 		proximityArea = GetNode<Area2D>("ProximityArea");
 		proximityArea.Visible = true;
-    	proximityArea.BodyEntered += OnBodyEntered;
-    	proximityArea.BodyExited += OnBodyExited;
+
+		playerNearArea = GetNode<Area2D>("PlayerNearArea");
+		playerNearArea.Visible = true;
+
+		label.Visible = true;
+
+		// Создаём и настраиваем таймер
+		cooldownTimer = new Timer();
+		AddChild(cooldownTimer);
+		cooldownTimer.Timeout += OnCooldownEnded;
 	}
 
 	public override void _Process(double delta)
 	{
 		Rotation = -GetParent<Node2D>().Rotation;
+		
+		timeSinceLastPriority += (float)delta; // Обновляем таймер
 
-		if (isPlayerNear && !isHeSay && isHeSee)
+		// Если игрок виден, но не прошло minPriorityDelay — игнорируем
+		bool canSayPriority = timeSinceLastPriority >= minPriorityDelay;
+
+		if (isPlayerInVisible && isHeSee && canSayPriority && !isHeSayPriorityPhrase)
 		{
-			SayRemark("friend");
-			isHeSay = true;
+			SayRemark("friend", isPriority: true);
+			timeSinceLastPriority = 0f; // Сброс таймера
+		}
+		else if (isPlayerNear && !isHeSee && !isOnCooldown && !isHeSay)
+		{
+			SayRemark();
 		}
 
 		if (playerBody != null)
@@ -124,15 +164,29 @@ public partial class Remarks : Node2D
 		{
 			isHeSee = BuildRayToTarget(playerBody);
 		}
+		else
+		{
+			isHeSee = false;
+		}
+		
 		proximityArea.Rotation = body.Rotation;
     }
 
 
 	//метод что печатает рандомную фразу исходя из отношений и дистанции
-	public void SayRemark(string relation, float time = 3f)
+	public void SayRemark(string relation, bool isPriority)
 	{
-		if (playerBody == null || !thoughtsByRelationAndDistance.ContainsKey(relation))
-			return;
+		// Если это НЕ приоритетная фраза, и идёт кулдаун/уже говорим — выходим
+    	if (!isPriority && (isOnCooldown || isHeSay))
+        	return;
+
+		// Если это приоритет, но УЖЕ говорим приоритет — не перебиваем
+    	if (isPriority && isSayingPriorityPhrase)
+        	return;
+		
+		// Прерываем кулдаун только для новых приоритетных фраз
+		if (isPriority && (isOnCooldown || isHeSay))
+			InterruptCooldown();
 
 		byte distanceCategory = GetDistanceCategory(playerBody);
 
@@ -142,61 +196,91 @@ public partial class Remarks : Node2D
 		{
 			var phrases = distanceDict[distanceCategory];
 			var phrase = phrases[random.Next(phrases.Count)];
-			TriggerRemark(phrase, time);
+			isHeSayPriorityPhrase = true;
+			label.Text = phrase;
+
+			StartCooldown(phrase); // Запускаем таймер
+        	isHeSay = true;
 		}
 	}
 
-
-	//метод для вызова метода печатания текста(чтобы не мучаться с await в других местах)
-	public async void TriggerRemark(string message, float time = 3f)
-    {
-        await ShowText(message, time);
-    }
-
-	//метод печатания текста
-	public async Task ShowText(string text, float totalDisplayTime)
+	//метод, что печатает случайную фразу, если игрок просто рядом
+	public void SayRemark()
 	{
-		if (isTyping)
+		if (isOnCooldown || idleThoughts.Count == 0) return;
+
+		var phrase = idleThoughts[random.Next(idleThoughts.Count)];
+		label.Text = phrase;
+		
+		StartCooldown(phrase); // Запускаем таймер
+    	isHeSay = true;
+	}
+
+	private void StartCooldown(string text)
+	{
+		if (string.IsNullOrEmpty(text)) 
 			return;
 
-		isTyping = true;
-		backGround.Visible = true;
-		label.Visible = true;
-		label.Text = "";
+		// Вычисляем длительность: 0.2 сек * кол-во символов
+		float duration = 0.2f * text.Length;
+		isOnCooldown = true;
+		cooldownTimer.Start(duration);
+	}
 
-		var typingSpeed = totalDisplayTime / text.Length;
+	private void OnCooldownEnded()
+	{
+		isOnCooldown = false;
+		isHeSay = false;
+		isSayingPriorityPhrase = false;
+	}
 
-		foreach (var ch in text)
-		{			
-			label.Text += ch;
-			await ToSignal(GetTree().CreateTimer(typingSpeed), "timeout");
+	private void InterruptCooldown()
+	{
+		if (!cooldownTimer.IsStopped())
+		{
+			cooldownTimer.Stop();
+			isOnCooldown = false;
+			isHeSay = false;
 		}
-
-		await ToSignal(GetTree().CreateTimer(totalDisplayTime), "timeout");
-		label.Visible = false;
-		backGround.Visible = false;
-		label.Text = "";
-		isTyping = false;
 	}
 
 	//даёт информацию если игрок зашёл в зону видимости npc
-	private void OnBodyEntered(Node2D body)
+	private void VisualRangeEnter(Node2D body)
 	{
     	if (body is PlayerControl)
     	{
 			playerBody = body;
-        	isPlayerNear = true;
+        	isPlayerInVisible = true;
 		}
 	}
 
 	//даёт информацию если игрок вышел из зоны видимости npc
-	private void OnBodyExited(Node2D body)
+	private void VisualRangeExited(Node2D body)
 	{
     	if (body is PlayerControl)
     	{
 			playerBody = null;
-        	isPlayerNear = false;
+        	isPlayerInVisible = false;
 			isHeSay = false;
+			isHeSayPriorityPhrase = false;
+    	}
+	}
+
+	//даёт информацию, если игрок рядом
+	private void PlayerNearEntered(Node2D body)
+	{
+		if (body is PlayerControl)
+    	{
+			isPlayerNear = true;
+    	}
+	}
+
+	//даёт информацию, если игрок вышел из близкой зоны.
+	private void PlayerNearExited(Node2D body)
+	{
+		if (body is PlayerControl)
+    	{
+			isPlayerNear = false;
     	}
 	}	
 
