@@ -78,7 +78,6 @@ public partial class EnemyGun : Node2D
 		{
 			for (int i = 0; i < bulletsPerShoot; i++)
 			{
-				GD.Print(isNear);
 				SpawnBullet(totalSpread);
 				muzzle.Visible = true;
 				muzzleTimer.Start();
