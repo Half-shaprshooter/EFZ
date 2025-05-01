@@ -1,9 +1,9 @@
-using EscapeFromZone.scripts.PlayerScripts;
+namespace EscapeFromZone.scripts.enemyScripts;
 
-public partial class Gun : Node2D
-{	
-	public FireTypeImpl fireType;
-	public FireTypeImpl PlayerFireType;
+public partial class EnemyGun : Node2D
+{
+	public bool isNear { set; get; } = false;
+	
 	[Export] public int spread = 10; // Разброс
 	[Export] public bool isAuto = true; // Автоматический режим
 	[Export] public float bulletsPerSecond = 5f; // Скорострельность
@@ -12,37 +12,19 @@ public partial class Gun : Node2D
 	[Export] public int bulletsPerShoot = 1; // Количество пуль за выстрел
 
 	[Export] PackedScene bulletScene;
+	
+	[Export] public Sprite2D muzzle;
 
 	float fireRate;
 	float timeUntilFire = 0f;
 
 	private Timer muzzleTimer;
-	
-	[Export] public Sprite2D muzzle;
-
-	public Gun()
-	{
-		fireType = this.GetNodeOrNull<FireTypeImpl>("FireTypeImpl");
-		
-		if (fireType == null)
-		{
-			GD.Print("Добавил");
-			fireType = new FireTypeImpl();
-			this.AddChild(fireType);
-			fireType.Name = "FireTypeImpl";
-			GD.Print("Добавил: " + fireType);
-		}
-
-		fireType.fireType = FireType.FireArm;
-	}
 
 	public override void _Ready()
 	{
 		fireRate = 1 / bulletsPerSecond;
-		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl"); 
 		
 		muzzleTimer = new Timer();
-		//muzzle = GetTree().Root.GetNode<Sprite2D>("main/Player/muzzle");
 		AddChild(muzzleTimer);
 		muzzleTimer.WaitTime = 0.1f;
 		muzzleTimer.OneShot = true;
@@ -92,12 +74,11 @@ public partial class Gun : Node2D
 			totalSpread = spread + Convert.ToInt16(spread * 0.75);
 		}
 
-		// Реализация стрельбы
-		if ((isAuto ? automatic : notAutomatic) && timeUntilFire > fireRate && PlayerFireType.fireType == FireType.FireArm)
+		if (timeUntilFire > fireRate && isNear)
 		{
 			for (int i = 0; i < bulletsPerShoot; i++)
 			{
-				GD.Print("Спавню пулю");
+				GD.Print(isNear);
 				SpawnBullet(totalSpread);
 				muzzle.Visible = true;
 				muzzleTimer.Start();
@@ -108,5 +89,10 @@ public partial class Gun : Node2D
 		{
 			timeUntilFire += (float)delta;
 		}
+	}
+
+	public void makeNear(bool gde)
+	{
+		isNear = gde;
 	}
 }

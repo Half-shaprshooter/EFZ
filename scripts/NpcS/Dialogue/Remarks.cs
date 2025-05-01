@@ -13,7 +13,7 @@ public partial class Remarks : Node2D
 	private RayCast2D lookRay; //луч ,куда смотрит бот
 
 	//ноды текста и заднего фона текста
-    private Label label;
+	private Label label;
 	private ColorRect backGround;
 
 	private bool isTyping = false; 
@@ -98,8 +98,8 @@ public partial class Remarks : Node2D
 
 		proximityArea = GetNode<Area2D>("ProximityArea");
 		proximityArea.Visible = true;
-    	proximityArea.BodyEntered += OnBodyEntered;
-    	proximityArea.BodyExited += OnBodyExited;
+		proximityArea.BodyEntered += OnBodyEntered;
+		proximityArea.BodyExited += OnBodyExited;
 	}
 
 	public override void _Process(double delta)
@@ -118,14 +118,14 @@ public partial class Remarks : Node2D
 		}
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
+	public override void _PhysicsProcess(double delta)
+	{
 		if (playerBody != null)
 		{
 			isHeSee = BuildRayToTarget(playerBody);
 		}
 		proximityArea.Rotation = body.Rotation;
-    }
+	}
 
 
 	//метод что печатает рандомную фразу исходя из отношений и дистанции
@@ -149,9 +149,9 @@ public partial class Remarks : Node2D
 
 	//метод для вызова метода печатания текста(чтобы не мучаться с await в других местах)
 	public async void TriggerRemark(string message, float time = 3f)
-    {
-        await ShowText(message, time);
-    }
+	{
+		await ShowText(message, time);
+	}
 
 	//метод печатания текста
 	public async Task ShowText(string text, float totalDisplayTime)
@@ -182,46 +182,46 @@ public partial class Remarks : Node2D
 	//даёт информацию если игрок зашёл в зону видимости npc
 	private void OnBodyEntered(Node2D body)
 	{
-    	if (body is PlayerControl)
-    	{
+		if (body is PlayerControl)
+		{
 			playerBody = body;
-        	isPlayerNear = true;
+			isPlayerNear = true;
 		}
 	}
 
 	//даёт информацию если игрок вышел из зоны видимости npc
 	private void OnBodyExited(Node2D body)
 	{
-    	if (body is PlayerControl)
-    	{
+		if (body is PlayerControl)
+		{
 			playerBody = null;
-        	isPlayerNear = false;
+			isPlayerNear = false;
 			isHeSay = false;
-    	}
+		}
 	}	
 
 	//возвращает true, если удалось построить луч для игрока(т.е. в прямой видимости)
 	private bool BuildRayToTarget(Node2D target)
-    {
+	{
 		if (target == null) return false;
 		lookRay.Rotation = body.Rotation;
-        
+		
 		// Устанавливаем начало луча в (0, 0) — относительно RayCast2D, он сам будет сдвинут в нужную точку
-    	lookRay.Position = Vector2.Zero;
-    	lookRay.GlobalPosition = body.GlobalPosition;
+		lookRay.Position = Vector2.Zero;
+		lookRay.GlobalPosition = body.GlobalPosition;
 
 		// Переводим глобальные координаты цели в локальные относительно RayCast2D
 		Vector2 localTarget = lookRay.ToLocal(target.GlobalPosition);
 		lookRay.TargetPosition = localTarget;
 
-        // Если луч столкнулся с объектом (целевым)
-        if (lookRay.IsColliding() && lookRay.GetCollider() == target)
-        {
-            // Показываем текст, если луч построен и объект видим
-            return true;
-        }
+		// Если луч столкнулся с объектом (целевым)
+		if (lookRay.IsColliding() && lookRay.GetCollider() == target)
+		{
+			// Показываем текст, если луч построен и объект видим
+			return true;
+		}
 		return false;
-    }
+	}
 
 	//возвращает дистанцию до цели(0 - близко, 1 - средне, 2 - далеко)
 	private byte GetDistanceCategory(Node2D target)
