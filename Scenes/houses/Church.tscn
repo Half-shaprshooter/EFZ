@@ -52,6 +52,9 @@ _data = {
 "RESET": SubResource("Animation_ofmqj")
 }
 
+[sub_resource type="Animation" id="Animation_kboxk"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_tpaao"]
 resource_name = "White"
 length = 2.0
@@ -68,9 +71,6 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_kboxk"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tor77"]
 _data = {
 "RESET": SubResource("Animation_kboxk"),
@@ -82,6 +82,21 @@ size = Vector2(131.022, 77.2546)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrgim"]
 size = Vector2(127.382, 120.355)
+
+[sub_resource type="Animation" id="Animation_vmwfj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-405, -619)]
+}
 
 [sub_resource type="Animation" id="Animation_uk1in"]
 resource_name = "Slide"
@@ -97,21 +112,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-405, -619), Vector2(-637, -619)]
-}
-
-[sub_resource type="Animation" id="Animation_vmwfj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-405, -619)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ng2w"]
@@ -227,7 +227,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ManHole/Area2D"]
 position = Vector2(8.35553, -1.09216)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_djxyf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ManHole"]
