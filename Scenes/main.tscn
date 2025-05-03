@@ -1,24 +1,25 @@
-[gd_scene load_steps=40 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=41 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
 [ext_resource type="PackedScene" uid="uid://dakog3812u1f7" path="res://Scenes/houses/house3.tscn" id="2_i31j7"]
 [ext_resource type="PackedScene" uid="uid://djh6mt40wbkm8" path="res://Scenes/SceneWithCharacter.tscn" id="2_pu6ya"]
-[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Neutral.tscn" id="3_pte4x"]
+[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Bases/Neutral.tscn" id="3_pte4x"]
 [ext_resource type="PackedScene" uid="uid://t5d4txhp4d85" path="res://Scenes/houses/house2.tscn" id="3_qosyy"]
 [ext_resource type="PackedScene" uid="uid://bn3mt4b7k843s" path="res://Scenes/houses/SellerHouse.tscn" id="4_03vsq"]
 [ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
 [ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
 [ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
-[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/wolf.tscn" id="7_d18ir"]
+[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/Bases/wolf.tscn" id="7_d18ir"]
 [ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
-[ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Seller.tscn" id="8_mo2kn"]
+[ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Bases/Seller.tscn" id="8_mo2kn"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/DialogueManager.cs" id="9_71m5p"]
 [ext_resource type="PackedScene" uid="uid://bamin58ys1teb" path="res://Scenes/Items/distructable_box.tscn" id="9_l0m3k"]
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
 [ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
+[ext_resource type="PackedScene" uid="uid://c2eg3lhrablns" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
 [ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
@@ -46,6 +47,7 @@ radius = 181.408
 
 [node name="main" type="Node2D"]
 position = Vector2(1596, -3195)
+scale = Vector2(0.928398, 1.04184)
 script = ExtResource("1_lgs1w")
 
 [node name="NodeGrassDELETE" type="Node2D" parent="."]
@@ -134,8 +136,12 @@ ItemId = 5
 [node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
 position = Vector2(-12902, 2667)
 
+[node name="HumanEnemyNpc" parent="." instance=ExtResource("12_dufiy")]
+position = Vector2(-4989.24, 1252.59)
+scale = Vector2(1, 1)
+
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-2983, 408)
+position = Vector2(-1230.08, 960.8)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("11_1p33v")
@@ -157,9 +163,6 @@ position = Vector2(397, 65)
 
 [node name="Wolf" parent="." instance=ExtResource("7_d18ir")]
 position = Vector2(-2082, 1917)
-
-[node name="Myaso" parent="." instance=ExtResource("7_d18ir")]
-position = Vector2(-2168, -360)
 
 [node name="Neutral" parent="." groups=["Alive"] instance=ExtResource("3_pte4x")]
 position = Vector2(-75, 1967)
