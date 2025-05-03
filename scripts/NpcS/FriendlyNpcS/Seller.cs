@@ -23,7 +23,7 @@ public partial class Seller : TalkableNpc
 		};
 		
 		_label = GetNode<Label>("ButtonText");
-		_sellerInventory = GetNode<Inventory>("UI2/SellerInventory");
+		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
 		
 	}
