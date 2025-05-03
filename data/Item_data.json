@@ -45,5 +45,12 @@
 	"Grid": "0,0",
 	"Size": [3, 2],
 	"Category": "Misc"
+  },
+"9": {
+	"Name": "Bandage",
+	"Value": 80,
+	"Grid": "0,0",
+	"Size": [1, 1],
+	"Category": "Misc"
   }
 }
