@@ -44,7 +44,6 @@ public partial class Seller : TalkableNpc
 		GetTree().Paused = true;
 	}
 
-	//добавлен async, чтобы работал показ текста
 	private void OnDetectionAreaBodyEntered(Node2D body)
 	{
 		if (body is PlayerControl)
