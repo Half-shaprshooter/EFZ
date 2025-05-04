@@ -2,6 +2,7 @@ using System.Linq;
 
 public  partial class DialogueManager : Control
 {
+	public static bool IsTradeIndex;
 	public List<NpcDialogue> NpcDialogues;
 	public List<InterfaceSelection> Selections = new List<InterfaceSelection>();
 	
@@ -100,6 +101,10 @@ public  partial class DialogueManager : Control
 	{
 		if (NpcDialogues.ElementAtOrDefault(index) == null || index == -1)
 		{
+			if (index == -1)
+			{
+				IsTradeIndex = true;
+			}
 			ShutDownDialogue();
 		}
 		else

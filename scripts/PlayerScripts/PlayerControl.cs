@@ -5,6 +5,7 @@ public partial class PlayerControl : CharacterBody2D
 {
 	//TODO: БАГ С ПАУЗОЙ НА ВРАГА 
 	//TODO: УКПАСТЬ КОД У ГУФА ГИТ
+	
 	public FireTypeImpl fireTypeInHands;
 	private AnimatedSprite2D _walk;
 	private AnimatedSprite2D _legs;
@@ -114,7 +115,6 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void Transport()
 	{
-		GD.Print("Але нахуй");
 		Position = new Vector2(-13143, 2406);
 	}
 
