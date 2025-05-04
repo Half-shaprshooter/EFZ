@@ -16,7 +16,12 @@ public partial class PlayerControl : CharacterBody2D
 	private bool _isInGrass;
 	private int _damageToPlayer;
 	private float _rotationSpeed = 6f;
+	private int _health;
+	private int _maxHealth;
 
+	private double _stamina;
+	private int _staminaCons;
+	private int _maxStamina;
 
 	private bool _isWalking;
 	private bool _isRunning;
@@ -57,6 +62,11 @@ public partial class PlayerControl : CharacterBody2D
 		_walk = GetNode<AnimatedSprite2D>("PlayerAnimation");
 		_legs = GetNode<AnimatedSprite2D>("LegsAnimation");
 		_wound = GetNode<AnimationPlayer>("PointLight2D/AnimationPlayer");
+		_health = PlayerData.PlayerHealth;
+		_maxHealth = PlayerData.PlayerMaxHealth;
+		_stamina = PlayerData.PlayerStamina;
+		_staminaCons = PlayerData.staminaConsumption;
+		_maxStamina = PlayerData.PlayerMaxStamina;
 		globalPos = this.GlobalPosition;
 	}
 
@@ -80,6 +90,9 @@ public partial class PlayerControl : CharacterBody2D
 		globalPos = this.GlobalPosition;
 		localPos = this.Position;
 
+		PlayerData.PlayerHealth = _health;
+		PlayerData.PlayerStamina = _stamina;
+
 		_isStading = true;
 
 		Dialogue();
@@ -88,7 +101,7 @@ public partial class PlayerControl : CharacterBody2D
 		//Логика слотов оружия
 		GunSlotsLogic();
 
-		if (PlayerData.PlayerHealth < (double)PlayerData.PlayerMaxHealth * 0.3)
+		if (_health < (double)_maxHealth * 0.3)
 		{
 			_wound.Play("wound");
 		}
@@ -125,7 +138,7 @@ public partial class PlayerControl : CharacterBody2D
 		var targetRotation = (mousePosition - GlobalPosition).Angle();
 		var moveInput = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-		if (!Input.IsActionPressed("run") || Input.IsActionPressed("aim") || PlayerData.PlayerStamina <= 0)
+		if (!Input.IsActionPressed("run") || Input.IsActionPressed("aim") || _stamina <= 0)
 		{
 			Rotation = (float)Mathf.LerpAngle(Rotation, targetRotation, _rotationSpeed * delta);
 		}
@@ -143,7 +156,7 @@ public partial class PlayerControl : CharacterBody2D
 				_legs.Stop();
 			}
 		}
-		else if (Input.IsActionPressed("run") && PlayerData.PlayerStamina > 0)
+		else if (Input.IsActionPressed("run") && _stamina > 0)
 		{
 			switch (_slots)
 			{
@@ -165,8 +178,8 @@ public partial class PlayerControl : CharacterBody2D
 					break;
 			}
 
-			PlayerData.PlayerStamina -= PlayerData.staminaConsumption * delta;
-			PlayerData.PlayerStamina = Math.Clamp(PlayerData.PlayerStamina, 0f, PlayerData.PlayerMaxStamina);
+			_stamina -= _staminaCons * delta;
+			_stamina = Math.Clamp(_stamina, 0f, _maxStamina);
 			Input.SetCustomMouseCursor(_runCursor, Input.CursorShape.Arrow, _hotspot8);
 			totalSpeed = (float)(Speed * 2);
 			Rotation = (float)Mathf.LerpAngle(Rotation, moveInput.Angle(), _rotationSpeed * delta);
@@ -273,13 +286,13 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void TakeDmg(int dmg)
 	{
-		if (PlayerData.PlayerHealth > 0)
+		if (_health > 0)
 		{
-			PlayerData.PlayerHealth -= dmg;
+			_health -= dmg;
 
-			if (PlayerData.PlayerHealth < 0)
+			if (_health < 0)
 			{
-				PlayerData.PlayerHealth = 0;
+				_health = 0;
 			}
 
 			_wound.Play("woundx3");
@@ -294,10 +307,10 @@ public partial class PlayerControl : CharacterBody2D
 	//метод восстановления выносливости
 	private void StaminaRecovery(double deltaTime)
 	{
-		if (!Input.IsActionPressed("run") && PlayerData.PlayerStamina < 100)
+		if (!Input.IsActionPressed("run") && _stamina < 100)
 		{
-			PlayerData.PlayerStamina += 7 * deltaTime;
-			PlayerData.PlayerStamina = Math.Clamp(PlayerData.PlayerStamina, 0f, PlayerData.PlayerMaxStamina);
+			_stamina += 7 * deltaTime;
+			_stamina = Math.Clamp(_stamina, 0f, _maxStamina);
 		}
 	}
 }

@@ -21,12 +21,6 @@ public partial class DoorWithCodeTest : StaticBody2D
 
         _label_E_ForCode = GetNode<CanvasLayer>("Canvas");
         _label_E_ForCode.Visible = false;
-
-		if (_codeLock == null)
-		{
-			_islocked = false;
-
-		}
 	}
 
 	private void OnDoorEventBodyEntered(Node body)
@@ -59,12 +53,7 @@ public partial class DoorWithCodeTest : StaticBody2D
 	{
 		HousesObjectsData.rotation = Rotation;
 		HousesObjectsData.isOpen = _isOpen;
-		
-		if (_codeLock != null)
-		{
-			_islocked = _codeLock.isLocked;
-		}
-        
+        _islocked = _codeLock.isLocked;
 
 		//если мы в зоне двери, она закрыта и не открывается сейчас, то появляется надпись, в ином случае её нет
         if (_isInArea && _islocked && !isUnlocking)
@@ -78,7 +67,7 @@ public partial class DoorWithCodeTest : StaticBody2D
         }
 		
 		//если мы пытаемся открыть дверь, находимся в зоне и она закрыта, то у нас появится кодовый замок
-		if (Input.IsActionJustPressed("open_door") && _isInArea && _islocked && _codeLock != null)
+		if (Input.IsActionJustPressed("open_door") && _isInArea && _islocked)
 		{
 			isUnlocking = true;
 			_codeLock.StartPinCode();
