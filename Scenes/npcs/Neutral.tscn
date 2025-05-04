@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://4qxvqshl643e"]
+
+[ext_resource type="Script" path="res://scripts/NpcS/NeutralNpcS/SomeNeutralNpc.cs" id="1_f72ey"]
+[ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="2_lusom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]
+size = Vector2(74, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3sui"]
+size = Vector2(145, 79)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uqjj"]
+radius = 193.01
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b50a2"]
+polygon = PackedVector2Array(-32, -24, -26, 21, 22, 22, 27, -30)
+
+[node name="NeutralNpc" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_f72ey")
+
+[node name="ButtonText" type="Label" parent="."]
+visible = false
+offset_left = -34.0
+offset_top = -71.0
+offset_right = 67.0
+offset_bottom = -45.0
+text = "[E] Разговор"
+
+[node name="NeutralSprite" type="Sprite2D" parent="."]
+position = Vector2(316, 103)
+scale = Vector2(0.582031, 0.542969)
+texture = ExtResource("2_lusom")
+offset = Vector2(-542.926, -193.381)
+
+[node name="WolfCol" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fjcb7")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(35.5, -3.5)
+shape = SubResource("RectangleShape2D_s3sui")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-4, 0)
+shape = SubResource("CircleShape2D_0uqjj")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_b50a2")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]
