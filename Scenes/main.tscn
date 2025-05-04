@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
 [ext_resource type="PackedScene" uid="uid://blk8m6a44fb0f" path="res://Scenes/worldObjects/box.tscn" id="18_gnmfo"]
 [ext_resource type="Script" path="res://scripts/minimap.gd" id="19_0jp71"]
+[ext_resource type="PackedScene" uid="uid://con576l1u4tyu" path="res://Scenes/npcs/npc_ai_test.tscn" id="19_crxo5"]
 [ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="20_7pm57"]
 [ext_resource type="Texture2D" uid="uid://bnln2nrju80yt" path="res://sprites/maptest.png" id="20_fifao"]
 [ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
@@ -172,6 +173,9 @@ process_mode = 0
 position = Vector2(-546, 2041)
 rotation = -3.14159
 collision_layer = 36
+
+[node name="NPC_AI_Test" parent="." instance=ExtResource("19_crxo5")]
+position = Vector2(1843, 2142)
 
 [node name="UI" type="CanvasLayer" parent="Seller"]
 script = ExtResource("11_1p33v")
