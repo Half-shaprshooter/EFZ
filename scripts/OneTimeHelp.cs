@@ -32,7 +32,6 @@ public partial class OneTimeHelp : Node2D
 
             if (Input.IsActionJustPressed(action))
             {
-                GD.Print("Пизда");
                 hint.Visible = false;
                 isActivated = true;
             }
