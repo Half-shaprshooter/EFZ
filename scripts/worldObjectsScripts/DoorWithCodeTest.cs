@@ -26,7 +26,6 @@ public partial class DoorWithCodeTest : StaticBody2D
 			_islocked = false;
 		}
 		
-
         _label_E_ForCode = GetNode<CanvasLayer>("Canvas");
         _label_E_ForCode.Visible = false;
 	}

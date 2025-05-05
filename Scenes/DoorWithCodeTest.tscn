@@ -23,7 +23,7 @@ polygon = PackedVector2Array(-11, 0, -8, 141, 15, 128, 11, -3)
 font_color = Color(0, 0, 0, 1)
 
 [node name="DoorHandler" type="StaticBody2D" node_paths=PackedStringArray("_codeLock")]
-position = Vector2(973, 2051)
+position = Vector2(-4, -69)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_jpt2t")

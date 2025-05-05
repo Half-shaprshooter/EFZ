@@ -47,6 +47,7 @@ public partial class Remarks : Node2D
 	//словарь с фоновыми фразами
 	private List<string> idleThoughts = new();
 
+	private HostImpl relation;
 	public override void _Ready()
 	{
 		LoadThoughtsFromJson();
@@ -73,6 +74,8 @@ public partial class Remarks : Node2D
 
 	public override void _Process(double delta)
 	{
+		relation = body.GetNode<HostImpl>("HostImpl");
+
 		Rotation = -GetParent<Node2D>().Rotation;
 		
 		timeSinceLastPriority += (float)delta; // Обновляем таймер
@@ -82,7 +85,7 @@ public partial class Remarks : Node2D
 
 		if (isPlayerInVisible && isHeSee && canSayPriority && !isHeSayPriorityPhrase)
 		{
-			SayRemark("friend", isPriority: true);
+			SayRemark(relation._host.ToString(), isPriority: true);
 			timeSinceLastPriority = 0f; // Сброс таймера
 		}
 		else if (isPlayerNear && !isHeSee && !isOnCooldown && !isHeSay)
