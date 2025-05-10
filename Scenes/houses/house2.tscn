@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://t5d4txhp4d85"]
+[gd_scene load_steps=21 format=3 uid="uid://t5d4txhp4d85"]
 
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="1_i4q1h"]
 [ext_resource type="Texture2D" uid="uid://ds6jlbjusgl0y" path="res://sprites/buildings/Home1Inside.png" id="2_gyshx"]
@@ -23,13 +23,65 @@ polygon = PackedVector2Array(-380, -154, -373, -81, -326, -79, -327, -160)
 polygon = PackedVector2Array(327, 114, 292, 112, 290, -70, 100, -73, 98, -98, 290, -105, 290, -184, 329, -179)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
-size = Vector2(201, 152)
+size = Vector2(261.409, 201.882)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
 size = Vector2(23, 129.652)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
 polygon = PackedVector2Array(-11, 0, -8, 127, 17, 123, 11, -3)
+
+[sub_resource type="Animation" id="Animation_u8irb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.45788]
+}
+
+[sub_resource type="Animation" id="Animation_kq15r"]
+resource_name = "door_closed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.56556, 0.0122173]
+}
+
+[sub_resource type="Animation" id="Animation_vmmas"]
+resource_name = "door_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0127904, -1.5661]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltnsj"]
+_data = {
+"RESET": SubResource("Animation_u8irb"),
+"door_closed": SubResource("Animation_kq15r"),
+"door_open": SubResource("Animation_vmmas")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
 size = Vector2(799, 956)
@@ -39,6 +91,7 @@ blend_mode = 2
 light_mode = 2
 
 [node name="House" type="StaticBody2D"]
+rotation = -0.00143776
 collision_layer = 4
 collision_mask = 2
 
@@ -69,7 +122,8 @@ polygon = PackedVector2Array(-51, -82, -21, -84, -14, 257, -50, 255, -51, 170, -
 polygon = PackedVector2Array(-379, -153, -373, 434, 329, 440, 329, -70, 330, -176, 333, -348, 322, -441, -367, -432, -370, -294, -356, -288, -327, -288, -321, -303, -320, -328, -328, -350, -322, -371, -328, -388, -291, -393, -54, -392, -42, -208, -29, -199, -11, -204, -6, -219, -12, -397, 21, -377, -6, -235, 20, -202, 20, -92, 42, -91, 104, -99, 107, -75, 293, -69, 293, 116, 293, 396, -327, 395, -319, 173, -248, 169, -244, 133, -326, 132, -327, -160)
 
 [node name="DoorHandler" type="StaticBody2D" parent="."]
-position = Vector2(-349, -289)
+position = Vector2(-348.102, -288.677)
+rotation = -1.45788
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_gtfdr")
@@ -80,7 +134,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
-position = Vector2(1.5, 65)
+position = Vector2(-28.7043, 40.059)
 shape = SubResource("RectangleShape2D_wmwc0")
 
 [node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
@@ -95,6 +149,14 @@ texture = ExtResource("4_xbie6")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
 occluder = SubResource("OccluderPolygon2D_t20li")
+
+[node name="DoorEffect" type="AudioStreamPlayer2D" parent="DoorHandler"]
+bus = &"Effects"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoorHandler"]
+libraries = {
+"": SubResource("AnimationLibrary_ltnsj")
+}
 
 [node name="Roof" type="Area2D" parent="."]
 collision_mask = 2

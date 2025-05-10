@@ -19,7 +19,7 @@ public partial class Remarks : Node2D
 	private RayCast2D lookRay; //луч ,куда смотрит бот
 
 	//ноды текста и заднего фона текста
-    private Label label;
+	private Label label;
 	private ColorRect backGround;
 
 	private bool isTyping = false; //если печатается текст - true
@@ -103,8 +103,8 @@ public partial class Remarks : Node2D
 		}
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
+	public override void _PhysicsProcess(double delta)
+	{
 		if (playerBody != null)
 		{
 			isHeSee = BuildRayToTarget(playerBody);
@@ -115,19 +115,19 @@ public partial class Remarks : Node2D
 		}
 		
 		proximityArea.Rotation = body.Rotation;
-    }
+	}
 
 
 	//метод что печатает рандомную фразу исходя из отношений и дистанции
 	public void SayRemark(string relation, bool isPriority)
 	{
 		// Если это НЕ приоритетная фраза, и идёт кулдаун/уже говорим — выходим
-    	if (!isPriority && (isOnCooldown || isHeSay))
-        	return;
+		if (!isPriority && (isOnCooldown || isHeSay))
+			return;
 
 		// Если это приоритет, но УЖЕ говорим приоритет — не перебиваем
-    	if (isPriority && isSayingPriorityPhrase)
-        	return;
+		if (isPriority && isSayingPriorityPhrase)
+			return;
 		
 		// Прерываем кулдаун только для новых приоритетных фраз
 		if (isPriority && (isOnCooldown || isHeSay))
@@ -149,7 +149,7 @@ public partial class Remarks : Node2D
 			label.Text = phrase;
 
 			StartCooldown(phrase); // Запускаем таймер
-        	isHeSay = true;
+			isHeSay = true;
 		}
 	}
 
@@ -165,7 +165,7 @@ public partial class Remarks : Node2D
 		label.Text = phrase;
 		
 		StartCooldown(phrase); // Запускаем таймер
-    	isHeSay = true;
+		isHeSay = true;
 	}
 
 	private void StartCooldown(string text)
@@ -186,7 +186,7 @@ public partial class Remarks : Node2D
 		isSayingPriorityPhrase = false;
 
 		label.Visible = false;
-    	backGround.Visible = false;
+		backGround.Visible = false;
 	}
 
 	private void InterruptCooldown()
@@ -202,72 +202,72 @@ public partial class Remarks : Node2D
 	//даёт информацию если игрок зашёл в зону видимости npc
 	private void VisualRangeEnter(Node2D body)
 	{
-    	if (body is PlayerControl)
-    	{
+		if (body is PlayerControl)
+		{
 			playerBody = body;
-        	isPlayerInVisible = true;
+			isPlayerInVisible = true;
 		}
 	}
 
 	//даёт информацию если игрок вышел из зоны видимости npc
 	private void VisualRangeExited(Node2D body)
 	{
-    	if (body is PlayerControl)
-    	{
+		if (body is PlayerControl)
+		{
 			playerBody = null;
-        	isPlayerInVisible = false;
+			isPlayerInVisible = false;
 			isHeSay = false;
 			isHeSayPriorityPhrase = false;
 
 			label.Visible = false;
-        	backGround.Visible = false;
+			backGround.Visible = false;
 
 			var idleDelay = random.Next(5, 11); // от 5 до 10 сек
 			nextIdleAllowedTime = Time.GetTicksMsec() / 1000f + idleDelay;
 
-    	}
+		}
 	}
 
 	//даёт информацию, если игрок рядом
 	private void PlayerNearEntered(Node2D body)
 	{
 		if (body is PlayerControl)
-    	{
+		{
 			isPlayerNear = true;
-    	}
+		}
 	}
 
 	//даёт информацию, если игрок вышел из близкой зоны.
 	private void PlayerNearExited(Node2D body)
 	{
 		if (body is PlayerControl)
-    	{
+		{
 			isPlayerNear = false;
-    	}
+		}
 	}	
 
 	//возвращает true, если удалось построить луч для игрока(т.е. в прямой видимости)
 	private bool BuildRayToTarget(Node2D target)
-    {
+	{
 		if (target == null) return false;
 		lookRay.Rotation = body.Rotation;
-        
+		
 		// Устанавливаем начало луча в (0, 0) — относительно RayCast2D, он сам будет сдвинут в нужную точку
-    	lookRay.Position = Vector2.Zero;
-    	lookRay.GlobalPosition = body.GlobalPosition;
+		lookRay.Position = Vector2.Zero;
+		lookRay.GlobalPosition = body.GlobalPosition;
 
 		// Переводим глобальные координаты цели в локальные относительно RayCast2D
 		Vector2 localTarget = lookRay.ToLocal(target.GlobalPosition);
 		lookRay.TargetPosition = localTarget;
 
-        // Если луч столкнулся с объектом (целевым)
-        if (lookRay.IsColliding() && lookRay.GetCollider() == target)
-        {
-            // Показываем текст, если луч построен и объект видим
-            return true;
-        }
+		// Если луч столкнулся с объектом (целевым)
+		if (lookRay.IsColliding() && lookRay.GetCollider() == target)
+		{
+			// Показываем текст, если луч построен и объект видим
+			return true;
+		}
 		return false;
-    }
+	}
 
 	//возвращает дистанцию до цели(0 - близко, 1 - средне, 2 - далеко)
 	private byte GetDistanceCategory(Node2D target)

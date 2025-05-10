@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://bwbmqpbjtj3od" path="res://sprites/playerSprites/WalkAnim/scopes/scopeAr.png" id="10_bi7xi"]
 [ext_resource type="Texture2D" uid="uid://dqgi68wvdkptm" path="res://sprites/playerSprites/WalkAnim/scopes/scopePistol.png" id="11_hepx2"]
 [ext_resource type="Texture2D" uid="uid://dvs4hc4kk1s8m" path="res://sprites/playerSprites/WalkAnim/Stay/standwithrifle.png" id="13_kchko"]
+[ext_resource type="PackedScene" uid="uid://dxru42vscxf2q" path="res://Scenes/guns/gun.tscn" id="13_kjjnc"]
 [ext_resource type="Texture2D" uid="uid://4hmiujgm80gi" path="res://sprites/playerSprites/WalkAnim/Stay/standwithknife.png" id="14_pojy6"]
 [ext_resource type="Texture2D" uid="uid://3ccw3whb7v6v" path="res://sprites/playerSprites/WalkAnim/Stay/standwithgun.png" id="15_12wwk"]
 [ext_resource type="Texture2D" uid="uid://bdfxahuk2xiaw" path="res://sprites/playerSprites/WalkAnim/Atlas/StandPlayer (1).png" id="15_siewf"]
-[ext_resource type="Script" path="res://scripts/PlayerScripts/Gun.cs" id="20_nok8j"]
 [ext_resource type="PackedScene" uid="uid://bood2jdsxja37" path="res://Scenes/guns/bullet.tscn" id="21_krd0o"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="22_4n81h"]
 [ext_resource type="Script" path="res://scripts/PlayerScripts/MeleeGun.cs" id="22_7r28r"]
@@ -644,8 +644,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_klx1p"]
-radius = 44.0
-height = 88.0
+radius = 31.0
+height = 62.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ct8xr"]
 font_size = 20
@@ -665,7 +665,7 @@ visibility_layer = 3
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_4140m")
-animation = &"RunWithKnife"
+animation = &"ScopeAr"
 speed_scale = 2.5
 
 [node name="LegsAnimation" type="AnimatedSprite2D" parent="."]
@@ -694,7 +694,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, -1)
+position = Vector2(-5, -2)
 shape = SubResource("CapsuleShape2D_klx1p")
 
 [node name="MainCamera" type="Camera2D" parent="."]
@@ -707,9 +707,8 @@ scale = Vector2(22.35, 22.35)
 target_position = Vector2(16.5548, 0.268456)
 collision_mask = 32
 
-[node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("muzzle")]
-position = Vector2(73, -10)
-script = ExtResource("20_nok8j")
+[node name="Gun" parent="." node_paths=PackedStringArray("muzzle") instance=ExtResource("13_kjjnc")]
+scale = Vector2(22.35, 22.35)
 bulletScene = ExtResource("21_krd0o")
 muzzle = NodePath("../muzzle")
 
@@ -777,5 +776,8 @@ script = ExtResource("22_7r28r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea"]
 position = Vector2(104, -0.5)
 shape = SubResource("RectangleShape2D_p20nb")
+
+[node name="EffectsPlayerKnife" type="AudioStreamPlayer2D" parent="MeleeAttackArea"]
+bus = &"Effects"
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
