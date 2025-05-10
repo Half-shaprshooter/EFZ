@@ -7,9 +7,16 @@ public partial class ManHole : Sprite2D
 	private AnimationPlayer _playerBlack;
 	private AnimationPlayer _playerWhite;
 	
+	private AudioStreamPlayer2D audioPlayer;
+	
+	//private AudioStream MANHOLE_OPEN = (AudioStream)GD.Load("res://sounds/effects/ManHoleOpening.mp3");
+	private AudioStream STAIRS_SOUND = (AudioStream)GD.Load("res://sounds/effects/UpDownStairs.mp3");
+	
+	
 	private bool once = true;
 	public override void _Ready()
 	{
+		audioPlayer = GetNode<AudioStreamPlayer2D>("EffectPlayer");
 		_playerBlack = GetNode<AnimationPlayer>("Black");
 		_playerWhite = GetNode<AnimationPlayer>("White");
 	}
@@ -18,6 +25,9 @@ public partial class ManHole : Sprite2D
 	{
 		if (Input.IsActionJustPressed("open_door") && _isInArea && once)
 		{
+			audioPlayer.Stream = STAIRS_SOUND;
+			audioPlayer.Play();
+			
 			_playerBlack.Play("Black");
 			once = false;
 		}

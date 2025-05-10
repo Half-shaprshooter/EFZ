@@ -1,9 +1,11 @@
+using System.Linq;
+
 namespace EscapeFromZone.scripts.Items;
 
 public partial class DistructableStatic : StaticBody2D
 {
 	private Health health;
-
+	
 	[Export]
 	public PackedScene[] Scenes { get; set; } = Array.Empty<PackedScene>();
 	
@@ -28,7 +30,6 @@ public partial class DistructableStatic : StaticBody2D
 			this.AddChild(health);
 			health.Name = "Health"; 
 		}
-		GD.Print();
 	}
 	public override void _Ready()
 	{
@@ -49,6 +50,7 @@ public partial class DistructableStatic : StaticBody2D
 		{
 			foreach (var scene in Scenes)
 			{
+				GD.Print("Спавню");
 				var item = (FloorItem)scene.Instantiate();
 				item.ItemId = ItemId;
 				item.ItemName = ItemName;

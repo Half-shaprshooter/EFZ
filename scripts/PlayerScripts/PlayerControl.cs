@@ -10,8 +10,7 @@ public partial class PlayerControl : CharacterBody2D
 	private AnimatedSprite2D _walk;
 	private AnimatedSprite2D _legs;
 	private AnimationPlayer _wound;
-
-	private Slots _slots;
+	private Slots _slots { get; set; }
 	private float Speed { get; set; }
 	private bool _isInGrass;
 	private int _damageToPlayer;
@@ -74,6 +73,11 @@ public partial class PlayerControl : CharacterBody2D
 		_isInGrass = true;
 	}
 
+	public Slots getCurrentSlot()
+	{
+		return this._slots;
+	}
+
 	public override void _Process(double delta)
 	{
 		globalPos = this.GlobalPosition;
@@ -109,6 +113,15 @@ public partial class PlayerControl : CharacterBody2D
 			GD.Print("Текущее оружие дальнего боя");
 			fireTypeInHands.fireType = FireType.FireArm;
 			_slots = Slots.AUTOMATIC;
+			GD.Print(_slots);
+		}
+		
+		if (Input.IsActionJustPressed("thirdSlots"))
+		{
+			GD.Print("Текущее оружие дальнего боя второй слот");
+			fireTypeInHands.fireType = FireType.FireArm;
+			_slots = Slots.PISTOL;
+			GD.Print(_slots);
 		}
 	}
 
@@ -131,7 +144,18 @@ public partial class PlayerControl : CharacterBody2D
 
 		if (Input.IsActionPressed("aim"))
 		{
-			_walk.Play("ScopePistol");
+			switch (_slots)
+			{
+				case Slots.AUTOMATIC:
+					_walk.Play("ScopeAr");
+					_legs.Stop();
+					break;
+				case Slots.PISTOL:
+					_walk.Play("ScopePistol");
+					_legs.Stop();
+					break;
+			}
+			
 			Input.SetCustomMouseCursor(_aimCursor, Input.CursorShape.Arrow, _hotspot16);
 			totalSpeed = (float)(Speed * 0.50);
 			_legs.Play("WalkLegs");
