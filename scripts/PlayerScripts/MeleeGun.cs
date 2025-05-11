@@ -4,6 +4,14 @@ using EscapeFromZone.scripts.PlayerScripts;
 
 public partial class MeleeGun : Area2D
 {
+	private AudioStreamPlayer2D effects;
+	
+	private AudioStream FIRST_SOUND = (AudioStream)GD.Load("res://sounds/effects/BoxSmash.mp3");
+	private AudioStream SECOND_SOUND = (AudioStream)GD.Load("res://sounds/effects/DoorSmash.mp3");
+	private AudioStream KNIFE_SOUND = (AudioStream)GD.Load("res://sounds/effects/KnifeAttack.mp3");
+
+	private List<AudioStream> _list = new List<AudioStream>();
+	
 	public FireTypeImpl FireType;
 	public FireTypeImpl PlayerFireType;
 	public float AttacksPerSeconds = 1f;
@@ -27,6 +35,9 @@ public partial class MeleeGun : Area2D
 
 	public override void _Ready()
 	{
+		_list.Add(SECOND_SOUND);
+		_list.Add(FIRST_SOUND);
+		effects = GetNode<AudioStreamPlayer2D>("EffectsPlayerKnife");
 		fireRate = 1 / AttacksPerSeconds;
 		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl");
 	}
@@ -43,6 +54,8 @@ public partial class MeleeGun : Area2D
 				var parent = area.GetParent();
 				if (parent.IsInGroup("Alive"))
 				{
+					effects.Stream = KNIFE_SOUND;
+					effects.Play();
 					var health = parent.GetNodeOrNull<Health>("Health");
 					var host = parent.GetNodeOrNull<HostImpl>("HostImpl");
 					GD.Print(parent);
@@ -53,6 +66,9 @@ public partial class MeleeGun : Area2D
 					health?.Damage(15);
 				} 
 				if (parent.IsInGroup("Distructable")) {
+					Random random = new Random();
+					effects.Stream = _list[random.Next(0,2)];
+					effects.Play();
 					var health = parent.GetNodeOrNull<Health>("Health");
 					GD.Print(parent);
 					GD.Print("Damage");

@@ -3,7 +3,7 @@ using System;
 
 public partial class HousesObjectsData : Node
 {
-	public static float rotation = 0;
+	//public static float rotation;
 	public static bool isOpen = false;
 	
 	// Called when the node enters the scene tree for the first time.

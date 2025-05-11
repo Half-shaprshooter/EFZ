@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://c21x1crmtyebs"]
+
+[ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="1_fqrvt"]
+[ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/Wolf.cs" id="1_kdmmu"]
+[ext_resource type="Script" path="res://scripts/NpcS/Health.cs" id="2_a05yv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]
+size = Vector2(63, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3sui"]
+size = Vector2(122, 81)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uqjj"]
+radius = 192.751
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b50a2"]
+polygon = PackedVector2Array(-32, -24, -26, 21, 22, 22, 27, -30)
+
+[node name="Wolf" type="CharacterBody2D" groups=["Alive"]]
+collision_mask = 244
+script = ExtResource("1_kdmmu")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_a05yv")
+
+[node name="WolfSprite" type="Sprite2D" parent="."]
+position = Vector2(316, 103)
+scale = Vector2(0.582031, 0.542969)
+texture = ExtResource("1_fqrvt")
+offset = Vector2(-542.926, -193.381)
+
+[node name="WolfCol" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -3.5)
+shape = SubResource("RectangleShape2D_fjcb7")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(18, -3.5)
+shape = SubResource("RectangleShape2D_s3sui")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_0uqjj")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_b50a2")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(373, -1)
+
+[connection signal="body_entered" from="DamageArea" to="." method="OnDamageAreaBodyEntered"]
+[connection signal="body_exited" from="DamageArea" to="." method="OnDamageAreaBodyExited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]

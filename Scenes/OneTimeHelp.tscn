@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7scin6rilqah"]
+
+[ext_resource type="Script" path="res://scripts/OneTimeHelp.cs" id="1_q3028"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6eb5"]
+radius = 185.003
+
+[node name="OneTimeHelp" type="Node2D" node_paths=PackedStringArray("hint")]
+script = ExtResource("1_q3028")
+hint = NodePath("CanvasLayer/Control/Label")
+action = "dialogue_button"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = -118.0
+offset_top = 64.0
+offset_right = 120.0
+offset_bottom = 132.0
+autowrap_mode = 2
+
+[node name="PlayerNearArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNearArea"]
+shape = SubResource("CircleShape2D_r6eb5")
+
+[connection signal="body_entered" from="PlayerNearArea" to="." method="PlayerNearEntered"]
+[connection signal="body_exited" from="PlayerNearArea" to="." method="PlayerNearExited"]

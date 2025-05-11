@@ -4,23 +4,29 @@ public partial class DoorWithCodeTest : StaticBody2D
 
 	private bool _isOpen; 
 
-    //ввод нужного нода замка в редакторе
-    [Export] private CodeLock _codeLock;
-    private bool _islocked;
+	//ввод нужного нода замка в редакторе
+	[Export] private CodeLock _codeLock;
+	private bool _islocked;
 	private bool isUnlocking = false;
 
 	//canvas в котором надпись: "[E] для ввода пинкода"
-    private CanvasLayer _label_E_ForCode;
+	private CanvasLayer _label_E_ForCode;
 	
 	public override void _Ready()
 	{
-		Rotation = HousesObjectsData.rotation;
 		_isOpen = HousesObjectsData.isOpen;
 
-        _islocked = _codeLock.isLocked;
-
-        _label_E_ForCode = GetNode<CanvasLayer>("Canvas");
-        _label_E_ForCode.Visible = false;
+		if (_codeLock != null)
+		{
+			_islocked = _codeLock.isLocked;
+		}
+		else
+		{
+			_islocked = false;
+		}
+		
+	 _label_E_ForCode = GetNode<CanvasLayer>("Canvas");
+	 _label_E_ForCode.Visible = false;
 	}
 
 	private void OnDoorEventBodyEntered(Node body)
@@ -51,40 +57,42 @@ public partial class DoorWithCodeTest : StaticBody2D
 
 	public override void _Process(double delta)
 	{
-		HousesObjectsData.rotation = Rotation;
 		HousesObjectsData.isOpen = _isOpen;
-        _islocked = _codeLock.isLocked;
-
+		if (_codeLock != null)
+		{
+			_islocked = _codeLock.isLocked;
+		}
+		
 		//если мы в зоне двери, она закрыта и не открывается сейчас, то появляется надпись, в ином случае её нет
-        if (_isInArea && _islocked && !isUnlocking)
-        {
-            _label_E_ForCode.Visible = true;
-        }
+		if (_isInArea && _islocked && !isUnlocking && _codeLock != null)
+		{
+			_label_E_ForCode.Visible = true;
+		}
 
-        else
-        {
-            _label_E_ForCode.Visible = false;
-        }
+		else
+		{
+			_label_E_ForCode.Visible = false;
+		}
 		
 		//если мы пытаемся открыть дверь, находимся в зоне и она закрыта, то у нас появится кодовый замок
-		if (Input.IsActionJustPressed("open_door") && _isInArea && _islocked)
+		if (Input.IsActionJustPressed("open_door") && _isInArea && _islocked && _codeLock != null)
 		{
 			isUnlocking = true;
 			_codeLock.StartPinCode();
 		}
 
-        //если мы не в зоне, то прогресс ввода кода сбрасывается
-		if (!_isInArea)
+		//если мы не в зоне, то прогресс ввода кода сбрасывается
+		if (!_isInArea && _codeLock != null)
 		{	
 			isUnlocking = false;
 			_codeLock.CancelPinCode();
 		}
 
 		//если дверь не заперта, мы в зоне и нажимаем кнопку открыть дверь, то она меняет своё состояние
-        if (Input.IsActionJustPressed("open_door") && _isInArea && !_islocked)
-        {
-            ToggleDoor();
-        }
+		if (Input.IsActionJustPressed("open_door") && _isInArea && !_islocked)
+		{
+			ToggleDoor();
+		}
 	}
 
 	private void ToggleDoor()
