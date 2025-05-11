@@ -59,6 +59,7 @@ public partial class PlayerControl : CharacterBody2D
 		_legs = GetNode<AnimatedSprite2D>("LegsAnimation");
 		_wound = GetNode<AnimationPlayer>("PointLight2D/AnimationPlayer");
 		globalPos = this.GlobalPosition;
+		InventoryManager.PlayerInventory = PlayerInventory;
 	}
 
 	//Необходим для проверки Body на плеера в сигналах

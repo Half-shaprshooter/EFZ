@@ -20,13 +20,13 @@
 	"Grid": "0,0"
   },
   "5": {
-	"Name": "AK47",
+	"Name": "AssaultRifle",
 	"Value": 50,
 	"Grid": "0,0/0,1/-1,0/-1,1/-2,0/-2,1",
 	"Category": "Weapon"
   },
   "6": {
-	"Name": "Glock",
+	"Name": "Pistol",
 	"Value": 60,
 	"Grid": "0,0/0,1/-1,0/-1,1",
 	"Size": [3, 2],
@@ -35,8 +35,8 @@
   "7": {
 	"Name": "Knife",
 	"Value": 70,
-	"Grid": "0,0/1,0",
-	"Size": [3, 2],
+	"Grid": "0,0/0,1",
+	"Size": [1, 2],
 	"Category": "Weapon"
   },
   "8": {
@@ -50,6 +50,13 @@
 	"Name": "Bandage",
 	"Value": 80,
 	"Grid": "0,0",
+	"Size": [1, 1],
+	"Category": "Misc"
+  },
+"10": {
+	"Name": "Key",
+	"Value": 80,
+	"Grid": "0,0/0,1",
 	"Size": [1, 1],
 	"Category": "Misc"
   }

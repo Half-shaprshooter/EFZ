@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=45 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
 [ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
+[ext_resource type="Texture2D" uid="uid://dyjuyota7t54i" path="res://sprites/AssaultRifle.png" id="11_he61s"]
 [ext_resource type="PackedScene" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
 [ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="16_p6m7n"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
@@ -33,11 +34,13 @@
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
-[ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
 [ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
-[ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
-[ext_resource type="PackedScene" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
+[ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
+[ext_resource type="Texture2D" uid="uid://nqbuieb2024k" path="res://sprites/Pistol.png" id="37_q6oxp"]
+[ext_resource type="Texture2D" uid="uid://cj13mvms6a6go" path="res://sprites/Knife.png" id="37_qhndv"]
+[ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="42_kcy3c"]
+[ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="43_tjx4e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -133,6 +136,15 @@ rotation = -1.5708
 light_mask = 0
 position = Vector2(-564, 1400)
 ItemId = 5
+ItemName = "AssaultRifle"
+ItemTexture = ExtResource("11_he61s")
+
+[node name="FloorItem" parent="FloorItem" instance=ExtResource("31_ug1do")]
+light_mask = 0
+position = Vector2(-564, 1400)
+ItemId = 5
+ItemName = "AssaultRifle"
+ItemTexture = ExtResource("11_he61s")
 
 [node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
 position = Vector2(-12902, 2667)
@@ -392,14 +404,14 @@ shape = SubResource("CircleShape2D_vu78m")
 [node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-451, 1352)
 ItemId = 6
-ItemName = "Glock"
-ItemTexture = ExtResource("33_g7gok")
+ItemName = "Pistol"
+ItemTexture = ExtResource("37_q6oxp")
 
 [node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-303, 1372)
 ItemId = 7
 ItemName = "Knife"
-ItemTexture = ExtResource("34_nih2l")
+ItemTexture = ExtResource("37_qhndv")
 
 [node name="DistructableBox" parent="." instance=ExtResource("9_l0m3k")]
 position = Vector2(507, 312)
@@ -410,6 +422,17 @@ ItemName = "AK47"
 [node name="FloorItem4" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(111, 84)
 ItemId = 5
+
+[node name="FloorItem5" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-731.367, 1422.48)
+ItemId = 9
+ItemName = "Bandage"
+ItemTexture = ExtResource("42_kcy3c")
+
+[node name="FloorItem6" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-731.367, 1266.03)
+ItemName = "Key"
+ItemTexture = ExtResource("43_tjx4e")
 
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
