@@ -2,8 +2,14 @@ using EscapeFromZone.scripts.PlayerScripts;
 
 public partial class Gun : Node2D
 {	
+	private AudioStream AR_SOUND = (AudioStream)GD.Load("res://sounds/effects/ArShootFire.mp3");
+	private AudioStream PISTOL_SOUND = (AudioStream)GD.Load("res://sounds/effects/PistolShootFire.mp3");
+	
 	public FireTypeImpl fireType;
 	public FireTypeImpl PlayerFireType;
+
+	private AudioStreamPlayer2D effects;
+	private PlayerControl _playerControl;
 	[Export] public int spread = 10; // Разброс
 	[Export] public bool isAuto = true; // Автоматический режим
 	[Export] public float bulletsPerSecond = 5f; // Скорострельность
@@ -38,6 +44,8 @@ public partial class Gun : Node2D
 
 	public override void _Ready()
 	{
+		effects = GetNode<AudioStreamPlayer2D>("EffectsPlayer");
+		_playerControl = GetTree().Root.GetNode<PlayerControl>("main/Player");
 		fireRate = 1 / bulletsPerSecond;
 		PlayerFireType = GetTree().Root.GetNode<FireTypeImpl>("main/Player/FireTypeImpl"); 
 		
@@ -97,7 +105,17 @@ public partial class Gun : Node2D
 		{
 			for (int i = 0; i < bulletsPerShoot; i++)
 			{
-				GD.Print("Спавню пулю");
+				switch (_playerControl.getCurrentSlot())
+				{
+					case Slots.AUTOMATIC:
+						effects.Stream = AR_SOUND;
+						effects.Play();
+						break;
+					case Slots.PISTOL:
+						effects.Stream = PISTOL_SOUND;
+						effects.Play();
+						break;
+				}
 				SpawnBullet(totalSpread);
 				muzzle.Visible = true;
 				muzzleTimer.Start();

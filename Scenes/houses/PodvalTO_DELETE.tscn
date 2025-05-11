@@ -1,8 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://dorgshoj4li6g"]
+[gd_scene load_steps=11 format=3 uid="uid://dorgshoj4li6g"]
 
 [ext_resource type="Texture2D" uid="uid://dh731gvexc385" path="res://sprites/buildings/Home2Inside.png" id="1_p8aju"]
-[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="2_r3nxg"]
-[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="3_xg7bh"]
 [ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="4_s1usc"]
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_8phc0"]
 [ext_resource type="Texture2D" uid="uid://dy3w8458qqevd" path="res://sprites/buildings/Home2Outside.png" id="6_0kgkw"]
@@ -18,15 +16,6 @@ polygon = PackedVector2Array(-364, 106, -359, 55, -69, 68, -71, 49, -355, 37, -3
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2v5d8"]
 polygon = PackedVector2Array(-358, -287, -387, -288, -384, -377, -404, -377, -416, -387, -412, -471, -400, -476, -316, -475, -313, -469, 274, -468, 281, -477, 369, -474, 373, -380, 348, -377, 343, -306, 334, -302, 327, -301, 319, -304, 318, -315, 314, -375, 280, -378, 276, -380, 271, -436, -309, -437, -311, -382, -320, -379, -352, -375)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
-size = Vector2(257, 197)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
-size = Vector2(27, 182.652)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
-polygon = PackedVector2Array(-11, 0, -10, 185, 16, 174, 19, 102, 13, -3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
 size = Vector2(799, 956)
@@ -57,34 +46,6 @@ occluder = SubResource("OccluderPolygon2D_2v5d8")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(317, -103, 347, -103, 343, 373, 364, 376, 365, 472, 266, 478, 266, 449, -332, 448, -332, 469, -430, 470, -427, 370, -389, 367, -387, -124, -386, -376, -413, -376, -413, -475, -315, -475, -315, -469, 275, -468, 281, -477, 372, -474, 374, -377, 347, -375, 344, -305, 318, -307, 313, -375, 277, -377, 271, -436, -309, -436, -312, -380, -353, -374, -357, 36, -71, 49, -69, 68, -359, 57, -357, 374, -329, 371, -323, 421, 258, 422, 265, 373, 310, 372, 312, 291, 314, 72, 99, 72, 102, 45, 311, 45)
-
-[node name="DoorHandler" type="StaticBody2D" parent="."]
-position = Vector2(322, -294)
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("2_r3nxg")
-
-[node name="DoorEvent" type="Area2D" parent="DoorHandler"]
-position = Vector2(1, 0)
-collision_layer = 0
-collision_mask = 2
-
-[node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
-position = Vector2(-10.5, 87.5)
-shape = SubResource("RectangleShape2D_wmwc0")
-
-[node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
-position = Vector2(5.5, 89.6741)
-shape = SubResource("RectangleShape2D_fmisg")
-
-[node name="Sprite2D" type="Sprite2D" parent="DoorHandler"]
-position = Vector2(2.31498, 90.3482)
-rotation = -1.41023
-scale = Vector2(1.08653, 0.824224)
-texture = ExtResource("3_xg7bh")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
-occluder = SubResource("OccluderPolygon2D_t20li")
 
 [node name="Roof" type="Area2D" parent="."]
 position = Vector2(49, -58)
@@ -126,7 +87,5 @@ position = Vector2(-100, -31)
 scale = Vector2(1.05746, 1.04454)
 texture = ExtResource("6_0kgkw")
 
-[connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]
-[connection signal="body_exited" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyExited"]
 [connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]

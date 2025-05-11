@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5d31782lmllg"]
+[gd_scene load_steps=19 format=3 uid="uid://c5d31782lmllg"]
 
 [ext_resource type="Texture2D" uid="uid://deei6qm656a0u" path="res://sprites/buildings/Home4Inside.png" id="1_d8wx0"]
 [ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="3_47rxh"]
@@ -20,13 +20,65 @@ polygon = PackedVector2Array(-561, -394, -598, -394, -595, -476, 537, -472, 538,
 polygon = PackedVector2Array(540, -93, 495, -93, 496, 109, 543, 109)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmwc0"]
-size = Vector2(201, 152)
+size = Vector2(278.17, 254.15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmisg"]
 size = Vector2(23, 129.652)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t20li"]
 polygon = PackedVector2Array(-11, 0, -8, 127, 17, 123, 11, -3)
+
+[sub_resource type="Animation" id="Animation_u8irb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.45788]
+}
+
+[sub_resource type="Animation" id="Animation_kq15r"]
+resource_name = "door_closed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.56556, 0.0122173]
+}
+
+[sub_resource type="Animation" id="Animation_vmmas"]
+resource_name = "door_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0127904, -1.5661]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltnsj"]
+_data = {
+"RESET": SubResource("Animation_u8irb"),
+"door_closed": SubResource("Animation_kq15r"),
+"door_open": SubResource("Animation_vmmas")
+}
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xivdx"]
 blend_mode = 2
@@ -56,8 +108,8 @@ occluder = SubResource("OccluderPolygon2D_8hqnr")
 polygon = PackedVector2Array(-198, -261, -192, 435, 497, 437, 494, -436, 351, -440, 347, -322, 6, -324, -1, -439, -561, -436, -554, 4, -416, 6, -416, 34, -491, 44, -598, 44, -597, -473, 536, -472, 541, 476, -235, 477, -234, 42, -267, 41, -272, 8, -233, 5, -236, -270)
 
 [node name="DoorHandler" type="StaticBody2D" parent="."]
-position = Vector2(-413, 21)
-rotation = -1.54802
+position = Vector2(-422, 11)
+rotation = -1.45788
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_47rxh")
@@ -68,7 +120,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="EventArea" type="CollisionShape2D" parent="DoorHandler/DoorEvent"]
-position = Vector2(1.5, 65)
+position = Vector2(40.085, 13.9248)
 shape = SubResource("RectangleShape2D_wmwc0")
 
 [node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
@@ -85,7 +137,16 @@ offset = Vector2(79.1402, -20.4395)
 [node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler"]
 occluder = SubResource("OccluderPolygon2D_t20li")
 
+[node name="DoorEffect" type="AudioStreamPlayer2D" parent="DoorHandler"]
+bus = &"Effects"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoorHandler"]
+libraries = {
+"": SubResource("AnimationLibrary_ltnsj")
+}
+
 [node name="Roof" type="Area2D" parent="."]
+visible = false
 position = Vector2(176, 29)
 collision_mask = 2
 script = ExtResource("5_ern6p")
