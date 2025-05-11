@@ -34,6 +34,9 @@ public partial class PlayerControl : CharacterBody2D
 	private double _idleTimer = 0f;
 	private bool _hasPlayedIdleAnim = false;
 	private const double IDLE_TRIGGER_TIME = 5;
+	
+	[Export] 
+	public Inventory PlayerInventory { get; set; }
 
 	public PlayerControl()
 	{
