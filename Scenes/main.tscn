@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=42 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -19,7 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
 [ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
-[ext_resource type="PackedScene" uid="uid://c2eg3lhrablns" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
+[ext_resource type="PackedScene" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
+[ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="16_p6m7n"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
 [ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
@@ -36,10 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
 [ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
-[ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_h87lq"]
-radius = 1226.76
+[ext_resource type="PackedScene" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -47,11 +45,6 @@ radius = 1226.76
 radius = 181.408
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vu78m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6322r"]
-size = Vector2(5571.96, 7246.79)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wm7ek"]
 
 [node name="main" type="Node2D"]
 position = Vector2(1596, -3195)
@@ -116,24 +109,20 @@ position = Vector2(-568, -3968)
 [node name="House2" parent="." instance=ExtResource("3_qosyy")]
 position = Vector2(-600, -2712)
 
-[node name="House7" parent="." instance=ExtResource("4_upcwe")]
+[node name="House" parent="." instance=ExtResource("4_upcwe")]
 position = Vector2(1848, 480)
 rotation = 3.14159
 
-[node name="Church" parent="." instance=ExtResource("35_6cqhb")]
-position = Vector2(-3129.05, -524.073)
-
-[node name="Area2D" type="Area2D" parent="Church"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Church/Area2D"]
-shape = SubResource("CircleShape2D_h87lq")
+[node name="House6" parent="." instance=ExtResource("35_6cqhb")]
+position = Vector2(-2532, 825)
 
 [node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
 position = Vector2(1952, -944)
 
 [node name="House4" parent="." instance=ExtResource("7_obbss")]
+position = Vector2(1976, -2654)
+
+[node name="House7" parent="." instance=ExtResource("7_obbss")]
 position = Vector2(1976, -2654)
 
 [node name="House5" parent="." instance=ExtResource("4_7w24t")]
@@ -150,6 +139,24 @@ position = Vector2(-12902, 2667)
 
 [node name="HumanEnemyNpc" parent="." instance=ExtResource("12_dufiy")]
 position = Vector2(-4989.24, 1252.59)
+
+[node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
+position = Vector2(-1230.08, 960.8)
+PlayerInventory = NodePath("UI/Inventory")
+
+[node name="UI" type="CanvasLayer" parent="Player"]
+script = ExtResource("11_1p33v")
+
+[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_bottom = 0.992
+offset_left = -1153.0
+offset_bottom = 0.18396
+IsPlayerInventory = true
+metadata/_edit_use_anchors_ = true
+
+[node name="FastSlots" parent="Player/UI" instance=ExtResource("16_p6m7n")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -394,25 +401,6 @@ ItemId = 7
 ItemName = "Knife"
 ItemTexture = ExtResource("34_nih2l")
 
-[node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(46.3164, 136.297)
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-script = ExtResource("11_1p33v")
-
-[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
-metadata/_edit_use_anchors_ = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(-46.3163, -136.297)
-autoplay = true
-bus = &"Music"
-
 [node name="DistructableBox" parent="." instance=ExtResource("9_l0m3k")]
 position = Vector2(507, 312)
 Scenes = [ExtResource("31_ug1do")]
@@ -420,30 +408,10 @@ ItemId = 5
 ItemName = "AK47"
 
 [node name="FloorItem4" parent="." instance=ExtResource("31_ug1do")]
-position = Vector2(6.46283, -2.87964)
+position = Vector2(111, 84)
 ItemId = 5
 
-[node name="NewBieCamp" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NewBieCamp"]
-position = Vector2(1108.9, -1593.33)
-shape = SubResource("RectangleShape2D_6322r")
-
-[node name="Forest" type="Area2D" parent="."]
-position = Vector2(7296.44, -822.583)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest"]
-scale = Vector2(229.94, 299.242)
-shape = SubResource("RectangleShape2D_wm7ek")
-
-[connection signal="body_entered" from="Church/Area2D" to="." method="_on_church_area_2d_body_entered"]
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
 [connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]
 [connection signal="body_exited" from="Transition" to="Transition" method="OnTransitionBodyExited"]
-[connection signal="body_entered" from="NewBieCamp" to="." method="_on_new_bie_camp_body_entered"]
-[connection signal="body_entered" from="Forest" to="." method="_on_forest_body_entered"]
