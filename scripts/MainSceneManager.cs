@@ -10,6 +10,8 @@ public partial class MainSceneManager : Node2D
 	private AudioStream CHURCH_MUSIC = (AudioStream)GD.Load("res://sounds/music/ChurchMusic.mp3");
 
 	private CollisionObject2D some;
+
+	[Export] private NavigationRegion2D NavReg2D;
 	public override void _Ready()
 	{
 		audioPlayer = GetNode<AudioStreamPlayer2D>("/root/main/Player/AudioStreamPlayer2D");
@@ -21,6 +23,7 @@ public partial class MainSceneManager : Node2D
 		// {
 		// 	QueueFree();
 		// }
+
 	}
 	
 	public override void _Process(double delta)

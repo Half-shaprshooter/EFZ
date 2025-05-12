@@ -85,6 +85,7 @@ public partial class Remarks : Node2D
 
 		if (isPlayerInVisible && isHeSee && canSayPriority && !isHeSayPriorityPhrase)
 		{
+			GD.Print(relation._host.ToString());
 			SayRemark(relation._host.ToString(), isPriority: true);
 			timeSinceLastPriority = 0f; // Сброс таймера
 		}
@@ -274,7 +275,7 @@ public partial class Remarks : Node2D
 	{
 		if (target == null) return 255;
 		var distance = body.GlobalPosition.DistanceTo(target.GlobalPosition);
-		GD.Print(distance);
+		// GD.Print(distance);
 		if (distance < 400f)
 			return 0;
 		else if (distance < 1000f)
