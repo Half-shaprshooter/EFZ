@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=45 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
 [ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
 [ext_resource type="Texture2D" uid="uid://dyjuyota7t54i" path="res://sprites/AssaultRifle.png" id="11_he61s"]
-[ext_resource type="PackedScene" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
+[ext_resource type="PackedScene" uid="uid://c2eg3lhrablns" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
 [ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="16_p6m7n"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
@@ -37,23 +37,10 @@
 [ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
 [ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
-
-[ext_resource type="PackedScene" uid="uid://con576l1u4tyu" path="res://Scenes/npcs/npc_ai_test.tscn" id="38_kkrvw"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_c2fq3"]
-vertices = PackedVector2Array(2742.16, 9614.64, 2919.46, 9613.01, 2919.43, 9616.89, 2658.64, 9618.15, 2707.8, 9587.15, 2658.49, 9588.79, 3364.26, 9614.74, 3169.96, 9615.68, 3169.96, 9612.33, 3363.99, 9605.37, 3380.37, 9200.28, 3376.95, 9200.41, 3378.22, 9199.45, 3431.06, 9199.45, 3430.08, 9368.98, 3395.75, 9363.53, 2704.22, 9198.89, 2723.17, 9209.58, 2705.73, 9218.7, 2656.55, 9219.56, 2656.43, 9197.22, 3433.25, 8816.64, 3395.26, 8816.02, 3392.46, 8810.77, 3393.14, 8809.86, 3433.3, 8807.71, 2711.6, 8814.07, 2708.45, 8815.45, 2663.59, 8815.45, 2705.27, 8810.41, 6304.95, 6394.79, 6308.9, 6278.09, 6334.15, 6278.8, 6336.75, 7033.27, 5767.44, 7031.62, 5849.48, 6392.12, 5761.55, 6347.9, 5842.51, 6277.75, 5423.42, 6601.56, 5405.02, 6601.3, 5399.91, 6280.12, 5425.2, 6585.99, 5603.13, 6310.38, 5606.34, 6605.93, 5603.2, 6606.17, 3130.31, 6824.77, 3140.18, 6734.79, 3145.55, 6826.92, 3371.74, 6918.88, 3364.01, 6567.36, 3368.41, 6567.56, 3377.75, 6581.69, 3375.84, 6566.59, 3556.94, 6587.21, 3557.13, 6714.12, 3557.44, 6934.01, 3059.63, 6933.93, 3215.08, 6910.4, 3063.27, 6828.64, 3213.98, 6827.78, 3223.72, 6423.42, 3271.59, 6456.46, 3211.15, 6460.58, 3154.71, 6398.76, 3217.43, 6671.65, 3146.71, 6675.33, 3147.02, 6672.51, 3057.86, 6671.55, 3056.48, 6387.76, 3213.25, 6266.37, 3169.55, 6266.25, 6495.64, 6124.5, 5243.08, 6123.4, 3816.93, 5528.57, 3808.94, 5061.45, 2906.64, 6371, 2985.77, 6379.85, 2884.13, 6393.68, 7450.91, 4258.11, 7465.73, 11118, 6501.28, 7192.37, 6373.46, 7835.83, 6369.76, 8857.77, 6267.39, 9316.37, 6260.9, 9532.58, 5241.84, 6760.45, 3716.52, 6246.87, 3698.48, 6096.2, 2368.72, 4239.36, 3493.36, 4920.93, 3576.51, 5061.45, 3569.4, 5225.12, 3500.75, 5083.45, 3526.96, 5547.63, 3526.96, 5749.77, 2897.53, 6107.83, 3377.99, 5767.39, 2891.45, 5775.48, 5775.2, 8854.88, 6047.54, 9318.61, 5604.82, 7193.53, 5383.08, 7830.08, 3027.96, 8405.29, 3027.96, 8335.29, 3028.58, 8335.37, 3059.66, 8400.8, 5372.09, 9525.97, 5368.03, 10010, 5213.73, 10046.3, 3609.15, 9781.5, 5352.08, 9523.11, 3603.76, 8142.31, 5349.95, 9318.56, 6052.03, 9541.97, 6072.95, 9539.72, 6074.14, 9727.66, 5777.62, 9716.42, 3713.69, 6422.45, 3713.7, 6422.46, 3713.68, 7098.41, 3712.86, 6528.46, 5513.6, 10098.2, 5512.47, 10098.1, 5514.49, 10080.4, 3433.74, 8404.79, 3375.3, 8429.14, 3367.54, 8408.45, 5371.41, 8073.4, 5528.37, 8070.85, 5528.27, 8079.92, 5388.36, 8107.87, 5562.74, 9532.85, 5743.58, 9715, 5522.09, 9715, 5523.54, 9556.55, 5524.1, 9533.71, 6248.54, 10163, 6221.78, 10163, 6222.54, 9971.24, 6047.54, 9338.89, 5569.54, 9338.1, 5569.54, 9305.25, 5532.61, 10375, 6030.54, 10375.9, 6030.54, 10382, 5525.94, 10385.1, 2709.82, 8427.45, 2652.39, 8427.45, 2652.27, 8406.28, 2754.81, 8408.45, 5581.13, 6755.91, 5605.82, 6756.65, 3650.57, 5228.2, 3650.24, 5279.38, 3649.64, 5279.58, 5792.27, 9855.6, 6071.97, 9868.31, 6069.04, 10169.1, 6030.25, 10174.7, 5558.75, 10223, 5553.05, 10166.9, 5727.24, 9862, 5516.16, 10010, 5522.16, 9862, 5518.51, 10165, 2995.7, 5543.71, 3004.82, 5074.21, 3355.64, 5066.77, 3357.61, 5083.45, 3371.01, 5400.33, 3363.15, 5607.31, 2895.38, 5614.32, 6027.67, 10223, 5374.38, 8454.37, 5773.81, 8474.26, 6224.31, 9535.46, 6248.54, 10382, 2418.46, 11093.6, 3595.42, 5380.52, 2917.22, 8048.34, 2905.79, 8149, 2484.96, 8146.02, 2892.28, 7092.56, 5569.56, 9485.08, 6045.3, 9485.9, 5197.17, 10192.3, 5341.21, 10208.7, 5344.73, 10379.1, 5542.37, 6743.19, 5579.84, 6747.44, 5412.94, 6760.45, 2840.38, 5530.39, 2892.73, 6344.26, 2908.85, 6351.14, 3059.3, 8064.45, 3206.92, 4913.43, 2857.59, 4923.03, 2484.96, 9791.15, 3331.31, 9795.46, 3065.25, 8143.59)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(13, 14, 15, 10), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(30, 33, 34, 35), PackedInt32Array(35, 34, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 41, 40), PackedInt32Array(42, 40, 37), PackedInt32Array(37, 36, 42), PackedInt32Array(45, 46, 47), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(50, 52, 51), PackedInt32Array(48, 51, 53, 54, 55), PackedInt32Array(48, 55, 56, 57), PackedInt32Array(57, 56, 58, 45, 47), PackedInt32Array(57, 47, 59), PackedInt32Array(60, 61, 62, 63), PackedInt32Array(64, 65, 66), PackedInt32Array(64, 66, 67, 68, 63, 62), PackedInt32Array(69, 60, 63, 70), PackedInt32Array(71, 72, 73, 74), PackedInt32Array(75, 76, 77), PackedInt32Array(78, 79, 80, 71), PackedInt32Array(81, 80, 79, 82), PackedInt32Array(83, 82, 79, 84), PackedInt32Array(73, 72, 85, 86, 87), PackedInt32Array(88, 78, 71, 74, 89), PackedInt32Array(90, 91, 92, 89), PackedInt32Array(93, 73, 87, 94), PackedInt32Array(94, 87, 95, 96), PackedInt32Array(97, 96, 95), PackedInt32Array(98, 82, 83, 99), PackedInt32Array(100, 80, 81, 101), PackedInt32Array(102, 103, 104, 105), PackedInt32Array(106, 107, 108, 109, 110), PackedInt32Array(110, 109, 111, 112), PackedInt32Array(113, 114, 115, 116), PackedInt32Array(117, 86, 85, 118), PackedInt32Array(119, 120, 118, 85, 100, 101), PackedInt32Array(121, 122, 123), PackedInt32Array(124, 125, 126), PackedInt32Array(105, 124, 126, 102), PackedInt32Array(127, 128, 129, 130, 111), PackedInt32Array(131, 132, 133, 134, 135), PackedInt32Array(136, 137, 138), PackedInt32Array(98, 99, 139, 140, 141), PackedInt32Array(142, 143, 144, 145), PackedInt32Array(146, 147, 148, 149), PackedInt32Array(150, 151, 100), PackedInt32Array(91, 152, 153, 154), PackedInt32Array(155, 156, 157, 158, 159, 160, 161), PackedInt32Array(162, 163, 161, 160, 164, 123), PackedInt32Array(165, 166, 167, 168, 169), PackedInt32Array(169, 170, 171, 165), PackedInt32Array(158, 172, 159), PackedInt32Array(173, 174, 98, 141, 112), PackedInt32Array(138, 175, 84, 79, 136), PackedInt32Array(176, 136, 79), PackedInt32Array(144, 176, 79, 177, 145), PackedInt32Array(91, 154, 178, 169), PackedInt32Array(179, 180, 181, 182), PackedInt32Array(131, 183, 184, 113, 116, 132), PackedInt32Array(161, 132, 116, 155), PackedInt32Array(185, 186, 187, 177), PackedInt32Array(188, 189, 150, 100, 190), PackedInt32Array(92, 91, 169, 168), PackedInt32Array(191, 165, 171), PackedInt32Array(192, 193, 75, 77), PackedInt32Array(173, 112, 111), PackedInt32Array(130, 173, 111), PackedInt32Array(182, 119, 101, 127, 111, 194), PackedInt32Array(85, 190, 100), PackedInt32Array(74, 90, 89), PackedInt32Array(88, 89, 195), PackedInt32Array(88, 195, 196), PackedInt32Array(187, 145, 177), PackedInt32Array(108, 185, 177, 197, 198), PackedInt32Array(149, 148, 102, 126), PackedInt32Array(199, 105, 104, 194), PackedInt32Array(111, 199, 194), PackedInt32Array(182, 194, 179), PackedInt32Array(88, 196, 191), PackedInt32Array(191, 171, 97), PackedInt32Array(77, 182, 181, 88), PackedInt32Array(88, 191, 97, 95, 192, 77), PackedInt32Array(177, 88, 181, 197), PackedInt32Array(108, 198, 109), PackedInt32Array(123, 108, 107, 162), PackedInt32Array(123, 164, 121)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(7525.87, 11178.3, 2358.9, 11153.3, 2308.28, 4179.14, 7510.79, 4198.34)])
-agent_radius = 60.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_h87lq"]
-radius = 1226.76
-
 [ext_resource type="Texture2D" uid="uid://nqbuieb2024k" path="res://sprites/Pistol.png" id="37_q6oxp"]
 [ext_resource type="Texture2D" uid="uid://cj13mvms6a6go" path="res://sprites/Knife.png" id="37_qhndv"]
 [ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="42_kcy3c"]
 [ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="43_tjx4e"]
-
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -119,39 +106,21 @@ position = Vector2(-189, -1599)
 scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(-3923.96, -9310.45)
-navigation_polygon = SubResource("NavigationPolygon_c2fq3")
-navigation_layers = 15
+[node name="House3" parent="." instance=ExtResource("2_i31j7")]
+position = Vector2(-568, -3968)
 
-[node name="SellerHouse" parent="NavigationRegion2D" instance=ExtResource("4_03vsq")]
-position = Vector2(5875.96, 8366.45)
+[node name="House2" parent="." instance=ExtResource("3_qosyy")]
+position = Vector2(-600, -2712)
 
-[node name="House7" parent="NavigationRegion2D" instance=ExtResource("4_upcwe")]
-position = Vector2(5775.54, 9847)
+[node name="House" parent="." instance=ExtResource("4_upcwe")]
+position = Vector2(1848, 480)
 rotation = 3.14159
 
-[node name="House3" parent="NavigationRegion2D" instance=ExtResource("2_i31j7")]
-position = Vector2(3355.96, 5342.45)
+[node name="House6" parent="." instance=ExtResource("35_6cqhb")]
+position = Vector2(-2532, 825)
 
-[node name="House2" parent="NavigationRegion2D" instance=ExtResource("3_qosyy")]
-position = Vector2(3323.96, 6598.45)
-
-[node name="Church" parent="NavigationRegion2D" instance=ExtResource("35_6cqhb")]
-position = Vector2(794.913, 8786.38)
-
-[node name="Area2D" type="Area2D" parent="NavigationRegion2D/Church"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Church/Area2D"]
-shape = SubResource("CircleShape2D_h87lq")
-
-[node name="House4" parent="NavigationRegion2D" instance=ExtResource("7_obbss")]
-position = Vector2(5899.96, 6656.45)
-
-[node name="House5" parent="NavigationRegion2D" instance=ExtResource("4_7w24t")]
-position = Vector2(3088.96, 8865.45)
+[node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
+position = Vector2(1952, -944)
 
 [node name="House4" parent="." instance=ExtResource("7_obbss")]
 position = Vector2(1976, -2654)
@@ -161,6 +130,7 @@ position = Vector2(1976, -2654)
 
 [node name="House5" parent="." instance=ExtResource("4_7w24t")]
 position = Vector2(-835, -445)
+rotation = -1.5708
 
 [node name="FloorItem" parent="." instance=ExtResource("31_ug1do")]
 light_mask = 0
@@ -262,7 +232,6 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("17_tu52g")
 expand_mode = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="InterfaceManager/DialogueManager"]
 self_modulate = Color(1, 1, 1, 0)
@@ -276,7 +245,6 @@ offset_top = -47.048
 offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="InterfaceManager/DialogueManager/Panel"]
 layout_mode = 1
@@ -293,7 +261,6 @@ scale = Vector2(0.974811, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "TEST"
 label_settings = SubResource("LabelSettings_2l8bt")
-metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="InterfaceManager/DialogueManager/Panel"]
 layout_mode = 1
@@ -307,7 +274,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_7tgbb")
 expand_mode = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InterfaceManager/DialogueManager/Panel"]
 layout_mode = 1
@@ -328,7 +294,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTBOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXT"
 scroll_following = true
 tab_size = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="InterfaceManager/DialogueManager/Panel"]
 layout_mode = 1
@@ -341,7 +306,6 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(0, 2)
 alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Force" type="StaticBody2D" parent="."]
 
@@ -386,7 +350,6 @@ offset_left = -962.0
 offset_top = 19.0
 offset_right = -662.0
 offset_bottom = 319.0
-metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
@@ -422,11 +385,9 @@ offset_bottom = 1.01599
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("25_k4ij3")
-metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("34_1tp5b")]
 anchors_preset = -1
-metadata/_edit_use_anchors_ = true
 
 [node name="Quest" type="StaticBody2D" parent="."]
 position = Vector2(-1077, -1894)
@@ -452,25 +413,6 @@ ItemId = 7
 ItemName = "Knife"
 ItemTexture = ExtResource("37_qhndv")
 
-[node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(932.79, 2202.83)
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-script = ExtResource("11_1p33v")
-
-[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
-metadata/_edit_use_anchors_ = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(-82.9385, -199.647)
-autoplay = true
-bus = &"Music"
-
 [node name="DistructableBox" parent="." instance=ExtResource("9_l0m3k")]
 position = Vector2(507, 312)
 Scenes = [ExtResource("31_ug1do")]
@@ -481,48 +423,16 @@ ItemName = "AK47"
 position = Vector2(111, 84)
 ItemId = 5
 
-
-[node name="NewBieCamp" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NewBieCamp"]
-position = Vector2(1108.9, -1593.33)
-shape = SubResource("RectangleShape2D_6322r")
-
-[node name="Forest" type="Area2D" parent="."]
-position = Vector2(7296.44, -822.583)
-collision_layer = 0
-collision_mask = 2
-
 [node name="FloorItem5" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-731.367, 1422.48)
 ItemId = 9
 ItemName = "Bandage"
+ItemTexture = ExtResource("42_kcy3c")
 
 [node name="FloorItem6" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-731.367, 1266.03)
 ItemName = "Key"
 ItemTexture = ExtResource("43_tjx4e")
-
-[node name="NPC_AI_Test" parent="." node_paths=PackedStringArray("PatrolPoints") instance=ExtResource("38_kkrvw")]
-position = Vector2(1836.5, 1685.48)
-PatrolPoints = [NodePath("../Point1"), NodePath("../Point2"), NodePath("../Point3"), NodePath("../Point4")]
-
-[node name="Point1" type="Node2D" parent="."]
-position = Vector2(1896.82, 1307.3)
-
-[node name="Point2" type="Node2D" parent="."]
-position = Vector2(1868.81, -85.4258)
-
-[node name="Point3" type="Node2D" parent="."]
-position = Vector2(2026.07, -1620.21)
-
-[node name="Point4" type="Node2D" parent="."]
-position = Vector2(2034.69, -3350.8)
-
-[connection signal="body_entered" from="NavigationRegion2D/Church/Area2D" to="." method="_on_church_area_2d_body_entered"]
 
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]

@@ -6,7 +6,7 @@ public partial class TalkableNpc : NpcObject
 	{
 		var a = this.GetNode<HostImpl>("HostImpl");
 		a._host = Host.Friendly;
-		// GD.Print("Friendly and Neutral is: " + a._host);
+		GD.Print("Friendly and Neutral is: " + a._host);
 	}
 	
 	protected void AttackPlayer()
