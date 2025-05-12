@@ -59,7 +59,7 @@ public partial class DoorHandler : StaticBody2D
 			var inventoryData = InventoryManager.PlayerInventory.GetInventoryData();
 			foreach (var slot in inventoryData.Slots)
 			{
-				if (slot.ItemData.ItemID == 10)
+				if (slot.ItemData != null && slot.ItemData.ItemID == 10)
 				{
 					_isLocked = false;
 					ToggleDoor();
