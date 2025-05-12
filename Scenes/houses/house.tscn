@@ -140,7 +140,6 @@ texture = ExtResource("2_cef43")
 occluder = SubResource("OccluderPolygon2D_t20li")
 
 [node name="DoorEffect" type="AudioStreamPlayer2D" parent="DoorHandler"]
-bus = &"Effects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DoorHandler"]
 libraries = {

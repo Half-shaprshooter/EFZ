@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using EscapeFromZone.scripts.Inventory;
 using EscapeFromZone.scripts.Items;
 
 public partial class Inventory : Control
@@ -154,6 +155,42 @@ public partial class Inventory : Control
 			}
 		}
 	}
+	
+	// Получение данных всего инвентаря
+	public InventoryData GetInventoryData()
+	{
+		var data = new InventoryData();
+
+		// Сохраняем обычные слоты
+		foreach (var slot in _gridArray)
+		{
+			data.Slots.Add(new SlotData
+			{
+				SlotId = slot.SlotID,
+				State = slot.State,
+				ItemData = slot.ItemStored != null ? new ItemData((Item)slot.ItemStored) : null
+			});
+		}
+
+		// Сохраняем слоты экипировки
+		foreach (var equipmentSlot in _equipmentSlots)
+		{
+			data.EquipmentSlots.Add(new EquipmentSlotData
+			{
+				SlotId = equipmentSlot.SlotID,
+				State = equipmentSlot.State,
+				ItemData = equipmentSlot.ItemStored != null ? new ItemData((Item)equipmentSlot.ItemStored) : null,
+				SlotCategory =  equipmentSlot.SlotCategory
+			});
+		}
+
+		return data;
+	}
+
+	private ItemData GetItemData(Item slotItemStored)
+	{
+		throw new NotImplementedException();
+	}
 
 	private void UseItem()
 	{
@@ -174,6 +211,15 @@ public partial class Inventory : Control
 				item.QueueFree();
 				ClearGrid();
 			}
+		}
+	}
+
+	public void UseItemFromSlot(int slotId)
+	{
+		if (slotId >= 0 && slotId < _gridArray.Count)
+		{
+			_currentSlot = _gridArray[slotId];
+			UseItem();
 		}
 	}
 

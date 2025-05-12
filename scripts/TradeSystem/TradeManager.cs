@@ -22,7 +22,7 @@ public partial class TradeManager : Node
 
     public override void _Process(double delta)
     {
-        if (_isTrading && Input.IsKeyPressed(Key.G))
+        if (_isTrading && Input.IsKeyPressed(Key.I))
         {
             StopTrading();
         }
@@ -50,7 +50,6 @@ public partial class TradeManager : Node
         if(!_isTrading)
             return;
         _isTrading = false;
-        _playerInventory.Visible = false;
         _sellerInventory.Visible = false;
         _playerInventory.IsTradeMode = false;
         _sellerInventory.IsTradeMode = false;

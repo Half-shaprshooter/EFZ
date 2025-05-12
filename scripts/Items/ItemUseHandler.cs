@@ -11,6 +11,8 @@ public partial class ItemUseHandler : Control
         {
             case 9: // Бинт
                 return UseBandage(item);
+            case 10: // Ключ
+                return true;
             default:
                 return false;
         }
