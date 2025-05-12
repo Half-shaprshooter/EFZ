@@ -214,6 +214,15 @@ public partial class Inventory : Control
 		}
 	}
 
+	public void UseItemFromSlot(int slotId)
+	{
+		if (slotId >= 0 && slotId < _gridArray.Count)
+		{
+			_currentSlot = _gridArray[slotId];
+			UseItem();
+		}
+	}
+
 	/// <summary>
 	/// Создает новый слот инвентаря
 	/// </summary>
