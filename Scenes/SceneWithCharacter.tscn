@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bwbmqpbjtj3od" path="res://sprites/playerSprites/WalkAnim/scopes/scopeAr.png" id="10_bi7xi"]
 [ext_resource type="Texture2D" uid="uid://dqgi68wvdkptm" path="res://sprites/playerSprites/WalkAnim/scopes/scopePistol.png" id="11_hepx2"]
 [ext_resource type="Texture2D" uid="uid://dvs4hc4kk1s8m" path="res://sprites/playerSprites/WalkAnim/Stay/standwithrifle.png" id="13_kchko"]
-[ext_resource type="PackedScene" path="res://Scenes/guns/gun.tscn" id="13_kjjnc"]
+[ext_resource type="PackedScene" uid="uid://dxru42vscxf2q" path="res://Scenes/guns/gun.tscn" id="13_kjjnc"]
 [ext_resource type="Texture2D" uid="uid://4hmiujgm80gi" path="res://sprites/playerSprites/WalkAnim/Stay/standwithknife.png" id="14_pojy6"]
 [ext_resource type="Texture2D" uid="uid://3ccw3whb7v6v" path="res://sprites/playerSprites/WalkAnim/Stay/standwithgun.png" id="15_12wwk"]
 [ext_resource type="Texture2D" uid="uid://bdfxahuk2xiaw" path="res://sprites/playerSprites/WalkAnim/Atlas/StandPlayer (1).png" id="15_siewf"]

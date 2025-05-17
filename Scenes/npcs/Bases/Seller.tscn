@@ -67,7 +67,6 @@ shape = SubResource("CircleShape2D_0uqjj")
 
 [node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_nveh8")]
 body = NodePath("..")
-ThoughtsJsonPath = ""
 
 [node name="OneTimeHelp" parent="." instance=ExtResource("4_i1qp5")]
 hintText = "Нажмите \"E\" для начала диалога"

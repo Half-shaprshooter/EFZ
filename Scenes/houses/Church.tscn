@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/Items/Kafedra.cs" id="4_fpa5r"]
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_o0gt4"]
 [ext_resource type="Texture2D" uid="uid://dnlf8gh4fiiqk" path="res://sprites/buildings/Church/NewChurchOutside.png" id="6_lfvo4"]
-[ext_resource type="PackedScene" path="res://Scenes/Items/Distructable_Door.tscn" id="7_w4uyy"]
+[ext_resource type="PackedScene" uid="uid://c3kfg3v0i4dkt" path="res://Scenes/Items/Distructable_Door.tscn" id="7_w4uyy"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1slxu"]
 polygon = PackedVector2Array(-37, 502, -34, 539, 204, 534, 214, 358, 159, 355, 154, 497)

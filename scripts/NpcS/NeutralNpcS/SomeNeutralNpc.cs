@@ -8,12 +8,12 @@ public partial class SomeNeutralNpc : TalkableNpc
 		InterfaceSelectionObject interSelect = new InterfaceSelectionObject(1, "Вариант 1");
 		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(2, "Вариант 2");
 		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(-1, "Вариант 3");
-		_npcDialogues = new List<NpcDialogue>
-		{
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect, interSelect2}, "Вариант текста 1", 0),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 2", 1),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 3", 2)
-		};
+		// _npcDialogues = new List<NpcDialogue>
+		// {
+		// 	new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect, interSelect2}, "Вариант текста 1", 0),
+		// 	new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 2", 1),
+		// 	new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 3", 2)
+		// };
 		_label = GetNode<Label>("ButtonText");
 	}
 
