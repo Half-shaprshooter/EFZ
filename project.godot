@@ -22,6 +22,7 @@ HousesObjectsData="*res://scripts/Data/HousesObjectsData.cs"
 DataHandler="*res://data/DataHandler.cs"
 TradeManager="*res://scripts/TradeSystem/TradeManager.cs"
 InventoryManager="*res://scripts/Inventory/InventoryManager.cs"
+QuestList="*res://scripts/questScripts/QuestList.cs"
 
 [dotnet]
 

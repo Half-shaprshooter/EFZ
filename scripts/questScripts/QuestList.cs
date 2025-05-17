@@ -1,10 +1,16 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
 public partial class QuestList : VBoxContainer
 {
+	public static QuestList Instance { get; private set; }
 	private List<string> questList = new List<string>();
 	private ArrowQuest ArrowQuest;
-
+	
 	public override void _Ready()
 	{
+		Instance = this;
 		ArrowQuest = GetNode<ArrowQuest>("/root/main/CanvasLayer/SubViewportContainer/ArrowQuest");
 		AddQuest("Вернуться к церкви", GetNode<Quest>("/root/main/NavigationRegion2D/House6/TriggerForQuest"));
 	}
@@ -35,6 +41,8 @@ public partial class QuestList : VBoxContainer
 			}
 		}
 	}
+
+	public bool HaveQuest(string text) => questList.Contains(text);
 	
 	// Удаляет все задания
 	public void ClearQuestList()
