@@ -778,6 +778,5 @@ position = Vector2(104, -0.5)
 shape = SubResource("RectangleShape2D_p20nb")
 
 [node name="EffectsPlayerKnife" type="AudioStreamPlayer2D" parent="MeleeAttackArea"]
-bus = &"Effects"
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]

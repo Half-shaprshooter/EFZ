@@ -1,16 +1,16 @@
-[gd_scene load_steps=44 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=47 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
 [ext_resource type="PackedScene" uid="uid://dakog3812u1f7" path="res://Scenes/houses/house3.tscn" id="2_i31j7"]
 [ext_resource type="PackedScene" uid="uid://djh6mt40wbkm8" path="res://Scenes/SceneWithCharacter.tscn" id="2_pu6ya"]
-[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Bases/Neutral.tscn" id="3_pte4x"]
+[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Neutral.tscn" id="3_pte4x"]
 [ext_resource type="PackedScene" uid="uid://t5d4txhp4d85" path="res://Scenes/houses/house2.tscn" id="3_qosyy"]
 [ext_resource type="PackedScene" uid="uid://bn3mt4b7k843s" path="res://Scenes/houses/SellerHouse.tscn" id="4_03vsq"]
 [ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
 [ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
 [ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
-[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/Bases/wolf.tscn" id="7_d18ir"]
+[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/wolf.tscn" id="7_d18ir"]
 [ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
 [ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Bases/Seller.tscn" id="8_mo2kn"]
@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bdima8u8such0" path="res://Scenes/Iface/interface_selection.tscn" id="10_nvyj3"]
 [ext_resource type="PackedScene" uid="uid://cdhtppipmq6hf" path="res://Scenes/Inventory/Inventory.tscn" id="10_ritai"]
 [ext_resource type="Script" path="res://scripts/Inventory/UI.cs" id="11_1p33v"]
+[ext_resource type="Texture2D" uid="uid://dyjuyota7t54i" path="res://sprites/AssaultRifle.png" id="11_he61s"]
 [ext_resource type="PackedScene" uid="uid://c2eg3lhrablns" path="res://Scenes/npcs/human_enemy_npc.tscn" id="12_dufiy"]
+[ext_resource type="PackedScene" uid="uid://dekgdy5ykla5b" path="res://Scenes/Inventory/fastSlots.tscn" id="16_p6m7n"]
 [ext_resource type="Script" path="res://scripts/TransitionLock.cs" id="17_c7v7w"]
 [ext_resource type="Texture2D" uid="uid://b0o3omwkswffu" path="res://sprites/iFace/image 30.png" id="17_tu52g"]
 [ext_resource type="Texture2D" uid="uid://b8q3qouvardf6" path="res://sprites/iFace/Rectangle 5.png" id="18_7tgbb"]
@@ -32,14 +34,20 @@
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
-[ext_resource type="Texture2D" uid="uid://dgsmuurorftyn" path="res://sprites/Glock.png" id="33_g7gok"]
 [ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
-[ext_resource type="Texture2D" uid="uid://brj335yxf0n6x" path="res://sprites/Knife.png" id="34_nih2l"]
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
 [ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
+[ext_resource type="Texture2D" uid="uid://nqbuieb2024k" path="res://sprites/Pistol.png" id="37_q6oxp"]
+[ext_resource type="Texture2D" uid="uid://cj13mvms6a6go" path="res://sprites/Knife.png" id="37_qhndv"]
+[ext_resource type="PackedScene" uid="uid://con576l1u4tyu" path="res://Scenes/npcs/npc_ai_test.tscn" id="42_5g7yk"]
+[ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="42_kcy3c"]
+[ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="43_tjx4e"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h87lq"]
-radius = 1226.76
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1kcds"]
+vertices = PackedVector2Array(-1181.8, 304.188, -1004.48, 302.563, -1004.51, 306.438, -1265.31, 307.703, -1216.15, 276.703, -1265.46, 278.344, -559.688, 304.289, -754, 305.219, -754, 301.883, -559.961, 294.922, -543.594, -110.172, -547, -110.031, -545.742, -111, -492.898, -111, -493.867, 58.5313, -528.203, 53.0781, -1219.73, -111.547, -1200.78, -100.859, -1218.22, -91.7422, -1267.4, -90.8828, -1267.52, -113.219, -490.703, -493.797, -528.688, -494.422, -531.492, -499.672, -530.813, -500.578, -490.648, -502.727, -1212.35, -496.367, -1215.51, -495, -1260.37, -495, -1218.68, -500.031, 2380.99, -2915.66, 2384.94, -3032.35, 2410.19, -3031.64, 2412.79, -2277.17, 1843.48, -2278.82, 1925.52, -2918.33, 1837.59, -2962.55, 1918.55, -3032.69, 1499.45, -2708.87, 1481.06, -2709.14, 1475.95, -3030.32, 1501.23, -2724.46, 1679.17, -3000.07, 1682.38, -2704.51, 1679.24, -2704.27, -793.656, -2485.66, -783.773, -2575.59, -778.406, -2483.54, -552.219, -2391.57, -559.938, -2743.08, -555.547, -2742.89, -546.211, -2728.77, -548.109, -2743.85, -367.008, -2723.24, -366.844, -2596.33, -366.508, -2376.43, -864.32, -2376.51, -708.883, -2400.05, -860.68, -2481.79, -709.969, -2482.67, -700.242, -2887.03, -652.359, -2853.98, -712.813, -2849.87, -769.25, -2911.68, -706.523, -2638.8, -777.227, -2635.11, -776.922, -2637.94, -866.094, -2638.89, -867.469, -2922.67, -710.703, -3044.07, -754.398, -3044.19, 2571.68, -3185.95, 1319.12, -3187.05, -107.031, -3781.88, -115.023, -4249, -1017.41, -2939.47, -938.156, -2930.59, -1039.83, -2916.75, 3581.76, -5032.53, 3581.76, 1898.87, 2445.8, -452.68, 2449.51, -1474.62, 2577.32, -2118.08, 2339.85, -50.6328, 2333.36, 165.578, 1317.88, -2550, -207.438, -3063.58, -225.477, -3214.24, -1559.03, -5083.18, -430.602, -4389.52, -347.453, -4249, -354.563, -4085.33, -423.211, -4227, -397, -3762.81, -397, -3560.68, -1026.43, -3202.62, -545.969, -3543.06, -1032.51, -3534.97, 1851.24, -455.563, 2120, -48.3906, 1680.86, -2116.92, 1459.12, -1480.37, -896, -905.156, -896, -975.141, -895.383, -975.07, -864.297, -909.648, 2124.49, 174.969, 2145.41, 172.719, 2146.6, 360.656, 1850.08, 349.422, 1444.55, 158.969, 1440.49, 643, 1286.17, 679.281, -314.813, 471.047, 1424.54, 156.109, -320.203, -1168.14, 1422.41, -48.4375, -210.281, -2212.05, -211.102, -2782, -210.25, -2888, 1586.06, 731.18, 1584.93, 731.094, 1586.95, 713.367, -490.211, -905.648, -548.648, -881.297, -556.422, -902, 1447.45, -1237.05, 1604.41, -1239.59, 1604.3, -1230.53, 1464.4, -1202.58, 1635.2, 165.852, 1816.04, 348, 1594.55, 348, 1596, 189.547, 1596.56, 166.711, 2321, 796, 2294.24, 796, 2295, 604.242, 2120, -28.1016, 1642, -28.8906, 1642, -61.75, 1605.07, 1008.05, 2103, 1008.89, 2103, 1015, 1598.4, 1018.07, -1214.14, -883, -1271.57, -883, -1271.68, -904.156, -1169.15, -902, 1657.17, -2554.54, 1681.86, -2553.79, -273.383, -4082.24, -273.711, -4031.06, -274.32, -4030.87, 1864.73, 488.602, 2144.43, 501.313, 2141.5, 802.063, 2102.71, 807.742, 1631.21, 856, 1625.51, 799.938, 1799.7, 495, 1588.62, 643, 1594.62, 495, 1590.97, 798.008, -928.258, -3766.74, -919.133, -4236.23, -568.313, -4243.67, -566.352, -4227, -552.953, -3910.12, -560.797, -3703.13, -1028.58, -3696.13, 2100.13, 856, 1450.42, -856.078, 1849.85, -836.188, 2296.77, 168.461, 2321, 1015, -1573.87, 1885.74, -328.531, -3929.92, -1006.74, -1262.13, -1018.16, -1161.43, -1439, -1164.43, -1031.69, -2217.88, 1642.02, 118.078, 2117.76, 118.898, 1269.67, 825.344, 1413.67, 841.672, 1417.19, 1012.09, 1618.41, -2567.25, 1655.88, -2563, 1488.98, -2550, -1083.58, -3780.06, -1031.23, -2966.21, -1015.16, -2959.34, -864.656, -1245.96, -717.039, -4397.02, -1066.37, -4387.42, -1439, 480.703, -592.648, 485.008, -858.711, -1166.86)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(13, 14, 15, 10), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(30, 33, 34, 35), PackedInt32Array(35, 34, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 41, 40), PackedInt32Array(42, 40, 37), PackedInt32Array(37, 36, 42), PackedInt32Array(45, 46, 47), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(50, 52, 51), PackedInt32Array(48, 51, 53, 54), PackedInt32Array(48, 54, 55), PackedInt32Array(48, 55, 56, 57), PackedInt32Array(57, 56, 58, 45, 47), PackedInt32Array(57, 47, 59), PackedInt32Array(60, 61, 62, 63), PackedInt32Array(64, 65, 66), PackedInt32Array(64, 66, 67, 68, 63, 62), PackedInt32Array(69, 60, 63, 70), PackedInt32Array(71, 72, 73, 74), PackedInt32Array(75, 76, 77), PackedInt32Array(78, 79, 80, 81, 82), PackedInt32Array(83, 80, 79, 84), PackedInt32Array(78, 82, 71), PackedInt32Array(73, 72, 85, 86, 87), PackedInt32Array(88, 78, 71, 74, 89), PackedInt32Array(90, 91, 92, 89), PackedInt32Array(93, 73, 87, 94), PackedInt32Array(94, 87, 95, 96), PackedInt32Array(97, 96, 95), PackedInt32Array(98, 80, 83, 99), PackedInt32Array(100, 82, 81, 101), PackedInt32Array(102, 103, 104, 105), PackedInt32Array(106, 107, 108, 109), PackedInt32Array(110, 111, 112, 113, 114), PackedInt32Array(114, 113, 115, 116), PackedInt32Array(117, 118, 119, 86, 85, 100, 101), PackedInt32Array(120, 121, 122), PackedInt32Array(123, 124, 125), PackedInt32Array(105, 123, 125, 102), PackedInt32Array(126, 127, 128, 129, 115), PackedInt32Array(130, 131, 132, 133, 134), PackedInt32Array(135, 136, 137), PackedInt32Array(98, 99, 138, 139, 140), PackedInt32Array(141, 142, 143, 144), PackedInt32Array(145, 146, 147, 148), PackedInt32Array(149, 150, 100), PackedInt32Array(91, 151, 152, 153), PackedInt32Array(154, 155, 156, 157, 158, 159, 160), PackedInt32Array(161, 162, 160, 159, 163, 122), PackedInt32Array(164, 165, 166, 167, 168), PackedInt32Array(168, 169, 170, 164), PackedInt32Array(157, 171, 158), PackedInt32Array(172, 173, 98, 140, 116), PackedInt32Array(137, 174, 84, 79, 135), PackedInt32Array(175, 135, 79), PackedInt32Array(143, 175, 79, 176, 144), PackedInt32Array(91, 153, 177, 168), PackedInt32Array(178, 179, 180, 181), PackedInt32Array(130, 182, 183, 106, 109, 131), PackedInt32Array(160, 131, 109, 154), PackedInt32Array(184, 185, 186, 176), PackedInt32Array(187, 188, 149, 100, 189), PackedInt32Array(92, 91, 168, 167), PackedInt32Array(190, 164, 170), PackedInt32Array(191, 192, 75, 77), PackedInt32Array(172, 116, 115), PackedInt32Array(129, 172, 115), PackedInt32Array(181, 117, 101, 126, 115, 193), PackedInt32Array(85, 189, 100), PackedInt32Array(74, 90, 89), PackedInt32Array(88, 89, 194), PackedInt32Array(88, 194, 195), PackedInt32Array(186, 144, 176), PackedInt32Array(112, 184, 176, 196, 197), PackedInt32Array(148, 147, 102, 125), PackedInt32Array(198, 105, 104, 193), PackedInt32Array(115, 198, 193), PackedInt32Array(181, 193, 178), PackedInt32Array(88, 195, 190), PackedInt32Array(190, 170, 97), PackedInt32Array(77, 181, 180, 88), PackedInt32Array(88, 190, 97, 95, 191, 77), PackedInt32Array(176, 88, 180, 196), PackedInt32Array(112, 197, 113), PackedInt32Array(122, 112, 111, 161), PackedInt32Array(122, 163, 120)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(3641.76, 1959.03, -1634, 1945.6, -1618.92, -5143.78, 3641.76, -5091.95)])
+agent_radius = 60.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -47,11 +55,6 @@ radius = 1226.76
 radius = 181.408
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vu78m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6322r"]
-size = Vector2(5571.96, 7246.79)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wm7ek"]
 
 [node name="main" type="Node2D"]
 position = Vector2(1596, -3195)
@@ -110,33 +113,35 @@ position = Vector2(-189, -1599)
 scale = Vector2(3.81719, 3.84167)
 texture = ExtResource("2_101oy")
 
-[node name="House3" parent="." instance=ExtResource("2_i31j7")]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_1kcds")
+navigation_layers = 15
+
+[node name="House3" parent="NavigationRegion2D" instance=ExtResource("2_i31j7")]
 position = Vector2(-568, -3968)
 
-[node name="House2" parent="." instance=ExtResource("3_qosyy")]
+[node name="House2" parent="NavigationRegion2D" instance=ExtResource("3_qosyy")]
 position = Vector2(-600, -2712)
+scale = Vector2(1, 1)
 
-[node name="House7" parent="." instance=ExtResource("4_upcwe")]
+[node name="House" parent="NavigationRegion2D" instance=ExtResource("4_upcwe")]
 position = Vector2(1848, 480)
 rotation = 3.14159
 
-[node name="Church" parent="." instance=ExtResource("35_6cqhb")]
-position = Vector2(-3129.05, -524.073)
+[node name="House6" parent="NavigationRegion2D" instance=ExtResource("35_6cqhb")]
+position = Vector2(-2532, 825)
 
-[node name="Area2D" type="Area2D" parent="Church"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Church/Area2D"]
-shape = SubResource("CircleShape2D_h87lq")
-
-[node name="SellerHouse" parent="." instance=ExtResource("4_03vsq")]
+[node name="SellerHouse" parent="NavigationRegion2D" instance=ExtResource("4_03vsq")]
 position = Vector2(1952, -944)
+scale = Vector2(1, 1)
 
-[node name="House4" parent="." instance=ExtResource("7_obbss")]
+[node name="House4" parent="NavigationRegion2D" instance=ExtResource("7_obbss")]
 position = Vector2(1976, -2654)
 
-[node name="House5" parent="." instance=ExtResource("4_7w24t")]
+[node name="House7" parent="NavigationRegion2D" instance=ExtResource("7_obbss")]
+position = Vector2(1976, -2654)
+
+[node name="House5" parent="NavigationRegion2D" instance=ExtResource("4_7w24t")]
 position = Vector2(-835, -445)
 rotation = -1.5708
 
@@ -144,12 +149,39 @@ rotation = -1.5708
 light_mask = 0
 position = Vector2(-564, 1400)
 ItemId = 5
+ItemName = "AssaultRifle"
+ItemTexture = ExtResource("11_he61s")
+
+[node name="FloorItem" parent="FloorItem" instance=ExtResource("31_ug1do")]
+light_mask = 0
+position = Vector2(-564, 1400)
+ItemId = 5
+ItemName = "AssaultRifle"
+ItemTexture = ExtResource("11_he61s")
 
 [node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
 position = Vector2(-12902, 2667)
 
 [node name="HumanEnemyNpc" parent="." instance=ExtResource("12_dufiy")]
 position = Vector2(-4989.24, 1252.59)
+
+[node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
+position = Vector2(-1230.08, 960.8)
+PlayerInventory = NodePath("UI/Inventory")
+
+[node name="UI" type="CanvasLayer" parent="Player"]
+script = ExtResource("11_1p33v")
+
+[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_bottom = 0.992
+offset_left = -1153.0
+offset_bottom = 0.18396
+IsPlayerInventory = true
+metadata/_edit_use_anchors_ = true
+
+[node name="FastSlots" parent="Player/UI" instance=ExtResource("16_p6m7n")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -327,10 +359,10 @@ texture = ExtResource("2_101oy")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-offset_left = -662.0
-offset_top = -1.0
-offset_right = -362.0
-offset_bottom = 299.0
+offset_left = -962.0
+offset_top = 19.0
+offset_right = -662.0
+offset_bottom = 319.0
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
@@ -385,33 +417,14 @@ shape = SubResource("CircleShape2D_vu78m")
 [node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-451, 1352)
 ItemId = 6
-ItemName = "Glock"
-ItemTexture = ExtResource("33_g7gok")
+ItemName = "Pistol"
+ItemTexture = ExtResource("37_q6oxp")
 
 [node name="FloorItem3" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-303, 1372)
 ItemId = 7
 ItemName = "Knife"
-ItemTexture = ExtResource("34_nih2l")
-
-[node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(-3213.06, 960.8)
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-script = ExtResource("11_1p33v")
-
-[node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
-metadata/_edit_use_anchors_ = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-position = Vector2(-46.3163, -136.297)
-autoplay = true
-bus = &"Music"
+ItemTexture = ExtResource("37_qhndv")
 
 [node name="DistructableBox" parent="." instance=ExtResource("9_l0m3k")]
 position = Vector2(507, 312)
@@ -420,30 +433,37 @@ ItemId = 5
 ItemName = "AK47"
 
 [node name="FloorItem4" parent="." instance=ExtResource("31_ug1do")]
-position = Vector2(6.46283, -2.87964)
+position = Vector2(111, 84)
 ItemId = 5
 
-[node name="NewBieCamp" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="FloorItem5" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-731.367, 1422.48)
+ItemId = 9
+ItemName = "Bandage"
+ItemTexture = ExtResource("42_kcy3c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NewBieCamp"]
-position = Vector2(1108.9, -1593.33)
-shape = SubResource("RectangleShape2D_6322r")
+[node name="FloorItem6" parent="." instance=ExtResource("31_ug1do")]
+position = Vector2(-731.367, 1266.03)
+ItemName = "Key"
+ItemTexture = ExtResource("43_tjx4e")
 
-[node name="Forest" type="Area2D" parent="."]
-position = Vector2(7296.44, -822.583)
-collision_layer = 0
-collision_mask = 2
+[node name="NPC_AI_Test" parent="." node_paths=PackedStringArray("PatrolPoints") instance=ExtResource("42_5g7yk")]
+position = Vector2(1744.94, 1548.22)
+PatrolPoints = [NodePath("../Point1"), NodePath("../Point2"), NodePath("../Point3"), NodePath("../Point4")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest"]
-scale = Vector2(229.94, 299.242)
-shape = SubResource("RectangleShape2D_wm7ek")
+[node name="Point1" type="Node2D" parent="."]
+position = Vector2(1855.89, 1274.67)
 
-[connection signal="body_entered" from="Church/Area2D" to="." method="_on_church_area_2d_body_entered"]
+[node name="Point2" type="Node2D" parent="."]
+position = Vector2(1923.74, -172.771)
+
+[node name="Point3" type="Node2D" parent="."]
+position = Vector2(2014.22, -1771.87)
+
+[node name="Point4" type="Node2D" parent="."]
+position = Vector2(2013.15, -3387.28)
+
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
 [connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]
 [connection signal="body_exited" from="Transition" to="Transition" method="OnTransitionBodyExited"]
-[connection signal="body_entered" from="NewBieCamp" to="." method="_on_new_bie_camp_body_entered"]
-[connection signal="body_entered" from="Forest" to="." method="_on_forest_body_entered"]
