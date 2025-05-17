@@ -327,10 +327,10 @@ texture = ExtResource("2_101oy")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-offset_left = -962.0
-offset_top = 19.0
-offset_right = -662.0
-offset_bottom = 319.0
+offset_left = -662.0
+offset_top = -1.0
+offset_right = -362.0
+offset_bottom = 299.0
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
@@ -395,7 +395,7 @@ ItemName = "Knife"
 ItemTexture = ExtResource("34_nih2l")
 
 [node name="Player" parent="." instance=ExtResource("2_pu6ya")]
-position = Vector2(46.3164, 136.297)
+position = Vector2(-3213.06, 960.8)
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 script = ExtResource("11_1p33v")

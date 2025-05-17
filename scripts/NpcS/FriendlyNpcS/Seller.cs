@@ -17,15 +17,17 @@ public partial class Seller : TalkableNpc
 		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(-1, "Ок");
 		_npcDialogues = new List<NpcDialogue>
 		{
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect, interSelect2, interSelect4}, "TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTBOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXT", 0),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 2", 1),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, "Вариант текста 3", 2)
+			new NpcDialogue(
+				new List<InterfaceSelectionObject>(){interSelect, interSelect2, interSelect4}, 
+				"TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST", 0, true),
+			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
+				"Вариант текста 2", 1, false),
+			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
+				"Вариант текста 3", 2, true)
 		};
-		
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
-		
 	}
 	
 	public override void _Process(double delta)
