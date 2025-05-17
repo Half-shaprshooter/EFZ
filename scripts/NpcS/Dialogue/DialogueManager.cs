@@ -116,6 +116,7 @@ public  partial class DialogueManager : Control
 				TradeIndexActivated = true;
 			}
 			Write(NpcDialogues[index]);
+			//Удаление диалога
 			if (NpcDialogues[index].isToDelete)
 			{
 				NpcDialogues.RemoveAt(index);
