@@ -1,7 +1,3 @@
-using Godot;
-using System;
-using System.Collections.Generic;
-
 public partial class QuestList : VBoxContainer
 {
 	public static QuestList Instance { get; private set; }

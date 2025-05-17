@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=51 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
@@ -55,6 +55,11 @@ size = Vector2(4267.57, 3981.42)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i8x7"]
 size = Vector2(4292.34, 3989.1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3x81"]
+size = Vector2(184.494, 94.4658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn03d"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hamf6"]
@@ -75,8 +80,13 @@ script = ExtResource("1_lgs1w")
 navigation_polygon = SubResource("NavigationPolygon_1kcds")
 navigation_layers = 15
 
-[node name="Treasure" type="Area2D" parent="NavigationRegion2D"]
+[node name="Treasure" type="Area2D" parent="NavigationRegion2D" node_paths=PackedStringArray("nextQuest")]
+position = Vector2(18096.8, 1033.75)
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("6_0o6as")
+questText = "Прочитать записку на столе и взять ключи"
+nextQuest = NodePath("../../PodvalTO_DELETE/ReadZapiska")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Treasure"]
 shape = SubResource("RectangleShape2D_rvh43")
@@ -106,7 +116,7 @@ shape = SubResource("RectangleShape2D_i2c8v")
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("6_0o6as")
-questText = "Обыскать тайник"
+questText = "Пробраться в подвал церкви"
 nextQuest = NodePath("../../Treasure")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/TriggerForQuest"]
@@ -141,13 +151,71 @@ ItemName = "AssaultRifle"
 ItemTexture = ExtResource("11_he61s")
 
 [node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
-position = Vector2(-12902, 2667)
+position = Vector2(19894.5, 8042.5)
+
+[node name="ReadZapiska" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+script = ExtResource("6_0o6as")
+questText = "Найти клетку Никитина"
+nextQuest = NodePath("../FindKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/ReadZapiska"]
+position = Vector2(82.25, 37.2329)
+shape = SubResource("RectangleShape2D_i3x81")
+
+[node name="FindKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Найти записку с кодом от двери генераторной"
+nextQuest = NodePath("../FindZapiskaKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/FindKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="FindZapiskaKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Отключить клетку Никитина от электросети"
+nextQuest = NodePath("../TurnOff")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/FindZapiskaKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="TurnOff" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Зайти в нужную клетку"
+nextQuest = NodePath("../GetInKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/TurnOff"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="GetInKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Выбраться из церкви"
+nextQuest = NodePath("../../GetOutFromChurch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/GetInKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="GetOutFromChurch" type="Area2D" parent="."]
+position = Vector2(18096.8, 2755.7)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GetOutFromChurch"]
+shape = SubResource("RectangleShape2D_rn03d")
 
 [node name="HumanEnemyNpc" parent="." instance=ExtResource("12_dufiy")]
 position = Vector2(-4989.24, 1252.59)
 
 [node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
-position = Vector2(15164.8, 1661.48)
+position = Vector2(-4103.84, 2778.74)
 PlayerInventory = NodePath("UI/Inventory")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
@@ -157,14 +225,29 @@ script = ExtResource("11_1p33v")
 
 [node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
 anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
+anchor_left = 0.305
+anchor_top = 0.131
+anchor_right = 0.898
+anchor_bottom = 0.867
+offset_left = -50.36
+offset_top = -41.888
+offset_right = 419.504
+offset_bottom = 124.184
+scale = Vector2(0.813587, 0.9116)
 IsPlayerInventory = true
 metadata/_edit_use_anchors_ = true
 
 [node name="FastSlots" parent="Player/UI" instance=ExtResource("16_p6m7n")]
+anchors_preset = -1
+anchor_left = 0.438
+anchor_top = 0.944
+anchor_right = 0.549
+anchor_bottom = 1.005
+offset_left = 9.42398
+offset_top = -4.71204
+offset_right = -118.448
+offset_bottom = -44.24
+pivot_offset = Vector2(70, 19)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -450,6 +533,12 @@ shape = SubResource("RectangleShape2D_qy6c8")
 
 [connection signal="body_entered" from="NavigationRegion2D/House6/Church" to="." method="_on_church_area_2d_body_entered"]
 [connection signal="body_entered" from="NavigationRegion2D/House6/TriggerForQuest" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/ReadZapiska" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/FindKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/FindZapiskaKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/TurnOff" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/GetInKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="GetOutFromChurch" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
 [connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]

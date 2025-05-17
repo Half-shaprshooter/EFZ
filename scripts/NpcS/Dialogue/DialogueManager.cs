@@ -119,6 +119,8 @@ public  partial class DialogueManager : Control
 			//Удаление диалога
 			if (NpcDialogues[index].isToDelete)
 			{
+				var s = Selections.Count();
+				var t = _currentIndex;
 				NpcDialogues.RemoveAt(index);
 			}
 		}
