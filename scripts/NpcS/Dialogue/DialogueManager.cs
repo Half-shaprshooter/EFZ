@@ -23,7 +23,7 @@ public  partial class DialogueManager : Control
 
 	public override void _Process(double delta)
 	{
-		if ( _isDialogueUp)
+		if (_isDialogueUp)
 		{
 			//GetTree().Paused = true;
 			if (Input.IsActionJustPressed("ui_left"))
@@ -107,6 +107,7 @@ public  partial class DialogueManager : Control
 				IsTradeIndex = true;
 				TradeIndexActivated = false;
 			}
+			NpcDialogues.RemoveAt(index);
 			ShutDownDialogue();
 		}
 		else

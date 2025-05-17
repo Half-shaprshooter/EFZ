@@ -250,6 +250,7 @@ public partial class PlayerControl : CharacterBody2D
 		}
 
 		Velocity = moveInput * totalSpeed;
+		//MovementAndAnimLogic(delta);
 		MoveAndSlide();
 	}
 

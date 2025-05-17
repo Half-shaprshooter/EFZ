@@ -7,7 +7,7 @@ public class NpcDialogue
 	public List<NpcDialogue> NpcDialogues;
 	public string DisplayText;
 
-	public NpcDialogue(List<InterfaceSelectionObject> interfaceSelectionObjects, string displayText,  int index, List<NpcDialogue> npcDialogues = null)
+	public NpcDialogue(List<InterfaceSelectionObject> interfaceSelectionObjects, string displayText,  int index, bool isToDelete, List<NpcDialogue> npcDialogues = null)
 	{
 		Index = index;
 		InterfaceSelectionObjects = interfaceSelectionObjects;

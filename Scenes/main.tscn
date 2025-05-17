@@ -359,10 +359,10 @@ texture = ExtResource("2_101oy")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-offset_left = -962.0
-offset_top = 19.0
-offset_right = -662.0
-offset_bottom = 319.0
+offset_left = -662.0
+offset_top = -1.0
+offset_right = -362.0
+offset_bottom = 299.0
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
@@ -424,7 +424,6 @@ ItemTexture = ExtResource("37_q6oxp")
 position = Vector2(-303, 1372)
 ItemId = 7
 ItemName = "Knife"
-ItemTexture = ExtResource("37_qhndv")
 
 [node name="DistructableBox" parent="." instance=ExtResource("9_l0m3k")]
 position = Vector2(507, 312)
