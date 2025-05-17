@@ -10,12 +10,12 @@ public partial class Gun : Node2D
 
 	private AudioStreamPlayer2D effects;
 	private PlayerControl _playerControl;
-	[Export] public int spread = 10; // Разброс
-	[Export] public bool isAuto = true; // Автоматический режим
-	[Export] public float bulletsPerSecond = 5f; // Скорострельность
-	[Export] public float bulletSpeed = 10000f; // Скорость пули
-	[Export] public float bulletDamage = 30f; // Урон пули
-	[Export] public int bulletsPerShoot = 1; // Количество пуль за выстрел
+	[Export] public virtual int spread { get; set; } = 10; // Разброс
+	[Export] public virtual bool isAuto { get; set; } = true; // Автоматический режим
+	[Export] public virtual float bulletsPerSecond { get; set; } = 5f; // Скорострельность
+	[Export] public virtual float bulletSpeed { get; set; } = 10000f; // Скорость пули
+	[Export] public virtual float bulletDamage { get; set; } = 30f; // Урон пули
+	[Export] public virtual int bulletsPerShoot { get; set; } = 1; // Количество пуль за выстрел
 
 	[Export] PackedScene bulletScene;
 

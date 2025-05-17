@@ -34,6 +34,9 @@ public partial class PlayerControl : CharacterBody2D
 	private double _idleTimer = 0f;
 	private bool _hasPlayedIdleAnim = false;
 	private const double IDLE_TRIGGER_TIME = 5;
+	
+	[Export] 
+	public Inventory PlayerInventory { get; set; }
 
 	public PlayerControl()
 	{
@@ -56,6 +59,7 @@ public partial class PlayerControl : CharacterBody2D
 		_legs = GetNode<AnimatedSprite2D>("LegsAnimation");
 		_wound = GetNode<AnimationPlayer>("PointLight2D/AnimationPlayer");
 		globalPos = this.GlobalPosition;
+		InventoryManager.PlayerInventory = PlayerInventory;
 	}
 
 	//Необходим для проверки Body на плеера в сигналах
