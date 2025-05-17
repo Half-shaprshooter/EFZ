@@ -28,6 +28,10 @@ public partial class ItemUseHandler : Control
         PlayerData.PlayerHealth += hpIncreaseAmount;
         
         GD.Print($"Предмет использован");
+        if (QuestList.Instance.HaveQuest("Вылечи ногу"))
+        {
+            QuestList.Instance.RemoveQuest("Вылечи ногу");
+        }
         return true;
     }
 }
