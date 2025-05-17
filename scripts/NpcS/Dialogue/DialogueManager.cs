@@ -73,9 +73,9 @@ public  partial class DialogueManager : Control
 		{
 			item.QueueFree();
 		}
-
 		Selections = new List<InterfaceSelection>();
 		GetNode<RichTextLabel>("Panel/RichTextLabel").Text = dialogue.DisplayText;
+		
 		foreach (var item in dialogue.InterfaceSelectionObjects)
 		{
 			InterfaceSelection interfaceSelection = InterfaceSelectableObject.Instantiate() as InterfaceSelection;
@@ -107,7 +107,6 @@ public  partial class DialogueManager : Control
 				IsTradeIndex = true;
 				TradeIndexActivated = false;
 			}
-			NpcDialogues.RemoveAt(index);
 			ShutDownDialogue();
 		}
 		else
@@ -117,6 +116,11 @@ public  partial class DialogueManager : Control
 				TradeIndexActivated = true;
 			}
 			Write(NpcDialogues[index]);
+			//Удаление диалога
+			if (NpcDialogues[index].isToDelete)
+			{
+				NpcDialogues.RemoveAt(index);
+			}
 		}
 	}
 }
