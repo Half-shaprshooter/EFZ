@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
 [ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
 [ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
+[ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="6_0o6as"]
 [ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/Bases/wolf.tscn" id="7_d18ir"]
 [ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
@@ -30,8 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="20_7pm57"]
 [ext_resource type="Texture2D" uid="uid://bnln2nrju80yt" path="res://sprites/maptest.png" id="20_fifao"]
 [ext_resource type="PackedScene" uid="uid://xv8bv3oa16pb" path="res://Scenes/questItems/ArrowQuest.tscn" id="22_43nml"]
-[ext_resource type="Texture2D" uid="uid://sgff8x8ohb6w" path="res://sprites/bigfire.png" id="23_4qyrl"]
-[ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="23_wuq3j"]
 [ext_resource type="Script" path="res://scripts/questScripts/QuestList.cs" id="25_k4ij3"]
 [ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="31_ug1do"]
 [ext_resource type="PackedScene" uid="uid://dp1q31rje6gio" path="res://Scenes/Iface/pause_menu.tscn" id="34_1tp5b"]
@@ -48,21 +47,24 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(3641.76, 1959.03, -1634, 1945.6, -1618.92, -5143.78, 3641.76, -5091.95)])
 agent_radius = 60.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvh43"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2c8v"]
-size = Vector2(1900.05, 2130.85)
+size = Vector2(4267.57, 3981.42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3i8x7"]
+size = Vector2(4292.34, 3989.1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hamf6"]
 radius = 181.408
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vu78m"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jhhe"]
 size = Vector2(5136.81, 6950.2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qy6c8"]
-size = Vector2(6125.91, 6844.62)
+size = Vector2(10876, 8255.59)
 
 [node name="main" type="Node2D"]
 position = Vector2(1596, -3195)
@@ -72,6 +74,12 @@ script = ExtResource("1_lgs1w")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_1kcds")
 navigation_layers = 15
+
+[node name="Treasure" type="Area2D" parent="NavigationRegion2D"]
+script = ExtResource("6_0o6as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Treasure"]
+shape = SubResource("RectangleShape2D_rvh43")
 
 [node name="House3" parent="NavigationRegion2D" instance=ExtResource("2_i31j7")]
 position = Vector2(-568, -3968)
@@ -84,15 +92,26 @@ position = Vector2(1848, 480)
 rotation = 3.14159
 
 [node name="House6" parent="NavigationRegion2D" instance=ExtResource("35_6cqhb")]
-position = Vector2(-2532, 825)
+position = Vector2(18501.8, 1580.86)
 
-[node name="Area2D" type="Area2D" parent="NavigationRegion2D/House6"]
+[node name="Church" type="Area2D" parent="NavigationRegion2D/House6"]
 collision_layer = 4
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/Area2D"]
-position = Vector2(-189.893, 62.8523)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/Church"]
+position = Vector2(-410.385, -547.109)
 shape = SubResource("RectangleShape2D_i2c8v")
+
+[node name="TriggerForQuest" type="Area2D" parent="NavigationRegion2D/House6" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Обыскать тайник"
+nextQuest = NodePath("../../Treasure")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/TriggerForQuest"]
+position = Vector2(-408.768, -543.27)
+shape = SubResource("RectangleShape2D_3i8x7")
 
 [node name="SellerHouse" parent="NavigationRegion2D" instance=ExtResource("4_03vsq")]
 position = Vector2(1952, -944)
@@ -128,7 +147,7 @@ position = Vector2(-12902, 2667)
 position = Vector2(-4989.24, 1252.59)
 
 [node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
-position = Vector2(-3221.68, 2177.88)
+position = Vector2(15164.8, 1661.48)
 PlayerInventory = NodePath("UI/Inventory")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
@@ -346,7 +365,7 @@ position = Vector2(154, 157)
 scale = Vector2(0.324219, 0.339844)
 texture = ExtResource("20_7pm57")
 
-[node name="Sprite2D2" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
+[node name="ArrowQuest" parent="CanvasLayer/SubViewportContainer" instance=ExtResource("22_43nml")]
 position = Vector2(1001, 26)
 
 [node name="QuesList" type="VBoxContainer" parent="CanvasLayer"]
@@ -365,18 +384,6 @@ script = ExtResource("25_k4ij3")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("34_1tp5b")]
 anchors_preset = -1
-
-[node name="Quest" type="StaticBody2D" parent="."]
-position = Vector2(-1077, -1894)
-script = ExtResource("23_wuq3j")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Quest"]
-position = Vector2(-108, -55)
-texture = ExtResource("23_4qyrl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Quest"]
-scale = Vector2(29.2739, 26.0629)
-shape = SubResource("CircleShape2D_vu78m")
 
 [node name="FloorItem2" parent="." instance=ExtResource("31_ug1do")]
 position = Vector2(-451, 1352)
@@ -438,10 +445,11 @@ shape = SubResource("RectangleShape2D_0jhhe")
 position = Vector2(5048.48, -131.498)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Forest"]
-position = Vector2(3052.95, -1637.97)
+position = Vector2(5428.01, -932.485)
 shape = SubResource("RectangleShape2D_qy6c8")
 
-[connection signal="body_entered" from="NavigationRegion2D/House6/Area2D" to="." method="_on_church_area_2d_body_entered"]
+[connection signal="body_entered" from="NavigationRegion2D/House6/Church" to="." method="_on_church_area_2d_body_entered"]
+[connection signal="body_entered" from="NavigationRegion2D/House6/TriggerForQuest" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
 [connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]
