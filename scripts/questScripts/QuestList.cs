@@ -1,25 +1,23 @@
-using Godot;
-using System;
-using System.Collections.Generic;
-
 public partial class QuestList : VBoxContainer
 {
 	private List<string> questList = new List<string>();
+	private ArrowQuest ArrowQuest;
 
 	public override void _Ready()
 	{
-		AddQuest("Выберись из этого места");
-		AddQuest("Вылечи ногу");
+		ArrowQuest = GetNode<ArrowQuest>("/root/main/CanvasLayer/SubViewportContainer/ArrowQuest");
+		AddQuest("Вернуться к церкви", GetNode<Quest>("/root/main/NavigationRegion2D/House6/TriggerForQuest"));
 	}
 
 	// Добавляет задание
-	public void AddQuest(string text)
+	public void AddQuest(string text, Quest quest)
 	{
 		questList.Add(text);
 		var label = new Label
 		{
 			Text = text
 		};
+		ArrowQuest.addQuest(quest, text);
 		AddChild(label);
 	}
 	
