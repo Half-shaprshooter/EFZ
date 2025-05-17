@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public partial class QuestList : VBoxContainer
 {
+	public static QuestList Instance { get; private set; }
 	private List<string> questList = new List<string>();
-
+	
 	public override void _Ready()
 	{
+		Instance = this;
 		AddQuest("Выберись из этого места");
 		AddQuest("Вылечи ногу");
 	}
@@ -37,6 +39,8 @@ public partial class QuestList : VBoxContainer
 			}
 		}
 	}
+
+	public bool HaveQuest(string text) => questList.Contains(text);
 	
 	// Удаляет все задания
 	public void ClearQuestList()
