@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/NpcS/FriendlyNpcS/Seller.cs" id="1_x4me2"]
 [ext_resource type="Texture2D" uid="uid://bwj1ulw0nkv68" path="res://sprites/npcSprites/Seller.png" id="2_dva7k"]
-[ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="3_nveh8"]
-[ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="4_i1qp5"]
+[ext_resource type="PackedScene" path="res://Scenes/remarks.tscn" id="3_nveh8"]
+[ext_resource type="PackedScene" path="res://Scenes/OneTimeHelp.tscn" id="4_i1qp5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]
 size = Vector2(74, 65)
@@ -67,7 +67,6 @@ shape = SubResource("CircleShape2D_0uqjj")
 
 [node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_nveh8")]
 body = NodePath("..")
-ThoughtsJsonPath = ""
 
 [node name="OneTimeHelp" parent="." instance=ExtResource("4_i1qp5")]
 hintText = "Нажмите \"E\" для начала диалога"
