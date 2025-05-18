@@ -1,17 +1,17 @@
-[gd_scene load_steps=49 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=50 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
 [ext_resource type="PackedScene" uid="uid://dakog3812u1f7" path="res://Scenes/houses/house3.tscn" id="2_i31j7"]
 [ext_resource type="PackedScene" uid="uid://djh6mt40wbkm8" path="res://Scenes/SceneWithCharacter.tscn" id="2_pu6ya"]
-[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Bases/Neutral.tscn" id="3_pte4x"]
+[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Neutral.tscn" id="3_pte4x"]
 [ext_resource type="PackedScene" uid="uid://t5d4txhp4d85" path="res://Scenes/houses/house2.tscn" id="3_qosyy"]
 [ext_resource type="PackedScene" uid="uid://bn3mt4b7k843s" path="res://Scenes/houses/SellerHouse.tscn" id="4_03vsq"]
 [ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
 [ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
 [ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="6_0o6as"]
-[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/Bases/wolf.tscn" id="7_d18ir"]
+[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/wolf.tscn" id="7_d18ir"]
 [ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
 [ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Bases/Seller.tscn" id="8_mo2kn"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
 [ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
 [ext_resource type="Texture2D" uid="uid://nqbuieb2024k" path="res://sprites/Pistol.png" id="37_q6oxp"]
+[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="41_rwqmy"]
 [ext_resource type="PackedScene" uid="uid://con576l1u4tyu" path="res://Scenes/npcs/npc_ai_test.tscn" id="42_5g7yk"]
 [ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="42_kcy3c"]
 [ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="43_tjx4e"]
@@ -102,12 +103,10 @@ collision_mask = 7
 position = Vector2(-410.385, -547.109)
 shape = SubResource("RectangleShape2D_i2c8v")
 
-[node name="TriggerForQuest" type="Area2D" parent="NavigationRegion2D/House6" node_paths=PackedStringArray("nextQuest")]
+[node name="TriggerForQuest" type="Area2D" parent="NavigationRegion2D/House6"]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("6_0o6as")
-questText = "Обыскать тайник"
-nextQuest = NodePath("../../Treasure")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/TriggerForQuest"]
 position = Vector2(-408.768, -543.27)
@@ -147,7 +146,7 @@ position = Vector2(-12902, 2667)
 position = Vector2(-4989.24, 1252.59)
 
 [node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
-position = Vector2(15164.8, 1661.48)
+position = Vector2(-1181.61, 1493.51)
 PlayerInventory = NodePath("UI/Inventory")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
@@ -165,6 +164,15 @@ IsPlayerInventory = true
 metadata/_edit_use_anchors_ = true
 
 [node name="FastSlots" parent="Player/UI" instance=ExtResource("16_p6m7n")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -417,9 +425,12 @@ position = Vector2(-731.367, 1266.03)
 ItemName = "Key"
 ItemTexture = ExtResource("43_tjx4e")
 
-[node name="NPC_AI_Test" parent="." node_paths=PackedStringArray("PatrolPoints") instance=ExtResource("42_5g7yk")]
+[node name="NPC_AI_Test" parent="." instance=ExtResource("42_5g7yk")]
 position = Vector2(1744.94, 1548.22)
-PatrolPoints = [NodePath("../Point1"), NodePath("../Point2"), NodePath("../Point3"), NodePath("../Point4")]
+SpeedWalk = 200
+SpeedFast = 350
+SpeedRun = 600
+BattleRotationSpeed = 15.0
 
 [node name="Point1" type="Node2D" parent="."]
 position = Vector2(1855.89, 1274.67)
@@ -447,6 +458,10 @@ position = Vector2(5048.48, -131.498)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Forest"]
 position = Vector2(5428.01, -932.485)
 shape = SubResource("RectangleShape2D_qy6c8")
+
+[node name="Note" parent="." instance=ExtResource("41_rwqmy")]
+position = Vector2(-878.933, 1351.46)
+_noteText = "sdlf;sldf /n sf ;ldslf; ls  s;ldf;ldsf;l  sd;lf;dslf;l sfd"
 
 [connection signal="body_entered" from="NavigationRegion2D/House6/Church" to="." method="_on_church_area_2d_body_entered"]
 [connection signal="body_entered" from="NavigationRegion2D/House6/TriggerForQuest" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]

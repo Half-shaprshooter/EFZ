@@ -94,6 +94,7 @@ public partial class Inventory : Control
 		if (Input.IsActionJustPressed("Inventory") && !IsTradeMode && IsPlayerInventory)
 		{
 			_uiInventory.Visible = !_uiInventory.Visible;
+			PlayerData.CanFire = !PlayerData.CanFire;
 		}
 
 		if (_itemHeld != null)
