@@ -37,9 +37,9 @@ public partial class ArrowQuest : Sprite2D
 			//Пока так надо
 			// try
 			// {
-
-				questList.AddQuest(_quest.questText,_quest.nextQuest);
-				questList.RemoveQuest(questText);
+				String text = questText;
+				QuestList.Instance.AddQuest(_quest.questText,_quest.nextQuest);
+				QuestList.Instance.RemoveQuest(text);
 				GD.Print("Отработал");
 				
 			// }catch(Exception e){}

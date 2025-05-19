@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class PlayerData : Node
 {
 	public static int PlayerHealth = 100;

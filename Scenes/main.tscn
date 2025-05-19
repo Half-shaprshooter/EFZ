@@ -1,17 +1,17 @@
-[gd_scene load_steps=50 format=3 uid="uid://r41m36oj85w4"]
+[gd_scene load_steps=51 format=3 uid="uid://r41m36oj85w4"]
 
 [ext_resource type="Script" path="res://scripts/MainSceneManager.cs" id="1_lgs1w"]
 [ext_resource type="Texture2D" uid="uid://dc7fjv8yptwi0" path="res://sprites/grass.jpg" id="2_101oy"]
 [ext_resource type="PackedScene" uid="uid://dakog3812u1f7" path="res://Scenes/houses/house3.tscn" id="2_i31j7"]
 [ext_resource type="PackedScene" uid="uid://djh6mt40wbkm8" path="res://Scenes/SceneWithCharacter.tscn" id="2_pu6ya"]
-[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Neutral.tscn" id="3_pte4x"]
+[ext_resource type="PackedScene" uid="uid://4qxvqshl643e" path="res://Scenes/npcs/Bases/Neutral.tscn" id="3_pte4x"]
 [ext_resource type="PackedScene" uid="uid://t5d4txhp4d85" path="res://Scenes/houses/house2.tscn" id="3_qosyy"]
 [ext_resource type="PackedScene" uid="uid://bn3mt4b7k843s" path="res://Scenes/houses/SellerHouse.tscn" id="4_03vsq"]
 [ext_resource type="PackedScene" uid="uid://d128oaqovn1ph" path="res://Scenes/houses/Military.tscn" id="4_7w24t"]
 [ext_resource type="PackedScene" uid="uid://nuc8tse8558k" path="res://Scenes/houses/house.tscn" id="4_upcwe"]
 [ext_resource type="PackedScene" uid="uid://mjjqlg56cnoj" path="res://Scenes/worldObjects/grass.tscn" id="5_j3ayf"]
 [ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="6_0o6as"]
-[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/wolf.tscn" id="7_d18ir"]
+[ext_resource type="PackedScene" uid="uid://c21x1crmtyebs" path="res://Scenes/npcs/Bases/wolf.tscn" id="7_d18ir"]
 [ext_resource type="PackedScene" uid="uid://c5d31782lmllg" path="res://Scenes/houses/house4.tscn" id="7_obbss"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/InterfaceManager.cs" id="8_lg11x"]
 [ext_resource type="PackedScene" uid="uid://choc7mheotepl" path="res://Scenes/npcs/Bases/Seller.tscn" id="8_mo2kn"]
@@ -37,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://brk0q1mwlagv0" path="res://Scenes/houses/Church.tscn" id="35_6cqhb"]
 [ext_resource type="PackedScene" uid="uid://dorgshoj4li6g" path="res://Scenes/houses/PodvalTO_DELETE.tscn" id="36_xtvg6"]
 [ext_resource type="Texture2D" uid="uid://nqbuieb2024k" path="res://sprites/Pistol.png" id="37_q6oxp"]
-[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="41_rwqmy"]
 [ext_resource type="PackedScene" uid="uid://con576l1u4tyu" path="res://Scenes/npcs/npc_ai_test.tscn" id="42_5g7yk"]
 [ext_resource type="Texture2D" uid="uid://lwlku5oij6to" path="res://sprites/Bandage.png" id="42_kcy3c"]
 [ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="43_tjx4e"]
@@ -55,6 +54,11 @@ size = Vector2(4267.57, 3981.42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i8x7"]
 size = Vector2(4292.34, 3989.1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3x81"]
+size = Vector2(184.494, 94.4658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn03d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2l8bt"]
 
@@ -76,8 +80,13 @@ script = ExtResource("1_lgs1w")
 navigation_polygon = SubResource("NavigationPolygon_1kcds")
 navigation_layers = 15
 
-[node name="Treasure" type="Area2D" parent="NavigationRegion2D"]
+[node name="Treasure" type="Area2D" parent="NavigationRegion2D" node_paths=PackedStringArray("nextQuest")]
+position = Vector2(18096.8, 1033.75)
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("6_0o6as")
+questText = "Прочитать записку на столе и взять ключи"
+nextQuest = NodePath("../../PodvalTO_DELETE/ReadZapiska")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Treasure"]
 shape = SubResource("RectangleShape2D_rvh43")
@@ -103,10 +112,12 @@ collision_mask = 7
 position = Vector2(-410.385, -547.109)
 shape = SubResource("RectangleShape2D_i2c8v")
 
-[node name="TriggerForQuest" type="Area2D" parent="NavigationRegion2D/House6"]
+[node name="TriggerForQuest" type="Area2D" parent="NavigationRegion2D/House6" node_paths=PackedStringArray("nextQuest")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("6_0o6as")
+questText = "Пробраться в подвал церкви"
+nextQuest = NodePath("../../Treasure")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/House6/TriggerForQuest"]
 position = Vector2(-408.768, -543.27)
@@ -140,13 +151,71 @@ ItemName = "AssaultRifle"
 ItemTexture = ExtResource("11_he61s")
 
 [node name="PodvalTO_DELETE" parent="." instance=ExtResource("36_xtvg6")]
-position = Vector2(-12902, 2667)
+position = Vector2(19894.5, 8042.5)
+
+[node name="ReadZapiska" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+script = ExtResource("6_0o6as")
+questText = "Найти клетку Никитина"
+nextQuest = NodePath("../FindKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/ReadZapiska"]
+position = Vector2(82.25, 37.2329)
+shape = SubResource("RectangleShape2D_i3x81")
+
+[node name="FindKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Найти записку с кодом от двери генераторной"
+nextQuest = NodePath("../FindZapiskaKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/FindKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="FindZapiskaKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Отключить клетку Никитина от электросети"
+nextQuest = NodePath("../TurnOff")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/FindZapiskaKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="TurnOff" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Зайти в нужную клетку"
+nextQuest = NodePath("../GetInKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/TurnOff"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="GetInKletka" type="Area2D" parent="PodvalTO_DELETE" node_paths=PackedStringArray("nextQuest")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+questText = "Выбраться из церкви"
+nextQuest = NodePath("../../GetOutFromChurch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PodvalTO_DELETE/GetInKletka"]
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="GetOutFromChurch" type="Area2D" parent="."]
+position = Vector2(18096.8, 2755.7)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_0o6as")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GetOutFromChurch"]
+shape = SubResource("RectangleShape2D_rn03d")
 
 [node name="HumanEnemyNpc" parent="." instance=ExtResource("12_dufiy")]
 position = Vector2(-4989.24, 1252.59)
 
 [node name="Player" parent="." node_paths=PackedStringArray("PlayerInventory") instance=ExtResource("2_pu6ya")]
-position = Vector2(-1181.61, 1493.51)
+position = Vector2(-4103.84, 2778.74)
 PlayerInventory = NodePath("UI/Inventory")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
@@ -156,23 +225,29 @@ script = ExtResource("11_1p33v")
 
 [node name="Inventory" parent="Player/UI" instance=ExtResource("10_ritai")]
 anchors_preset = -1
-anchor_left = 1.0
-anchor_bottom = 0.992
-offset_left = -1153.0
-offset_bottom = 0.18396
+anchor_left = 0.305
+anchor_top = 0.131
+anchor_right = 0.898
+anchor_bottom = 0.867
+offset_left = -50.36
+offset_top = -41.888
+offset_right = 419.504
+offset_bottom = 124.184
+scale = Vector2(0.813587, 0.9116)
 IsPlayerInventory = true
 metadata/_edit_use_anchors_ = true
 
 [node name="FastSlots" parent="Player/UI" instance=ExtResource("16_p6m7n")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_vertical = 0
+anchors_preset = -1
+anchor_left = 0.438
+anchor_top = 0.944
+anchor_right = 0.549
+anchor_bottom = 1.005
+offset_left = 9.42398
+offset_top = -4.71204
+offset_right = -118.448
+offset_bottom = -44.24
+pivot_offset = Vector2(70, 19)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -425,12 +500,9 @@ position = Vector2(-731.367, 1266.03)
 ItemName = "Key"
 ItemTexture = ExtResource("43_tjx4e")
 
-[node name="NPC_AI_Test" parent="." instance=ExtResource("42_5g7yk")]
+[node name="NPC_AI_Test" parent="." node_paths=PackedStringArray("PatrolPoints") instance=ExtResource("42_5g7yk")]
 position = Vector2(1744.94, 1548.22)
-SpeedWalk = 200
-SpeedFast = 350
-SpeedRun = 600
-BattleRotationSpeed = 15.0
+PatrolPoints = [NodePath("../Point1"), NodePath("../Point2"), NodePath("../Point3"), NodePath("../Point4")]
 
 [node name="Point1" type="Node2D" parent="."]
 position = Vector2(1855.89, 1274.67)
@@ -459,12 +531,14 @@ position = Vector2(5048.48, -131.498)
 position = Vector2(5428.01, -932.485)
 shape = SubResource("RectangleShape2D_qy6c8")
 
-[node name="Note" parent="." instance=ExtResource("41_rwqmy")]
-position = Vector2(-878.933, 1351.46)
-_noteText = "sdlf;sldf /n sf ;ldslf; ls  s;ldf;ldsf;l  sd;lf;dslf;l sfd"
-
 [connection signal="body_entered" from="NavigationRegion2D/House6/Church" to="." method="_on_church_area_2d_body_entered"]
 [connection signal="body_entered" from="NavigationRegion2D/House6/TriggerForQuest" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/ReadZapiska" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/FindKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/FindZapiskaKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/TurnOff" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="PodvalTO_DELETE/GetInKletka" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
+[connection signal="body_entered" from="GetOutFromChurch" to="CanvasLayer/SubViewportContainer/ArrowQuest" method="PlayerEnterQuestArea"]
 [connection signal="grass_entered" from="grass2" to="Player" method="_on_grass_2_grass_entered"]
 [connection signal="grass_exited" from="grass2" to="Player" method="_on_grass_2_grass_exited"]
 [connection signal="body_entered" from="Transition" to="Transition" method="OnTransitionBodyEntered"]

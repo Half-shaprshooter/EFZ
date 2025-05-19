@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class Quest : Area2D
 {
 	public static Vector2 globalPos { get; set; }
