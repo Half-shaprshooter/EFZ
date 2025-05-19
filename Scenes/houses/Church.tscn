@@ -329,7 +329,6 @@ rotation = -1.45788
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_c4ty4")
-_isLocked = true
 
 [node name="DoorEvent" type="Area2D" parent="DoorHandler"]
 position = Vector2(1, 0)

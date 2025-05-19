@@ -159,7 +159,7 @@ public partial class PlayerControl : CharacterBody2D
 
 	public void Transport()
 	{
-		Position = new Vector2(-13143, 2406);
+		Position = new Vector2(20255, 8079);
 	}
 
 	private void MovementAndAnimLogic(double delta)
