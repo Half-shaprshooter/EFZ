@@ -1,7 +1,7 @@
 public partial class NpcObject : CharacterBody2D
 {
 	protected int Speed { get; set; }
-	
+
 	[Export] public int SpeedWalk = 200;
 
 	[Export] public int SpeedFast = 350;
@@ -10,7 +10,7 @@ public partial class NpcObject : CharacterBody2D
 
 	[Export] public float RotationSpeed = 5f;
 	[Export] public float BattleRotationSpeed = 15f;
-	
+
 	protected PlayerControl Player;
 
 	protected Vector2 PlayerPosForAngle;
@@ -21,14 +21,14 @@ public partial class NpcObject : CharacterBody2D
 
 	protected bool PlayerNear;
 
-	[Export] protected string relationToPlayer = "neutral";
+	[Export] protected string relationToPlayer = "Friendly";
 	protected HostImpl relation;
-	
+
 	public NpcObject()
 	{
 		var health = this.GetNodeOrNull<Health>("Health");
 		var host = this.GetNodeOrNull<HostImpl>("HostImpl");
-		
+
 		if (health == null)
 		{
 			host = new HostImpl();
@@ -41,33 +41,34 @@ public partial class NpcObject : CharacterBody2D
 	}
 
 	//Движение со скоростью ходьбы
-	protected void MoveInDirectionWalk(Vector2 direction)
+	public void SetVelocityWalk(Vector2 direction)
 	{
 		Velocity = direction.Normalized() * SpeedWalk;
-		MoveAndSlide();
 	}
-	
+
 	//Движение со скоростью быстрого шага
-	protected void MoveInDirectionFast(Vector2 direction)
+	public void SetVelocityFast(Vector2 direction)
 	{
 		Velocity = direction.Normalized() * SpeedFast;
-		MoveAndSlide();
 	}
 
 	//Движение со скоростью бега
-	protected void MoveInDirectionRun(Vector2 direction)
+	public void SetVelocityRun(Vector2 direction)
 	{
-		Velocity = direction.Normalized() * SpeedFast;
-		MoveAndSlide();
+		Velocity = direction.Normalized() * SpeedRun;
 	}
 
-	protected void RotateTowardsDirectionSmoothly(Vector2 direction, CharacterBody2D body, float delta, float RotationSpeed)
+	public void RotateTowardsDirectionSmoothly(Vector2 direction, float delta, float rotationSpeedToUse)
 	{
-		if (direction.Length() < 1f || body == null)
+		if (direction.LengthSquared() < 0.001f)
 			return;
 
 		float targetAngle = direction.Angle();
-		float currentAngle = body.Rotation;
-		body.Rotation = Mathf.LerpAngle(currentAngle, targetAngle, RotationSpeed * delta);
+		Rotation = Mathf.LerpAngle(Rotation, targetAngle, rotationSpeedToUse * delta);
 	}
+	
+	public void RotateTowardsAngleSmoothly(float targetAngle, float delta, float rotSpeed)
+    {
+        Rotation = Mathf.LerpAngle(Rotation, targetAngle, delta * rotSpeed);
+    }
 }
