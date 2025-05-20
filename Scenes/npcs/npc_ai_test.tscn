@@ -1,25 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://con576l1u4tyu"]
+[gd_scene load_steps=11 format=3 uid="uid://con576l1u4tyu"]
 
-[ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_a0k1w"]
 [ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="1_h4abk"]
+[ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_lwhu1"]
+[ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/EnemyHuman.png" id="2_3tb2c"]
+[ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="4_fyqoq"]
+[ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="5_dngqq"]
+[ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="6_akny4"]
+[ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="7_uvndp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
 size = Vector2(74, 65)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_q8n3i"]
-radius = 200.022
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0l5i"]
+size = Vector2(145, 79)
 
-[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfq2q"]
+radius = 117.004
+
+[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D")]
 position = Vector2(1, 1)
-script = ExtResource("1_a0k1w")
+collision_layer = 36
+collision_mask = 244
+script = ExtResource("1_lwhu1")
 PatrolPoints = []
-body = NodePath(".")
-SpeedWalk = 150
-SpeedFast = 400
-SpeedRun = 800
-BattleRotationSpeed = 20.0
+body2D = NodePath(".")
+SpeedWalk = 250
+SpeedFast = 600
+SpeedRun = 900
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.56735
+scale = Vector2(1, 1)
+texture = ExtResource("2_3tb2c")
 
 [node name="NeutralSprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(316, 103)
 scale = Vector2(0.582031, 0.542969)
 texture = ExtResource("1_h4abk")
@@ -29,6 +44,28 @@ offset = Vector2(-542.926, -193.381)
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_p2j1y")
 
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(35.5, -3.5)
+shape = SubResource("RectangleShape2D_p0l5i")
+
+[node name="muzzle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(66, 33)
+rotation = 1.58384
+texture = ExtResource("4_fyqoq")
+
+[node name="Timer" type="Timer" parent="muzzle"]
+
+[node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("muzzle")]
+position = Vector2(73, -10)
+script = ExtResource("5_dngqq")
+bulletScene = ExtResource("6_akny4")
+muzzle = NodePath("../muzzle")
+
 [node name="ProximityArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 7
@@ -37,15 +74,22 @@ collision_mask = 7
 self_modulate = Color(1, 1, 1, 0.286275)
 polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
 
-[node name="PlayerNearArea" type="Area2D" parent="."]
-visible = false
+[node name="AreaHearCalm" type="Area2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 collision_layer = 4
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNearArea"]
-shape = SubResource("CircleShape2D_q8n3i")
-debug_color = Color(0.678431, 0.458824, 0.572549, 0.298039)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHearCalm"]
+shape = SubResource("CircleShape2D_nfq2q")
+debug_color = Color(0.156386, 0.518903, 1, 0.298039)
+
+[node name="KnowPosInFight" type="Area2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KnowPosInFight"]
+polygon = PackedVector2Array(270, -250, 270, 250, -100, 60, -100, -60)
 
 [node name="LookRay" type="RayCast2D" parent="."]
 target_position = Vector2(200, 0)
@@ -54,6 +98,7 @@ collision_mask = 7
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 15
 avoidance_enabled = true
+max_speed = 1100.0
 avoidance_layers = 4
 avoidance_mask = 7
 
@@ -61,5 +106,11 @@ avoidance_mask = 7
 width = 4.0
 default_color = Color(1, 0, 0, 1)
 
+[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("7_uvndp")]
+body = NodePath("..")
+
+[connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
 [connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]
 [connection signal="body_exited" from="ProximityArea" to="." method="SeeZoneExited"]
+[connection signal="body_entered" from="KnowPosInFight" to="." method="KnowPosInChaseEntered"]
+[connection signal="body_exited" from="KnowPosInFight" to="." method="KnowPosInChaseExited"]
