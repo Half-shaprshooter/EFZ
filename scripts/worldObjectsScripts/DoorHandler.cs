@@ -5,6 +5,8 @@ public partial class DoorHandler : StaticBody2D
 	[Export]
 	private bool _isLocked;
 
+	[Export] public float rotate;
+
 	private AudioStreamPlayer2D effect;
 	private AudioStream DOOR_SOUND= (AudioStream)GD.Load("res://sounds/effects/DoorOpening.mp3");
 	private AnimationPlayer _animationPlayer;
@@ -13,6 +15,10 @@ public partial class DoorHandler : StaticBody2D
 	
 	public override void _Ready()
 	{
+		if (rotate != 0)
+		{
+			Rotation = rotate;
+		}
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_isOpen = HousesObjectsData.isOpen;
 		effect = GetNode<AudioStreamPlayer2D>("DoorEffect");

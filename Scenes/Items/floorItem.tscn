@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://tbrqk2pn4j0h" path="res://sprites/AK47.png" id="2_ie02h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_31w6y"]
-radius = 25.0
+radius = 43.7321
 
 [node name="FloorItem" type="Node2D"]
 scale = Vector2(2, 2)

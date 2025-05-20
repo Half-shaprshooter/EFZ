@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://drvjhxb5jdbdt"]
+
+[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="1_rsvs6"]
+
+[node name="Note" instance=ExtResource("1_rsvs6")]
+
+[node name="Label" parent="NoteUI" index="1"]
+text = "
+
+
+
+
+
+3578"
+horizontal_alignment = 1

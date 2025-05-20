@@ -54,7 +54,7 @@ occluder = SubResource("OccluderPolygon2D_r2tpp")
 [node name="CodeLock" type="Node" parent="."]
 script = ExtResource("3_w304y")
 isLocked = true
-PinCode = "1578"
+PinCode = "3578"
 
 [node name="CodeUI" type="CanvasLayer" parent="CodeLock"]
 visible = false

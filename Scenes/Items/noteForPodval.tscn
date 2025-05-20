@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsc02ujatwpj7"]
+
+[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="1_e82cf"]
+
+[node name="Note" instance=ExtResource("1_e82cf")]
+
+[node name="Label" parent="NoteUI" index="1"]
+text = "Поставили новые генераторы, чтобы питать 
+клетки.
+
+Особенно буйные в четвёртой и пятой. 
+Электричество хоть как-то их сдерживает. 
+Проведывай шестого, 
+в последнее время он странно себя ведет.
+
+Провода тянутся из северной комнаты. 
+Доступ только через щиток. 
+Код знаешь - не забудь, на всякий 
+случай я сделал копию кода на листе.
+"

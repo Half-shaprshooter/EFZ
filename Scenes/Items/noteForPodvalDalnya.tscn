@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfxjq8k23eudi"]
+
+[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="1_ar1hi"]
+
+[node name="Note" instance=ExtResource("1_ar1hi")]
+
+[node name="Label" parent="NoteUI" index="1"]
+text = "Код от генераторной опять куда-то подевался.
+
+Помню, держал его при себе, но, кажется, 
+обронил в кладовке, когда проверял шестую 
+клетку.
+Без него щиток не открыть. Если найдёшь 
+- не тяни. 
+
+Проверь, всё ли в порядке с питанием клеток. 
+Особенно с той, где был Никитин.
+"

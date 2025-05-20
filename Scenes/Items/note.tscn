@@ -1,12 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbo6nn2252m1h"]
+[gd_scene load_steps=7 format=3 uid="uid://bbo6nn2252m1h"]
 
 [ext_resource type="Texture2D" uid="uid://ca0h4ahwvsxa5" path="res://sprites/Note.png" id="1_05xou"]
 [ext_resource type="Script" path="res://scripts/Items/Note.cs" id="1_357x7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g0qes"]
-radius = 36.2215
+radius = 66.7533
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0oeuq"]
+bg_color = Color(0.720468, 0.720467, 0.720467, 1)
+
+[sub_resource type="Theme" id="Theme_qfx7c"]
+Panel/styles/panel = SubResource("StyleBoxFlat_0oeuq")
+
+[sub_resource type="Theme" id="Theme_s1jct"]
+Label/colors/font_color = Color(0.098788, 0, 0.603077, 1)
 
 [node name="Note" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_357x7")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -22,10 +32,11 @@ texture = ExtResource("1_05xou")
 
 [node name="interactItem" type="ColorRect" parent="."]
 visible = false
-offset_left = -31.0
-offset_top = -40.0
-offset_right = 31.0
-offset_bottom = -19.0
+offset_left = -47.0
+offset_top = -64.0
+offset_right = 15.0
+offset_bottom = -43.0
+scale = Vector2(1.47496, 1.42441)
 color = Color(0.344076, 0.344076, 0.344076, 1)
 
 [node name="Label" type="Label" parent="interactItem"]
@@ -39,42 +50,45 @@ text = "press E"
 [node name="NoteUI" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="NoteUI"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -250.0
-offset_right = 200.0
-offset_bottom = 250.0
+anchors_preset = -1
+anchor_left = 0.324
+anchor_top = 0.029
+anchor_right = 0.674
+anchor_bottom = 0.801
+offset_left = -0.247986
+offset_top = 0.208
+offset_right = -3.448
+offset_bottom = -0.0480347
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_qfx7c")
 
 [node name="Label" type="Label" parent="NoteUI"]
 anchors_preset = -1
-anchor_left = 0.476997
-anchor_top = 0.388117
-anchor_right = 0.520399
-anchor_bottom = 0.619599
-offset_left = -150.5
-offset_top = -150.5
-offset_right = 150.5
-offset_bottom = 150.5
+anchor_left = 0.346
+anchor_top = 0.065
+anchor_right = 0.643
+anchor_bottom = 0.69
+offset_left = 4.40799
+offset_top = -0.120003
+offset_right = 13.264
+offset_bottom = -0.120026
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_s1jct")
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="NoteUI"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = 217.0
-offset_right = 38.0
-offset_bottom = 248.0
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.445
+anchor_top = 0.727
+anchor_right = 0.554
+anchor_bottom = 0.786
+offset_left = -1.64001
+offset_top = -0.0960388
+offset_right = 0.176025
+offset_bottom = 0.220093
 grow_horizontal = 2
 grow_vertical = 2
 text = "Закрыть"
