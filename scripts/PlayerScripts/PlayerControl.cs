@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using EscapeFromZone.scripts.Inventory;
 using EscapeFromZone.scripts.PlayerScripts;
 
 public partial class PlayerControl : CharacterBody2D
@@ -89,11 +90,15 @@ public partial class PlayerControl : CharacterBody2D
 
 		_isStading = true;
 
+		
 		Dialogue();
 		GrassLogic();
-		MovementAndAnimLogic(delta);
-		//Логика слотов оружия
-		GunSlotsLogic();
+		if (!PlayerInventory.Visible)
+		{
+			MovementAndAnimLogic(delta);
+			//Логика слотов оружия
+			GunSlotsLogic();
+		}
 
 		if (PlayerData.PlayerHealth < (double)PlayerData.PlayerMaxHealth * 0.3)
 		{
@@ -103,29 +108,52 @@ public partial class PlayerControl : CharacterBody2D
 		StaminaRecovery(delta);
 	}
 
-	private void GunSlotsLogic()
+	private void GetWeaponFromSlot(InventoryData inventoryData, int slotID)
 	{
-		if (Input.IsActionJustPressed("firstSlot"))
+		var weaponId = -1;
+		if (inventoryData.HaveWeaponInSlot(slotID))
+		{
+			weaponId = inventoryData.GetWeaponIDFromSlot(slotID);
+		}
+
+		if (weaponId == -1)
 		{
 			fireTypeInHands.fireType = FireType.Melee;
 			GD.Print("Текущее оружие ближнего боя");
 			_slots = Slots.HANDS;
 		}
-
-		if (Input.IsActionJustPressed("secondSlot"))
+		else if (weaponId == 5)
 		{
 			GD.Print("Текущее оружие дальнего боя");
 			fireTypeInHands.fireType = FireType.FireArm;
 			_slots = Slots.AUTOMATIC;
 			GD.Print(_slots);
 		}
-		
-		if (Input.IsActionJustPressed("thirdSlots"))
+		else if (weaponId == 6)
 		{
 			GD.Print("Текущее оружие дальнего боя второй слот");
 			fireTypeInHands.fireType = FireType.FireArm;
 			_slots = Slots.PISTOL;
 			GD.Print(_slots);
+		}
+	}
+
+	private void GunSlotsLogic()
+	{
+		var inventoryData = PlayerInventory.GetInventoryData();
+		if (Input.IsActionJustPressed("firstSlot"))
+		{
+			GetWeaponFromSlot(inventoryData, 0);
+		}
+
+		if (Input.IsActionJustPressed("secondSlot"))
+		{
+			GetWeaponFromSlot(inventoryData, 1);
+		}
+		
+		if (Input.IsActionJustPressed("thirdSlots"))
+		{
+			GetWeaponFromSlot(inventoryData, 1);
 		}
 	}
 

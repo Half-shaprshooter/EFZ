@@ -80,6 +80,10 @@ public partial class Gun : Node2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!PlayerData.CanFire)
+		{
+			return;
+		}
 		bool notAutomatic = Input.IsActionJustPressed("shoot");
 		bool automatic = Input.IsActionPressed("shoot");
 		bool aim = Input.IsActionPressed("aim");
