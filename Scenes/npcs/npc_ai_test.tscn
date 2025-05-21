@@ -1,56 +1,38 @@
-[gd_scene load_steps=11 format=3 uid="uid://con576l1u4tyu"]
+[gd_scene load_steps=10 format=3 uid="uid://con576l1u4tyu"]
 
-[ext_resource type="Texture2D" uid="uid://bt6q7n3dhc27" path="res://icon.svg" id="1_h4abk"]
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_lwhu1"]
 [ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/EnemyHuman.png" id="2_3tb2c"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="4_fyqoq"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="5_dngqq"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="6_akny4"]
+[ext_resource type="PackedScene" uid="uid://lthit5pw6kuj" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_l1hqy"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="7_uvndp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
 size = Vector2(74, 65)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0l5i"]
-size = Vector2(145, 79)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfq2q"]
-radius = 117.004
+radius = 263.919
 
-[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D")]
-position = Vector2(1, 1)
-collision_layer = 36
+[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
+position = Vector2(4, 1)
+collision_layer = 4
 collision_mask = 244
 script = ExtResource("1_lwhu1")
 PatrolPoints = []
 body2D = NodePath(".")
+MeleeAttackRange = 190.0
 SpeedWalk = 250
 SpeedFast = 600
 SpeedRun = 900
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.56735
-scale = Vector2(1, 1)
 texture = ExtResource("2_3tb2c")
-
-[node name="NeutralSprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(316, 103)
-scale = Vector2(0.582031, 0.542969)
-texture = ExtResource("1_h4abk")
-offset = Vector2(-542.926, -193.381)
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_p2j1y")
-
-[node name="DamageArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
-position = Vector2(35.5, -3.5)
-shape = SubResource("RectangleShape2D_p0l5i")
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false
@@ -108,6 +90,8 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("7_uvndp")]
 body = NodePath("..")
+
+[node name="NpcMeleeAttack" parent="." instance=ExtResource("7_l1hqy")]
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
 [connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]
