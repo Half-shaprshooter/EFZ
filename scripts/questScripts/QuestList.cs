@@ -3,6 +3,8 @@ public partial class QuestList : VBoxContainer
 	public static QuestList Instance { get; private set; }
 	private List<string> questList = new List<string>();
 	private ArrowQuest ArrowQuest;
+	private Quest _quest;
+	private String textNow;
 	
 	public override void _Ready()
 	{
@@ -10,7 +12,7 @@ public partial class QuestList : VBoxContainer
 		ArrowQuest = GetNode<ArrowQuest>("/root/main/CanvasLayer/SubViewportContainer/ArrowQuest");
 		AddQuest("Вернуться к церкви", GetNode<Quest>("/root/main/NavigationRegion2D/House6/TriggerForQuest"));
 	}
-
+	
 	// Добавляет задание
 	public void AddQuest(string text, Quest quest)
 	{
@@ -24,18 +26,32 @@ public partial class QuestList : VBoxContainer
 	}
 	
 	// Удаляет задание
-	public void RemoveQuest(string text)
+	public void RemoveQuest(string text, Quest ques)
 	{
-		if (questList.Remove(text))
+		if (questList.Contains(text))
 		{
 			foreach (var child in GetChildren())
-			{
-				if (child is Label label && label.Text == text)
 				{
-					label.QueueFree();
+					if (child is Label label && label.Text == text)
+					{
+						ques.QueueFree();
+						label.QueueFree();
+					}
 				}
-			}
 		}
+		
+		// if (questList.Remove(text))
+		// {
+		// 	foreach (var child in GetChildren())
+		// 	{
+		// 		if (child is Label label && label.Text == text)
+		// 		{
+		// 			var a = ques;
+		// 			//quest.QueueFree();
+		// 			label.QueueFree();
+		// 		}
+		// 	}
+		// }
 	}
 
 	public bool HaveQuest(string text) => questList.Contains(text);

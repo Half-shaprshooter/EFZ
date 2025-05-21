@@ -33,6 +33,7 @@ project/assembly_name="EscapeFromZone"
 Alive=""
 Player=""
 Distructable="Статичные объекты, которые можно разрушать"
+Quest=""
 
 [input]
 
