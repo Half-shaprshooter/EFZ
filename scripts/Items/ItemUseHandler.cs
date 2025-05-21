@@ -30,7 +30,7 @@ public partial class ItemUseHandler : Control
         GD.Print($"Предмет использован");
         if (QuestList.Instance.HaveQuest("Вылечи ногу"))
         {
-            QuestList.Instance.RemoveQuest("Вылечи ногу");
+            //QuestList.Instance.RemoveQuest("Вылечи ногу");
         }
         return true;
     }
