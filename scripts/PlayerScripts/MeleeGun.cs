@@ -17,6 +17,7 @@ public partial class MeleeGun : Area2D
 	public float AttacksPerSeconds = 1f;
 	private float fireRate;
 	private float timeUntilFire;
+	[Export] private CharacterBody2D whoAttacks = null;
 
 	public MeleeGun()
 	{
@@ -63,7 +64,7 @@ public partial class MeleeGun : Area2D
 					host._host = Host.Enemy;
 					GD.Print(parent.GetName() + " is after " + host._host);
 					//TODO: Если милишки будут разные, сюда нужно будет передавать динамично урон
-					health?.Damage(15);
+					health?.Damage(15, whoAttacks);
 				} 
 				if (parent.IsInGroup("Distructable")) {
 					Random random = new Random();

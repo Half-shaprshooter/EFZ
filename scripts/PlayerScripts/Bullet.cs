@@ -4,17 +4,18 @@ using System;
 public partial class Bullet : RigidBody2D
 {
 	[Export] public float damage = 1000f;
-	[Export] public float speed = 1000f; 
+	[Export] public float speed = 1000f;
+	[Export] public Node2D whoAttacks = null;
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Transform.X * speed * (float)delta;
 		Vector2 newPosition = GlobalPosition + velocity;
-		
+
 		var spaceState = GetWorld2D().DirectSpaceState;
 		var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, newPosition);
 		var result = spaceState.IntersectRay(query);
-		
+
 		if (result != null && result.ContainsKey("collider"))
 		{
 			var collider = (Node)result["collider"];
@@ -26,7 +27,7 @@ public partial class Bullet : RigidBody2D
 				GD.Print(collider + " is before " + host._host);
 				host._host = Host.Enemy;
 				GD.Print(collider + " is after " + host._host);
-				health?.Damage(damage);
+				health?.Damage(damage, whoAttacks);
 			}
 			GD.Print(collider);
 			if (collider.IsInGroup("Distructable"))
@@ -45,6 +46,4 @@ public partial class Bullet : RigidBody2D
 			GlobalPosition = newPosition;
 		}
 	}
-
-	
 }

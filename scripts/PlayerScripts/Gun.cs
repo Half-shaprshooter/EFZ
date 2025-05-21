@@ -26,10 +26,12 @@ public partial class Gun : Node2D
 	
 	[Export] public Sprite2D muzzle;
 
+	[Export] Node2D whoAttacks = null;
+
 	public Gun()
 	{
 		fireType = this.GetNodeOrNull<FireTypeImpl>("FireTypeImpl");
-		
+
 		if (fireType == null)
 		{
 			GD.Print("Добавил");
@@ -74,6 +76,7 @@ public partial class Gun : Node2D
 		bullet.Rotation = GlobalRotation + spreadAngle;
 		bullet.Set("speed", bulletSpeed);
 		bullet.Set("damage", bulletDamage);
+		bullet.Set("whoAttacks", whoAttacks);
 
 		GetTree().Root.AddChild(bullet);
 	}

@@ -768,10 +768,11 @@ script = ExtResource("25_7wngu")
 [node name="Knife" type="Sprite2D" parent="."]
 rotation = -0.97913
 
-[node name="MeleeAttackArea" type="Area2D" parent="."]
+[node name="MeleeAttackArea" type="Area2D" parent="." node_paths=PackedStringArray("whoAttacks")]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("22_7r28r")
+whoAttacks = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea"]
 position = Vector2(104, -0.5)

@@ -8,14 +8,16 @@ public partial class NPC_AI : TalkableNpc
     [Export] public Node2D[] PatrolPoints;
     [Export] public CharacterBody2D body2D;
     [Export] public float AttackStopDistance = 400f;
-    
+    [Export] public float MeleeAttackRange = 70f;
+    [Export] public bool CanUseRangedWeapon = true;
+    [Export] public bool CanUseMeleeWeapon = true; 
+
     // Параметры для "осматривания"
     [Export] public float LookAroundSpeed = 2.0f;      // Скорость поворота при осматривании
     [Export] public float LookAroundSweepAngle = Mathf.Pi / 3; // Угол обзора в каждую сторону (60 градусов)
     [Export] public float LookAroundPauseTime = 0.75f;   // Время паузы на каждом угле обзора
 
     public enum BotState { Patrol, Finding, Attack, Panic }
-
     [Export] private BotState currentState = BotState.Patrol;
 
     private int _currentPatrolIndex = 0;
@@ -27,7 +29,7 @@ public partial class NPC_AI : TalkableNpc
     // Состояние "осматривания"
     private bool _isLookingAround = false;
     private float _lookAroundPhaseTimer = 0f;
-    private int _currentLookAroundPhase = 0; 
+    private int _currentLookAroundPhase = 0;
     // Фазы: 0-неактивно, 1-поворот налево, 2-пауза, 3-поворот направо, 4-пауза, 5-возврат в центр, 6-пауза -> завершение
     private float _initialLookAngle = 0f; // Угол, с которого началось осматривание
 
@@ -36,6 +38,9 @@ public partial class NPC_AI : TalkableNpc
     private bool isCanBuildRay = false; //отвечает за то, находится ли цель в прямой видимости
 
     public EnemyGun gun;
+    private NpcMeleeAttack _npcMeleeWeapon;
+
+    private Health _npcHealth;
 
     public override async void _Ready()
     {
@@ -43,6 +48,7 @@ public partial class NPC_AI : TalkableNpc
         _pathLine = GetNodeOrNull<Line2D>("PathLine");
         lookRay = GetNode<RayCast2D>("LookRay");
         gun = GetNode<EnemyGun>("Gun");
+        _npcMeleeWeapon = GetNodeOrNull<NpcMeleeAttack>("NpcMeleeAttack");
 
         if (body2D == null)
         {
@@ -52,8 +58,13 @@ public partial class NPC_AI : TalkableNpc
             return;
         }
 
-        if (_agent == null || PatrolPoints.Length == 0)
-            return;
+        _npcHealth = GetNodeOrNull<Health>("Health");
+        if (_npcHealth != null)
+        {
+            _npcHealth.Damaged += OnDamaged;
+        }
+
+        _npcMeleeWeapon.AttackerBody = this.body2D; 
 
         _patrolTargets = new Vector2[PatrolPoints.Length];
         for (int i = 0; i < PatrolPoints.Length; i++)
@@ -115,6 +126,7 @@ public partial class NPC_AI : TalkableNpc
             default:
                 GD.Print("Я сломался");
                 SetVelocityToZero();
+                currentState = BotState.Patrol;
                 break;
         }
 
@@ -171,74 +183,122 @@ public partial class NPC_AI : TalkableNpc
         {
             if (_isLookingAround) StopLookingAround();
             SetVelocityToZero();
+            if (CanUseRangedWeapon && gun != null) gun.makeNear(false); // Отключаем прицеливание, если есть оружие
             return;
         }
 
-        if (isCanBuildRay) // Если есть прямая видимость
+        float distanceToTarget = GlobalPosition.DistanceTo(target.GlobalPosition);
+
+        // Приоритет ближней атаке, если возможно и разрешено
+        if (CanUseMeleeWeapon && _npcMeleeWeapon != null && (distanceToTarget <= MeleeAttackRange || distanceToTarget - MeleeAttackRange < 30))
         {
-            if (_isLookingAround) StopLookingAround(); // Прекратить осматриваться, если игрок появился
-
-            if (isInSeeZone && isCanBuildRay)
-            {
-                gun.makeNear(true);
-            }
-            else
-            {
-                gun.makeNear(false);
-            }
-
-            lastSeenPlayerPosition = target.GlobalPosition;
-            _agent.TargetPosition = target.GlobalPosition;
-
-            float distanceToPlayer = GlobalPosition.DistanceTo(target.GlobalPosition);
-
-            if (distanceToPlayer > AttackStopDistance)
-            {
-                Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
-                Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
-
-                int speedLevel;
-                if (distanceToPlayer < 500 || timerValue > 2.5) { speedLevel = 1; }
-                else if (distanceToPlayer < 800) { speedLevel = 2; }
-                else { speedLevel = 3; }
-                MoveToTarget(directionToNextNavPos, delta, speedLevel);
-            }
-            else
-            {
-                var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
-                RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
-                SetVelocityToZero();
-            }
-        }
-        else if (lastSeenPlayerPosition.HasValue) // Прямой видимости нет, НО есть последняя известная позиция
-        {
-            gun.makeNear(false);
-            
-            _agent.TargetPosition = lastSeenPlayerPosition.Value;
-            float distanceToLastSeenPos = GlobalPosition.DistanceTo(lastSeenPlayerPosition.Value);
-
-            // Двигаемся к LSPP, если еще не там И не в процессе осматривания
-            if (distanceToLastSeenPos > _agent.TargetDesiredDistance + 5.0f && !_isLookingAround)
-            {
-                Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
-                Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
-                MoveToTarget(directionToNextNavPos, delta, 1); // Level 1 = WalkSpeed
-            }
-            else // Достигли LSPP (или достаточно близко) ИЛИ уже осматриваемся
-            {
-                SetVelocityToZero(); // Останавливаемся
-                if (!_isLookingAround) // Если еще не начали осматриваться
-                {
-                    StartLookingAround();
-                }
-                HandleLookingAround(delta); // Выполняем логику осматривания
-            }
-        }
-        else // Нет прямой видимости И НЕТ последней известной позиции
-        {
-            if (_isLookingAround) StopLookingAround();
             SetVelocityToZero();
-            // StateSystem или ChaseTimer должны обработать и перевести в Patrol
+            var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
+            RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
+
+            if (_npcMeleeWeapon.CanAttack())
+            {
+                //GD.Print($"NPC_AI ({Name}): Performing MELEE attack on {target.Name}!");
+                _npcMeleeWeapon.PerformAttack();
+            }
+            // Если атакуем вблизи, дальнее оружие не должно целиться/стрелять
+            if (CanUseRangedWeapon && gun != null) gun.makeNear(false);
+        }
+        // Логика дальней атаки или преследования, если ближняя атака невозможна/не разрешена или цель дальше
+        else
+        {
+            if (isCanBuildRay) // Если есть прямая видимость
+            {
+                if (_isLookingAround) StopLookingAround();
+                
+                lastSeenPlayerPosition = target.GlobalPosition;
+                if (_agent != null && _agent.IsInsideTree()) _agent.TargetPosition = target.GlobalPosition;
+
+                // Если можем использовать дальнобойное оружие и оно есть
+                if (CanUseRangedWeapon && gun != null)
+                {
+                    gun.makeNear(true); // Целимся из дальнего оружия
+
+                    if (distanceToTarget > AttackStopDistance) // Далеко для стрельбы, но видим - преследуем
+                    {
+                        // Логика преследования (MoveToTarget)
+                        if (_agent != null && _agent.IsInsideTree())
+                        {
+                            Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
+                            Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
+                            int speedLevel = (distanceToTarget < 500 || timerValue > 2.5) ? 1 : (distanceToTarget < 800 ? 2 : 3);
+                            MoveToTarget(directionToNextNavPos, delta, speedLevel);
+                        } else { SetVelocityToZero(); }
+                    }
+                    else // Достаточно близко для дальней атаки (и не в зоне ближней, или ближняя запрещена)
+                    {
+                        var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
+                        RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
+                        SetVelocityToZero();
+                        // Здесь должна быть логика стрельбы из 'gun'
+                        // Например, если у EnemyGun есть метод TryShoot(Node2D target)
+                        // gun.TryShoot(target); 
+                        //GD.Print($"NPC_AI ({Name}): In RANGED attack range. Would shoot at {target.Name} if gun.TryShoot() implemented.");
+                    }
+                }
+                // Если не можем использовать дальнобойное, но видим цель - просто преследуем (если разрешена ближняя и цель далеко)
+                // или стоим, если преследовать нечем/незачем.
+                else if (CanUseMeleeWeapon) // Если разрешена только ближняя, а цель далеко - преследуем
+                {
+                     if (distanceToTarget > MeleeAttackRange + 5.0f) // Небольшой буфер, чтобы не дергался
+                     {
+                        if (_agent != null && _agent.IsInsideTree())
+                        {
+                            Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
+                            Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
+                             // Можно использовать другую скорость, если это просто преследование для ближнего боя
+                            MoveToTarget(directionToNextNavPos, delta, 1); // Двигаемся медленнее
+                        } else { SetVelocityToZero(); }
+                     }
+                     else // Слишком близко для "только преследования", но не в MeleeAttackRange (или ближняя не сработала выше) - стоим и смотрим
+                     {
+                        var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
+                        RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
+                        SetVelocityToZero();
+                     }
+                }
+                else // Не может использовать ни дальнее, ни ближнее - просто стоит и смотрит, если видит
+                {
+                    var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
+                    RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
+                    SetVelocityToZero();
+                    GD.Print($"NPC_AI ({Name}): Sees target {target.Name} but cannot use any weapon.");
+                }
+            }
+            else if (lastSeenPlayerPosition.HasValue) // Прямой видимости нет, НО есть последняя известная позиция
+            {
+                if (CanUseRangedWeapon && gun != null) gun.makeNear(false);
+                
+                if (_agent != null && _agent.IsInsideTree()) _agent.TargetPosition = lastSeenPlayerPosition.Value;
+                float distanceToLastSeenPos = GlobalPosition.DistanceTo(lastSeenPlayerPosition.Value);
+
+                if (distanceToLastSeenPos > (_agent?.TargetDesiredDistance ?? 4f) + 5.0f && !_isLookingAround)
+                {
+                     if (_agent != null && _agent.IsInsideTree())
+                     {
+                        Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
+                        Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
+                        MoveToTarget(directionToNextNavPos, delta, 1);
+                     } else { SetVelocityToZero(); }
+                }
+                else
+                {
+                    SetVelocityToZero();
+                    if (!_isLookingAround) StartLookingAround();
+                    HandleLookingAround(delta);
+                }
+            }
+            else // Совсем потеряли цель
+            {
+                if (_isLookingAround) StopLookingAround();
+                SetVelocityToZero();
+                if (CanUseRangedWeapon && gun != null) gun.makeNear(false);
+            }
         }
     }
 
@@ -293,7 +353,7 @@ public partial class NPC_AI : TalkableNpc
             case 3: // Поворот направо
                 targetAngleThisPhase = _initialLookAngle + LookAroundSweepAngle;
                 RotateTowardsAngleSmoothly(targetAngleThisPhase, (float)delta, LookAroundSpeed);
-                 if (Mathf.Abs(Mathf.AngleDifference(body2D.Rotation, targetAngleThisPhase)) < Mathf.DegToRad(5))
+                if (Mathf.Abs(Mathf.AngleDifference(body2D.Rotation, targetAngleThisPhase)) < Mathf.DegToRad(5))
                 {
                     _currentLookAroundPhase = 4; _lookAroundPhaseTimer = 0f;
                 }
@@ -313,7 +373,7 @@ public partial class NPC_AI : TalkableNpc
                 }
                 break;
             case 6: // Пауза (смотрим в центр)
-                 if (_lookAroundPhaseTimer >= LookAroundPauseTime)
+                if (_lookAroundPhaseTimer >= LookAroundPauseTime)
                 {
                     GD.Print("Завершил последовательность осматривания.");
                     StopLookingAround(); // Завершаем осматривание
@@ -355,27 +415,27 @@ public partial class NPC_AI : TalkableNpc
     private Node2D target;
     //построение луча до цели, что понять, есть ли прямая видимость
     private bool BuildRayToTarget(Node2D target)
-	{
-		if (target == null) return false;
-		//lookRay.Rotation = body2D.Rotation;
-		
-		// Устанавливаем начало луча в (0, 0) — относительно RayCast2D, он сам будет сдвинут в нужную точку
-		lookRay.Position = Vector2.Zero;
-		lookRay.GlobalPosition = body2D.GlobalPosition;
+    {
+        if (target == null) return false;
+        //lookRay.Rotation = body2D.Rotation;
 
-		// Переводим глобальные координаты цели в локальные относительно RayCast2D
-		Vector2 localTarget = lookRay.ToLocal(target.GlobalPosition);
-		lookRay.TargetPosition = localTarget;
+        // Устанавливаем начало луча в (0, 0) — относительно RayCast2D, он сам будет сдвинут в нужную точку
+        lookRay.Position = Vector2.Zero;
+        lookRay.GlobalPosition = body2D.GlobalPosition;
+
+        // Переводим глобальные координаты цели в локальные относительно RayCast2D
+        Vector2 localTarget = lookRay.ToLocal(target.GlobalPosition);
+        lookRay.TargetPosition = localTarget;
         lookRay.ForceRaycastUpdate();
 
-		// Если луч столкнулся с объектом (целевым)
-		if (lookRay.IsColliding() && lookRay.GetCollider() == target)
-		{
-			// Показываем текст, если луч построен и объект видим
-			return true;
-		}
-		return false;
-	}
+        // Если луч столкнулся с объектом (целевым)
+        if (lookRay.IsColliding() && lookRay.GetCollider() == target)
+        {
+            // Показываем текст, если луч построен и объект видим
+            return true;
+        }
+        return false;
+    }
 
     private void StateSystem()
     {
@@ -406,7 +466,7 @@ public partial class NPC_AI : TalkableNpc
             if (timerValue >= 10) // Таймаут 10 секунд
             {
                 GD.Print("ChaseTimer: Время вышло, переход в патруль.");
-                if(_isLookingAround) // Если таймер истек во время осматривания
+                if (_isLookingAround) // Если таймер истек во время осматривания
                 {
                     StopLookingAround();
                 }
@@ -473,5 +533,59 @@ public partial class NPC_AI : TalkableNpc
         {
             _pathLine.AddPoint(ToLocal(point)); // локальные координаты от NPC
         }
+    }
+
+    private void OnDamaged(float damageAmount, Node attackerNode) // attackerNode это Node из сигнала
+    {
+        GD.Print($"NPC_AI ({Name}): I've been damaged by '{(attackerNode != null ? attackerNode.Name : "Unknown")}' for {damageAmount} HP!");
+
+        if (attackerNode == null)
+        {
+            GD.Print($"NPC_AI ({Name}): Attacker is null. Current state: {currentState}");
+            return;
+        }
+
+        Node2D attackerAsNode2D = attackerNode as Node2D;
+        if (attackerAsNode2D == null)
+        {
+            GD.PrintErr($"NPC_AI ({Name}): Attacker '{attackerNode.Name}' is not a Node2D. Cannot process as target.");
+            return;
+        }
+        
+        this.target = attackerAsNode2D; // Устанавливаем Node2D как цель
+
+        if (this.relation == null)
+        {
+            // Попытка получить 'relation' еще раз, если он null
+            this.relation = body2D?.GetNodeOrNull<HostImpl>("HostImpl");
+            if (this.relation == null)
+            {
+                GD.PrintErr($"NPC_AI ({Name}): Relation component is null. Cannot change hostility towards {this.target.Name}.");
+                return; 
+            }
+        }
+
+        this.relation._host = Host.Enemy;
+        GD.Print($"NPC_AI ({Name}): Relation with {this.target.Name} set to Host.Enemy.");
+        
+        currentState = BotState.Attack;
+        lastSeenPlayerPosition = this.target.GlobalPosition; 
+
+        if (_isLookingAround) StopLookingAround();
+        timerValue = 0; // Сброс таймера погони
+        // Можно также сбросить кулдаун атаки, чтобы NPC мог сразу контратаковать, если это _npcMeleeWeapon
+        // _npcMeleeWeapon?.ResetCooldown(); // (потребует добавить такой метод в NpcMeleeAttack)
+
+        GD.Print($"NPC_AI ({Name}): Target set to {this.target.Name}. State: Attack. LSPP: {lastSeenPlayerPosition}.");
+    }
+
+    // Важно отписаться от сигнала при уничтожении узла
+    public override void _ExitTree()
+    {
+        if (_npcHealth != null)
+        {
+            _npcHealth.Damaged -= OnDamaged;
+        }
+        base._ExitTree(); // Вызов базового метода, если он есть и что-то делает
     }
 }
