@@ -51,10 +51,10 @@ public partial class MeleeGun : Area2D
 			var list = GetOverlappingAreas();
 			foreach (var area in list)
 			{
-				GD.Print("Бью рукой");
 				var parent = area.GetParent();
 				if (parent.IsInGroup("Alive"))
 				{
+					GD.Print("Melee Gun: Попытка нанести урон Alive");
 					effects.Stream = KNIFE_SOUND;
 					effects.Play();
 					var health = parent.GetNodeOrNull<Health>("Health");
