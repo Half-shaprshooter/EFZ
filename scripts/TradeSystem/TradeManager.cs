@@ -37,6 +37,7 @@ public partial class TradeManager : Node
         _isTrading = true;
         
         _playerInventory.Visible = true;
+        PlayerData.CanFire = false;
         _sellerInventory.Visible = true;
 
         _playerInventory.IsTradeMode = true;
