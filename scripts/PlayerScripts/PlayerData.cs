@@ -7,7 +7,7 @@ public partial class PlayerData : Node
 	public static int staminaConsumption = 10;
 	public static double PlayerStamina = 100;
 	public static int PlayerMaxStamina = 100;
-	public static bool CanFire = false;
+	public static bool CanFire = true;
 
 	public override void _Ready()
 	{

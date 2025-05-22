@@ -17,6 +17,11 @@ public partial class ArrowQuest : Sprite2D
 	
 	public override void _Process(double delta)
 	{
+		if (_quest == null || !IsInstanceValid(_quest)) 
+		{
+			Visible = false; // Скрываем стрелку, если квеста нет
+			return;
+		}
 		PosForAngle = _quest.GlobalPosition;
 		Target = (PosForAngle - PlayerControl.globalPos).Normalized();
 		
@@ -40,7 +45,9 @@ public partial class ArrowQuest : Sprite2D
 			String text = questText;
 			if (QuestList.Instance.HaveQuest(text))
 			{
+				var quest = _quest;
 				QuestList.Instance.AddQuest(_quest.questText,_quest.nextQuest);
+				quest.die();
 				QuestList.Instance.RemoveQuest(text, _quest);
 				GD.Print("Меняю квест");
 			}
