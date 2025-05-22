@@ -52,7 +52,6 @@ public partial class Inventory : Control
 		_colCount = _gridContainer.Columns;
 		_uiInventory = this;
 		_colorRect1 = GetNode<ColorRect>("ColorRect");
-		_colorRect2 = GetNode<ColorRect>("ColorRect2");
 		_ui = GetNode<CanvasLayer>("..");
 		_floorItemScene = GD.Load<PackedScene>("res://Scenes/Items/floorItem.tscn");
 		_itemUseHandler = new ItemUseHandler();
@@ -64,9 +63,12 @@ public partial class Inventory : Control
 		}
 
 		_uiInventory.Visible = false;
-		
 
-		InitializeEquipmentSlots();
+		if (IsPlayerInventory)
+		{
+			_colorRect2 = GetNode<ColorRect>("ColorRect2");
+			InitializeEquipmentSlots();
+		}
 		
 		// Создаем начальные слоты
 		for (int i = 0; i < 64; i++)
@@ -108,6 +110,7 @@ public partial class Inventory : Control
 			{
 				if (_scrollContainer.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
 				{
+					PlayerData.CanFire =  PlayerData.CanFire || IsTradeMode ? PlayerData.CanFire = false: PlayerData.CanFire;
 					PlaceItem();
 				}
 				//else if (!_colorRect1.GetGlobalRect().HasPoint(GetGlobalMousePosition()) && 
@@ -115,12 +118,15 @@ public partial class Inventory : Control
 				//{
 				//	DeleteHeldItem();
 				//}
-				else
+				else if (IsPlayerInventory)
 				{
 					foreach (var equipmentSlot in _equipmentSlots)
 					{
 						if (equipmentSlot.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+						{
+							PlayerData.CanFire = PlayerData.CanFire || IsTradeMode ? PlayerData.CanFire = false: PlayerData.CanFire;
 							PlaceItem();
+						}
 					}
 				}
 				
@@ -138,7 +144,7 @@ public partial class Inventory : Control
 				{
 					PickItem();
 				}
-				else
+				else if (IsPlayerInventory)
 				{
 					foreach (var equipmentSlot in _equipmentSlots)
 					{
@@ -595,6 +601,11 @@ public partial class Inventory : Control
 			_currentEquipmentSlot.State = EquipmentSlot.States.Free;
 			_currentEquipmentSlot.ItemStored = null;
 			_currentEquipmentSlot.SetColor(EquipmentSlot.States.Default);
+			
+			if (IsTradeMode)
+			{
+				DoTransfer();
+			}
 		}
 	}
 

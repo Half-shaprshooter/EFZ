@@ -35,6 +35,7 @@ public partial class PlayerControl : CharacterBody2D
 	private double _idleTimer = 0f;
 	private bool _hasPlayedIdleAnim = false;
 	private const double IDLE_TRIGGER_TIME = 5;
+	private InventoryData _inventoryData;
 	
 	[Export] 
 	public Inventory PlayerInventory { get; set; }
@@ -93,11 +94,10 @@ public partial class PlayerControl : CharacterBody2D
 		
 		Dialogue();
 		GrassLogic();
-		if (!PlayerInventory.Visible)
+		if (PlayerData.CanFire)  
 		{
-			MovementAndAnimLogic(delta);
-			//Логика слотов оружия
 			GunSlotsLogic();
+			MovementAndAnimLogic(delta);
 		}
 
 		if (PlayerData.PlayerHealth < (double)PlayerData.PlayerMaxHealth * 0.3)
@@ -140,20 +140,20 @@ public partial class PlayerControl : CharacterBody2D
 
 	private void GunSlotsLogic()
 	{
-		var inventoryData = PlayerInventory.GetInventoryData();
+		_inventoryData = PlayerInventory.GetInventoryData();
 		if (Input.IsActionJustPressed("firstSlot"))
 		{
-			GetWeaponFromSlot(inventoryData, 0);
+			GetWeaponFromSlot(_inventoryData, 0);
 		}
 
 		if (Input.IsActionJustPressed("secondSlot"))
 		{
-			GetWeaponFromSlot(inventoryData, 1);
+			GetWeaponFromSlot(_inventoryData, 1);
 		}
 		
 		if (Input.IsActionJustPressed("thirdSlots"))
 		{
-			GetWeaponFromSlot(inventoryData, 1);
+			GetWeaponFromSlot(_inventoryData, 1);
 		}
 	}
 
