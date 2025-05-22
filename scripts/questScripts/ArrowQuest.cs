@@ -19,6 +19,7 @@ public partial class ArrowQuest : Sprite2D
 	{
 		if (_quest == null || !IsInstanceValid(_quest)) 
 		{
+			Visible = false; // Скрываем стрелку, если квеста нет
 			return;
 		}
 		PosForAngle = _quest.GlobalPosition;

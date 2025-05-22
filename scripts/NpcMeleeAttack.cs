@@ -112,7 +112,8 @@ public partial class NpcMeleeAttack : Area2D
 				PlaySound(_hitAliveSound);
 
 				GD.Print($"NpcMeleeAttack: NPC '{AttackerBody.Name}' hit 'Alive' entity: {parentOfArea.Name}.");
-				Player.TakeDmg(30);
+				var targetNode = GetNode("/root/main/Player");
+				targetNode.Call("TakeDmg", 30);
 				didDamageThisTarget = true;
 				attackHitSomething = true;
 			}

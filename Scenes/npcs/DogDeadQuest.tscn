@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwgcvtd6ybx03"]
+
+[ext_resource type="Script" path="res://Scenes/DogDeadForQuest.cs" id="1_7ovuv"]
+[ext_resource type="Texture2D" uid="uid://ufnjkaj31jas" path="res://sprites/Animals/Dogstanding.png" id="2_rryco"]
+[ext_resource type="Texture2D" uid="uid://c5jd8v3typ4xr" path="res://sprites/Animals/Dog_lies.png" id="3_e86n3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cu1ij"]
+radius = 44.0
+height = 308.0
+
+[node name="DogDeadQuest" type="CharacterBody2D" node_paths=PackedStringArray("aliveSprite", "deadSprite") groups=["Alive"]]
+scale = Vector2(0.7, 0.7)
+collision_layer = 4
+collision_mask = 244
+script = ExtResource("1_7ovuv")
+aliveSprite = NodePath("Alive")
+deadSprite = NodePath("Dead")
+
+[node name="Alive" type="Sprite2D" parent="."]
+texture = ExtResource("2_rryco")
+
+[node name="Dead" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.05, 1.2)
+texture = ExtResource("3_e86n3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cu1ij")
