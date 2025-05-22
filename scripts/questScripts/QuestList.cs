@@ -26,19 +26,32 @@ public partial class QuestList : VBoxContainer
 	}
 	
 	// Удаляет задание
-	public void RemoveQuest(string text)
+	public void RemoveQuest(string text, Quest ques)
 	{
-		if (questList.Remove(text))
+		if (questList.Contains(text))
 		{
 			foreach (var child in GetChildren())
-			{
-				if (child is Label label && label.Text == text)
 				{
-					//quest.QueueFree();
-					label.QueueFree();
+					if (child is Label label && label.Text == text)
+					{
+						ques.QueueFree();
+						label.QueueFree();
+					}
 				}
-			}
 		}
+		
+		// if (questList.Remove(text))
+		// {
+		// 	foreach (var child in GetChildren())
+		// 	{
+		// 		if (child is Label label && label.Text == text)
+		// 		{
+		// 			var a = ques;
+		// 			//quest.QueueFree();
+		// 			label.QueueFree();
+		// 		}
+		// 	}
+		// }
 	}
 
 	public bool HaveQuest(string text) => questList.Contains(text);
