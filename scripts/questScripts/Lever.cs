@@ -6,11 +6,11 @@ public partial class Lever : Node2D
 	private Label _label;
 	private bool isNear;
 	private bool once;
-	private Kletka _kletka;
+	private NikitinCage _kletka;
 	public override void _Ready()
 	{
 		_label = GetNode<Label>("Label");
-		_kletka = GetNode<Kletka>("/root/main/Podval/Kletka4");
+		_kletka = GetNode<NikitinCage>("/root/main/Podval/NikitinCage");
 	}
 	
 	public override void _Process(double delta)
