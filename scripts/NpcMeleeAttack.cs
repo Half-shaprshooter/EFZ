@@ -173,4 +173,3 @@ public partial class NpcMeleeAttack : Area2D
 		Player = null;
 	}
 }
-

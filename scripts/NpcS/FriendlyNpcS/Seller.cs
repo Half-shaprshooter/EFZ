@@ -13,17 +13,26 @@ public partial class Seller : TalkableNpc
 		NpcName = "SellerName";
 		InterfaceSelectionObject interSelect = new InterfaceSelectionObject(1, "Торговать");
 		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(2, "Уйти");
-		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(3, "qweqeqwe");
+		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(3, "…");
+		InterfaceSelectionObject interSelect5 = new InterfaceSelectionObject(4, "Ага");
+		
 		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(-1, "Ок");
 		_npcDialogues = new List<NpcDialogue>
 		{
 			new NpcDialogue(
 				new List<InterfaceSelectionObject>(){interSelect, interSelect2, interSelect4}, 
-				"TEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST BOTTOM TEXTTEST", 0, true),
+				"Ты, значит, от него? Ну, значит, не самый надёжный у тебя выбор друзей.", 0, true),
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
 				"Вариант текста 2", 1, false),
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
-				"Вариант текста 3", 2, true)
+				"Вариант текста 3", 2, true),
+			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect5}, 
+				"Ну-ну, смотри-ка. Подходи, коль живой добрался.", 3, true),
+			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
+				"Вот это уже лучше. Слушай тогда сюда. Есть тут один сталкер, " +
+				"Митя.\n С ним и потолкуй. У него дельце завалялось. Простенькое, но для новенького — в самый раз.\n " +
+				"А если справишься... глядишь, и расскажу.\n И помни: тут каждый шаг записывается. " +
+				"Даже если ты сам этого не замечаешь.\n.", 4, true),
 		};
 		
 		_label = GetNode<Label>("ButtonText");
