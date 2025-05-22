@@ -76,6 +76,8 @@ public partial class NPC_AI : TalkableNpc
 
 		_agent.TargetDesiredDistance = 4f;
 		SetNextPatrolPoint();
+		relation = body2D.GetNode<HostImpl>("HostImpl");
+		relation._host = relationToPlayer;
 	}
 
 	public override void _Process(double delta)

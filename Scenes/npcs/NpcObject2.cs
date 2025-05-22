@@ -3,7 +3,7 @@ using System;
 
 public partial class NpcObject2 : CharacterBody2D
 {
-    protected int Speed { get; set; }
+	protected int Speed { get; set; }
 
 	protected PlayerControl Player;
 

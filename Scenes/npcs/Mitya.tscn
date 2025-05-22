@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://chp3m06jisirq"]
+
+[ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_i8n4y"]
+[ext_resource type="Texture2D" uid="uid://cliileuhcsqq3" path="res://sprites/npcSprites/Mitya.png" id="2_aldng"]
+[ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="3_6wflh"]
+[ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="4_hnoq1"]
+[ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_hyo2y"]
+[ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_d2nph"]
+[ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_7pb6v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
+size = Vector2(74, 65)
+
+[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
+position = Vector2(4, 1)
+collision_layer = 4
+collision_mask = 244
+script = ExtResource("1_i8n4y")
+PatrolPoints = []
+body2D = NodePath(".")
+MeleeAttackRange = 190.0
+SpeedWalk = 250
+SpeedFast = 600
+SpeedRun = 900
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.56735
+texture = ExtResource("2_aldng")
+
+[node name="WolfCol" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_p2j1y")
+
+[node name="muzzle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(66, 33)
+rotation = 1.58384
+texture = ExtResource("3_6wflh")
+
+[node name="Timer" type="Timer" parent="muzzle"]
+
+[node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("muzzle")]
+position = Vector2(73, -10)
+script = ExtResource("4_hnoq1")
+bulletScene = ExtResource("5_hyo2y")
+muzzle = NodePath("../muzzle")
+
+[node name="ProximityArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ProximityArea"]
+self_modulate = Color(1, 1, 1, 0.286275)
+polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
+
+[node name="KnowPosInFight" type="Area2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KnowPosInFight"]
+polygon = PackedVector2Array(270, -250, 270, 250, -100, 60, -100, -60)
+
+[node name="LookRay" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+collision_mask = 7
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 15
+avoidance_enabled = true
+max_speed = 1100.0
+avoidance_layers = 4
+avoidance_mask = 7
+
+[node name="PathLine" type="Line2D" parent="."]
+width = 4.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("6_d2nph")]
+body = NodePath("..")
+
+[node name="NpcMeleeAttack" parent="." instance=ExtResource("7_7pb6v")]
+
+[connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
+[connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]
+[connection signal="body_exited" from="ProximityArea" to="." method="SeeZoneExited"]
+[connection signal="body_entered" from="KnowPosInFight" to="." method="KnowPosInChaseEntered"]
+[connection signal="body_exited" from="KnowPosInFight" to="." method="KnowPosInChaseExited"]
