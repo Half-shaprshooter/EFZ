@@ -76,13 +76,13 @@ public partial class NPC_AI : TalkableNpc
 
 		_agent.TargetDesiredDistance = 4f;
 		SetNextPatrolPoint();
-		relation = body2D.GetNode<HostImpl>("HostImpl");
+		relation = GetNodeOrNull<HostImpl>("HostImpl");
 		relation._host = relationToPlayer;
 	}
 
 	public override void _Process(double delta)
 	{
-		relation = body2D.GetNode<HostImpl>("HostImpl");
+		relation = GetNodeOrNull<HostImpl>("HostImpl");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -440,7 +440,13 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	private void StateSystem()
-	{
+	{		
+		if (relation == null)
+		{
+			GD.Print("Отношения сломаны");
+			return;
+		}
+		
 		if (target != null && relation._host == Host.Enemy)
 		{
 			currentState = BotState.Attack; // Внутри Attack будет логика преследования, осматривания и т.д.

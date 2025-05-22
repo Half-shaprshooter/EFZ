@@ -707,10 +707,11 @@ scale = Vector2(22.35, 22.35)
 target_position = Vector2(16.5548, 0.268456)
 collision_mask = 32
 
-[node name="Gun" parent="." node_paths=PackedStringArray("muzzle") instance=ExtResource("13_kjjnc")]
+[node name="Gun" parent="." node_paths=PackedStringArray("muzzle", "whoAttacks") instance=ExtResource("13_kjjnc")]
 scale = Vector2(22.35, 22.35)
 bulletScene = ExtResource("21_krd0o")
 muzzle = NodePath("../muzzle")
+whoAttacks = NodePath("..")
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false

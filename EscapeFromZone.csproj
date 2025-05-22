@@ -14,7 +14,4 @@
     <Content Include="Scenes\SceneWithCharacter.tscn" />
     <Content Include="scripts\gdScripts\roof.gd" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\NpcS\FriendlyNpcS\" />
-  </ItemGroup>
 </Project>
