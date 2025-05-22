@@ -42,6 +42,7 @@ public partial class ArrowQuest : Sprite2D
 			//Пока так надо
 			// try
 			// {
+			//;.;.l,lp,l[,
 			String text = questText;
 			if (QuestList.Instance.HaveQuest(text))
 			{
