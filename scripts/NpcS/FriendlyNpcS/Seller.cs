@@ -5,6 +5,7 @@ public partial class Seller : TalkableNpc
 {
 	private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
+	private static List<NpcDialogue> _npcDialogues2;
 	private Inventory _sellerInventory;
 	private TradeManager _tradeManager;
 
@@ -25,9 +26,18 @@ public partial class Seller : TalkableNpc
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
 				"Вариант текста 3", 2, true)
 		};
+		
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
+	}
+
+	public void SetNewDialogue(Node2D body)
+	{
+		if (body.IsInGroup("Npc"))
+		{
+			InterfaceManager.dialogueManager.NpcDialogues = _npcDialogues2;
+		}
 	}
 	
 	public override void _Process(double delta)
