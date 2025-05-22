@@ -35,7 +35,6 @@ public partial class ManHole : Sprite2D
 
 	public void OnPnimationPlayerAnimationFinished(String name)
 	{
-		
 		var targetNode = GetNode("/root/main/Player");
 		targetNode.Call("Transport");
 		_playerWhite.Play("White");
