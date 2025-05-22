@@ -34,6 +34,7 @@ public partial class Seller : TalkableNpc
 				"А если справишься... глядишь, и расскажу.\n И помни: тут каждый шаг записывается. " +
 				"Даже если ты сам этого не замечаешь.\n.", 4, true),
 		};
+		
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
