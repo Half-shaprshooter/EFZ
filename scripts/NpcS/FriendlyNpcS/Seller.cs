@@ -15,7 +15,6 @@ public partial class Seller : TalkableNpc
 		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(2, "Уйти");
 		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(3, "…");
 		InterfaceSelectionObject interSelect5 = new InterfaceSelectionObject(4, "Ага");
-		InterfaceSelectionObject interSelect6 = new InterfaceSelectionObject(5, "Ага");
 		
 		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(-1, "Ок");
 		_npcDialogues = new List<NpcDialogue>
@@ -34,7 +33,6 @@ public partial class Seller : TalkableNpc
 				"Митя.\n С ним и потолкуй. У него дельце завалялось. Простенькое, но для новенького — в самый раз.\n " +
 				"А если справишься... глядишь, и расскажу.\n И помни: тут каждый шаг записывается. " +
 				"Даже если ты сам этого не замечаешь.\n.", 4, true),
-			
 		};
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
