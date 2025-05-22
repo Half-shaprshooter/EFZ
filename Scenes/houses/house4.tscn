@@ -146,7 +146,6 @@ libraries = {
 }
 
 [node name="Roof" type="Area2D" parent="."]
-visible = false
 position = Vector2(176, 29)
 collision_mask = 2
 script = ExtResource("5_ern6p")

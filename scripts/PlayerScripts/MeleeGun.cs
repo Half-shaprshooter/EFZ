@@ -45,6 +45,10 @@ public partial class MeleeGun : Area2D
 	
 	public override void _Process(double delta)
 	{
+		if (!PlayerData.CanFire)
+		{
+			return;
+		}
 		if (timeUntilFire > fireRate && Input.IsActionJustPressed("shoot") && PlayerFireType.fireType == EscapeFromZone.scripts.PlayerScripts.FireType.Melee)
 		{
 			//Если объект не является живым, то будет просто проигрываться звук анимка удара, без урона
