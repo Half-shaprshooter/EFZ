@@ -18,29 +18,28 @@ public partial class NPC_AI : TalkableNpc
 	[Export] public float LookAroundPauseTime = 0.75f;   // Время паузы на каждом угле обзора
 
 	public enum BotState { Patrol, Finding, Attack, Panic }
-	[Export] private BotState currentState = BotState.Patrol;
+	[Export] protected BotState currentState = BotState.Patrol;
 
-	private int _currentPatrolIndex = 0;
-	private Vector2[] _patrolTargets;
-
-	private NavigationAgent2D _agent;
-	private Line2D _pathLine;
+	protected int _currentPatrolIndex = 0;
+	protected Vector2[] _patrolTargets;
+	protected NavigationAgent2D _agent;
+	protected Line2D _pathLine;
 
 	// Состояние "осматривания"
-	private bool _isLookingAround = false;
-	private float _lookAroundPhaseTimer = 0f;
-	private int _currentLookAroundPhase = 0;
+	protected bool _isLookingAround = false;
+	protected float _lookAroundPhaseTimer = 0f;
+	protected int _currentLookAroundPhase = 0;
 	// Фазы: 0-неактивно, 1-поворот налево, 2-пауза, 3-поворот направо, 4-пауза, 5-возврат в центр, 6-пауза -> завершение
-	private float _initialLookAngle = 0f; // Угол, с которого началось осматривание
+	protected float _initialLookAngle = 0f; // Угол, с которого началось осматривание
 
-	private Vector2? lastSeenPlayerPosition = null;
+	protected Vector2? lastSeenPlayerPosition = null;
 
-	private bool isCanBuildRay = false; //отвечает за то, находится ли цель в прямой видимости
+	protected bool isCanBuildRay = false; //отвечает за то, находится ли цель в прямой видимости
 
 	public EnemyGun gun;
-	private NpcMeleeAttack _npcMeleeWeapon;
+	protected NpcMeleeAttack _npcMeleeWeapon;
 
-	private Health _npcHealth;
+	protected Health _npcHealth;
 
 	public override async void _Ready()
 	{
@@ -76,13 +75,13 @@ public partial class NPC_AI : TalkableNpc
 
 		_agent.TargetDesiredDistance = 4f;
 		SetNextPatrolPoint();
-		relation = GetNodeOrNull<HostImpl>("HostImpl");
+		relation = body2D.GetNode<HostImpl>("HostImpl");
 		relation._host = relationToPlayer;
 	}
 
 	public override void _Process(double delta)
 	{
-		relation = GetNodeOrNull<HostImpl>("HostImpl");
+		relation = body2D.GetNode<HostImpl>("HostImpl");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -141,7 +140,7 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	//логика при патруле
-	private void HandlePatrol()
+	protected void HandlePatrol()
 	{
 		if (_agent == null || PatrolPoints.Length == 0)
 			return;
@@ -164,13 +163,13 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void AdvancePatrolPoint()
+	protected void AdvancePatrolPoint()
 	{
 		_currentPatrolIndex = (_currentPatrolIndex + 1) % PatrolPoints.Length;
 	}
 
 	//выбирает следующую точку патруля
-	private void SetNextPatrolPoint()
+	protected void SetNextPatrolPoint()
 	{
 		if (_agent != null && PatrolPoints.Length > 0)
 		{
@@ -179,7 +178,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void Chase(float delta)
+	protected void Chase(float delta)
 	{
 		if (target == null)
 		{
@@ -304,7 +303,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void StartLookingAround()
+	protected void StartLookingAround()
 	{
 		if (_isLookingAround) return;
 		GD.Print("Начинаю осматриваться...");
@@ -314,7 +313,7 @@ public partial class NPC_AI : TalkableNpc
 		_initialLookAngle = body2D.Rotation;
 	}
 
-	private void StopLookingAround()
+	protected void StopLookingAround()
 	{
 		if (!_isLookingAround) return;
 		GD.Print("Заканчиваю осматриваться.");
@@ -325,7 +324,7 @@ public partial class NPC_AI : TalkableNpc
 		// RotateTowardsAngleSmoothly(_initialLookAngle, GetPhysicsProcessDeltaTime(), LookAroundSpeed);
 	}
 
-	private void HandleLookingAround(double delta)
+	protected void HandleLookingAround(double delta)
 	{
 		if (!_isLookingAround || target == null) // Если осматривание было прервано или цель исчезла
 		{
@@ -385,7 +384,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void MoveToTarget(Vector2 targetPosition, float delta, int levelSpeed)
+	protected void MoveToTarget(Vector2 targetPosition, float delta, int levelSpeed)
 	{
 		if (_agent == null)
 			return;
@@ -408,15 +407,15 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void SetVelocityToZero()
+	protected void SetVelocityToZero()
 	{
 		body2D.Velocity = Vector2.Zero;
 	}
 
-	private RayCast2D lookRay;
-	private Node2D target;
+	protected RayCast2D lookRay;
+	protected Node2D target;
 	//построение луча до цели, что понять, есть ли прямая видимость
-	private bool BuildRayToTarget(Node2D target)
+	protected bool BuildRayToTarget(Node2D target)
 	{
 		if (target == null) return false;
 		//lookRay.Rotation = body2D.Rotation;
@@ -439,14 +438,8 @@ public partial class NPC_AI : TalkableNpc
 		return false;
 	}
 
-	private void StateSystem()
-	{		
-		if (relation == null)
-		{
-			GD.Print("Отношения сломаны");
-			return;
-		}
-		
+	protected void StateSystem()
+	{
 		if (target != null && relation._host == Host.Enemy)
 		{
 			currentState = BotState.Attack; // Внутри Attack будет логика преследования, осматривания и т.д.
@@ -463,7 +456,7 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	double timerValue = 0;
-	private void ChaseTimer(double delta)
+	protected void ChaseTimer(double delta)
 	{
 		// Таймер тикает, если есть цель, но мы её не видим (ни лучом, ни в зонах)
 		bool canTrackPlayer = isCanBuildRay || isInSeeZone || isKnowPosBattle;
@@ -491,9 +484,9 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private bool isInSeeZone = false;
+	protected bool isInSeeZone = false;
 	//Зона видимости бота(вход)
-	private void SeeZoneEnter(Node2D body)
+	protected void SeeZoneEnter(Node2D body)
 	{
 		if (body is PlayerControl)
 		{
@@ -502,7 +495,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 	//Зона видимости бота(выход)
-	private void SeeZoneExited(Node2D body)
+	protected void SeeZoneExited(Node2D body)
 	{
 		if (body is PlayerControl)
 		{
@@ -511,8 +504,8 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	//Зона в которой в бою бот всегда знает где игрок, если есть прямая видимость
-	private bool isKnowPosBattle = false;
-	private void KnowPosInChaseEntered(Node2D body)
+	protected bool isKnowPosBattle = false;
+	protected void KnowPosInChaseEntered(Node2D body)
 	{
 		if (body is PlayerControl)
 		{
@@ -520,7 +513,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void KnowPosInChaseExited(Node2D body)
+	protected void KnowPosInChaseExited(Node2D body)
 	{
 		if (body is PlayerControl)
 		{
@@ -529,7 +522,7 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	//рисует направление пути бота
-	private void DrawNavigationPath()
+	protected void DrawNavigationPath()
 	{
 		if (_pathLine == null || _agent == null)
 			return;
@@ -543,7 +536,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	private void OnDamaged(float damageAmount, Node attackerNode) // attackerNode это Node из сигнала
+	protected void OnDamaged(float damageAmount, Node attackerNode) // attackerNode это Node из сигнала
 	{
 		GD.Print($"NPC_AI ({Name}): I've been damaged by '{(attackerNode != null ? attackerNode.Name : "Unknown")}' for {damageAmount} HP!");
 
