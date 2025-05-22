@@ -12,4 +12,9 @@ public partial class Quest : Area2D
 	{
 		globalPos = this.GlobalPosition;
 	}
+
+	public void die()
+	{
+		this.QueueFree();
+	}
 }
