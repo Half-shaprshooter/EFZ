@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="4_fyqoq"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="5_dngqq"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="6_akny4"]
-[ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_l1hqy"]
-[ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="7_uvndp"]
+[ext_resource type="PackedScene" uid="uid://lthit5pw6kuj" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_l1hqy"]
+[ext_resource type="PackedScene" path="res://Scenes/remarks.tscn" id="7_uvndp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
 size = Vector2(74, 65)
