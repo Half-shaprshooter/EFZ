@@ -20,8 +20,8 @@ public partial class NpcObject : CharacterBody2D
 	protected Vector2 TargetPosToFollow;
 
 	protected bool PlayerNear;
-	
-	[Export] public Host relationToPlayer = Host.Friendly;
+
+	[Export] protected string relationToPlayer = "Friendly";
 	protected HostImpl relation;
 
 	public NpcObject()
