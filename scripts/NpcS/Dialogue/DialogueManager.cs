@@ -97,7 +97,7 @@ public  partial class DialogueManager : Control
 		GetTree().Paused = false;
 		_isDialogueUp = false;
 	}
-
+	
 	private void DisplayNextDialogueElement(int index)
 	{
 		if (NpcDialogues.ElementAtOrDefault(index) == null || index == -1)
@@ -108,7 +108,6 @@ public  partial class DialogueManager : Control
 				TradeIndexActivated = false;
 			}
 			ShutDownDialogue();
-			//NpcDialogues.RemoveRange();
 		}
 		else
 		{

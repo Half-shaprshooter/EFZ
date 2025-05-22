@@ -48,7 +48,7 @@ public partial class ArrowQuest : Sprite2D
 				var quest = _quest;
 				QuestList.Instance.AddQuest(_quest.questText,_quest.nextQuest);
 				quest.die();
-				QuestList.Instance.RemoveQuest(text);
+				QuestList.Instance.RemoveQuest(text, _quest);
 				GD.Print("Меняю квест");
 			}
 			// }catch(Exception e){}

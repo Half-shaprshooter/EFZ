@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://con576l1u4tyu"]
+[gd_scene load_steps=9 format=3 uid="uid://con576l1u4tyu"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_lwhu1"]
 [ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/EnemyHuman.png" id="2_3tb2c"]
@@ -10,9 +10,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
 size = Vector2(74, 65)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nfq2q"]
-radius = 263.919
 
 [node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
 position = Vector2(4, 1)
@@ -55,15 +52,6 @@ collision_mask = 7
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ProximityArea"]
 self_modulate = Color(1, 1, 1, 0.286275)
 polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
-
-[node name="AreaHearCalm" type="Area2D" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-collision_layer = 4
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHearCalm"]
-shape = SubResource("CircleShape2D_nfq2q")
-debug_color = Color(0.156386, 0.518903, 1, 0.298039)
 
 [node name="KnowPosInFight" type="Area2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
