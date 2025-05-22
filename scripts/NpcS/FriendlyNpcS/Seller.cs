@@ -25,6 +25,7 @@ public partial class Seller : TalkableNpc
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
 				"Вариант текста 3", 2, true)
 		};
+		
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");

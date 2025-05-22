@@ -97,7 +97,7 @@ public  partial class DialogueManager : Control
 		GetTree().Paused = false;
 		_isDialogueUp = false;
 	}
-	
+
 	private void DisplayNextDialogueElement(int index)
 	{
 		if (NpcDialogues.ElementAtOrDefault(index) == null || index == -1)
@@ -108,6 +108,7 @@ public  partial class DialogueManager : Control
 				TradeIndexActivated = false;
 			}
 			ShutDownDialogue();
+			//NpcDialogues.RemoveRange();
 		}
 		else
 		{
@@ -116,13 +117,6 @@ public  partial class DialogueManager : Control
 				TradeIndexActivated = true;
 			}
 			Write(NpcDialogues[index]);
-			//Удаление диалога
-			if (NpcDialogues[index].isToDelete)
-			{
-				var s = Selections.Count();
-				var t = _currentIndex;
-				NpcDialogues.RemoveAt(index);
-			}
 		}
 	}
 }

@@ -6,11 +6,13 @@ public partial class Lever : Node2D
 	private Label _label;
 	private bool isNear;
 	private bool once;
-	private Kletka _kletka;
+	private NikitinCage _kletka;
+	private OneTimeHelpNoButton _oneTimeHelpNoButton;
 	public override void _Ready()
 	{
+		_oneTimeHelpNoButton = GetNode<OneTimeHelpNoButton>("HelpGenerator");
 		_label = GetNode<Label>("Label");
-		_kletka = GetNode<Kletka>("/root/main/Podval/Kletka4");
+		_kletka = GetNode<NikitinCage>("/root/main/Podval/NikitinCage");
 	}
 	
 	public override void _Process(double delta)
@@ -18,6 +20,7 @@ public partial class Lever : Node2D
 		if (isNear && Input.IsActionPressed("interact"))
 		{
 			_kletka.toggle();
+			_oneTimeHelpNoButton.disable();
 			_label.Visible = false;
 			once = true;
 		}
