@@ -24,7 +24,7 @@ public partial class FloorItem : Node2D
 
 	public override void _Ready()
 	{
-		_inventoryUI = GetNode<Control>("/root/main/Player/UI/Inventory");
+		_inventoryUI = GetNode<Control>("/root/main2/Player/UI/Inventory");
 		_iconSprite = GetNode<Sprite2D>("Sprite2D");
 		_interactUI = GetNode<Control>("interactItem");
 
