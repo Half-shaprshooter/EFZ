@@ -10,7 +10,7 @@ public partial class QuestList : VBoxContainer
 	{
 		Instance = this;
 		ArrowQuest = GetNode<ArrowQuest>("/root/main/CanvasLayer/SubViewportContainer/ArrowQuest");
-		AddQuest("Вернуться к церкви", GetNode<Quest>("/root/main/NavigationRegion2D/House6/TriggerForQuest"));
+		AddQuest("Поговорить с Лыткиным", GetNode<Quest>("/root/main/Quest2/TalkWithLitkin"));
 	}
 	
 	// Добавляет задание

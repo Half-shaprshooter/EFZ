@@ -140,7 +140,7 @@ public partial class NPC_AI : TalkableNpc
 	}
 
 	//логика при патруле
-	protected void HandlePatrol()
+	protected virtual void HandlePatrol()
 	{
 		if (_agent == null || PatrolPoints.Length == 0)
 			return;

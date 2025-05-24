@@ -328,8 +328,11 @@ public partial class PlayerControl : CharacterBody2D
 			if (obj is Mitya)
 			{
 				Mitya npc = obj as Mitya;
-				npc.SetDialog();
-				InterfaceManager.dialogueManager.ShowDialougeElement();
+				if (npc.CanTalk)
+				{
+					npc.SetDialog();
+					InterfaceManager.dialogueManager.ShowDialougeElement();
+				}
 			}
 		}
 	}
