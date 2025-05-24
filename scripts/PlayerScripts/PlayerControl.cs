@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using EscapeFromZone.scripts.FriendlyNpcS;
 using EscapeFromZone.scripts.Inventory;
 using EscapeFromZone.scripts.PlayerScripts;
 
@@ -321,6 +322,12 @@ public partial class PlayerControl : CharacterBody2D
 			if (obj is Seller)
 			{
 				Seller npc = obj as Seller;
+				npc.SetDialog();
+				InterfaceManager.dialogueManager.ShowDialougeElement();
+			}
+			if (obj is Mitya)
+			{
+				Mitya npc = obj as Mitya;
 				npc.SetDialog();
 				InterfaceManager.dialogueManager.ShowDialougeElement();
 			}
