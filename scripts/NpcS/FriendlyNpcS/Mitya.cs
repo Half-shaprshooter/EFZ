@@ -1,46 +1,65 @@
 namespace EscapeFromZone.scripts.FriendlyNpcS;
 
-public partial class Mitya : TalkableNpc
+public partial class Mitya : NPC_AI
 {
     private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
+	public bool CanTalk;
+	[Export] public Random Random1 { get; set; }
+	[Export] public Random Random2 { get; set; }
 
 	public override void _Ready()
 	{
 		NpcName = "Mitya";
-		InterfaceSelectionObject interSelect = new InterfaceSelectionObject(1, "Торговать");
-		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(2, "Уйти");
-		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(3, "…");
-		InterfaceSelectionObject interSelect5 = new InterfaceSelectionObject(4, "Ага");
+		CanTalk = true;
+		InterfaceSelectionObject interSelect = new InterfaceSelectionObject(2, "Здарова, да");
+		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(3, "Ходили туда?");
+		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(4, "Идём?");
+		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(-1, "Ага");
 		
-		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(-1, "Ок");
 		_npcDialogues = new List<NpcDialogue>
 		{
 			new NpcDialogue(
-				new List<InterfaceSelectionObject>(){interSelect, interSelect2, interSelect4}, 
-				"Ты, значит, от него? Ну, значит, не самый надёжный у тебя выбор друзей.", 0, true),
+				new List<InterfaceSelectionObject>(){interSelect}, 
+				"Ты, новенький, от Лыткина? Здорова.", 0, true),
+			new NpcDialogue(
+				new List<InterfaceSelectionObject>(){interSelect}, 
+				"Ты, новенький, от Лыткина? Здорова.", 0, true),
+			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect2}, 
+				"Лыткин, значит. Ну, если он одобрил — валяй, расскажу." +
+				"\n Есть старая церковь, километра три отсюда. Когда-то там жили, молились..." +
+				"\n А потом - тишина. Ни связи, ни сталкеров, ни писка. Только пустота и серая зона на карте." +
+				"\n Нужно проверить. Может, найдём что ценное... а может - кого-то.", 2, true),
 			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
-				"Вариант текста 2", 1, false),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
-				"Вариант текста 3", 2, true),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect5}, 
-				"Ну-ну, смотри-ка. Подходи, коль живой добрался.", 3, true),
-			new NpcDialogue(new List<InterfaceSelectionObject>(){interSelect3}, 
-				"Вот это уже лучше. Слушай тогда сюда. Есть тут один сталкер, " +
-				"Митя.\n С ним и потолкуй. У него дельце завалялось. Простенькое, но для новенького — в самый раз.\n " +
-				"А если справишься... глядишь, и расскажу.\n И помни: тут каждый шаг записывается. " +
-				"Даже если ты сам этого не замечаешь.\n.", 4, true),
+				"Несколько раз. Вернулись не все. Один говорил, будто слышал чей-то рёв. Другой - что видел человека без лица." +
+				"\nНо, честно, тут и не такое бывает. Главное - не отходи. Если начнётся - держим строй и валим.", 3, true),
+			new NpcDialogue(
+				new List<InterfaceSelectionObject>(){interSelect4}, 
+				"Да, не будем терять время", 4, true),
 		};
 		
 		_label = GetNode<Label>("ButtonText");
 		base._Ready();
 	}
+
+	protected override void HandlePatrol()
+	{
+		if (!CanTalk)
+		{
+			base.HandlePatrol();
+		}
+	}
 	
 	public void SetDialog()
 	{
+		if (!CanTalk)
+			return;
 		InterfaceManager.dialogueManager.NpcDialogues = _npcDialogues;
 		InterfaceManager.dialogueManager.DialogHeader = NpcName;
 		GetTree().Paused = true;
+		CanTalk = false;
+		Random1.IsStanding = !Random1.IsStanding;
+		Random2.IsStanding = !Random2.IsStanding;
 	}
 
 	//добавлен async, чтобы работал показ текста
