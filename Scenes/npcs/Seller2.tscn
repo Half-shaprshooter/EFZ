@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://8uno8sp66mlr"]
+
+[ext_resource type="Script" path="res://scripts/NpcS/FriendlyNpcS/Seller.cs" id="1_efu23"]
+[ext_resource type="Texture2D" uid="uid://bwj1ulw0nkv68" path="res://sprites/npcSprites/Seller.png" id="2_prw3g"]
+[ext_resource type="Script" path="res://scripts/NpcS/Dialogue/Remarks.cs" id="3_2upxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]
+size = Vector2(74, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3sui"]
+size = Vector2(145, 79)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uqjj"]
+radius = 193.01
+
+[sub_resource type="LabelSettings" id="LabelSettings_8x5op"]
+font_size = 24
+
+[node name="NeutralNpc" type="CharacterBody2D"]
+process_mode = 3
+collision_layer = 4
+collision_mask = 244
+script = ExtResource("1_efu23")
+
+[node name="ButtonText" type="Label" parent="."]
+light_mask = 1023
+anchors_preset = -1
+anchor_left = -0.043
+anchor_top = 0.091
+anchor_right = 0.049
+anchor_bottom = 0.127
+offset_left = 58.0
+offset_top = 66.0
+offset_right = 165.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "[E] Торговать"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Seller" type="Sprite2D" parent="."]
+position = Vector2(-1, -3)
+rotation = 1.58996
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_prw3g")
+
+[node name="WolfCol" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fjcb7")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DamageCol" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(35.5, -3.5)
+shape = SubResource("RectangleShape2D_s3sui")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_0uqjj")
+
+[node name="Remarks" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_2upxb")
+body = NodePath("..")
+
+[node name="BackGround" type="ColorRect" parent="Remarks"]
+offset_left = -111.0
+offset_top = -159.0
+offset_right = 111.0
+offset_bottom = -81.0
+color = Color(0, 0, 0, 0)
+
+[node name="Label" type="Label" parent="Remarks"]
+offset_left = -111.0
+offset_top = -159.0
+offset_right = 111.0
+offset_bottom = -81.0
+label_settings = SubResource("LabelSettings_8x5op")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ProximityArea" type="Area2D" parent="Remarks"]
+visible = false
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Remarks/ProximityArea"]
+self_modulate = Color(1, 1, 1, 0.286275)
+polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
+
+[node name="LookRay" type="RayCast2D" parent="Remarks"]
+target_position = Vector2(200, 0)
+collision_mask = 7
+
+[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]
+[connection signal="body_entered" from="Remarks/ProximityArea" to="Remarks" method="OnBodyEntered"]
+[connection signal="body_exited" from="Remarks/ProximityArea" to="." method="OnBodyExited"]

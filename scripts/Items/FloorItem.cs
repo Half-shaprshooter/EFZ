@@ -87,6 +87,7 @@ public partial class FloorItem : Node2D
 		{
 			_inventoryUI.Call("AddItem", ItemId);
 			_interactUI.Visible = true;
+			PlayerData.CanFire = false;
 			QueueFree();
 			GD.Print("Произошло действие");
 		}

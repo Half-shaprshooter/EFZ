@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chp3m06jisirq"]
+[gd_scene load_steps=11 format=3 uid="uid://chp3m06jisirq"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_i8n4y"]
 [ext_resource type="Texture2D" uid="uid://cliileuhcsqq3" path="res://sprites/npcSprites/Mitya.png" id="2_aldng"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_hyo2y"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_d2nph"]
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_7pb6v"]
+[ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="8_4ppuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
-size = Vector2(74, 65)
+size = Vector2(120, 142)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcv8x"]
+radius = 189.003
 
 [node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
 position = Vector2(4, 1)
@@ -23,12 +27,32 @@ SpeedWalk = 250
 SpeedFast = 600
 SpeedRun = 900
 
+[node name="ButtonText" type="Label" parent="."]
+light_mask = 1023
+anchors_preset = -1
+anchor_left = -0.043
+anchor_top = 0.091
+anchor_right = 0.049
+anchor_bottom = 0.127
+offset_left = 58.0
+offset_top = 66.0
+offset_right = 165.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "[E] Поговорить"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.56735
 texture = ExtResource("2_aldng")
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
+position = Vector2(-7, 1)
 shape = SubResource("RectangleShape2D_p2j1y")
 
 [node name="muzzle" type="Sprite2D" parent="."]
@@ -81,8 +105,20 @@ body = NodePath("..")
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_7pb6v")]
 
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_jcv8x")
+
+[node name="OneTimeHelp" parent="." instance=ExtResource("8_4ppuk")]
+hintText = "Нажмите \"E\" для начала диалога"
+
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
 [connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]
 [connection signal="body_exited" from="ProximityArea" to="." method="SeeZoneExited"]
 [connection signal="body_entered" from="KnowPosInFight" to="." method="KnowPosInChaseEntered"]
 [connection signal="body_exited" from="KnowPosInFight" to="." method="KnowPosInChaseExited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="OnDetectionAreaBodyEntered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="OnDetectionAreaBodyExited"]

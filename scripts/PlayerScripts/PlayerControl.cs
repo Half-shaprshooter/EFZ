@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using EscapeFromZone.scripts.FriendlyNpcS;
 using EscapeFromZone.scripts.Inventory;
 using EscapeFromZone.scripts.PlayerScripts;
 
@@ -323,6 +324,15 @@ public partial class PlayerControl : CharacterBody2D
 				Seller npc = obj as Seller;
 				npc.SetDialog();
 				InterfaceManager.dialogueManager.ShowDialougeElement();
+			}
+			if (obj is Mitya)
+			{
+				Mitya npc = obj as Mitya;
+				if (npc.CanTalk)
+				{
+					npc.SetDialog();
+					InterfaceManager.dialogueManager.ShowDialougeElement();
+				}
 			}
 		}
 	}
