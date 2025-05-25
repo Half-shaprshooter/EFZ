@@ -4,7 +4,11 @@ public partial class Mitya : NPC_AI
 {
     private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
+	private static List<NpcDialogue> _npcDialogues2;
 	public bool CanTalk;
+	private int _patrolPointsVisited = 0;
+	private int _dialogueNumber = 0;
+	[Export] public Node2D[] NextPatrolPoints;
 	[Export] public Random Random1 { get; set; }
 	[Export] public Random Random2 { get; set; }
 
@@ -16,6 +20,8 @@ public partial class Mitya : NPC_AI
 		InterfaceSelectionObject interSelect2 = new InterfaceSelectionObject(3, "Ходили туда?");
 		InterfaceSelectionObject interSelect3 = new InterfaceSelectionObject(4, "Идём?");
 		InterfaceSelectionObject interSelect4 = new InterfaceSelectionObject(-1, "Ага");
+		
+		InterfaceSelectionObject interSelect5 = new InterfaceSelectionObject(-1, "Отлично");
 		
 		_npcDialogues = new List<NpcDialogue>
 		{
@@ -37,9 +43,30 @@ public partial class Mitya : NPC_AI
 				new List<InterfaceSelectionObject>(){interSelect4}, 
 				"Да, не будем терять время", 4, true),
 		};
+
+		_npcDialogues2 = new List<NpcDialogue>()
+		{
+			new NpcDialogue(
+				new List<InterfaceSelectionObject>(){interSelect5}, 
+				"Чёрт бы его..." +
+				"\n Слушай, нужно, прочесать всю церковь. От подвала до колокольни." +
+				"\n Если там что-то осталось - мы должны это найти. Мы пойдем первыми.", 0, true),
+		};
 		
 		_label = GetNode<Label>("ButtonText");
 		base._Ready();
+	}
+
+	public override void _Process(double delta)
+	{
+		if (_patrolPointsVisited == PatrolPoints.Length && _dialogueNumber == 1)
+		{
+			_patrolPointsVisited = 0;
+			SetVelocityToZero();
+			CanTalk = true;
+			_npcDialogues = _npcDialogues2;
+		}
+		base._Process(delta);
 	}
 
 	protected override void HandlePatrol()
@@ -48,6 +75,12 @@ public partial class Mitya : NPC_AI
 		{
 			base.HandlePatrol();
 		}
+	}
+
+	protected override void AdvancePatrolPoint()
+	{
+		_patrolPointsVisited++;
+		base.AdvancePatrolPoint();
 	}
 	
 	public void SetDialog()
@@ -60,6 +93,28 @@ public partial class Mitya : NPC_AI
 		CanTalk = false;
 		Random1.IsStanding = !Random1.IsStanding;
 		Random2.IsStanding = !Random2.IsStanding;
+		_dialogueNumber++;
+		if (_dialogueNumber == 2)
+		{
+			PatrolPoints = NextPatrolPoints;
+        
+			// 2. Обновляем массив позиций
+			_patrolTargets = new Vector2[PatrolPoints.Length];
+			for (int i = 0; i < PatrolPoints.Length; i++)
+			{
+				_patrolTargets[i] = PatrolPoints[i].GlobalPosition;
+			}
+        
+			// 3. Сбрасываем индекс и счетчик
+			_currentPatrolIndex = 0;
+			_patrolPointsVisited = 0;
+        
+			// 4. Запускаем движение к первой точке
+			SetNextPatrolPoint();
+			Random1.SetNextPoints();
+			Random2.SetNextPoints();
+		}
+
 	}
 
 	//добавлен async, чтобы работал показ текста
