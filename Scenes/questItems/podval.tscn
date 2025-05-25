@@ -1,0 +1,546 @@
+[gd_scene load_steps=49 format=3 uid="uid://wawxu7ijh1yq"]
+
+[ext_resource type="Script" path="res://scripts/questScripts/Quest.cs" id="1_s73yl"]
+[ext_resource type="Texture2D" uid="uid://ba3bt154p4aqd" path="res://sprites/Black.png" id="2_d2hb4"]
+[ext_resource type="Texture2D" uid="uid://b6ebqx231ljha" path="res://sprites/buildings/Podval.png" id="3_rgrj0"]
+[ext_resource type="Texture2D" uid="uid://b8lexfjvyk182" path="res://sprites/buildings/Church/Ladder.png" id="4_1tcuy"]
+[ext_resource type="PackedScene" uid="uid://wacv3xxahf74" path="res://Scenes/DoorWithCodeTest.tscn" id="5_48rqv"]
+[ext_resource type="PackedScene" uid="uid://c0pkx260wbdnu" path="res://Scenes/Items/floorItem.tscn" id="6_cbl8t"]
+[ext_resource type="Texture2D" uid="uid://dfnyjd0l64v68" path="res://sprites/Key.png" id="7_c6320"]
+[ext_resource type="PackedScene" uid="uid://dsc02ujatwpj7" path="res://Scenes/Items/noteForPodval.tscn" id="8_15853"]
+[ext_resource type="PackedScene" uid="uid://drvjhxb5jdbdt" path="res://Scenes/Items/noteWithCode.tscn" id="9_yuofq"]
+[ext_resource type="Script" path="res://scripts/questScripts/Kletka.cs" id="10_y8hom"]
+[ext_resource type="Texture2D" uid="uid://bvyy3mc6bv45v" path="res://sprites/Kletki/1.png" id="11_v12bi"]
+[ext_resource type="Texture2D" uid="uid://cvpu3praml1o" path="res://sprites/Kletki/2.png" id="12_wot4x"]
+[ext_resource type="Texture2D" uid="uid://375rmhp5t48o" path="res://sprites/Kletki/3.png" id="13_qm635"]
+[ext_resource type="Texture2D" uid="uid://ds41fo7c3u5fu" path="res://sprites/Kletki/4.png" id="14_6hm65"]
+[ext_resource type="Texture2D" uid="uid://bxwclqw774ani" path="res://sprites/Kletki/5.png" id="15_rin8r"]
+[ext_resource type="Texture2D" uid="uid://c1p1kp01apq3m" path="res://sprites/Kletki/6.png" id="16_iytj4"]
+[ext_resource type="Texture2D" uid="uid://b8k0d3pswekul" path="res://sprites/Kletki/7.png" id="17_mcyfi"]
+[ext_resource type="Texture2D" uid="uid://b08a7obj2tq35" path="res://sprites/Kletki/8.png" id="18_lilc7"]
+[ext_resource type="Texture2D" uid="uid://b1kfuweaor574" path="res://sprites/Kletki/openCage.png" id="19_xijff"]
+[ext_resource type="PackedScene" path="res://Scenes/npcs/Mutant.tscn" id="20_0ua5a"]
+[ext_resource type="Texture2D" uid="uid://c6pd2sycjgleh" path="res://sprites/npcSprites/Nikitin.png" id="21_qjvf7"]
+[ext_resource type="Script" path="res://scripts/questScripts/NikitinCage.cs" id="22_fgar1"]
+[ext_resource type="Script" path="res://scripts/Basement/PodvalSound.cs" id="23_pibs7"]
+[ext_resource type="AudioStream" uid="uid://b1yoco0fscvr" path="res://sounds/effects/Electric.mp3" id="24_g4qet"]
+[ext_resource type="AudioStream" uid="uid://dv3sg6jsxgqta" path="res://sounds/effects/Lever.mp3" id="25_jxacc"]
+[ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="26_e6kk6"]
+[ext_resource type="Texture2D" uid="uid://bmwxt6sg3pkml" path="res://sprites/door.png" id="27_gpelx"]
+[ext_resource type="Script" path="res://scripts/questScripts/Lever.cs" id="28_doxq1"]
+[ext_resource type="PackedScene" uid="uid://re28wg5vu0b2" path="res://Scenes/questItems/HelpGenerator.tscn" id="29_23f6m"]
+[ext_resource type="PackedScene" uid="uid://bfxjq8k23eudi" path="res://Scenes/Items/noteForPodvalDalnya.tscn" id="30_l4sx0"]
+[ext_resource type="PackedScene" uid="uid://dxtgibq1xtv10" path="res://Scenes/OneTimeHelp.tscn" id="31_50asj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7x1n"]
+radius = 235.895
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cn11p"]
+radius = 195.439
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tgimc"]
+radius = 133.595
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ash82"]
+radius = 76.4826
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn03d"]
+size = Vector2(166.954, 177.57)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bf6p"]
+polygon = PackedVector2Array(-7.55469, 18.2388, -7.55469, 100.785, 1.0625, 100.785, 1.0625, 112.303, 156.168, 112.303, 156.168, 99.8252, 173.402, 99.8252, 173.402, 18.2388, 182.02, 18.2388, 182.02, 77.749, 336.049, 77.749, 336.049, 72.9497, 352.205, 72.9497, 352.205, -70.0664, 339.279, -70.0664, 339.279, -83.5039, 178.787, -83.5039, 178.787, -21.1143, 175.557, -21.1143, 175.557, -107.5, 165.861, -107.5, 165.861, -121.897, 106.621, -121.897, 106.621, -125.737, 169.094, -125.737, 169.094, -287.95, 164.785, -287.95, 164.785, -301.388, 16.1426, -301.388, 16.1426, -289.87, 3.2168, -289.87, 3.2168, -261.075, 144.32, -261.075, 144.32, -257.235, 3.2168, -257.235, 3.2168, -125.737, 62.459, -125.737, 62.459, -121.897, 3.2168, -121.897, 3.2168, -106.54, -8.63281, -106.54, -8.63281, -22.0742, -10.7852, -22.0742, -10.7852, -81.5845, -569.814, -81.5845, -569.814, 70.0703, -555.811, 70.0703, -555.811, 79.6689, -500.877, 79.6689, -500.877, 83.5083, -553.656, 83.5083, -553.656, 244.761, -549.348, 244.761, -549.348, 255.319, -411.477, 255.319, -411.477, 243.801, -400.705, 243.801, -400.705, 82.5483, -457.793, 82.5483, -457.793, 79.6689, -15.0938, 86.3877, -10.7852, 86.3877, -10.7852, 18.2388)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6n2xj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_v12bi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wot4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qm635")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6hm65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rin8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_iytj4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mcyfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_lilc7")
+}],
+"loop": true,
+"name": &"Electric",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_xijff")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_036xg"]
+radius = 100.828
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g18xa"]
+size = Vector2(282.277, 240.372)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfltm"]
+size = Vector2(23, 156.186)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e3b8k"]
+polygon = PackedVector2Array(-11, 0, -6.46289, 157.414, 15.0801, 145.896, 11, -3)
+
+[sub_resource type="Animation" id="Animation_u8irb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.45788]
+}
+
+[sub_resource type="Animation" id="Animation_kq15r"]
+resource_name = "door_closed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.56556, 0.0122173]
+}
+
+[sub_resource type="Animation" id="Animation_vmmas"]
+resource_name = "door_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0127904, -1.5661]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltnsj"]
+_data = {
+"RESET": SubResource("Animation_u8irb"),
+"door_closed": SubResource("Animation_kq15r"),
+"door_open": SubResource("Animation_vmmas")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tvw0k"]
+radius = 125.068
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b7iqs"]
+vertices = PackedVector2Array(471.75, 280.039, 590.922, 452.203, 29.7266, 457.906, -1.3125, 402.578, 24, 26.4531, -306.57, -321.82, -112.969, -336.883, -110.828, -9.63281, -322.781, -10.2266, -2187.17, 296.43, -2454.65, 299.367, -2506.13, -314.813, -1815.12, -325.094, -1815.12, -22.8438, -2160.81, 294.297, -2168.61, 433.383, -1861.83, 427.602, -1885.86, 1103.83, -2449.7, 1099.63, -2457.4, 428.578, -2198.28, 427.648, -1352.18, 308.773, -1706.03, -69.6094, -1546.88, -32.6797, -574.43, -39.3828, -579.711, -320.367, -414.398, -326.156, -418.492, -50.3516, -431.328, 59.25, -944.258, -37.8281, -937.867, -303.32, -680.539, -314.258, -678.398, -18.3672, -680.023, 52.1484, 326.68, -627.422, 70, -627.422, 68.1406, -1128.89, 728.133, -1110.08, 716.961, -631.523, 431.656, -604.148, 343.156, -509.789, 443.672, -500.258, -1706.03, -295.594, -1572.35, -291.32, -1302.3, 9.99219, -1446.45, -48.2891, -1303.48, -23.0078, -1446.45, -308.148, -1303.48, -303.844, -106.781, 52.3594, -116.172, 328.688, -313.117, 319.711, -327.438, 47.7188, -429.211, 301.859, -577.141, 302.492, -583.609, 52.1484, 1562.41, -282.43, 1547.6, 282.344, 881.18, 296.102, 873.5, 17.25, 1526.95, -332.594, 858.992, -338.773, 846.641, -61.7578, 738.219, 37.0703, 798.852, -42.5469, -1203.28, -51.2188, -1201.2, -294.023, -1052.31, -294.023, -1043.52, -24.5625, -1061.71, 43.1484, -693.508, 320.711, -944.781, 310.859, -954.633, 36.0781, -1064.92, 286.352, -1206.39, 286.352, -1213.44, 58.3906, 737.82, -100.789, 2.90625, -15.7734, 716.773, -501.258, 734.531, -470.109, 21.3281, -463.172, 39.3438, -504.672)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(15, 18, 19, 20), PackedInt32Array(14, 15, 20, 9), PackedInt32Array(21, 14, 13, 22, 23), PackedInt32Array(24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(34, 38, 39), PackedInt32Array(40, 34, 39, 41), PackedInt32Array(22, 42, 43, 23), PackedInt32Array(44, 21, 23, 45, 46), PackedInt32Array(45, 47, 48, 46), PackedInt32Array(49, 50, 51, 52, 8, 7), PackedInt32Array(28, 53, 54, 55, 24), PackedInt32Array(56, 57, 58, 59, 60), PackedInt32Array(61, 60, 59, 62), PackedInt32Array(62, 59, 63, 64), PackedInt32Array(65, 66, 67, 68, 69), PackedInt32Array(33, 70, 71, 72, 29), PackedInt32Array(69, 73, 74, 75, 65), PackedInt32Array(4, 76, 64, 63, 0), PackedInt32Array(44, 46, 65, 75), PackedInt32Array(72, 69, 68, 29), PackedInt32Array(55, 33, 32, 24), PackedInt32Array(28, 27, 8, 52), PackedInt32Array(4, 49, 7, 77), PackedInt32Array(78, 79, 76, 4, 77, 80, 41), PackedInt32Array(40, 41, 80, 81)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1847.28, 1144.13, -2489.25, 1139.33, -2497.87, 388.737, -2235.05, 387.777, -2230.74, 336.906, -2491.4, 339.786, -2549.57, -354.179, -1775.12, -365.697, -1775.12, -83.5039, -1746.03, -95.9819, -1746.03, -336.902, -1535.99, -330.183, -1511.22, -78.7051, -1486.45, -82.5444, -1486.45, -349.38, -1263.48, -342.661, -1263.48, -75.8252, -1243.02, -81.5845, -1240.86, -334.022, -1013.59, -334.022, -1004.97, -70.0664, -983.43, -72.9458, -976.967, -341.701, -640.853, -355.981, -638.75, -67.187, -615.053, -71.9858, -620.438, -358.978, -373.777, -367.617, -378.086, -76.7852, -359.773, -69.1064, -344.695, -358.978, -73.2598, -380.095, -71.1055, -51.8291, -35.5605, -53.749, -18.3262, -472.239, 12.9102, -544.228, 297.271, -549.026, 291.887, -587.42, 30.1445, -587.42, 27.9902, -1170.04, 769.053, -1148.93, 756.127, -595.099, 476.074, -568.224, 479.305, -540.388, 739.969, -541.348, 774.438, -480.878, 777.668, -118.058, 807.828, -89.2632, 820.754, -379.135, 1547.81, -372.416, 1602.75, -294.669, 1586.59, 321.548, 842.297, 336.906, 834.756, 63.3516, 756.127, 74.8696, 524.545, 286.035, 666.725, 491.44, 6.44727, 498.159, -42.0234, 411.773, -19.4023, 75.8296, -67.873, 85.4277, -77.5684, 370.5, -351.158, 358.022, -365.16, 92.1465, -391.012, 95.0264, -388.857, 341.705, -616.131, 342.665, -622.592, 92.1465, -641.98, 92.1465, -655.558, 362.238, -983.43, 349.384, -993.123, 78.709, -1022.21, 80.6284, -1025.44, 326.348, -1245.17, 326.348, -1252.71, 82.5483, -1272.1, 71.9902, -1318.41, 349.384, -2123.03, 334.986, -2126.26, 392.577, -1820.36, 386.818)])
+agent_radius = 40.0
+
+[node name="Podval" type="StaticBody2D"]
+position = Vector2(19894.5, 8042.5)
+collision_layer = 4
+collision_mask = 2
+
+[node name="ReadZapiska" type="Area2D" parent="." node_paths=PackedStringArray("nextQuest")]
+position = Vector2(700.116, 401.215)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_s73yl")
+questText = "Найти клетку Никитина"
+nextQuest = NodePath("../FindKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReadZapiska"]
+position = Vector2(-43.084, 32.1548)
+shape = SubResource("CircleShape2D_c7x1n")
+
+[node name="FindKletka" type="Area2D" parent="." node_paths=PackedStringArray("nextQuest")]
+position = Vector2(-2197.35, -211.163)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_s73yl")
+questText = "Найти записку с кодом от двери генераторной"
+nextQuest = NodePath("../FindZapiskaKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FindKletka"]
+position = Vector2(667.812, 252.438)
+shape = SubResource("CircleShape2D_cn11p")
+
+[node name="FindZapiskaKletka" type="Area2D" parent="." node_paths=PackedStringArray("nextQuest")]
+position = Vector2(-1929.14, 985.758)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_s73yl")
+questText = "Отключить клетку Никитина от электросети"
+nextQuest = NodePath("../TurnOff")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FindZapiskaKletka"]
+shape = SubResource("CircleShape2D_tgimc")
+
+[node name="TurnOff" type="Area2D" parent="." node_paths=PackedStringArray("nextQuest")]
+position = Vector2(755.049, -905.128)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_s73yl")
+questText = "Зайти в нужную клетку"
+nextQuest = NodePath("../GetInKletka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurnOff"]
+shape = SubResource("CircleShape2D_ash82")
+
+[node name="GetInKletka" type="Area2D" parent="." node_paths=PackedStringArray("nextQuest")]
+position = Vector2(-2407.39, -223.641)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_s73yl")
+questText = "Выбраться из церкви"
+nextQuest = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GetInKletka"]
+position = Vector2(81.3223, 7.19873)
+shape = SubResource("RectangleShape2D_rn03d")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(-144.888, -198.685)
+scale = Vector2(1.03081, 1.06971)
+texture = ExtResource("2_d2hb4")
+
+[node name="PodvalSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.518, 4.518)
+texture = ExtResource("3_rgrj0")
+
+[node name="Ladder" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(289.731, 37.4355)
+scale = Vector2(1.94517, 2.29377)
+texture = ExtResource("4_1tcuy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(4.518, 4.518)
+occluder = SubResource("OccluderPolygon2D_4bf6p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(786.286, -853.296)
+rotation = 3.14159
+polygon = PackedVector2Array(21.5391, 447.286, 38.7734, 450.166, 40.9277, 513.515, 714.119, 511.597, 714.119, 453.047, 775.527, 453.048, 775.529, 333.066, 126.023, 332.105, 126.023, 303.31, 775.529, 303.311, 772.299, -277.39, 498.709, -277.391, 498.709, -303.307, 772.299, -303.306, 774.453, -373.375, 813.23, -374.333, 820.771, -755.39, 835.852, -755.39, 835.85, -486.635, 3282, -467.428, 3287.39, -496.223, 3348.78, -496.222, 3352.02, -1145.07, 3277.69, -1145.07, 3277.69, -1205.54, 3034.26, -1205.55, 3034.26, -1233.38, 3275.54, -1233.38, 3276.62, -1941.74, 3259.39, -1941.74, 3259.39, -1998.37, 2662.66, -2005.09, 2662.66, -1933.11, 2604.5, -1934.07, 2604.49, -1231.25, 2865.16, -1231.46, 2865.16, -1207.47, 2604.49, -1208.43, 844.471, -1235.31, 844.471, -1259.31, 2577.53, -1233.54, 2576.49, -1933.11, 2556.03, -2031.97, 2596.96, -2059.81, 3261.54, -2061.72, 3352.02, -2058.84, 3346.63, -1935.02, 3310.01, -1934.06, 3308.93, -1242.02, 3398.33, -1256.42, 3413.41, -431.913, 849.852, -467.438, 820.754, 453.047, 841.219, 454.966, 841.219, 548.071, -77.5684, 544.231, -58.1797, 449.208, -57.1016, 75.8296, -28.0039, -442.486, -23.6934, -757.314, -6.45898, -757.314, -5.38477, -366.659, 36.623, -366.658, 36.623, -303.309, 304.828, -301.388, 304.828, -285.071, 22.6211, -284.113, 22.1313, 46.9578)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(1095.42, 405.054)
+rotation = -1.57079
+polygon = PackedVector2Array(52.792, 428.695, 78.708, 428.695, 76.7886, 494.4, 718.922, 498.707, 721.801, 437.311, 603.741, 431.926, 601.821, 305.902, 487.6, 303.75, 488.559, 217.58, 607.58, 218.654, 608.539, 89.4004, 784.19, 91.5547, 784.189, -281.131, 815.864, -280.053, 820.754, 453.047, 841.219, 454.966, 841.219, 548.071, -20.1553, 554.719, 5.76025, 429.773, 23.0356, -273.59, 53.7505, -273.59)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-31.252, 454.966, -0.015625, 454.966, -0.015625, 513.517, 714.119, 511.597, 714.119, 453.047, 634.412, 443.448, 639.797, 344.584, 550.396, 341.705, 551.473, 271.637, 640.875, 280.275, 637.643, 173.733, 779.822, 173.733, 785.209, 81.5884, 822.908, 81.5884, 820.754, 453.047, 841.219, 454.966, 841.219, 548.071, -77.5684, 544.231, -58.1797, 449.208, -57.1016, 75.8296, -34.4824, 75.8296)
+
+[node name="DoorHandler" parent="." instance=ExtResource("5_48rqv")]
+position = Vector2(302.656, -562.465)
+rotation = -1.57079
+
+[node name="Key" parent="." instance=ExtResource("6_cbl8t")]
+position = Vector2(644.105, 179.492)
+ItemName = "Key"
+ItemTexture = ExtResource("7_c6320")
+
+[node name="NoteOnTable" parent="." instance=ExtResource("8_15853")]
+position = Vector2(657.031, 435.769)
+
+[node name="NoteWithCode" parent="." instance=ExtResource("9_yuofq")]
+position = Vector2(-1929.14, 985.758)
+scale = Vector2(1.6071, 1.19393)
+
+[node name="Kletka" type="StaticBody2D" parent="."]
+position = Vector2(-611.821, -274.512)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("10_y8hom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Kletka"]
+position = Vector2(106.635, 67.1888)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+
+[node name="Walls" type="CollisionPolygon2D" parent="Kletka"]
+position = Vector2(115.252, 76.7868)
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -138.005, -39.1432, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="Door" type="CollisionPolygon2D" parent="Kletka"]
+position = Vector2(118.484, 76.7868)
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+disabled = true
+
+[node name="NPC_AI_Test" parent="Kletka" instance=ExtResource("20_0ua5a")]
+position = Vector2(115.253, 4.79858)
+rotation = 1.57079
+MeleeAttackRange = 100.0
+CanUseRangedWeapon = false
+relationToPlayer = 0
+
+[node name="Kletka2" type="StaticBody2D" parent="."]
+position = Vector2(-1630.78, -211.163)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("10_y8hom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Kletka2"]
+position = Vector2(0.00390625, -0.000495911)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+
+[node name="Walls" type="CollisionPolygon2D" parent="Kletka2"]
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="Door" type="CollisionPolygon2D" parent="Kletka2"]
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+disabled = true
+
+[node name="NPC_AI_Test" parent="Kletka2" instance=ExtResource("20_0ua5a")]
+position = Vector2(0.000740051, 20.1565)
+rotation = 1.57079
+MeleeAttackRange = 100.0
+CanUseRangedWeapon = false
+relationToPlayer = 0
+
+[node name="Nikitin" type="Sprite2D" parent="."]
+position = Vector2(-2326.6, -211.163)
+rotation = 1.57079
+texture = ExtResource("21_qjvf7")
+
+[node name="NikitinCage" type="StaticBody2D" parent="."]
+position = Vector2(-2509.71, -275.472)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("22_fgar1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NikitinCage"]
+position = Vector2(190.651, 63.3494)
+rotation = -4.71238
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+
+[node name="Walls" type="CollisionPolygon2D" parent="NikitinCage"]
+position = Vector2(188.711, 78.1309)
+rotation = -1.57079
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -138.005, -39.1432, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="DoorNikitin" type="CollisionPolygon2D" parent="NikitinCage"]
+position = Vector2(197.313, 79.4211)
+rotation = -1.57079
+scale = Vector2(1.00716, 0.945734)
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+
+[node name="Trigger" type="Area2D" parent="NikitinCage"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NikitinCage/Trigger"]
+position = Vector2(183.107, 64.3088)
+shape = SubResource("CircleShape2D_036xg")
+
+[node name="Kletka5" type="StaticBody2D" parent="."]
+position = Vector2(-389.934, 302.352)
+rotation = -3.14159
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("10_y8hom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Kletka5"]
+position = Vector2(106.635, 67.1888)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+
+[node name="Walls" type="CollisionPolygon2D" parent="Kletka5"]
+position = Vector2(115.252, 76.7868)
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -138.005, -39.1432, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="Door" type="CollisionPolygon2D" parent="Kletka5"]
+position = Vector2(118.484, 76.7868)
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+disabled = true
+
+[node name="NPC_AI_Test" parent="Kletka5" instance=ExtResource("20_0ua5a")]
+position = Vector2(108.79, 69.1088)
+rotation = 1.57079
+MeleeAttackRange = 100.0
+CanUseRangedWeapon = false
+relationToPlayer = 0
+
+[node name="SoundPlayers" type="Node2D" parent="."]
+position = Vector2(696.884, -95.9824)
+script = ExtResource("23_pibs7")
+
+[node name="FirstPlayer" type="AudioStreamPlayer2D" parent="SoundPlayers"]
+position = Vector2(0.000732422, 0.00012207)
+rotation = 3.14159
+stream = ExtResource("24_g4qet")
+autoplay = true
+bus = &"Effects"
+
+[node name="SecondPlayer" type="AudioStreamPlayer2D" parent="SoundPlayers"]
+position = Vector2(-776.607, -540.39)
+stream = ExtResource("25_jxacc")
+bus = &"Effects"
+
+[node name="Kletka6" type="StaticBody2D" parent="."]
+position = Vector2(-1021.13, 286.034)
+rotation = 3.14159
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("10_y8hom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Kletka6"]
+position = Vector2(106.635, 67.1888)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+frame = 5
+frame_progress = 0.838581
+
+[node name="Walls" type="CollisionPolygon2D" parent="Kletka6"]
+position = Vector2(115.252, 76.7868)
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -138.005, -39.1432, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="Door" type="CollisionPolygon2D" parent="Kletka6"]
+position = Vector2(118.484, 76.7868)
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+disabled = true
+
+[node name="NPC_AI_Test" parent="Kletka6" instance=ExtResource("20_0ua5a")]
+position = Vector2(115.251, 74.8674)
+rotation = 1.57079
+MeleeAttackRange = 100.0
+CanUseRangedWeapon = false
+relationToPlayer = 0
+
+[node name="Kletka3" type="StaticBody2D" parent="."]
+position = Vector2(-1239.78, -274.512)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("10_y8hom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Kletka3"]
+position = Vector2(106.635, 67.1888)
+rotation = -3.14159
+sprite_frames = SubResource("SpriteFrames_6n2xj")
+animation = &"Electric"
+
+[node name="Walls" type="CollisionPolygon2D" parent="Kletka3"]
+position = Vector2(115.252, 76.7868)
+polygon = PackedVector2Array(-117.406, 124.779, -117.406, 124.779, -140.025, 124.779, -138.005, -39.1432, -136.795, -137.257, 144.334, -137.257, 137.873, 129.578, 117.406, 129.578, 117.406, 106.542, 110.943, -119.98, -116.33, -117.101)
+
+[node name="Door" type="CollisionPolygon2D" parent="Kletka3"]
+position = Vector2(112.017, 76.7868)
+polygon = PackedVector2Array(-110.943, 109.421, -110.943, 127.659, 113.098, 127.659, 112.021, 105.582)
+disabled = true
+
+[node name="NPC_AI_Test" parent="Kletka3" instance=ExtResource("20_0ua5a")]
+position = Vector2(115.249, 63.3488)
+rotation = 1.57079
+MeleeAttackRange = 100.0
+CanUseRangedWeapon = false
+relationToPlayer = 0
+
+[node name="DoorHandler2" type="StaticBody2D" parent="."]
+position = Vector2(-42.022, -85.4238)
+rotation = -1.45788
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("26_e6kk6")
+_isLocked = true
+rotate = 6.3
+
+[node name="DoorEvent" type="Area2D" parent="DoorHandler2"]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="EventArea" type="CollisionShape2D" parent="DoorHandler2/DoorEvent"]
+position = Vector2(-18.2695, 59.3042)
+shape = SubResource("RectangleShape2D_g18xa")
+
+[node name="doorCol" type="CollisionShape2D" parent="DoorHandler2"]
+position = Vector2(3.50391, 76.4414)
+shape = SubResource("RectangleShape2D_wfltm")
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorHandler2"]
+position = Vector2(2.224, 77.0458)
+rotation = -1.41023
+scale = Vector2(0.936627, 0.759975)
+texture = ExtResource("27_gpelx")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="DoorHandler2"]
+occluder = SubResource("OccluderPolygon2D_e3b8k")
+
+[node name="DoorEffect" type="AudioStreamPlayer2D" parent="DoorHandler2"]
+bus = &"Effects"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoorHandler2"]
+libraries = {
+"": SubResource("AnimationLibrary_ltnsj")
+}
+
+[node name="Lever" type="Node2D" parent="."]
+position = Vector2(755.049, -905.128)
+script = ExtResource("28_doxq1")
+
+[node name="Area2D" type="Area2D" parent="Lever"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lever/Area2D"]
+shape = SubResource("CircleShape2D_tvw0k")
+
+[node name="Label" type="Label" parent="Lever"]
+visible = false
+offset_left = -48.0
+offset_top = -79.0
+offset_right = 12.0
+offset_bottom = -50.0
+text = "[E] Активация"
+
+[node name="HelpGenerator" parent="Lever" instance=ExtResource("29_23f6m")]
+
+[node name="Note" parent="." instance=ExtResource("30_l4sx0")]
+position = Vector2(1206.36, -211.163)
+
+[node name="OneTimeHelp" parent="." instance=ExtResource("31_50asj")]
+position = Vector2(-2197.35, -211.163)
+hintText = "Нужно отключить генераторы"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_b7iqs")
+
+[connection signal="body_entered" from="NikitinCage/Trigger" to="NikitinCage" method="_on_trigger_body_entered"]
+[connection signal="body_entered" from="DoorHandler2/DoorEvent" to="DoorHandler2" method="OnDoorEventBodyEntered"]
+[connection signal="body_exited" from="DoorHandler2/DoorEvent" to="DoorHandler2" method="OnDoorEventBodyExited"]
+[connection signal="body_entered" from="Lever/Area2D" to="Lever" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Lever/Area2D" to="Lever" method="_on_area_2d_body_exited"]
