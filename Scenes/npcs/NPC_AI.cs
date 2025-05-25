@@ -10,7 +10,8 @@ public partial class NPC_AI : TalkableNpc
 	[Export] public float AttackStopDistance = 400f;
 	[Export] public float MeleeAttackRange = 70f;
 	[Export] public bool CanUseRangedWeapon = true;
-	[Export] public bool CanUseMeleeWeapon = true; 
+	[Export] public bool CanUseMeleeWeapon = true;
+	[Export] public bool DeletePatrolPoints;
 
 	// Параметры для "осматривания"
 	[Export] public float LookAroundSpeed = 2.0f;      // Скорость поворота при осматривании
@@ -163,7 +164,7 @@ public partial class NPC_AI : TalkableNpc
 		}
 	}
 
-	protected void AdvancePatrolPoint()
+	protected virtual void AdvancePatrolPoint()
 	{
 		_currentPatrolIndex = (_currentPatrolIndex + 1) % PatrolPoints.Length;
 	}
@@ -174,6 +175,10 @@ public partial class NPC_AI : TalkableNpc
 		if (_agent != null && PatrolPoints.Length > 0)
 		{
 			var target = _patrolTargets[_currentPatrolIndex];
+			if (DeletePatrolPoints)
+			{
+				PatrolPoints[_currentPatrolIndex].QueueFree();
+			}
 			_agent.TargetPosition = target;
 		}
 	}
