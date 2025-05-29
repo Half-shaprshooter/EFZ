@@ -2,7 +2,7 @@ namespace EscapeFromZone.scripts.FriendlyNpcS;
 
 public partial class Mitya : NPC_AI
 {
-    private Label _label;
+	private Label _label;
 	private static List<NpcDialogue> _npcDialogues;
 	private static List<NpcDialogue> _npcDialogues2;
 	public bool CanTalk;
@@ -97,18 +97,18 @@ public partial class Mitya : NPC_AI
 		if (_dialogueNumber == 2)
 		{
 			PatrolPoints = NextPatrolPoints;
-        
+		
 			// 2. Обновляем массив позиций
 			_patrolTargets = new Vector2[PatrolPoints.Length];
 			for (int i = 0; i < PatrolPoints.Length; i++)
 			{
 				_patrolTargets[i] = PatrolPoints[i].GlobalPosition;
 			}
-        
+		
 			// 3. Сбрасываем индекс и счетчик
 			_currentPatrolIndex = 0;
 			_patrolPointsVisited = 0;
-        
+		
 			// 4. Запускаем движение к первой точке
 			SetNextPatrolPoint();
 			Random1.SetNextPoints();
