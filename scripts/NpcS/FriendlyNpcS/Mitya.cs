@@ -8,7 +8,6 @@ public partial class Mitya : NPC_AI
 	public bool CanTalk;
 	private int _patrolPointsVisited = 0;
 	private int _dialogueNumber = 0;
-	[Export] public Node2D[] NextPatrolPoints;
 	[Export] public Random Random1 { get; set; }
 	[Export] public Random Random2 { get; set; }
 
@@ -59,13 +58,14 @@ public partial class Mitya : NPC_AI
 
 	public override void _Process(double delta)
 	{
-		if (_patrolPointsVisited == PatrolPoints.Length && _dialogueNumber == 1)
+		if (_patrolPointsVisited == 6 && _dialogueNumber == 1)
 		{
-			_patrolPointsVisited = 0;
 			SetVelocityToZero();
 			CanTalk = true;
 			_npcDialogues = _npcDialogues2;
 		}
+		if (_patrolPointsVisited == 7)
+			QueueFree();
 		base._Process(delta);
 	}
 
@@ -96,23 +96,8 @@ public partial class Mitya : NPC_AI
 		_dialogueNumber++;
 		if (_dialogueNumber == 2)
 		{
-			PatrolPoints = NextPatrolPoints;
-		
-			// 2. Обновляем массив позиций
-			_patrolTargets = new Vector2[PatrolPoints.Length];
-			for (int i = 0; i < PatrolPoints.Length; i++)
-			{
-				_patrolTargets[i] = PatrolPoints[i].GlobalPosition;
-			}
-		
-			// 3. Сбрасываем индекс и счетчик
-			_currentPatrolIndex = 0;
-			_patrolPointsVisited = 0;
-		
-			// 4. Запускаем движение к первой точке
-			SetNextPatrolPoint();
-			Random1.SetNextPoints();
-			Random2.SetNextPoints();
+			Random1.CanGoNextPoints = !Random1.CanGoNextPoints;
+			Random2.CanGoNextPoints = !Random2.CanGoNextPoints;
 		}
 
 	}
