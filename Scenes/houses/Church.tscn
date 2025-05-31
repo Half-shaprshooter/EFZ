@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://brk0q1mwlagv0"]
+[gd_scene load_steps=38 format=3 uid="uid://brk0q1mwlagv0"]
 
 [ext_resource type="Texture2D" uid="uid://dsfifjojas41d" path="res://sprites/buildings/Church/NewChurchInside.png" id="1_1c3uu"]
 [ext_resource type="Script" path="res://scripts/worldObjectsScripts/DoorHandler.cs" id="2_c4ty4"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bhpir3ksf6h7q" path="res://sprites/buildings/Church/Kafedra.png" id="3_tuiit"]
 [ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="4_67iv4"]
 [ext_resource type="Script" path="res://scripts/Items/Kafedra.cs" id="4_fpa5r"]
+[ext_resource type="Script" path="res://scripts/Items/DoorTrigger.cs" id="4_ppc2r"]
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="5_o0gt4"]
 [ext_resource type="Texture2D" uid="uid://dnlf8gh4fiiqk" path="res://sprites/buildings/Church/NewChurchOutside.png" id="6_lfvo4"]
+[ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="7_tnigo"]
 [ext_resource type="PackedScene" uid="uid://c3kfg3v0i4dkt" path="res://Scenes/Items/Distructable_Door.tscn" id="7_w4uyy"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1slxu"]
@@ -33,7 +35,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/path = NodePath("../ManHole/CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +63,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/path = NodePath("../ManHole/CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -271,6 +273,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ManHole/Area2D"]
 position = Vector2(8.35553, -1.09216)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_djxyf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ManHole"]
@@ -293,6 +296,41 @@ libraries = {
 }
 
 [node name="EffectPlayer" type="AudioStreamPlayer2D" parent="ManHole"]
+
+[node name="DoorTriger" type="Sprite2D" parent="."]
+position = Vector2(79.9999, -676)
+scale = Vector2(0.229176, 0.209532)
+script = ExtResource("4_ppc2r")
+
+[node name="Area2D" type="Area2D" parent="DoorTriger"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorTriger/Area2D"]
+position = Vector2(117.814, -23.8621)
+scale = Vector2(2.5, 2.5)
+shape = SubResource("RectangleShape2D_djxyf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="DoorTriger"]
+
+[node name="ColorRect" type="ColorRect" parent="DoorTriger/CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.0
+offset_right = -2.45605
+color = Color(0, 0, 0, 0)
+
+[node name="Black" type="AnimationPlayer" parent="DoorTriger"]
+libraries = {
+"": SubResource("AnimationLibrary_pamgv")
+}
+
+[node name="White" type="AnimationPlayer" parent="DoorTriger"]
+libraries = {
+"": SubResource("AnimationLibrary_tor77")
+}
+
+[node name="EffectPlayer" type="AudioStreamPlayer2D" parent="DoorTriger"]
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -340,6 +378,10 @@ position = Vector2(6.33212, 57.9258)
 rotation = -3.23092
 shape = SubResource("RectangleShape2D_wmwc0")
 
+[node name="OneTimeHelp" parent="DoorHandler/DoorEvent" instance=ExtResource("7_tnigo")]
+position = Vector2(4.13182, 71.8795)
+hintText = "Нажмите E, чтобы открыть"
+
 [node name="doorCol" type="CollisionShape2D" parent="DoorHandler"]
 position = Vector2(6.79648, 85.5075)
 shape = SubResource("RectangleShape2D_fmisg")
@@ -364,6 +406,9 @@ libraries = {
 position = Vector2(29, -711)
 rotation = -1.57648
 scale = Vector2(0.592484, 0.687199)
+
+[node name="OneTimeHelp" parent="DistructableBox" instance=ExtResource("7_tnigo")]
+hintText = "Ударьте кулаком или холодным оружием"
 
 [node name="Roof" type="Area2D" parent="."]
 position = Vector2(83, -0.999998)
@@ -415,6 +460,9 @@ texture = ExtResource("6_lfvo4")
 [connection signal="body_entered" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyEntered"]
 [connection signal="body_exited" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyExited"]
 [connection signal="animation_finished" from="ManHole/Black" to="ManHole" method="OnPnimationPlayerAnimationFinished"]
+[connection signal="body_entered" from="DoorTriger/Area2D" to="DoorTriger" method="OnAreaBodyEntered"]
+[connection signal="body_exited" from="DoorTriger/Area2D" to="DoorTriger" method="OnAreaBodyExited"]
+[connection signal="animation_finished" from="DoorTriger/Black" to="DoorTriger" method="OnPnimationPlayerAnimationFinished"]
 [connection signal="body_entered" from="Node2D/Kafedra/Area2D" to="Node2D/Kafedra" method="OnAreaBodyEntered"]
 [connection signal="body_exited" from="Node2D/Kafedra/Area2D" to="Node2D/Kafedra" method="OnAreaBodyExited"]
 [connection signal="body_entered" from="DoorHandler/DoorEvent" to="DoorHandler" method="OnDoorEventBodyEntered"]

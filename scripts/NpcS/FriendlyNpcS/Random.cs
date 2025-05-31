@@ -4,22 +4,24 @@ public partial class Random : NPC_AI
 {
 	public bool IsStanding;
 	private int _patrolPointsVisited = 0;
-	[Export] public Node2D[] NextPatrolPoints;
+	public bool CanGoNextPoints;
 
 	public override void _Ready()
 	{
 		IsStanding = true;
+		CanGoNextPoints = false;
 		base._Ready();
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_patrolPointsVisited == PatrolPoints.Length)
+		if (_patrolPointsVisited == 5 && !CanGoNextPoints)
 		{
-			_patrolPointsVisited = 0;
-			IsStanding = false;
+			IsStanding = true;
 			SetVelocityToZero();
 		}
+		if (_patrolPointsVisited == 6)
+			QueueFree();
 		base._Process(delta);
 	}
 
@@ -30,23 +32,10 @@ public partial class Random : NPC_AI
 			base.HandlePatrol();
 		}
 	}
-
-	public void SetNextPoints()
+	
+	protected override void AdvancePatrolPoint()
 	{
-		PatrolPoints = NextPatrolPoints;
-        
-		// 2. Обновляем массив позиций
-		_patrolTargets = new Vector2[PatrolPoints.Length];
-		for (int i = 0; i < PatrolPoints.Length; i++)
-		{
-			_patrolTargets[i] = PatrolPoints[i].GlobalPosition;
-		}
-        
-		// 3. Сбрасываем индекс и счетчик
-		_currentPatrolIndex = 0;
-		_patrolPointsVisited = 0;
-        
-		// 4. Запускаем движение к первой точке
-		SetNextPatrolPoint();
+		_patrolPointsVisited++;
+		base.AdvancePatrolPoint();
 	}
 }
