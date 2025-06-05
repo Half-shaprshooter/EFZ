@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://con576l1u4tyu"]
+[gd_scene load_steps=11 format=3 uid="uid://con576l1u4tyu"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_lwhu1"]
 [ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/EnemyHuman.png" id="2_3tb2c"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_l1hqy"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="7_uvndp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
-size = Vector2(74, 65)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5hnp"]
+size = Vector2(120, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whntm"]
+size = Vector2(120, 142)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfq2q"]
 radius = 263.919
@@ -31,8 +34,15 @@ rotation = 1.56735
 texture = ExtResource("2_3tb2c")
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_p2j1y")
+position = Vector2(-7, 1)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_v5hnp")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="HitBoxColl" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-7, 1)
+shape = SubResource("RectangleShape2D_whntm")
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false
@@ -49,8 +59,8 @@ bulletScene = ExtResource("6_akny4")
 muzzle = NodePath("../muzzle")
 
 [node name="ProximityArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 7
+collision_layer = 0
+collision_mask = 2147483655
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ProximityArea"]
 self_modulate = Color(1, 1, 1, 0.286275)
@@ -58,8 +68,8 @@ polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
 
 [node name="AreaHearCalm" type="Area2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-collision_layer = 4
-collision_mask = 7
+collision_layer = 0
+collision_mask = 2147483655
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHearCalm"]
 shape = SubResource("CircleShape2D_nfq2q")
@@ -67,8 +77,8 @@ debug_color = Color(0.156386, 0.518903, 1, 0.298039)
 
 [node name="KnowPosInFight" type="Area2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-collision_layer = 4
-collision_mask = 7
+collision_layer = 0
+collision_mask = 2147483655
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KnowPosInFight"]
 polygon = PackedVector2Array(270, -250, 270, 250, -100, 60, -100, -60)
@@ -88,8 +98,7 @@ avoidance_mask = 7
 width = 4.0
 default_color = Color(1, 0, 0, 1)
 
-[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("7_uvndp")]
-body = NodePath("..")
+[node name="Remarks" parent="." instance=ExtResource("7_uvndp")]
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_l1hqy")]
 
