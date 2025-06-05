@@ -47,13 +47,19 @@ text = "[E] Поговорить"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.56735
-texture = ExtResource("2_aldng")
-
 [node name="WolfCol" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 1)
 shape = SubResource("RectangleShape2D_p2j1y")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="HitBoxColl" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-7, 1)
+shape = SubResource("RectangleShape2D_p2j1y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.56735
+texture = ExtResource("2_aldng")
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false
@@ -100,8 +106,7 @@ avoidance_mask = 7
 width = 4.0
 default_color = Color(1, 0, 0, 1)
 
-[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("6_d2nph")]
-body = NodePath("..")
+[node name="Remarks" parent="." instance=ExtResource("6_d2nph")]
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_7pb6v")]
 

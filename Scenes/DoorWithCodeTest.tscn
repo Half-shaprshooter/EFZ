@@ -52,12 +52,12 @@ texture = ExtResource("2_rcpip")
 occluder = SubResource("OccluderPolygon2D_r2tpp")
 
 [node name="CodeLock" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("3_w304y")
 isLocked = true
-PinCode = "3578"
+PinCode = "2534"
 
 [node name="CodeUI" type="CanvasLayer" parent="CodeLock"]
-visible = false
 
 [node name="CodePictures" type="Control" parent="CodeLock/CodeUI"]
 layout_mode = 3
@@ -99,29 +99,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="One" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -1.2
-anchor_top = -0.925
-anchor_right = -0.325
-anchor_bottom = -0.125
+anchor_right = 0.47
+anchor_bottom = 0.461
+offset_left = -68.0
+offset_top = -57.0
+offset_right = -34.0
+offset_bottom = -25.0
 flat = true
 
 [node name="Two" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = -0.925
-anchor_right = 0.925
-anchor_bottom = -0.125
+anchor_left = 0.486
+anchor_top = 0.412
+anchor_right = 0.512
+anchor_bottom = 0.46
+offset_left = -16.0
+offset_top = -57.0
+offset_right = 15.0
+offset_bottom = -26.0
 flat = true
 
 [node name="Three" type="Button" parent="CodeLock/CodeUI/Buttons"]
@@ -129,8 +131,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.275
 anchor_top = -0.925
-anchor_right = 2.15
-anchor_bottom = -0.125
+anchor_right = 2.125
+anchor_bottom = -0.15
+offset_left = 32.0
+offset_top = -57.0
+offset_right = 65.0
+offset_bottom = -25.0
 flat = true
 
 [node name="Four" type="Button" parent="CodeLock/CodeUI/Buttons"]
@@ -138,17 +144,25 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.225
 anchor_top = 0.275
-anchor_right = -0.35
-anchor_bottom = 1.075
+anchor_right = -0.375
+anchor_bottom = 1.05
+offset_left = -68.0
+offset_top = -9.0
+offset_right = -34.0
+offset_bottom = 23.0
 flat = true
 
 [node name="Five" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.025
-anchor_top = 0.275
-anchor_right = 0.9
-anchor_bottom = 1.075
+anchor_left = 0.484
+anchor_top = 0.488
+anchor_right = 0.512
+anchor_bottom = 0.534
+offset_left = -19.0
+offset_top = -8.0
+offset_right = 13.0
+offset_bottom = 22.0
 flat = true
 
 [node name="Six" type="Button" parent="CodeLock/CodeUI/Buttons"]
@@ -156,8 +170,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.275
 anchor_top = 0.275
-anchor_right = 2.15
+anchor_right = 2.125
 anchor_bottom = 1.075
+offset_left = 31.0
+offset_top = -9.0
+offset_right = 65.0
+offset_bottom = 22.0
 flat = true
 
 [node name="Seven" type="Button" parent="CodeLock/CodeUI/Buttons"]
@@ -165,8 +183,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.225
 anchor_top = 1.5
-anchor_right = -0.35
-anchor_bottom = 2.3
+anchor_right = -0.375
+anchor_bottom = 2.275
+offset_left = -68.0
+offset_top = 39.0
+offset_right = -35.0
+offset_bottom = 72.0
 flat = true
 
 [node name="Eight" type="Button" parent="CodeLock/CodeUI/Buttons"]
@@ -174,44 +196,64 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 1.5
-anchor_right = 0.925
+anchor_right = 0.9
 anchor_bottom = 2.3
+offset_left = -17.0
+offset_top = 39.0
+offset_right = 15.0
+offset_bottom = 73.0
 flat = true
 
 [node name="Nine" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.275
-anchor_top = 1.5
-anchor_right = 2.15
-anchor_bottom = 2.3
+anchor_top = 1.475
+anchor_right = 2.125
+anchor_bottom = 2.325
+offset_left = 32.0
+offset_top = 39.0
+offset_right = 65.0
+offset_bottom = 72.0
 flat = true
 
 [node name="Zero" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
+anchor_left = 0.1
 anchor_top = 2.675
-anchor_right = 0.925
+anchor_right = 0.875
 anchor_bottom = 3.475
+offset_left = -16.0
+offset_top = 87.0
+offset_right = 15.0
+offset_bottom = 118.0
 flat = true
 
 [node name="Cancel" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.225
-anchor_top = 2.65
+anchor_top = 2.625
 anchor_right = -0.35
-anchor_bottom = 3.45
+anchor_bottom = 3.475
+offset_left = -68.0
+offset_top = 85.0
+offset_right = -34.0
+offset_bottom = 118.0
 flat = true
 
 [node name="Enter" type="Button" parent="CodeLock/CodeUI/Buttons"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.3
-anchor_top = 2.65
+anchor_top = 2.625
 anchor_right = 2.175
-anchor_bottom = 3.45
+anchor_bottom = 3.475
+offset_left = 33.0
+offset_top = 85.0
+offset_right = 67.0
+offset_bottom = 119.0
 flat = true
 
 [node name="Canvas" type="CanvasLayer" parent="."]

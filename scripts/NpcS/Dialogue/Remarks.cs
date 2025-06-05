@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 public partial class Remarks : Node2D
 {
 	//ссылка на персонажа, к которому будет привязана нода Remarks
-	[Export] CharacterBody2D body;
+	private CharacterBody2D body;
 
 	//ссылка на файл с мыслями
 	[Export(PropertyHint.File, "*.json")]
@@ -50,6 +50,7 @@ public partial class Remarks : Node2D
 	private HostImpl relation;
 	public override void _Ready()
 	{
+		body = GetParent() as CharacterBody2D;
 		LoadThoughtsFromJson();
 		lookRay = GetNode<RayCast2D>("LookRay");
 
@@ -75,7 +76,7 @@ public partial class Remarks : Node2D
 	public override void _Process(double delta)
 	{
 		relation = body.GetNode<HostImpl>("HostImpl");
-
+		
 		Rotation = -GetParent<Node2D>().Rotation;
 		
 		timeSinceLastPriority += (float)delta; // Обновляем таймер
@@ -114,7 +115,7 @@ public partial class Remarks : Node2D
 			isHeSee = false;
 		}
 		
-		proximityArea.Rotation = body.Rotation;
+		//proximityArea.Rotation = Rotation;
 	}
 
 
@@ -250,6 +251,7 @@ public partial class Remarks : Node2D
 	private bool BuildRayToTarget(Node2D target)
 	{
 		if (target == null) return false;
+
 		lookRay.Rotation = body.Rotation;
 		
 		// Устанавливаем начало луча в (0, 0) — относительно RayCast2D, он сам будет сдвинут в нужную точку

@@ -55,29 +55,33 @@ public partial class MeleeGun : Area2D
 			var list = GetOverlappingAreas();
 			foreach (var area in list)
 			{
-				var parent = area.GetParent();
-				if (parent.IsInGroup("Alive"))
+				if (area.Name == "HitBox")
 				{
-					GD.Print("Melee Gun: Попытка нанести урон Alive");
-					effects.Stream = KNIFE_SOUND;
-					effects.Play();
-					var health = parent.GetNodeOrNull<Health>("Health");
-					var host = parent.GetNodeOrNull<HostImpl>("HostImpl");
-					GD.Print(parent);
-					GD.Print(parent.GetName() + " is before " + host._host);
-					host._host = Host.Enemy;
-					GD.Print(parent.GetName() + " is after " + host._host);
-					//TODO: Если милишки будут разные, сюда нужно будет передавать динамично урон
-					health?.Damage(15, whoAttacks);
-				} 
-				if (parent.IsInGroup("Distructable")) {
-					Random random = new Random();
-					effects.Stream = _list[random.Next(0,2)];
-					effects.Play();
-					var health = parent.GetNodeOrNull<Health>("Health");
-					GD.Print(parent);
-					GD.Print("Damage");
-					health?.Damage(15);
+					var parent = area.GetParent();
+					if (parent.IsInGroup("Alive"))
+					{
+						GD.Print("Melee Gun: Попытка нанести урон Alive");
+						effects.Stream = KNIFE_SOUND;
+						effects.Play();
+						var health = parent.GetNodeOrNull<Health>("Health");
+						var host = parent.GetNodeOrNull<HostImpl>("HostImpl");
+						GD.Print(parent);
+						GD.Print(parent.GetName() + " is before " + host._host);
+						host._host = Host.Enemy;
+						GD.Print(parent.GetName() + " is after " + host._host);
+						//TODO: Если милишки будут разные, сюда нужно будет передавать динамично урон
+						health?.Damage(15, whoAttacks);
+					}
+					if (parent.IsInGroup("Distructable"))
+					{
+						Random random = new Random();
+						effects.Stream = _list[random.Next(0, 2)];
+						effects.Play();
+						var health = parent.GetNodeOrNull<Health>("Health");
+						GD.Print(parent);
+						GD.Print("Damage");
+						health?.Damage(15);
+					}
 				}
 			}
 			timeUntilFire = 0f;

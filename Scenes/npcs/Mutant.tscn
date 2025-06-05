@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djjr1il5hlmx6"]
+[gd_scene load_steps=10 format=3 uid="uid://djjr1il5hlmx6"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_1f1h3"]
 [ext_resource type="Texture2D" uid="uid://basv8xj6828t2" path="res://sprites/npcSprites/mutant.png" id="2_nv4n4"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_gyhyx"]
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_hnjyq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
-size = Vector2(74, 65)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahxne"]
+size = Vector2(120, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imhyy"]
+size = Vector2(120, 142)
 
 [node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
 position = Vector2(4, 1)
@@ -28,8 +31,14 @@ rotation = 1.56735
 texture = ExtResource("2_nv4n4")
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_p2j1y")
+position = Vector2(-7, 1)
+shape = SubResource("RectangleShape2D_ahxne")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="HitBoxColl" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-7, 1)
+shape = SubResource("RectangleShape2D_imhyy")
 
 [node name="muzzle" type="Sprite2D" parent="."]
 visible = false
@@ -46,7 +55,7 @@ bulletScene = ExtResource("5_g1q7i")
 muzzle = NodePath("../muzzle")
 
 [node name="ProximityArea" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 2147483648
 collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ProximityArea"]
@@ -55,7 +64,7 @@ polygon = PackedVector2Array(10, 35, 1500, 600, 1500, -600, 10, -35)
 
 [node name="KnowPosInFight" type="Area2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-collision_layer = 4
+collision_layer = 2147483648
 collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KnowPosInFight"]
@@ -76,8 +85,8 @@ avoidance_mask = 7
 width = 4.0
 default_color = Color(1, 0, 0, 1)
 
-[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("6_gyhyx")]
-body = NodePath("..")
+[node name="Remarks" parent="." instance=ExtResource("6_gyhyx")]
+visible = false
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_hnjyq")]
 

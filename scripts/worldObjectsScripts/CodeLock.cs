@@ -56,6 +56,7 @@ public partial class CodeLock : Node
     public void StartPinCode()
     {
         starting = true;
+        GetTree().Paused = true; 
         inputCode = "";
         _codeUICanvas.Visible = true;
         _zeroButtons.Visible = true;
@@ -68,6 +69,7 @@ public partial class CodeLock : Node
     //метод отмены ввода пинкода
     public void CancelPinCode()
     {
+        GetTree().Paused = false; 
         starting = false;
         _codeUICanvas.Visible = false;
         CodeDelete();
@@ -117,6 +119,7 @@ public partial class CodeLock : Node
             isLocked = false;
             _codeUICanvas.Visible = false;
             CodeDelete();
+            GetTree().Paused = false; 
             GD.Print("Закрыто ли?" + isLocked);
         }
         else

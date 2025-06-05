@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="3_nveh8"]
 [ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="4_i1qp5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]
-size = Vector2(74, 65)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mp3b"]
+size = Vector2(120, 142)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3sui"]
 size = Vector2(145, 79)
@@ -40,15 +40,15 @@ text = "[E] Торговать"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="WolfCol" type="CollisionShape2D" parent="."]
+position = Vector2(-7, 1)
+shape = SubResource("RectangleShape2D_2mp3b")
+
 [node name="Seller" type="Sprite2D" parent="."]
 position = Vector2(-1, -3)
 rotation = 1.58996
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("2_dva7k")
-
-[node name="WolfCol" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_fjcb7")
 
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -59,14 +59,13 @@ position = Vector2(35.5, -3.5)
 shape = SubResource("RectangleShape2D_s3sui")
 
 [node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 7
+collision_layer = 0
+collision_mask = 2147483655
 
 [node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_0uqjj")
 
-[node name="Remarks" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_nveh8")]
-body = NodePath("..")
+[node name="Remarks" parent="." instance=ExtResource("3_nveh8")]
 
 [node name="OneTimeHelp" parent="." instance=ExtResource("4_i1qp5")]
 hintText = "Нажмите \"E\" для начала диалога"
