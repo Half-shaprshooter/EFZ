@@ -15,17 +15,16 @@ size = Vector2(120, 142)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jcv8x"]
 radius = 189.003
 
-[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
+[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("body2D") groups=["Alive"]]
 position = Vector2(4, 1)
 collision_layer = 4
-collision_mask = 244
+collision_mask = 243
 script = ExtResource("1_i8n4y")
-PatrolPoints = []
-body2D = NodePath(".")
 MeleeAttackRange = 190.0
 SpeedWalk = 250
 SpeedFast = 600
 SpeedRun = 900
+body2D = NodePath(".")
 
 [node name="ButtonText" type="Label" parent="."]
 light_mask = 1023
@@ -99,8 +98,8 @@ collision_mask = 7
 navigation_layers = 15
 avoidance_enabled = true
 max_speed = 1100.0
-avoidance_layers = 4
-avoidance_mask = 7
+avoidance_layers = 6
+avoidance_mask = 4
 
 [node name="PathLine" type="Line2D" parent="."]
 width = 4.0
