@@ -67,9 +67,8 @@ collision_mask = 7
 [node name="DetectionCol" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_0uqjj")
 
-[node name="Remarks" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+[node name="Remarks" type="Node2D" parent="."]
 script = ExtResource("3_62nuh")
-body = NodePath("..")
 
 [node name="BackGround" type="ColorRect" parent="Remarks"]
 offset_left = -111.0

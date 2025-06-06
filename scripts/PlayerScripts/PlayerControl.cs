@@ -132,10 +132,17 @@ public partial class PlayerControl : CharacterBody2D
 		}
 		else if (weaponId == 6)
 		{
-			GD.Print("Текущее оружие дальнего боя второй слот");
+			GD.Print("Текущее оружие дальнего боя");
 			fireTypeInHands.fireType = FireType.FireArm;
 			_slots = Slots.PISTOL;
 			GD.Print(_slots);
+		}
+		else if (weaponId == 7)
+		{
+			GD.Print("Текущее оружие ближнего боя");
+			fireTypeInHands.fireType = FireType.Melee;
+			GD.Print("Текущее оружие ближнего боя");
+			_slots = Slots.KNIFE;
 		}
 	}
 
@@ -161,6 +168,11 @@ public partial class PlayerControl : CharacterBody2D
 	public void Transport()
 	{
 		Position = new Vector2(20255, 8079);
+	}
+	
+	public void Transport2()
+	{
+		Position = new Vector2(-15891, 2859);
 	}
 
 	private void MovementAndAnimLogic(double delta)
