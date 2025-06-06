@@ -17,7 +17,7 @@ size = Vector2(120, 142)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nfq2q"]
 radius = 263.919
 
-[node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
+[node name="NPC_AI_Test2" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
 position = Vector2(4, 1)
 collision_layer = 4
 collision_mask = 244
@@ -35,7 +35,6 @@ texture = ExtResource("2_3tb2c")
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 1)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_v5hnp")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -101,6 +100,7 @@ default_color = Color(1, 0, 0, 1)
 [node name="Remarks" parent="." instance=ExtResource("7_uvndp")]
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_l1hqy")]
+collision_layer = 4
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
 [connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]

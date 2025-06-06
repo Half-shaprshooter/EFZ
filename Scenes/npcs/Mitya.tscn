@@ -109,6 +109,7 @@ default_color = Color(1, 0, 0, 1)
 [node name="Remarks" parent="." instance=ExtResource("6_d2nph")]
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_7pb6v")]
+collision_layer = 4
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 4

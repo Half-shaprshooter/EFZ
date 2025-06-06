@@ -38,6 +38,7 @@ public partial class Seller : TalkableNpc
 		_label = GetNode<Label>("ButtonText");
 		_sellerInventory = GetNode<Inventory>("UI/SellerInventory");
 		_tradeManager = GetNode<TradeManager>("/root/TradeManager");
+		_sellerInventory.PlaceItemInInventory();
 	}
 	
 	public override void _Process(double delta)

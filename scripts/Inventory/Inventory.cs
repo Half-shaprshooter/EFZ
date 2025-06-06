@@ -140,7 +140,7 @@ public partial class Inventory : Control
 		{
 			if (Input.IsActionJustPressed("InventoryClick"))
 			{
-				if (_scrollContainer.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+				if (_scrollContainer.GetGlobalRect().HasPoint(GetGlobalMousePosition()) && !PlayerData.CanFire)
 				{
 					PickItem();
 				}
@@ -148,7 +148,7 @@ public partial class Inventory : Control
 				{
 					foreach (var equipmentSlot in _equipmentSlots)
 					{
-						if (equipmentSlot.GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+						if (equipmentSlot.GetGlobalRect().HasPoint(GetGlobalMousePosition()) && !PlayerData.CanFire)
 							PickItem();
 					}
 				}
@@ -382,6 +382,28 @@ public partial class Inventory : Control
 		Item item = (Item)_itemScene.Instantiate();
 		AddChild(item);
 		item.LoadItem(8);
+	
+		int[] itemSize = {1, 1}; // Ширина, высота
+		int colCount = 1;
+	
+		for (int startSlotId = 0; startSlotId < _gridArray.Count; startSlotId += colCount)
+		{
+			if (PlaceItemInCells(item, itemSize, startSlotId))
+			{
+				GD.Print("Предмет успешно размещён в слоте ", startSlotId);
+				return;
+			}
+		}
+	
+		GD.Print("Предмет не удалось разместить!");
+		item.QueueFree();
+	}
+
+	public void PlaceItemInInventory()
+	{
+		Item item = (Item)_itemScene.Instantiate();
+		AddChild(item);
+		item.LoadItem(9);
 	
 		int[] itemSize = {1, 1}; // Ширина, высота
 		int colCount = 1;
