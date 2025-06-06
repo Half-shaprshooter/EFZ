@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn3mt4b7k843s"]
+[gd_scene load_steps=17 format=3 uid="uid://bn3mt4b7k843s"]
 
 [ext_resource type="Texture2D" uid="uid://btypuf23c84xv" path="res://sprites/buildings/SellerHouseIndide.png" id="1_02cfn"]
 [ext_resource type="Texture2D" uid="uid://dunhxxhkyrs3b" path="res://sprites/pngwing.com.png" id="1_blvlw"]
 [ext_resource type="Texture2D" uid="uid://b0u0akcwu14og" path="res://sprites/buildings/SellerHouseOutside.png" id="4_jma6r"]
 [ext_resource type="Script" path="res://scripts/gdScripts/roof.gd" id="5_hopyp"]
+[ext_resource type="Script" path="res://scripts/Items/ManHole.cs" id="5_wrtf6"]
+[ext_resource type="PackedScene" uid="uid://bgtgxujxtjxic" path="res://Scenes/houses/door_handler.tscn" id="6_lkx2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl5kd"]
 size = Vector2(597.5, 954)
@@ -14,6 +16,59 @@ light_mode = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7bx3w"]
 polygon = PackedVector2Array(-352, 399, -350, 436, -470, 436, -467, -51, -466, -434, 418, -433, 433, 44, 40, 45, 40, 443, -208, 437, -208, 395, -5, 392, -3, 107, -13, 114, -19, 128, -114, 26, -106, -2, 377, -6, 372, -397, -435, -398, -421, -8, -251, -8, -245, 15, -423, 18, -432, 394)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evn60"]
+size = Vector2(421.217, 436.292)
+
+[sub_resource type="Animation" id="Animation_4qg63"]
+resource_name = "Black"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ManHole/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ofmqj"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pamgv"]
+_data = {
+"Black": SubResource("Animation_4qg63"),
+"RESET": SubResource("Animation_ofmqj")
+}
+
+[sub_resource type="Animation" id="Animation_kboxk"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_tpaao"]
+resource_name = "White"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ManHole/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tor77"]
+_data = {
+"RESET": SubResource("Animation_kboxk"),
+"White": SubResource("Animation_tpaao")
+}
 
 [node name="House" type="StaticBody2D"]
 rotation = 1.57775
@@ -53,6 +108,7 @@ color = Color(0.439049, 0.439049, 0.439049, 1)
 texture = ExtResource("1_blvlw")
 
 [node name="RoofSpriteGroup" type="CanvasGroup" parent="Roof"]
+visible = false
 position = Vector2(1017.28, 69.5123)
 
 [node name="RoofSprite2" type="Sprite2D" parent="Roof/RoofSpriteGroup"]
@@ -70,7 +126,50 @@ texture = ExtResource("4_jma6r")
 occluder = SubResource("OccluderPolygon2D_7bx3w")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-212, 402, -206, 431, 34, 439, 51, 42, 429, 38, 428, -437, -474, -434, -473, 439, -351, 444, -352, 401, -431, 395, -428, 289, 1, 291, -2, 397)
+polygon = PackedVector2Array(-212, 402, -206, 431, 34, 439, 51, 42, 429, 38, 428, -437, -474, -434, -473, 439, -351, 444, -352, 401, -431, 395, -429.119, 271.991, -189.153, 266.322, -188.827, 169.317, -432.828, 170.014, -428.603, -229.025, -309.641, -234.853, -311.767, -396.842, -84.1313, -399.26, -78.1955, -315.464, 319.586, -348.231, 321.239, -398.243, 371.23, -399.591, 376.963, -6.62141, -2.00691, -0.986069, -6.23921, 397.053)
+
+[node name="ManHole" type="Sprite2D" parent="."]
+position = Vector2(-192.24, -177.668)
+scale = Vector2(0.478723, 0.457747)
+script = ExtResource("5_wrtf6")
+transportNumber = "3"
+
+[node name="Area2D" type="Area2D" parent="ManHole"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ManHole/Area2D"]
+position = Vector2(9.41428, 6.81818)
+shape = SubResource("RectangleShape2D_evn60")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ManHole"]
+
+[node name="ColorRect" type="ColorRect" parent="ManHole/CanvasLayer"]
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.0
+offset_right = -2.45605
+color = Color(0, 0, 0, 0)
+
+[node name="Black" type="AnimationPlayer" parent="ManHole"]
+libraries = {
+"": SubResource("AnimationLibrary_pamgv")
+}
+
+[node name="White" type="AnimationPlayer" parent="ManHole"]
+libraries = {
+"": SubResource("AnimationLibrary_tor77")
+}
+
+[node name="EffectPlayer" type="AudioStreamPlayer2D" parent="ManHole"]
+
+[node name="DoorHandler" parent="." instance=ExtResource("6_lkx2h")]
+position = Vector2(-349.078, 421.438)
+scale = Vector2(0.92052, 0.822806)
+_isLocked = true
 
 [connection signal="body_entered" from="Roof" to="Roof" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Roof" to="Roof" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyEntered"]
+[connection signal="body_exited" from="ManHole/Area2D" to="ManHole" method="OnAreaBodyExited"]
+[connection signal="animation_finished" from="ManHole/Black" to="ManHole" method="OnPnimationPlayerAnimationFinished"]

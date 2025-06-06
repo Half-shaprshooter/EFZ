@@ -55,10 +55,10 @@ public partial class MeleeGun : Area2D
 			var list = GetOverlappingAreas();
 			foreach (var area in list)
 			{
-				if (area.Name == "HitBox")
+				var parent = area.GetParent();
+				if (parent.IsInGroup("Alive"))
 				{
-					var parent = area.GetParent();
-					if (parent.IsInGroup("Alive"))
+					if (area.Name == "HitBox")
 					{
 						GD.Print("Melee Gun: Попытка нанести урон Alive");
 						effects.Stream = KNIFE_SOUND;
@@ -72,16 +72,16 @@ public partial class MeleeGun : Area2D
 						//TODO: Если милишки будут разные, сюда нужно будет передавать динамично урон
 						health?.Damage(15, whoAttacks);
 					}
-					if (parent.IsInGroup("Distructable"))
-					{
-						Random random = new Random();
-						effects.Stream = _list[random.Next(0, 2)];
-						effects.Play();
-						var health = parent.GetNodeOrNull<Health>("Health");
-						GD.Print(parent);
-						GD.Print("Damage");
-						health?.Damage(15);
-					}
+				}
+				if (parent.IsInGroup("Distructable"))
+				{
+					Random random = new Random();
+					effects.Stream = _list[random.Next(0, 2)];
+					effects.Play();
+					var health = parent.GetNodeOrNull<Health>("Health");
+					GD.Print(parent);
+					GD.Print("Damage");
+					health?.Damage(15);
 				}
 			}
 			timeUntilFire = 0f;

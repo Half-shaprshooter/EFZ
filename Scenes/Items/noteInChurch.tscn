@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsxiug2vwwms8"]
+
+[ext_resource type="Script" path="res://scripts/Items/Note.cs" id="1_v44au"]
+[ext_resource type="Texture2D" uid="uid://ca0h4ahwvsxa5" path="res://sprites/Note.png" id="2_cf58k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0qes"]
+radius = 66.7533
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rybua"]
+bg_color = Color(0.720468, 0.720467, 0.720467, 1)
+
+[sub_resource type="Theme" id="Theme_qfx7c"]
+Panel/styles/panel = SubResource("StyleBoxFlat_rybua")
+
+[sub_resource type="Theme" id="Theme_s1jct"]
+Label/colors/font_color = Color(0.098788, 0, 0.603077, 1)
+
+[node name="Note" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_v44au")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_g0qes")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_cf58k")
+
+[node name="interactItem" type="ColorRect" parent="."]
+visible = false
+offset_left = -47.0
+offset_top = -64.0
+offset_right = 15.0
+offset_bottom = -43.0
+scale = Vector2(1.47496, 1.42441)
+color = Color(0.344076, 0.344076, 0.344076, 1)
+
+[node name="Label" type="Label" parent="interactItem"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 59.0
+offset_bottom = 21.0
+text = "press E"
+
+[node name="NoteUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="NoteUI"]
+anchors_preset = -1
+anchor_left = 0.324
+anchor_top = 0.029
+anchor_right = 0.674
+anchor_bottom = 0.801
+offset_left = -0.247986
+offset_top = 0.208
+offset_right = -3.448
+offset_bottom = -0.0480347
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qfx7c")
+
+[node name="Label" type="Label" parent="NoteUI"]
+anchors_preset = -1
+anchor_left = 0.346
+anchor_top = 0.065
+anchor_right = 0.643
+anchor_bottom = 0.69
+offset_left = 4.40802
+offset_top = -0.119999
+offset_right = 13.264
+offset_bottom = -0.120026
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_s1jct")
+text = "
+Важно! Если ты читаешь это, значит твоё задание уже началось.
+В моем подвале находится записка, тебе нужно прочесть её. В доме у меня остались припасы. Ключ при мне, возьми его. Там бинты, патроны, еда. Также тебе важно найти “Аксолотля” и съесть его, он поможет тебе в будущем. 
+Будь осторожен.
+- Л.
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="NoteUI"]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.445
+anchor_top = 0.727
+anchor_right = 0.554
+anchor_bottom = 0.786
+offset_left = -31.64
+offset_top = -50.096
+offset_right = 41.0001
+offset_bottom = -21.4561
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.84)
+text = "Закрыть"
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="Area2D" to="." method="OnBodyExited"]
+[connection signal="pressed" from="NoteUI/Button" to="." method="OnCloseButtonPressed"]
