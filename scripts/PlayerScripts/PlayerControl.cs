@@ -165,14 +165,28 @@ public partial class PlayerControl : CharacterBody2D
 		}
 	}
 
+	//вход в подвал церкви
 	public void Transport()
 	{
 		Position = new Vector2(20255, 8079);
 	}
 	
+	//телепорт на тестовую площадку
 	public void Transport2()
 	{
 		Position = new Vector2(-15891, 2859);
+	}
+
+	//вход в подвал торговца
+	public void Transport3()
+	{
+		Position = new Vector2(6572, 7705);
+	}
+
+	//выход из подвала торговца
+	public void Transport4()
+	{
+		Position = new Vector2(2795, -1995);
 	}
 
 	private void MovementAndAnimLogic(double delta)
@@ -200,7 +214,7 @@ public partial class PlayerControl : CharacterBody2D
 					_legs.Stop();
 					break;
 			}
-			
+
 			Input.SetCustomMouseCursor(_aimCursor, Input.CursorShape.Arrow, _hotspot16);
 			totalSpeed = (float)(Speed * 0.50);
 			_legs.Play("WalkLegs");

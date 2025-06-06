@@ -781,4 +781,8 @@ shape = SubResource("RectangleShape2D_p20nb")
 
 [node name="EffectsPlayerKnife" type="AudioStreamPlayer2D" parent="MeleeAttackArea"]
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 55.0
+avoidance_layers = 2
+
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]

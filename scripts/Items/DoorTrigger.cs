@@ -50,7 +50,7 @@ public partial class DoorTrigger : Sprite2D
 		_note.Visible = true;
 		_key.Visible = true;
 		_bandage.Visible = true;
-		PlayerData.PlayerHealth = 30;
+		PlayerData.PlayerHealth = 20;
 		_seller.QueueFree();
 	}
 

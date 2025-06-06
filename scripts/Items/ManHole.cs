@@ -6,7 +6,7 @@ public partial class ManHole : Sprite2D
 	private bool _isInArea = false;
 	private AnimationPlayer _playerBlack;
 	private AnimationPlayer _playerWhite;
-	
+	[Export] string transportNumber = "";
 	private AudioStreamPlayer2D audioPlayer;
 	
 	//private AudioStream MANHOLE_OPEN = (AudioStream)GD.Load("res://sounds/effects/ManHoleOpening.mp3");
@@ -36,7 +36,7 @@ public partial class ManHole : Sprite2D
 	public void OnPnimationPlayerAnimationFinished(String name)
 	{
 		var targetNode = GetNode("/root/main/Player");
-		targetNode.Call("Transport");
+		targetNode.Call("Transport" + transportNumber);
 		_playerWhite.Play("White");
 	}
 
