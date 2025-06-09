@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://eta00f5ntuq1"]
+[gd_scene load_steps=2 format=3 uid="uid://dk75u3s84phmm"]
 
-[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="1_v5jts"]
+[ext_resource type="PackedScene" uid="uid://bbo6nn2252m1h" path="res://Scenes/Items/note.tscn" id="1_8rylc"]
 
-[node name="Note" instance=ExtResource("1_v5jts")]
-
-[node name="NoteUI" parent="." index="3"]
-process_mode = 3
+[node name="Note" instance=ExtResource("1_8rylc")]
 
 [node name="Label" parent="NoteUI" index="1"]
 text = "Важно! Если ты читаешь это, значит твоё задание уже началось.
