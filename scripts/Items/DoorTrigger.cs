@@ -21,7 +21,7 @@ public partial class DoorTrigger : Sprite2D
 	public override void _Ready()
 	{
 		_corpse = GetNode<Sprite2D>("/root/main/NavigationRegion2D/House6/Сorpse");
-		_note = GetNode<Node2D>("/root/main/NavigationRegion2D/House6/SellerNote");
+		_note = GetNode<Node2D>("/root/main/Notes/SellerNote");
 		_key = GetNode<Node2D>("/root/main/NavigationRegion2D/House6/KeyItem");
 		_bandage = GetNode<Node2D>("/root/main/NavigationRegion2D/House6/Bandage");
 		_seller = GetNode<CharacterBody2D>("/root/main/Seller");
