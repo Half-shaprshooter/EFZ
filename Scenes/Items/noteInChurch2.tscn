@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyh85c842nxsx"]
+
+[ext_resource type="PackedScene" uid="uid://bk730kjgq6b3g" path="res://Scenes/Items/noteForStand.tscn" id="1_isy4k"]
+
+[node name="Note" instance=ExtResource("1_isy4k")]
+
+[node name="Label" parent="NoteUI" index="1"]
+text = "Важно! Если ты читаешь это, значит твоё задание уже началось.
+В моем подвале находится записка, тебе нужно прочесть её. В доме у меня остались припасы. Ключ при мне, возьми его. Там бинты, патроны, еда. Также тебе важно найти “Аксолотля” и съесть его, он поможет тебе в будущем. 
+Будь осторожен."
+autowrap_mode = 2
