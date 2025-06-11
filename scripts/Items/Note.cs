@@ -24,6 +24,11 @@ public partial class Note : Node2D
 			_noteUI.Visible = true;
 			GetTree().Paused = true;
 		}
+
+		if (_noteUI.Visible && Input.IsActionJustPressed("pause"))
+		{
+			CloseNote();
+		}
 	}
 
 	private void CloseNote()
