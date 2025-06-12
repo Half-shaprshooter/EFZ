@@ -16,8 +16,8 @@ size = Vector2(120, 142)
 
 [node name="NPC_AI_Test" type="CharacterBody2D" node_paths=PackedStringArray("PatrolPoints", "body2D") groups=["Alive"]]
 position = Vector2(4, 1)
-collision_layer = 4
-collision_mask = 243
+collision_layer = 2
+collision_mask = 245
 script = ExtResource("1_1f1h3")
 PatrolPoints = []
 body2D = NodePath(".")
