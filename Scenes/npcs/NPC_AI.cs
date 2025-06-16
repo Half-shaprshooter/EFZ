@@ -132,7 +132,7 @@ public partial class NPC_AI : TalkableNpc
 				break;
 		}
 
-		DrawNavigationPath();
+		//DrawNavigationPath();
 
 		//GD.Print("видимость ", isCanBuildRay, " есть цель ", target, " поведение ", currentState);
 		//GD.Print(timerValue, currentState);
