@@ -76,13 +76,13 @@ public partial class NPC_AI : TalkableNpc
 
 		_agent.TargetDesiredDistance = 4f;
 		SetNextPatrolPoint();
-		relation = body2D.GetNode<HostImpl>("HostImpl");
+		relation = body2D.GetNodeOrNull<HostImpl>("HostImpl");
 		relation._host = relationToPlayer;
 	}
 
 	public override void _Process(double delta)
 	{
-		relation = body2D.GetNode<HostImpl>("HostImpl");
+		relation = body2D.GetNodeOrNull<HostImpl>("HostImpl");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -132,7 +132,7 @@ public partial class NPC_AI : TalkableNpc
 				break;
 		}
 
-		DrawNavigationPath();
+		//DrawNavigationPath();
 
 		//GD.Print("видимость ", isCanBuildRay, " есть цель ", target, " поведение ", currentState);
 		//GD.Print(timerValue, currentState);
@@ -445,19 +445,23 @@ public partial class NPC_AI : TalkableNpc
 
 	protected void StateSystem()
 	{
+		if (relation == null)
+		{
+			//GD.Print(this.Name, "Relation = null");	
+		}
 		if (target != null && relation._host == Host.Enemy)
-		{
-			currentState = BotState.Attack; // Внутри Attack будет логика преследования, осматривания и т.д.
-		}
-		else
-		{
-			if (_isLookingAround) // Если цель пропала (target стал null), а мы осматривались
 			{
-				StopLookingAround();
+				currentState = BotState.Attack; // Внутри Attack будет логика преследования, осматривания и т.д.
 			}
-			currentState = BotState.Patrol;
-			// lastSeenPlayerPosition = null; // Сбрасывается в ChaseTimer или когда target становится null
-		}
+			else
+			{
+				if (_isLookingAround) // Если цель пропала (target стал null), а мы осматривались
+				{
+					StopLookingAround();
+				}
+				currentState = BotState.Patrol;
+				// lastSeenPlayerPosition = null; // Сбрасывается в ChaseTimer или когда target становится null
+			}
 	}
 
 	double timerValue = 0;
