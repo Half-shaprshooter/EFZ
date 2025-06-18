@@ -189,6 +189,16 @@ public partial class PlayerControl : CharacterBody2D
 		Position = new Vector2(2795, -1995);
 	}
 
+	public void TransportStory()
+	{
+		Position = new Vector2(-12744, 2726);
+	}
+	
+	public void TransportDemo()
+	{
+		Position = new Vector2(-15969, 2843);
+	}
+
 	private void MovementAndAnimLogic(double delta)
 	{
 		float totalSpeed;
