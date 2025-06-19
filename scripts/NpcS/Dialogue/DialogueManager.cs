@@ -26,6 +26,7 @@ public  partial class DialogueManager : Control
 		if (_isDialogueUp)
 		{
 			//GetTree().Paused = true;
+			Engine.TimeScale = 0.0f;
 			if (Input.IsActionJustPressed("ui_left"))
 			{
 				foreach (var item in Selections)
@@ -94,7 +95,8 @@ public  partial class DialogueManager : Control
 	{
 		GetNode<Panel>("Panel").Hide();
 		GetNode<TextureRect>("Fon").Hide();
-		GetTree().Paused = false;
+		Engine.TimeScale = 1.0f;
+		//GetTree().Paused = false;
 		_isDialogueUp = false;
 	}
 
