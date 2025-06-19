@@ -189,14 +189,14 @@ public partial class PlayerControl : CharacterBody2D
 		Position = new Vector2(2795, -1995);
 	}
 
-	public void TransportStory()
+	public void Transport5()
 	{
-		Position = new Vector2(-12744, 2726);
+		Position = new Vector2(-13325, 2900);
 	}
-	
-	public void TransportDemo()
+  
+	public void Transport6()
 	{
-		Position = new Vector2(-15969, 2843);
+		Position = new Vector2(-21039, 2754);
 	}
 
 	private void MovementAndAnimLogic(double delta)
