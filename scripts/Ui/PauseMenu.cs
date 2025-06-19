@@ -4,6 +4,7 @@ using System;
 public partial class PauseMenu : Control
 {
 	private PanelContainer _panelContainer;
+	public bool _pause;
 	public override void _Ready()
 	{
 		_panelContainer = GetNode<PanelContainer>("References");
@@ -13,10 +14,20 @@ public partial class PauseMenu : Control
 	
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("pause") && GetTree().Paused == false)
+		/*if (Input.IsActionJustPressed("pause") && !GetTree().Paused)
 		{
 			Pause();
-		}else if (Input.IsActionJustPressed("pause") && GetTree().Paused == true)
+		}
+		else if (Input.IsActionJustPressed("pause") && GetTree().Paused)
+		{
+			Resume();
+			_panelContainer.Visible = false;
+		}*/
+		if (Input.IsActionJustPressed("pause") && Engine.TimeScale == 1.0f)
+		{
+			Pause();
+		}
+		else if (Input.IsActionJustPressed("pause") && Engine.TimeScale == 0.0f)
 		{
 			Resume();
 			_panelContainer.Visible = false;
@@ -25,14 +36,14 @@ public partial class PauseMenu : Control
 
 	public void Resume()
 	{
-		GetTree().Paused = false; 
+		Engine.TimeScale = 1.0f;
 		_panelContainer.Visible = false;
 		Visible = false;
 	}
 
 	public void Pause()
 	{
-		GetTree().Paused = true;
+		Engine.TimeScale = 0.0f;
 		Visible = true;
 	}
 

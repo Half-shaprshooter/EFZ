@@ -22,7 +22,8 @@ public partial class Note : Node2D
 		if (_playerInArea && Input.IsActionJustPressed("interact") && !_noteUI.Visible)
 		{
 			_noteUI.Visible = true;
-			GetTree().Paused = true;
+			//GetTree().Paused = true;
+			Engine.TimeScale = 0.0f;
 		}
 
 		if (_noteUI.Visible && Input.IsActionJustPressed("pause"))
@@ -33,7 +34,8 @@ public partial class Note : Node2D
 
 	private void CloseNote()
 	{
-		GetTree().Paused = false;
+		Engine.TimeScale = 1.0f;
+		//GetTree().Paused = false;
 		_noteUI.Visible = false;
 	}
 	
