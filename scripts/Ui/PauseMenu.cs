@@ -60,6 +60,7 @@ public partial class PauseMenu : Control
 	//TODO: Тестовая логика, потом под переделку
 	public void OnRestartPressed()
 	{
+		Engine.TimeScale = 1.0f;
 		GetTree().ReloadCurrentScene();
 	}
 
