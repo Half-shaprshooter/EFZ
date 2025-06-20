@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1apa2v3d7n4m"
-path="res://.godot/imported/atlasNPC.png-87a9b636754a0d32727fd852effb0895.ctex"
+uid="uid://bxkwl2hg3p3e0"
+path="res://.godot/imported/atlas.png-b6e0291e3a05256b4e445cc09422e296.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/npcSprites/human/anim/atlasNPC.png"
-dest_files=["res://.godot/imported/atlasNPC.png-87a9b636754a0d32727fd852effb0895.ctex"]
+source_file="res://sprites/npcSprites/human/anim/atlas.png"
+dest_files=["res://.godot/imported/atlas.png-b6e0291e3a05256b4e445cc09422e296.ctex"]
 
 [params]
 
