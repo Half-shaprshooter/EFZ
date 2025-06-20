@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://djjr1il5hlmx6"]
+[gd_scene load_steps=16 format=3 uid="uid://djjr1il5hlmx6"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_1f1h3"]
-[ext_resource type="Texture2D" uid="uid://basv8xj6828t2" path="res://sprites/npcSprites/mutant.png" id="2_nv4n4"]
+[ext_resource type="Texture2D" uid="uid://basv8xj6828t2" path="res://sprites/npcSprites/monsters/mutant.png" id="2_nv4n4"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="3_4fook"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="4_abk8g"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_g1q7i"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_gyhyx"]
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_hnjyq"]
+[ext_resource type="AudioStream" uid="uid://bgpbvflotmcc1" path="res://sounds/effects/punch.mp3" id="8_1scwx"]
+[ext_resource type="Script" path="res://Scenes/npcs/ScreamsMonsters.cs" id="9_mj8h8"]
+[ext_resource type="AudioStream" uid="uid://bds8eyl1sacf7" path="res://sounds/effects/monsterScream1.mp3" id="10_fsauj"]
+[ext_resource type="AudioStream" uid="uid://b5hmvo4fposi2" path="res://sounds/effects/monsterScream2.mp3" id="11_sgndj"]
+[ext_resource type="AudioStream" uid="uid://ol8wdpi2s4bp" path="res://sounds/effects/monsterScream3.mp3" id="12_1cx0j"]
+[ext_resource type="AudioStream" uid="uid://dcaotvw026cyp" path="res://sounds/effects/monsterScream4.mp3" id="13_8ilp0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahxne"]
 size = Vector2(120, 142)
@@ -89,6 +95,15 @@ default_color = Color(1, 0, 0, 1)
 visible = false
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_hnjyq")]
+_hitAliveSound = ExtResource("8_1scwx")
+
+[node name="Screams" type="Node2D" parent="."]
+script = ExtResource("9_mj8h8")
+MonsterScreams = Array[AudioStream]([ExtResource("10_fsauj"), ExtResource("11_sgndj"), ExtResource("12_1cx0j"), ExtResource("13_8ilp0")])
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Screams"]
+volume_db = -10.0
+attenuation = 2.73208
 
 [connection signal="timeout" from="muzzle/Timer" to="muzzle" method="hide"]
 [connection signal="body_entered" from="ProximityArea" to="." method="SeeZoneEnter"]

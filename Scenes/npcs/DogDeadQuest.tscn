@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwgcvtd6ybx03"]
+[gd_scene load_steps=6 format=3 uid="uid://dwgcvtd6ybx03"]
 
 [ext_resource type="Script" path="res://Scenes/DogDeadForQuest.cs" id="1_7ovuv"]
+[ext_resource type="AudioStream" uid="uid://bfwdo04uwyun0" path="res://sounds/effects/wolf whine.mp3" id="2_0tge6"]
 [ext_resource type="Texture2D" uid="uid://ufnjkaj31jas" path="res://sprites/Animals/Dogstanding.png" id="2_rryco"]
 [ext_resource type="Texture2D" uid="uid://c5jd8v3typ4xr" path="res://sprites/Animals/Dog_lies.png" id="3_e86n3"]
 
@@ -13,6 +14,7 @@ scale = Vector2(0.7, 0.7)
 collision_layer = 4
 collision_mask = 244
 script = ExtResource("1_7ovuv")
+_wolfHowling = ExtResource("2_0tge6")
 aliveSprite = NodePath("Alive")
 deadSprite = NodePath("Dead")
 
@@ -26,3 +28,6 @@ texture = ExtResource("3_e86n3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cu1ij")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+attenuation = 2.19097
