@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://b8k0d3pswekul" path="res://sprites/Kletki/7.png" id="17_mcyfi"]
 [ext_resource type="Texture2D" uid="uid://b08a7obj2tq35" path="res://sprites/Kletki/8.png" id="18_lilc7"]
 [ext_resource type="Texture2D" uid="uid://b1kfuweaor574" path="res://sprites/Kletki/openCage.png" id="19_xijff"]
-[ext_resource type="PackedScene" path="res://Scenes/npcs/Mutant.tscn" id="20_0ua5a"]
-[ext_resource type="Texture2D" uid="uid://c6pd2sycjgleh" path="res://sprites/npcSprites/Nikitin.png" id="21_qjvf7"]
+[ext_resource type="PackedScene" uid="uid://djjr1il5hlmx6" path="res://Scenes/npcs/Mutant.tscn" id="20_0ua5a"]
+[ext_resource type="Texture2D" uid="uid://c6pd2sycjgleh" path="res://sprites/npcSprites/human/Nikitin.png" id="21_qjvf7"]
 [ext_resource type="Script" path="res://scripts/questScripts/NikitinCage.cs" id="22_fgar1"]
 [ext_resource type="Script" path="res://scripts/Basement/PodvalSound.cs" id="23_pibs7"]
 [ext_resource type="AudioStream" uid="uid://b1yoco0fscvr" path="res://sounds/effects/Electric.mp3" id="24_g4qet"]
@@ -30,7 +30,7 @@
 [ext_resource type="Script" path="res://scripts/questScripts/Lever.cs" id="28_doxq1"]
 [ext_resource type="PackedScene" uid="uid://re28wg5vu0b2" path="res://Scenes/questItems/HelpGenerator.tscn" id="29_23f6m"]
 [ext_resource type="PackedScene" uid="uid://bfxjq8k23eudi" path="res://Scenes/Items/noteForPodvalDalnya.tscn" id="30_l4sx0"]
-[ext_resource type="PackedScene" uid="uid://dxtgibq1xtv10" path="res://Scenes/OneTimeHelp.tscn" id="31_50asj"]
+[ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="31_50asj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7x1n"]
 radius = 235.895

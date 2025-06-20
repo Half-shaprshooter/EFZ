@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://8uno8sp66mlr"]
 
 [ext_resource type="Script" path="res://scripts/NpcS/FriendlyNpcS/Seller.cs" id="1_efu23"]
-[ext_resource type="Texture2D" uid="uid://bwj1ulw0nkv68" path="res://sprites/npcSprites/Seller.png" id="2_prw3g"]
+[ext_resource type="Texture2D" uid="uid://bwj1ulw0nkv68" path="res://sprites/npcSprites/human/Seller.png" id="2_prw3g"]
 [ext_resource type="Script" path="res://scripts/NpcS/Dialogue/Remarks.cs" id="3_2upxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fjcb7"]

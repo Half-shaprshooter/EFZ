@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://chp3m06jisirq"]
+[gd_scene load_steps=12 format=3 uid="uid://chp3m06jisirq"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_i8n4y"]
-[ext_resource type="Texture2D" uid="uid://cliileuhcsqq3" path="res://sprites/npcSprites/Mitya.png" id="2_aldng"]
+[ext_resource type="Texture2D" uid="uid://cliileuhcsqq3" path="res://sprites/npcSprites/human/Mitya.png" id="2_aldng"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="3_6wflh"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="4_hnoq1"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_hyo2y"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_d2nph"]
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_7pb6v"]
 [ext_resource type="PackedScene" uid="uid://b7scin6rilqah" path="res://Scenes/OneTimeHelp.tscn" id="8_4ppuk"]
+[ext_resource type="AudioStream" uid="uid://bnf0yu8a8u3rw" path="res://sounds/effects/KnifeAttack.mp3" id="8_xsrab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p2j1y"]
 size = Vector2(120, 142)
@@ -110,6 +111,7 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="NpcMeleeAttack" parent="." instance=ExtResource("7_7pb6v")]
 collision_layer = 4
+_hitAliveSound = ExtResource("8_xsrab")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfwdo04uwyun0"
+path="res://.godot/imported/wolf whine.mp3-300c971766a64d0aa9763a095618e817.mp3str"
+
+[deps]
+
+source_file="res://sounds/effects/wolf whine.mp3"
+dest_files=["res://.godot/imported/wolf whine.mp3-300c971766a64d0aa9763a095618e817.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2eg3lhrablns"]
 
 [ext_resource type="PackedScene" uid="uid://bmyv3nu10ea1f" path="res://Scenes/npcs/Bases/human_enemy_npc_base.tscn" id="1_otcox"]
-[ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/EnemyHuman.png" id="2_0xf2g"]
+[ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/human/EnemyHuman.png" id="2_0xf2g"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="3_byxof"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="4_drgtk"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_umcie"]
