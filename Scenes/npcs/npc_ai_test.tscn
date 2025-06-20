@@ -1,13 +1,133 @@
-[gd_scene load_steps=12 format=3 uid="uid://con576l1u4tyu"]
+[gd_scene load_steps=21 format=3 uid="uid://con576l1u4tyu"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_lwhu1"]
 [ext_resource type="Texture2D" uid="uid://mfm6mmcmwfi2" path="res://sprites/npcSprites/human/EnemyHuman.png" id="2_3tb2c"]
+[ext_resource type="Texture2D" uid="uid://bof8v0acsme18" path="res://sprites/playerSprites/WalkAnim/Atlas/runs (1).png" id="3_aeyl5"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="4_fyqoq"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="5_dngqq"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="6_akny4"]
 [ext_resource type="PackedScene" uid="uid://bmbib42s5spbd" path="res://Scenes/npcs/npc_melee_attack.tscn" id="7_l1hqy"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="7_uvndp"]
 [ext_resource type="AudioStream" uid="uid://bnf0yu8a8u3rw" path="res://sounds/effects/KnifeAttack.mp3" id="8_836hv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgn1c"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(414, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqvif"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(552, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bep5"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(690, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d6ma"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(828, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77ikm"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(276, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drto3"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(138, 0, 138, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22js6"]
+atlas = ExtResource("3_aeyl5")
+region = Rect2(0, 0, 138, 173)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tijji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqvif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bep5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d6ma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bep5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqvif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ikm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drto3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22js6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drto3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ikm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqvif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bep5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d6ma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bep5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqvif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ikm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drto3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22js6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drto3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ikm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgn1c")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5hnp"]
 size = Vector2(120, 142)
@@ -25,12 +145,21 @@ collision_mask = 245
 script = ExtResource("1_lwhu1")
 PatrolPoints = []
 body2D = NodePath(".")
+AttackStopDistance = 850.0
+AttackRangLastDistance = 400.0
 MeleeAttackRange = 190.0
+CanUseMeleeWeapon = false
 SpeedWalk = 250
-SpeedFast = 600
-SpeedRun = 900
+SpeedFast = 500
+SpeedRun = 800
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_tijji")
+animation = &"run"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 rotation = 1.56735
 texture = ExtResource("2_3tb2c")
 
@@ -89,7 +218,6 @@ collision_mask = 7
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 15
-avoidance_enabled = true
 radius = 55.0
 max_speed = 1100.0
 avoidance_layers = 4

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://djjr1il5hlmx6"]
+[gd_scene load_steps=38 format=3 uid="uid://djjr1il5hlmx6"]
 
 [ext_resource type="Script" path="res://Scenes/npcs/NPC_AI.cs" id="1_1f1h3"]
-[ext_resource type="Texture2D" uid="uid://basv8xj6828t2" path="res://sprites/npcSprites/monsters/mutant.png" id="2_nv4n4"]
+[ext_resource type="Texture2D" uid="uid://cle0cp6a7uwg4" path="res://sprites/npcSprites/monsters/anim/mutantAttack.png" id="2_gb6ti"]
 [ext_resource type="Texture2D" uid="uid://dec7cmruyfsh8" path="res://sprites/GunSprites/muzzle_flash.png" id="3_4fook"]
+[ext_resource type="Texture2D" uid="uid://dxd838c5670py" path="res://sprites/npcSprites/monsters/anim/mutantGo.png" id="3_ah76h"]
 [ext_resource type="Script" path="res://scripts/NpcS/enemyScripts/EnemyGun.cs" id="4_abk8g"]
 [ext_resource type="PackedScene" uid="uid://bllnt7kjmcrdl" path="res://Scenes/guns/enemy_bullet.tscn" id="5_g1q7i"]
 [ext_resource type="PackedScene" uid="uid://dwk0lyrjdltsn" path="res://Scenes/remarks.tscn" id="6_gyhyx"]
@@ -13,6 +14,164 @@
 [ext_resource type="AudioStream" uid="uid://b5hmvo4fposi2" path="res://sounds/effects/monsterScream2.mp3" id="11_sgndj"]
 [ext_resource type="AudioStream" uid="uid://ol8wdpi2s4bp" path="res://sounds/effects/monsterScream3.mp3" id="12_1cx0j"]
 [ext_resource type="AudioStream" uid="uid://dcaotvw026cyp" path="res://sounds/effects/monsterScream4.mp3" id="13_8ilp0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g5oj"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(0, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eucb8"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(179, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qij6n"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(358, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncb5p"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(537, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt3kf"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(716, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uup4j"]
+atlas = ExtResource("2_gb6ti")
+region = Rect2(895, 0, 179, 178)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3xlu"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(0, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl7ie"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(178, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvl88"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(356, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxmh4"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(534, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8441e"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(712, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xpxy"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(890, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bp2x"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(1068, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3307"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(0, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4emg"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(178, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sfvn"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(356, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgf5s"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(534, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wakj4"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(712, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1xjd"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(890, 0, 178, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06fak"]
+atlas = ExtResource("3_ah76h")
+region = Rect2(1068, 0, 178, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4mxr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g5oj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eucb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qij6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncb5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt3kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uup4j")
+}],
+"loop": true,
+"name": &"melee_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3xlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl7ie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvl88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxmh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8441e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xpxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bp2x")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3307")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4emg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sfvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgf5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wakj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1xjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06fak")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahxne"]
 size = Vector2(120, 142)
@@ -28,13 +187,18 @@ script = ExtResource("1_1f1h3")
 PatrolPoints = []
 body2D = NodePath(".")
 MeleeAttackRange = 190.0
-SpeedWalk = 250
+SpeedWalk = 280
 SpeedFast = 600
 SpeedRun = 900
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(28, -5)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_i4mxr")
+animation = &"melee_attack"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.56735
-texture = ExtResource("2_nv4n4")
 
 [node name="WolfCol" type="CollisionShape2D" parent="."]
 position = Vector2(-7, 1)

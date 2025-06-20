@@ -8,6 +8,7 @@ public partial class NPC_AI : TalkableNpc
 	[Export] public Node2D[] PatrolPoints;
 	[Export] public CharacterBody2D body2D;
 	[Export] public float AttackStopDistance = 400f;
+	[Export] public float AttackRangLastDistance = 250f; //дистанция, к которой бот идёт, чтобы быть ближе к игроку, пока стреляет по нему
 	[Export] public float MeleeAttackRange = 70f;
 	[Export] public bool CanUseRangedWeapon = true;
 	[Export] public bool CanUseMeleeWeapon = true;
@@ -20,6 +21,12 @@ public partial class NPC_AI : TalkableNpc
 
 	public enum BotState { Patrol, Finding, Attack, Panic }
 	[Export] protected BotState currentState = BotState.Patrol;
+
+	protected AnimatedSprite2D animation;
+	protected Sprite2D sprite;
+	protected bool isWalking = false;
+	protected bool isStanding = false;
+	protected bool isRunning = false;
 
 	protected int _currentPatrolIndex = 0;
 	protected Vector2[] _patrolTargets;
@@ -49,6 +56,8 @@ public partial class NPC_AI : TalkableNpc
 		lookRay = GetNode<RayCast2D>("LookRay");
 		gun = GetNode<EnemyGun>("Gun");
 		_npcMeleeWeapon = GetNodeOrNull<NpcMeleeAttack>("NpcMeleeAttack");
+		animation = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
+		sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
 
 		if (body2D == null)
 		{
@@ -83,6 +92,22 @@ public partial class NPC_AI : TalkableNpc
 	public override void _Process(double delta)
 	{
 		relation = body2D.GetNodeOrNull<HostImpl>("HostImpl");
+
+		if (Velocity.Length() <= 10)
+		{
+			sprite.Visible = true;
+		}
+		else if (Velocity.Length() <= 260)
+		{
+			sprite.Visible = true;
+			animation.Play("walk");
+		}
+		else if (Velocity.Length() > 260)
+		{
+			sprite.Visible = true;
+			animation.Play("run");
+		}
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -206,6 +231,7 @@ public partial class NPC_AI : TalkableNpc
 			{
 				//GD.Print($"NPC_AI ({Name}): Performing MELEE attack on {target.Name}!");
 				_npcMeleeWeapon.PerformAttack();
+				animation.Play("melee_attack");
 			}
 			// Если атакуем вблизи, дальнее оружие не должно целиться/стрелять
 			if (CanUseRangedWeapon && gun != null) gun.makeNear(false);
@@ -223,61 +249,67 @@ public partial class NPC_AI : TalkableNpc
 				// Если можем использовать дальнобойное оружие и оно есть
 				if (CanUseRangedWeapon && gun != null)
 				{
-					gun.makeNear(true); // Целимся из дальнего оружия
-
 					if (distanceToTarget > AttackStopDistance) // Далеко для стрельбы, но видим - преследуем
 					{
+						gun.makeNear(false);
 						// Логика преследования (MoveToTarget)
 						if (_agent != null && _agent.IsInsideTree())
 						{
 							Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
 							Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
-							int speedLevel = (distanceToTarget < 500 || timerValue > 2.5) ? 1 : (distanceToTarget < 800 ? 2 : 3);
+							int speedLevel = (distanceToTarget < 1200) ? 2 : 3;
 							MoveToTarget(directionToNextNavPos, delta, speedLevel);
-						} else { SetVelocityToZero(); }
+						}
+						else
+						{
+							SetVelocityToZero();
+						}
 					}
-					else // Достаточно близко для дальней атаки (и не в зоне ближней, или ближняя запрещена)
+					else if (distanceToTarget <= AttackStopDistance && distanceToTarget > AttackRangLastDistance) // Достаточно близко для дальней атаки (и не в зоне ближней, или ближняя запрещена)
 					{
+						gun.makeNear(true);
+						MoveToTarget(target.GlobalPosition, delta, 1);
+					}
+					else
+					{
+						gun.makeNear(true);
 						var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
 						RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
 						SetVelocityToZero();
-						// Здесь должна быть логика стрельбы из 'gun'
-						// Например, если у EnemyGun есть метод TryShoot(Node2D target)
-						// gun.TryShoot(target); 
-						//GD.Print($"NPC_AI ({Name}): In RANGED attack range. Would shoot at {target.Name} if gun.TryShoot() implemented.");
 					}
 				}
 				// Если не можем использовать дальнобойное, но видим цель - просто преследуем (если разрешена ближняя и цель далеко)
 				// или стоим, если преследовать нечем/незачем.
 				else if (CanUseMeleeWeapon) // Если разрешена только ближняя, а цель далеко - преследуем
 				{
-					 if (distanceToTarget > MeleeAttackRange + 5.0f) // Небольшой буфер, чтобы не дергался
-					 {
+					if (distanceToTarget > MeleeAttackRange + 5.0f) // Небольшой буфер, чтобы не дергался
+					{
 						if (_agent != null && _agent.IsInsideTree())
 						{
 							Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
 							Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
-							 // Можно использовать другую скорость, если это просто преследование для ближнего боя
+							// Можно использовать другую скорость, если это просто преследование для ближнего боя
 							MoveToTarget(directionToNextNavPos, delta, 1); // Двигаемся медленнее
-						} else { SetVelocityToZero(); }
-					 }
-					 else // Слишком близко для "только преследования", но не в MeleeAttackRange (или ближняя не сработала выше) - стоим и смотрим
-					 {
+						}
+						else { SetVelocityToZero(); }
+					}
+					else // Слишком близко для "только преследования", но не в MeleeAttackRange (или ближняя не сработала выше) - стоим и смотрим
+					{
 						var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
 						RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
 						SetVelocityToZero();
-					 }
+					}
 				}
 				else // Не может использовать ни дальнее, ни ближнее - просто стоит и смотрит, если видит
 				{
 					var directionToTarget = (target.GlobalPosition - GlobalPosition).Normalized();
 					RotateTowardsDirectionSmoothly(directionToTarget, delta, BattleRotationSpeed);
 					SetVelocityToZero();
-					GD.Print($"NPC_AI ({Name}): Sees target {target.Name} but cannot use any weapon.");
+					//GD.Print($"NPC_AI ({Name}): Sees target {target.Name} but cannot use any weapon.");
 				}
 			}
 			else if (lastSeenPlayerPosition.HasValue) // Прямой видимости нет, НО есть последняя известная позиция
-			{
+			{				
 				if (CanUseRangedWeapon && gun != null) gun.makeNear(false);
 				
 				if (_agent != null && _agent.IsInsideTree()) _agent.TargetPosition = lastSeenPlayerPosition.Value;
@@ -285,12 +317,16 @@ public partial class NPC_AI : TalkableNpc
 
 				if (distanceToLastSeenPos > (_agent?.TargetDesiredDistance ?? 4f) + 5.0f && !_isLookingAround)
 				{
-					 if (_agent != null && _agent.IsInsideTree())
-					 {
+					if (_agent != null && _agent.IsInsideTree())
+					{
 						Vector2 nextNavPathPosition = _agent.GetNextPathPosition();
 						Vector2 directionToNextNavPos = (nextNavPathPosition - GlobalPosition).Normalized();
 						MoveToTarget(directionToNextNavPos, delta, 1);
-					 } else { SetVelocityToZero(); }
+					}
+					else
+					{
+						SetVelocityToZero();
+					}
 				}
 				else
 				{
@@ -311,7 +347,7 @@ public partial class NPC_AI : TalkableNpc
 	protected void StartLookingAround()
 	{
 		if (_isLookingAround) return;
-		GD.Print("Начинаю осматриваться...");
+		//GD.Print("Начинаю осматриваться...");
 		_isLookingAround = true;
 		_currentLookAroundPhase = 1; // Начать с первой фазы
 		_lookAroundPhaseTimer = 0f;
@@ -321,12 +357,10 @@ public partial class NPC_AI : TalkableNpc
 	protected void StopLookingAround()
 	{
 		if (!_isLookingAround) return;
-		GD.Print("Заканчиваю осматриваться.");
+		//GD.Print("Заканчиваю осматриваться.");
 		_isLookingAround = false;
 		_currentLookAroundPhase = 0;
 		_lookAroundPhaseTimer = 0f;
-		// Можно добавить поворот в сторону _initialLookAngle, если нужно вернуться к исходному направлению
-		// RotateTowardsAngleSmoothly(_initialLookAngle, GetPhysicsProcessDeltaTime(), LookAroundSpeed);
 	}
 
 	protected void HandleLookingAround(double delta)
@@ -383,7 +417,6 @@ public partial class NPC_AI : TalkableNpc
 				{
 					GD.Print("Завершил последовательность осматривания.");
 					StopLookingAround(); // Завершаем осматривание
-					// ChaseTimer продолжит отсчет, если игрок так и не найден, и вернет в Patrol
 				}
 				break;
 		}
