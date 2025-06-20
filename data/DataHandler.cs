@@ -7,7 +7,9 @@ public partial class DataHandler : Node
 {
 	public static Dictionary<string, Dictionary<string, JsonElement>> itemData = new();
 	public static Dictionary<string, List<List<string>>> itemGridData = new();
-	private readonly string itemDataPath = "res://Data/Item_data.json";
+	
+	public string itemDataPath = "res://data/Item_data.json";
+	
 
 	public override void _Ready()
 	{
